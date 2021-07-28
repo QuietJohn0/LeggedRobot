@@ -1,0 +1,12 @@
+For John
+cd Documents\MATtierLAB\MATtierLAB\LeggedRobotGithub\LeggedRobot
+
+
+to pull updated files into repository
+git pull
+
+
+to push your files into repository
+git add . or git add "filename"
+git commit -m "message"
+git push
