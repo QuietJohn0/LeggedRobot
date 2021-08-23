@@ -32,6 +32,11 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
    */
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0 },
 
+  /* Expression: 30/18
+   * Referenced by: '<S3>/Gain'
+   */
+  1.6666666666666667,
+
   /* Computed Parameter: CANWrite1_P1_Size
    * Referenced by: '<S3>/CAN Write1'
    */
@@ -114,15 +119,15 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
    */
   0.0,
 
-  /* Expression: 3
-   * Referenced by: '<Root>/Constant'
-   */
-  3.0,
-
-  /* Expression: 0.4
+  /* Expression: 0
    * Referenced by: '<Root>/Constant1'
    */
-  0.4,
+  0.0,
+
+  /* Expression: 4
+   * Referenced by: '<Root>/Constant'
+   */
+  4.0,
 
   /* Expression: 0
    * Referenced by: '<Root>/Constant2'
@@ -144,10 +149,10 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
    */
   0.0,
 
-  /* Expression: 1.4
+  /* Expression: 0.4
    * Referenced by: '<Root>/Constant7'
    */
-  1.4,
+  0.4,
 
   /* Expression: 18/30
    * Referenced by: '<Root>/Gain'

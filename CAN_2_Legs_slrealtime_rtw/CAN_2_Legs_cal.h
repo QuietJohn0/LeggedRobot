@@ -24,6 +24,9 @@ struct CAN_2_Legs_cal_type {
                       /* Expression: [initValues(1:4) messageType initValues(6)]
                        * Referenced by: '<S3>/CAN Read'
                        */
+  real_T Gain_Gain;                    /* Expression: 30/18
+                                        * Referenced by: '<S3>/Gain'
+                                        */
   real_T CANWrite1_P1_Size[2];         /* Computed Parameter: CANWrite1_P1_Size
                                         * Referenced by: '<S3>/CAN Write1'
                                         */
@@ -76,11 +79,11 @@ struct CAN_2_Legs_cal_type {
   real_T CANSetup_P3;                  /* Expression: termStruct
                                         * Referenced by: '<Root>/CAN Setup '
                                         */
-  real_T Constant_Value;               /* Expression: 3
-                                        * Referenced by: '<Root>/Constant'
-                                        */
-  real_T Constant1_Value;              /* Expression: 0.4
+  real_T Constant1_Value;              /* Expression: 0
                                         * Referenced by: '<Root>/Constant1'
+                                        */
+  real_T Constant_Value;               /* Expression: 4
+                                        * Referenced by: '<Root>/Constant'
                                         */
   real_T Constant2_Value;              /* Expression: 0
                                         * Referenced by: '<Root>/Constant2'
@@ -94,10 +97,10 @@ struct CAN_2_Legs_cal_type {
   real_T Constant5_Value;              /* Expression: 0
                                         * Referenced by: '<Root>/Constant5'
                                         */
-  real_T Constant7_Value;              /* Expression: 1.4
+  real_T Constant7_Value;              /* Expression: 0.4
                                         * Referenced by: '<Root>/Constant7'
                                         */
-  real_T Gain_Gain;                    /* Expression: 18/30
+  real_T Gain_Gain_j;                  /* Expression: 18/30
                                         * Referenced by: '<Root>/Gain'
                                         */
   real_T Constant8_Value;              /* Expression: 0

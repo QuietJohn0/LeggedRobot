@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs".
  *
- * Model version              : 1.4
+ * Model version              : 1.5
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Sun Aug 22 19:13:31 2021
+ * C++ source code generated on : Mon Aug 23 14:12:25 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -33,27 +33,6 @@ RT_MODEL_CAN_2_Legs_T *const CAN_2_Legs_M = &CAN_2_Legs_M_;
 
 /* Forward declaration for local functions */
 static void CAN_2_Legs_dec2bin(real_T d, char_T s_data[], int32_T s_size[2]);
-
-/*
- * Output and update for atomic system:
- *    '<S5>/bytes -> floats'
- *    '<S8>/bytes -> floats'
- */
-void CAN_2_Legs_bytesfloats(B_bytesfloats_CAN_2_Legs_T *localB)
-{
-  real_T I_ff;
-  real_T position;
-  real_T velocity;
-  I_ff = localB->I_ff;
-  velocity = localB->velocity;
-  position = localB->position;
-  localB->I_ff = I_ff;
-  localB->velocity = velocity;
-  localB->position = position;
-  localB->position = localB->position * 191.0 / 65535.0 + -95.5;
-  localB->velocity = localB->velocity * 90.0 / 4095.0 + -45.0;
-  localB->I_ff = localB->I_ff * 80.0 / 4095.0 + -40.0;
-}
 
 /* Function for MATLAB Function: '<S3>/floats -> bytes' */
 static void CAN_2_Legs_dec2bin(real_T d, char_T s_data[], int32_T s_size[2])
@@ -241,7 +220,9 @@ real_T rt_roundd_snf(real_T u)
 void CAN_2_Legs_step(void)
 {
   real_T b_B[8];
-  real_T u0;
+  real_T I_ff;
+  real_T position;
+  real_T velocity;
   uint64_T a;
   uint64_T p2;
   int32_T first;
@@ -287,6 +268,9 @@ void CAN_2_Legs_step(void)
 
   /* Constant: '<Root>/Constant1' */
   CAN_2_Legs_B.Constant1 = CAN_2_Legs_cal->Constant1_Value;
+
+  /* Constant: '<Root>/Constant' */
+  CAN_2_Legs_B.mode = CAN_2_Legs_cal->Constant_Value;
 
   /* Constant: '<Root>/Constant2' */
   CAN_2_Legs_B.Constant2 = CAN_2_Legs_cal->Constant2_Value;
@@ -463,10 +447,20 @@ void CAN_2_Legs_step(void)
     }
 
     /* MATLAB Function: '<S8>/bytes -> floats' */
-    CAN_2_Legs_B.sf_bytesfloats_k.position = CAN_2_Legs_B.CANUnpack_o1;
-    CAN_2_Legs_B.sf_bytesfloats_k.velocity = CAN_2_Legs_B.CANUnpack_o2;
-    CAN_2_Legs_B.sf_bytesfloats_k.I_ff = CAN_2_Legs_B.CANUnpack_o3;
-    CAN_2_Legs_bytesfloats(&CAN_2_Legs_B.sf_bytesfloats_k);
+    CAN_2_Legs_B.position = CAN_2_Legs_B.CANUnpack_o1;
+    CAN_2_Legs_B.velocity = CAN_2_Legs_B.CANUnpack_o2;
+    CAN_2_Legs_B.I_ff = CAN_2_Legs_B.CANUnpack_o3;
+    I_ff = CAN_2_Legs_B.I_ff;
+    velocity = CAN_2_Legs_B.velocity;
+    position = CAN_2_Legs_B.position;
+    CAN_2_Legs_B.I_ff = I_ff;
+    CAN_2_Legs_B.velocity = velocity;
+    CAN_2_Legs_B.position = position;
+    CAN_2_Legs_B.position = CAN_2_Legs_B.position * 191.0 / 65535.0 + -95.5;
+    CAN_2_Legs_B.velocity = CAN_2_Legs_B.velocity * 90.0 / 4095.0 + -45.0;
+    CAN_2_Legs_B.I_ff = CAN_2_Legs_B.I_ff * 80.0 / 4095.0 + -40.0;
+
+    /* End of Outputs for SubSystem: '<S4>/If Action Subsystem' */
 
     /* Update for IfAction SubSystem: '<S4>/If Action Subsystem' incorporates:
      *  ActionPort: '<S8>/Action Port'
@@ -478,21 +472,22 @@ void CAN_2_Legs_step(void)
   }
 
   /* End of If: '<S4>/If' */
+
   /* MATLAB Function: '<S4>/floats -> bytes' incorporates:
    *  Constant: '<Root>/Constant3'
    *  Constant: '<Root>/Constant4'
    *  Constant: '<Root>/Constant5'
    */
-  u0 = CAN_2_Legs_B.Constant1;
-  if (!(u0 < 95.5)) {
-    u0 = 95.5;
+  I_ff = CAN_2_Legs_B.Constant1;
+  if (!(I_ff < 95.5)) {
+    I_ff = 95.5;
   }
 
-  if (!(u0 > -95.5)) {
-    u0 = -95.5;
+  if (!(I_ff > -95.5)) {
+    I_ff = -95.5;
   }
 
-  CAN_2_Legs_dec2bin(std::floor((u0 - -95.5) * 65535.0 / 191.0), B, c_size);
+  CAN_2_Legs_dec2bin(std::floor((I_ff - -95.5) * 65535.0 / 191.0), B, c_size);
   outsize_idx_1 = static_cast<int8_T>(16 - c_size[1]);
   i = outsize_idx_1;
   loop_ub = c_size[1];
@@ -504,16 +499,16 @@ void CAN_2_Legs_step(void)
     p_data[first + i] = B[first];
   }
 
-  u0 = CAN_2_Legs_B.Constant2;
-  if (!(u0 < 45.0)) {
-    u0 = 45.0;
+  I_ff = CAN_2_Legs_B.Constant2;
+  if (!(I_ff < 45.0)) {
+    I_ff = 45.0;
   }
 
-  if (!(u0 > -45.0)) {
-    u0 = -45.0;
+  if (!(I_ff > -45.0)) {
+    I_ff = -45.0;
   }
 
-  CAN_2_Legs_dec2bin(std::floor((u0 - -45.0) * 4095.0 / 90.0), B, c_size);
+  CAN_2_Legs_dec2bin(std::floor((I_ff - -45.0) * 4095.0 / 90.0), B, c_size);
   outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
   i = outsize_idx_1;
   loop_ub = c_size[1];
@@ -525,16 +520,16 @@ void CAN_2_Legs_step(void)
     v_data[first + i] = B[first];
   }
 
-  u0 = CAN_2_Legs_cal->Constant3_Value;
-  if (!(u0 < 500.0)) {
-    u0 = 500.0;
+  I_ff = CAN_2_Legs_cal->Constant3_Value;
+  if (!(I_ff < 500.0)) {
+    I_ff = 500.0;
   }
 
-  if (!(u0 > 0.0)) {
-    u0 = 0.0;
+  if (!(I_ff > 0.0)) {
+    I_ff = 0.0;
   }
 
-  CAN_2_Legs_dec2bin(std::floor(u0 * 4095.0 / 500.0), B, c_size);
+  CAN_2_Legs_dec2bin(std::floor(I_ff * 4095.0 / 500.0), B, c_size);
   outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
   i = outsize_idx_1;
   loop_ub = c_size[1];
@@ -546,16 +541,16 @@ void CAN_2_Legs_step(void)
     kp_data[first + i] = B[first];
   }
 
-  u0 = CAN_2_Legs_cal->Constant4_Value;
-  if (!(u0 < 45.0)) {
-    u0 = 45.0;
+  I_ff = CAN_2_Legs_cal->Constant4_Value;
+  if (!(I_ff < 45.0)) {
+    I_ff = 45.0;
   }
 
-  if (!(u0 > -45.0)) {
-    u0 = -45.0;
+  if (!(I_ff > -45.0)) {
+    I_ff = -45.0;
   }
 
-  CAN_2_Legs_dec2bin(std::floor(u0 * 4095.0 / 5.0), B, c_size);
+  CAN_2_Legs_dec2bin(std::floor(I_ff * 4095.0 / 5.0), B, c_size);
   outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
   i = outsize_idx_1;
   loop_ub = c_size[1];
@@ -567,16 +562,16 @@ void CAN_2_Legs_step(void)
     kd_data[first + i] = B[first];
   }
 
-  u0 = CAN_2_Legs_cal->Constant5_Value;
-  if (!(u0 < 45.0)) {
-    u0 = 45.0;
+  I_ff = CAN_2_Legs_cal->Constant5_Value;
+  if (!(I_ff < 45.0)) {
+    I_ff = 45.0;
   }
 
-  if (!(u0 > -45.0)) {
-    u0 = -45.0;
+  if (!(I_ff > -45.0)) {
+    I_ff = -45.0;
   }
 
-  CAN_2_Legs_dec2bin(std::floor((u0 - -18.0) * 4095.0 / 36.0), B, c_size);
+  CAN_2_Legs_dec2bin(std::floor((I_ff - -18.0) * 4095.0 / 36.0), B, c_size);
   outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
   i = outsize_idx_1;
   loop_ub = c_size[1];
@@ -654,10 +649,10 @@ void CAN_2_Legs_step(void)
     }
 
     b_B[i] = static_cast<real_T>(a);
-    u0 = rt_roundd_snf(b_B[i]);
-    if (u0 < 256.0) {
-      if (u0 >= 0.0) {
-        tmp = static_cast<uint8_T>(u0);
+    I_ff = rt_roundd_snf(b_B[i]);
+    if (I_ff < 256.0) {
+      if (I_ff >= 0.0) {
+        tmp = static_cast<uint8_T>(I_ff);
       } else {
         tmp = 0U;
       }
@@ -670,10 +665,8 @@ void CAN_2_Legs_step(void)
 
   /* End of MATLAB Function: '<S4>/floats -> bytes' */
 
-  /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
-   *  Constant: '<Root>/Constant'
-   */
-  switch (static_cast<int32_T>(CAN_2_Legs_cal->Constant_Value)) {
+  /* MultiPortSwitch: '<S4>/Multiport Switch' */
+  switch (static_cast<int32_T>(CAN_2_Legs_B.mode)) {
    case 1:
     /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
      *  Constant: '<S4>/Constant'
@@ -745,10 +738,13 @@ void CAN_2_Legs_step(void)
     sfcnOutputs(rts,0);
   }
 
+  /* Sum: '<Root>/Add' */
+  CAN_2_Legs_B.pcp1 = CAN_2_Legs_B.position - CAN_2_Legs_B.Constant1;
+
   /* Gain: '<Root>/Gain' incorporates:
    *  Constant: '<Root>/Constant7'
    */
-  CAN_2_Legs_B.Gain = CAN_2_Legs_cal->Gain_Gain *
+  CAN_2_Legs_B.Gain = CAN_2_Legs_cal->Gain_Gain_j *
     CAN_2_Legs_cal->Constant7_Value;
 
   /* Constant: '<Root>/Constant8' */
@@ -927,10 +923,20 @@ void CAN_2_Legs_step(void)
     }
 
     /* MATLAB Function: '<S5>/bytes -> floats' */
-    CAN_2_Legs_B.sf_bytesfloats.position = CAN_2_Legs_B.CANUnpack_o1_o;
-    CAN_2_Legs_B.sf_bytesfloats.velocity = CAN_2_Legs_B.CANUnpack_o2_m;
-    CAN_2_Legs_B.sf_bytesfloats.I_ff = CAN_2_Legs_B.CANUnpack_o3_o;
-    CAN_2_Legs_bytesfloats(&CAN_2_Legs_B.sf_bytesfloats);
+    CAN_2_Legs_B.position_f = CAN_2_Legs_B.CANUnpack_o1_o;
+    CAN_2_Legs_B.velocity_d = CAN_2_Legs_B.CANUnpack_o2_m;
+    CAN_2_Legs_B.I_ff_n = CAN_2_Legs_B.CANUnpack_o3_o;
+    I_ff = CAN_2_Legs_B.I_ff_n;
+    velocity = CAN_2_Legs_B.velocity_d;
+    position = CAN_2_Legs_B.position_f;
+    CAN_2_Legs_B.I_ff_n = I_ff;
+    CAN_2_Legs_B.velocity_d = velocity;
+    CAN_2_Legs_B.position_f = position;
+    CAN_2_Legs_B.position_f = CAN_2_Legs_B.position_f * 191.0 / 65535.0 + -95.5;
+    CAN_2_Legs_B.velocity_d = CAN_2_Legs_B.velocity_d * 90.0 / 4095.0 + -45.0;
+    CAN_2_Legs_B.I_ff_n = CAN_2_Legs_B.I_ff_n * 80.0 / 4095.0 + -40.0;
+
+    /* End of Outputs for SubSystem: '<S3>/If Action Subsystem' */
 
     /* Update for IfAction SubSystem: '<S3>/If Action Subsystem' incorporates:
      *  ActionPort: '<S5>/Action Port'
@@ -942,21 +948,25 @@ void CAN_2_Legs_step(void)
   }
 
   /* End of If: '<S3>/If' */
+
+  /* Gain: '<S3>/Gain' */
+  CAN_2_Legs_B.Gain_l = CAN_2_Legs_cal->Gain_Gain * CAN_2_Legs_B.position_f;
+
   /* MATLAB Function: '<S3>/floats -> bytes' incorporates:
    *  Constant: '<Root>/Constant10'
    *  Constant: '<Root>/Constant11'
    *  Constant: '<Root>/Constant9'
    */
-  u0 = CAN_2_Legs_B.Gain;
-  if (!(u0 < 95.5)) {
-    u0 = 95.5;
+  I_ff = CAN_2_Legs_B.Gain;
+  if (!(I_ff < 95.5)) {
+    I_ff = 95.5;
   }
 
-  if (!(u0 > -95.5)) {
-    u0 = -95.5;
+  if (!(I_ff > -95.5)) {
+    I_ff = -95.5;
   }
 
-  CAN_2_Legs_dec2bin(std::floor((u0 - -95.5) * 65535.0 / 191.0), B, c_size);
+  CAN_2_Legs_dec2bin(std::floor((I_ff - -95.5) * 65535.0 / 191.0), B, c_size);
   outsize_idx_1 = static_cast<int8_T>(16 - c_size[1]);
   i = outsize_idx_1;
   loop_ub = c_size[1];
@@ -968,16 +978,16 @@ void CAN_2_Legs_step(void)
     p_data[first + i] = B[first];
   }
 
-  u0 = CAN_2_Legs_B.Constant8;
-  if (!(u0 < 45.0)) {
-    u0 = 45.0;
+  I_ff = CAN_2_Legs_B.Constant8;
+  if (!(I_ff < 45.0)) {
+    I_ff = 45.0;
   }
 
-  if (!(u0 > -45.0)) {
-    u0 = -45.0;
+  if (!(I_ff > -45.0)) {
+    I_ff = -45.0;
   }
 
-  CAN_2_Legs_dec2bin(std::floor((u0 - -45.0) * 4095.0 / 90.0), B, c_size);
+  CAN_2_Legs_dec2bin(std::floor((I_ff - -45.0) * 4095.0 / 90.0), B, c_size);
   outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
   i = outsize_idx_1;
   loop_ub = c_size[1];
@@ -989,16 +999,16 @@ void CAN_2_Legs_step(void)
     v_data[first + i] = B[first];
   }
 
-  u0 = CAN_2_Legs_cal->Constant9_Value;
-  if (!(u0 < 500.0)) {
-    u0 = 500.0;
+  I_ff = CAN_2_Legs_cal->Constant9_Value;
+  if (!(I_ff < 500.0)) {
+    I_ff = 500.0;
   }
 
-  if (!(u0 > 0.0)) {
-    u0 = 0.0;
+  if (!(I_ff > 0.0)) {
+    I_ff = 0.0;
   }
 
-  CAN_2_Legs_dec2bin(std::floor(u0 * 4095.0 / 500.0), B, c_size);
+  CAN_2_Legs_dec2bin(std::floor(I_ff * 4095.0 / 500.0), B, c_size);
   outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
   i = outsize_idx_1;
   loop_ub = c_size[1];
@@ -1010,16 +1020,16 @@ void CAN_2_Legs_step(void)
     kp_data[first + i] = B[first];
   }
 
-  u0 = CAN_2_Legs_cal->Constant10_Value;
-  if (!(u0 < 45.0)) {
-    u0 = 45.0;
+  I_ff = CAN_2_Legs_cal->Constant10_Value;
+  if (!(I_ff < 45.0)) {
+    I_ff = 45.0;
   }
 
-  if (!(u0 > -45.0)) {
-    u0 = -45.0;
+  if (!(I_ff > -45.0)) {
+    I_ff = -45.0;
   }
 
-  CAN_2_Legs_dec2bin(std::floor(u0 * 4095.0 / 5.0), B, c_size);
+  CAN_2_Legs_dec2bin(std::floor(I_ff * 4095.0 / 5.0), B, c_size);
   outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
   i = outsize_idx_1;
   loop_ub = c_size[1];
@@ -1031,16 +1041,16 @@ void CAN_2_Legs_step(void)
     kd_data[first + i] = B[first];
   }
 
-  u0 = CAN_2_Legs_cal->Constant11_Value;
-  if (!(u0 < 45.0)) {
-    u0 = 45.0;
+  I_ff = CAN_2_Legs_cal->Constant11_Value;
+  if (!(I_ff < 45.0)) {
+    I_ff = 45.0;
   }
 
-  if (!(u0 > -45.0)) {
-    u0 = -45.0;
+  if (!(I_ff > -45.0)) {
+    I_ff = -45.0;
   }
 
-  CAN_2_Legs_dec2bin(std::floor((u0 - -18.0) * 4095.0 / 36.0), B, c_size);
+  CAN_2_Legs_dec2bin(std::floor((I_ff - -18.0) * 4095.0 / 36.0), B, c_size);
   outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
   i = outsize_idx_1;
   loop_ub = c_size[1];
@@ -1118,10 +1128,10 @@ void CAN_2_Legs_step(void)
     }
 
     b_B[i] = static_cast<real_T>(a);
-    u0 = rt_roundd_snf(b_B[i]);
-    if (u0 < 256.0) {
-      if (u0 >= 0.0) {
-        tmp = static_cast<uint8_T>(u0);
+    I_ff = rt_roundd_snf(b_B[i]);
+    if (I_ff < 256.0) {
+      if (I_ff >= 0.0) {
+        tmp = static_cast<uint8_T>(I_ff);
       } else {
         tmp = 0U;
       }
@@ -1134,10 +1144,8 @@ void CAN_2_Legs_step(void)
 
   /* End of MATLAB Function: '<S3>/floats -> bytes' */
 
-  /* MultiPortSwitch: '<S3>/Multiport Switch' incorporates:
-   *  Constant: '<Root>/Constant'
-   */
-  switch (static_cast<int32_T>(CAN_2_Legs_cal->Constant_Value)) {
+  /* MultiPortSwitch: '<S3>/Multiport Switch' */
+  switch (static_cast<int32_T>(CAN_2_Legs_B.mode)) {
    case 1:
     /* MultiPortSwitch: '<S3>/Multiport Switch' incorporates:
      *  Constant: '<S3>/Constant'
@@ -1213,20 +1221,16 @@ void CAN_2_Legs_step(void)
   /* SignalConversion generated from: '<S2>/ SFunction ' incorporates:
    *  MATLAB Function: '<Root>/MATLAB Function1'
    */
-  CAN_2_Legs_B.TmpSignalConversionAtSFunctionI[0] =
-    CAN_2_Legs_B.sf_bytesfloats_k.position;
-  CAN_2_Legs_B.TmpSignalConversionAtSFunctionI[1] =
-    CAN_2_Legs_B.sf_bytesfloats.position;
+  CAN_2_Legs_B.TmpSignalConversionAtSFunctionI[0] = CAN_2_Legs_B.position;
+  CAN_2_Legs_B.TmpSignalConversionAtSFunctionI[1] = CAN_2_Legs_B.Gain_l;
 
   /* MATLAB Function: '<Root>/MATLAB Function1' */
   CAN_2_Legs_B.danger = 0.0;
 
   /* MATLAB Function: '<Root>/MATLAB Function' */
   CAN_2_Legs_B.GRF = 0.0;
-  if (((CAN_2_Legs_B.sf_bytesfloats_k.position < 0.0) && (2.25 <
-        CAN_2_Legs_B.sf_bytesfloats_k.I_ff)) ||
-      ((CAN_2_Legs_B.sf_bytesfloats_k.position > 0.0) && (-2.25 >
-        CAN_2_Legs_B.sf_bytesfloats_k.I_ff))) {
+  if (((CAN_2_Legs_B.position < 0.0) && (2.25 < CAN_2_Legs_B.I_ff)) ||
+      ((CAN_2_Legs_B.position > 0.0) && (-2.25 > CAN_2_Legs_B.I_ff))) {
     CAN_2_Legs_B.GRF = 1.0;
   }
 
@@ -1276,7 +1280,7 @@ void CAN_2_Legs_initialize(void)
     CAN_2_Legs_M->Timing.offsetTimes = (&CAN_2_Legs_M->Timing.offsetTimesArray[0]);
 
     /* task periods */
-    CAN_2_Legs_M->Timing.sampleTimes[0] = (0.001);
+    CAN_2_Legs_M->Timing.sampleTimes[0] = (0.1);
 
     /* task offsets */
     CAN_2_Legs_M->Timing.offsetTimes[0] = (0.0);
@@ -1291,10 +1295,10 @@ void CAN_2_Legs_initialize(void)
   }
 
   rtmSetTFinal(CAN_2_Legs_M, -1);
-  CAN_2_Legs_M->Timing.stepSize0 = 0.001;
+  CAN_2_Legs_M->Timing.stepSize0 = 0.1;
   CAN_2_Legs_M->solverInfoPtr = (&CAN_2_Legs_M->solverInfo);
-  CAN_2_Legs_M->Timing.stepSize = (0.001);
-  rtsiSetFixedStepSize(&CAN_2_Legs_M->solverInfo, 0.001);
+  CAN_2_Legs_M->Timing.stepSize = (0.1);
+  rtsiSetFixedStepSize(&CAN_2_Legs_M->solverInfo, 0.1);
   rtsiSetSolverMode(&CAN_2_Legs_M->solverInfo, SOLVER_MODE_SINGLETASKING);
 
   /* block I/O */
@@ -1475,7 +1479,7 @@ void CAN_2_Legs_initialize(void)
       sfcnInitializeSampleTimes(rts);
 
       /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.001);
+      ssSetSampleTime(rts, 0, 0.1);
       ssSetOffsetTime(rts, 0, 0.0);
       sfcnTsMap[0] = 0;
 
@@ -1602,7 +1606,7 @@ void CAN_2_Legs_initialize(void)
       sfcnInitializeSampleTimes(rts);
 
       /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.001);
+      ssSetSampleTime(rts, 0, 0.1);
       ssSetOffsetTime(rts, 0, 0.0);
       sfcnTsMap[0] = 0;
 
@@ -1736,7 +1740,7 @@ void CAN_2_Legs_initialize(void)
       sfcnInitializeSampleTimes(rts);
 
       /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.001);
+      ssSetSampleTime(rts, 0, 0.1);
       ssSetOffsetTime(rts, 0, 0.0);
       sfcnTsMap[0] = 0;
 
@@ -1863,7 +1867,7 @@ void CAN_2_Legs_initialize(void)
       sfcnInitializeSampleTimes(rts);
 
       /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.001);
+      ssSetSampleTime(rts, 0, 0.1);
       ssSetOffsetTime(rts, 0, 0.0);
       sfcnTsMap[0] = 0;
 
@@ -1969,7 +1973,7 @@ void CAN_2_Legs_initialize(void)
       sfcnInitializeSampleTimes(rts);
 
       /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.001);
+      ssSetSampleTime(rts, 0, 0.1);
       ssSetOffsetTime(rts, 0, 0.0);
       sfcnTsMap[0] = 0;
 
@@ -2103,7 +2107,7 @@ void CAN_2_Legs_initialize(void)
       sfcnInitializeSampleTimes(rts);
 
       /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.001);
+      ssSetSampleTime(rts, 0, 0.1);
       ssSetOffsetTime(rts, 0, 0.0);
       sfcnTsMap[0] = 0;
 
@@ -2160,18 +2164,19 @@ void CAN_2_Legs_initialize(void)
       return;
   }
 
+  /* SystemInitialize for IfAction SubSystem: '<S4>/If Action Subsystem' */
   /* Start for S-Function (scanunpack): '<S8>/CAN Unpack' */
 
   /*-----------S-Function Block: <S8>/CAN Unpack -----------------*/
 
   /* SystemInitialize for Outport: '<S8>/Outport' */
-  CAN_2_Legs_B.sf_bytesfloats_k.position = CAN_2_Legs_cal->Outport_Y0_e;
+  CAN_2_Legs_B.position = CAN_2_Legs_cal->Outport_Y0_e;
 
   /* SystemInitialize for Outport: '<S8>/Outport1' */
-  CAN_2_Legs_B.sf_bytesfloats_k.velocity = CAN_2_Legs_cal->Outport1_Y0_c;
+  CAN_2_Legs_B.velocity = CAN_2_Legs_cal->Outport1_Y0_c;
 
   /* SystemInitialize for Outport: '<S8>/Outport2' */
-  CAN_2_Legs_B.sf_bytesfloats_k.I_ff = CAN_2_Legs_cal->Outport2_Y0_j;
+  CAN_2_Legs_B.I_ff = CAN_2_Legs_cal->Outport2_Y0_j;
 
   /* SystemInitialize for S-Function (scanunpack): '<S8>/CAN Unpack' incorporates:
    *  Outport: '<S8>/Outport3'
@@ -2203,18 +2208,19 @@ void CAN_2_Legs_initialize(void)
       return;
   }
 
+  /* SystemInitialize for IfAction SubSystem: '<S3>/If Action Subsystem' */
   /* Start for S-Function (scanunpack): '<S5>/CAN Unpack' */
 
   /*-----------S-Function Block: <S5>/CAN Unpack -----------------*/
 
   /* SystemInitialize for Outport: '<S5>/Outport' */
-  CAN_2_Legs_B.sf_bytesfloats.position = CAN_2_Legs_cal->Outport_Y0;
+  CAN_2_Legs_B.position_f = CAN_2_Legs_cal->Outport_Y0;
 
   /* SystemInitialize for Outport: '<S5>/Outport1' */
-  CAN_2_Legs_B.sf_bytesfloats.velocity = CAN_2_Legs_cal->Outport1_Y0;
+  CAN_2_Legs_B.velocity_d = CAN_2_Legs_cal->Outport1_Y0;
 
   /* SystemInitialize for Outport: '<S5>/Outport2' */
-  CAN_2_Legs_B.sf_bytesfloats.I_ff = CAN_2_Legs_cal->Outport2_Y0;
+  CAN_2_Legs_B.I_ff_n = CAN_2_Legs_cal->Outport2_Y0;
 
   /* SystemInitialize for S-Function (scanunpack): '<S5>/CAN Unpack' incorporates:
    *  Outport: '<S5>/Outport3'
@@ -2241,6 +2247,7 @@ void CAN_2_Legs_terminate(void)
   }
 
   /* Terminate for Atomic SubSystem: '<Root>/Simulink Function3' */
+
   /* Terminate for S-Function (sg_IO602_IO691_read_s): '<S4>/CAN Read' */
   /* Level2 S-Function Block: '<S4>/CAN Read' (sg_IO602_IO691_read_s) */
   {
@@ -2255,7 +2262,10 @@ void CAN_2_Legs_terminate(void)
     sfcnTerminate(rts);
   }
 
+  /* End of Terminate for SubSystem: '<Root>/Simulink Function3' */
+
   /* Terminate for Atomic SubSystem: '<Root>/Simulink Function1' */
+
   /* Terminate for S-Function (sg_IO602_IO691_read_s): '<S3>/CAN Read' */
   /* Level2 S-Function Block: '<S3>/CAN Read' (sg_IO602_IO691_read_s) */
   {
@@ -2269,6 +2279,8 @@ void CAN_2_Legs_terminate(void)
     SimStruct *rts = CAN_2_Legs_M->childSfunctions[1];
     sfcnTerminate(rts);
   }
+
+  /* End of Terminate for SubSystem: '<Root>/Simulink Function1' */
 
   /* Terminate for S-Function (sg_IO602_IO691_status_s): '<Root>/CAN Status' */
   /* Level2 S-Function Block: '<Root>/CAN Status' (sg_IO602_IO691_status_s) */
