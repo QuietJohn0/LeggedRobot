@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs".
  *
- * Model version              : 1.3
+ * Model version              : 1.4
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Fri Aug 20 17:03:54 2021
+ * C++ source code generated on : Sun Aug 22 19:13:31 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -36,8 +36,8 @@ static void CAN_2_Legs_dec2bin(real_T d, char_T s_data[], int32_T s_size[2]);
 
 /*
  * Output and update for atomic system:
- *    '<S3>/bytes -> floats'
- *    '<S6>/bytes -> floats'
+ *    '<S5>/bytes -> floats'
+ *    '<S8>/bytes -> floats'
  */
 void CAN_2_Legs_bytesfloats(B_bytesfloats_CAN_2_Legs_T *localB)
 {
@@ -55,7 +55,7 @@ void CAN_2_Legs_bytesfloats(B_bytesfloats_CAN_2_Legs_T *localB)
   localB->I_ff = localB->I_ff * 80.0 / 4095.0 + -40.0;
 }
 
-/* Function for MATLAB Function: '<S1>/floats -> bytes' */
+/* Function for MATLAB Function: '<S3>/floats -> bytes' */
 static void CAN_2_Legs_dec2bin(real_T d, char_T s_data[], int32_T s_size[2])
 {
   real_T b_d;
@@ -237,21 +237,16 @@ real_T rt_roundd_snf(real_T u)
   return y;
 }
 
-/*
- * Output and update for atomic system:
- *    '<S1>/floats -> bytes'
- *    '<S2>/floats -> bytes'
- */
-void CAN_2_Legs_floatsbytes(real_T rtu_position, real_T rtu_velocity, real_T
-  rtu_K_p, real_T rtu_K_d, real_T rtu_T_ff, B_floatsbytes_CAN_2_Legs_T *localB)
+/* Model step function */
+void CAN_2_Legs_step(void)
 {
   real_T b_B[8];
-  real_T y;
+  real_T u0;
   uint64_T a;
   uint64_T p2;
+  int32_T first;
   int32_T i;
   int32_T loop_ub;
-  int32_T loop_ub_0;
   char_T p_data[79];
   char_T kd_data[75];
   char_T kp_data[75];
@@ -275,205 +270,6 @@ void CAN_2_Legs_floatsbytes(real_T rtu_position, real_T rtu_velocity, real_T
     false };
 
   int32_T c_size[2];
-  if (rtu_position < 95.5) {
-    y = rtu_position;
-  } else {
-    y = 95.5;
-  }
-
-  if (!(y > -95.5)) {
-    y = -95.5;
-  }
-
-  CAN_2_Legs_dec2bin(std::floor((y - -95.5) * 65535.0 / 191.0), B, c_size);
-  outsize_idx_1 = static_cast<int8_T>(16 - c_size[1]);
-  loop_ub = outsize_idx_1;
-  loop_ub_0 = c_size[1];
-  for (i = 0; i < loop_ub; i++) {
-    p_data[i] = '0';
-  }
-
-  for (i = 0; i < loop_ub_0; i++) {
-    p_data[i + loop_ub] = B[i];
-  }
-
-  if (rtu_velocity < 45.0) {
-    y = rtu_velocity;
-  } else {
-    y = 45.0;
-  }
-
-  if (!(y > -45.0)) {
-    y = -45.0;
-  }
-
-  CAN_2_Legs_dec2bin(std::floor((y - -45.0) * 4095.0 / 90.0), B, c_size);
-  outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
-  loop_ub = outsize_idx_1;
-  loop_ub_0 = c_size[1];
-  for (i = 0; i < loop_ub; i++) {
-    v_data[i] = '0';
-  }
-
-  for (i = 0; i < loop_ub_0; i++) {
-    v_data[i + loop_ub] = B[i];
-  }
-
-  if (rtu_K_p < 500.0) {
-    y = rtu_K_p;
-  } else {
-    y = 500.0;
-  }
-
-  if (!(y > 0.0)) {
-    y = 0.0;
-  }
-
-  CAN_2_Legs_dec2bin(std::floor(y * 4095.0 / 500.0), B, c_size);
-  outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
-  loop_ub = outsize_idx_1;
-  loop_ub_0 = c_size[1];
-  for (i = 0; i < loop_ub; i++) {
-    kp_data[i] = '0';
-  }
-
-  for (i = 0; i < loop_ub_0; i++) {
-    kp_data[i + loop_ub] = B[i];
-  }
-
-  if (rtu_K_d < 45.0) {
-    y = rtu_K_d;
-  } else {
-    y = 45.0;
-  }
-
-  if (!(y > -45.0)) {
-    y = -45.0;
-  }
-
-  CAN_2_Legs_dec2bin(std::floor(y * 4095.0 / 5.0), B, c_size);
-  outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
-  loop_ub = outsize_idx_1;
-  loop_ub_0 = c_size[1];
-  for (i = 0; i < loop_ub; i++) {
-    kd_data[i] = '0';
-  }
-
-  for (i = 0; i < loop_ub_0; i++) {
-    kd_data[i + loop_ub] = B[i];
-  }
-
-  if (rtu_T_ff < 45.0) {
-    y = rtu_T_ff;
-  } else {
-    y = 45.0;
-  }
-
-  if (!(y > -45.0)) {
-    y = -45.0;
-  }
-
-  CAN_2_Legs_dec2bin(std::floor((y - -18.0) * 4095.0 / 36.0), B, c_size);
-  outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
-  loop_ub = outsize_idx_1;
-  loop_ub_0 = c_size[1];
-  for (i = 0; i < loop_ub; i++) {
-    t_data[i] = '0';
-  }
-
-  for (i = 0; i < loop_ub_0; i++) {
-    t_data[i + loop_ub] = B[i];
-  }
-
-  for (i = 0; i < 64; i++) {
-    B[i] = '0';
-  }
-
-  for (i = 0; i < 8; i++) {
-    B[i << 3] = p_data[i];
-    B[(i << 3) + 1] = p_data[i + 8];
-    B[(i << 3) + 2] = v_data[i];
-  }
-
-  B[3] = v_data[8];
-  B[35] = kp_data[0];
-  B[11] = v_data[9];
-  B[43] = kp_data[1];
-  B[19] = v_data[10];
-  B[51] = kp_data[2];
-  B[27] = v_data[11];
-  B[59] = kp_data[3];
-  for (i = 0; i < 8; i++) {
-    B[(i << 3) + 4] = kp_data[i + 4];
-    B[(i << 3) + 5] = kd_data[i];
-  }
-
-  B[6] = kd_data[8];
-  B[38] = t_data[0];
-  B[14] = kd_data[9];
-  B[46] = t_data[1];
-  B[22] = kd_data[10];
-  B[54] = t_data[2];
-  B[30] = kd_data[11];
-  B[62] = t_data[3];
-  for (i = 0; i < 8; i++) {
-    B[(i << 3) + 7] = t_data[i + 4];
-  }
-
-  for (i = 0; i < 8; i++) {
-    loop_ub = 1;
-    while ((loop_ub < 8) && b[static_cast<uint8_T>(B[((loop_ub - 1) << 3) + i])])
-    {
-      loop_ub++;
-    }
-
-    loop_ub_0 = 7;
-    while ((loop_ub_0 + 1 > loop_ub) && b[static_cast<uint8_T>(B[(loop_ub_0 << 3)
-            + i])]) {
-      loop_ub_0--;
-    }
-
-    p2 = 1UL;
-    a = 0UL;
-    while ((loop_ub < loop_ub_0 + 1) && b[static_cast<uint8_T>(B[((loop_ub - 1) <<
-             3) + i])]) {
-      loop_ub++;
-    }
-
-    while (loop_ub_0 + 1 >= loop_ub) {
-      if (B[(loop_ub_0 << 3) + i] == '1') {
-        a += p2;
-        p2 += p2;
-      } else if (B[(loop_ub_0 << 3) + i] == '0') {
-        p2 += p2;
-      }
-
-      loop_ub_0--;
-    }
-
-    b_B[i] = static_cast<real_T>(a);
-  }
-
-  for (i = 0; i < 8; i++) {
-    y = rt_roundd_snf(b_B[i]);
-    if (y < 256.0) {
-      if (y >= 0.0) {
-        tmp = static_cast<uint8_T>(y);
-      } else {
-        tmp = 0U;
-      }
-    } else {
-      tmp = MAX_uint8_T;
-    }
-
-    localB->b[i] = tmp;
-  }
-}
-
-/* Model step function */
-void CAN_2_Legs_step(void)
-{
-  int32_T i;
 
   /* Reset subsysRan breadcrumbs */
   srClearBC(CAN_2_Legs_DW.IfActionSubsystem_SubsysRanBC_j);
@@ -489,29 +285,492 @@ void CAN_2_Legs_step(void)
     sfcnOutputs(rts,0);
   }
 
-  /* Constant: '<Root>/Constant7' */
-  CAN_2_Legs_B.Constant7 = CAN_2_Legs_cal->Constant7_Value;
+  /* Constant: '<Root>/Constant1' */
+  CAN_2_Legs_B.Constant1 = CAN_2_Legs_cal->Constant1_Value;
+
+  /* Constant: '<Root>/Constant2' */
+  CAN_2_Legs_B.Constant2 = CAN_2_Legs_cal->Constant2_Value;
+
+  /* Outputs for Atomic SubSystem: '<Root>/Simulink Function3' */
+  /* S-Function (sg_IO602_IO691_read_s): '<S4>/CAN Read' */
+
+  /* Level2 S-Function Block: '<S4>/CAN Read' (sg_IO602_IO691_read_s) */
+  {
+    SimStruct *rts = CAN_2_Legs_M->childSfunctions[2];
+    sfcnOutputs(rts,0);
+  }
+
+  /* If: '<S4>/If' */
+  if (CAN_2_Legs_B.CANRead_o1) {
+    /* Outputs for IfAction SubSystem: '<S4>/If Action Subsystem' incorporates:
+     *  ActionPort: '<S8>/Action Port'
+     */
+    /* S-Function (scanunpack): '<S8>/CAN Unpack' */
+    {
+      /* S-Function (scanunpack): '<S8>/CAN Unpack' */
+      uint8_T msgReceived = 0;
+      if ((6 == CAN_2_Legs_B.CANRead_o2.Length) && (CAN_2_Legs_B.CANRead_o2.ID
+           != INVALID_CAN_ID) ) {
+        msgReceived = 1;
+
+        {
+          /* --------------- START Unpacking signal 0 ------------------
+           *  startBit                = 16
+           *  length                  = 16
+           *  desiredSignalByteLayout = BIGENDIAN
+           *  dataType                = UNSIGNED
+           *  factor                  = 1.0
+           *  offset                  = 0.0
+           * -----------------------------------------------------------------------*/
+          {
+            real64_T outValue = 0;
+
+            {
+              uint16_T unpackedValue = 0;
+
+              {
+                uint16_T tempValue = (uint16_T) (0);
+
+                {
+                  tempValue = tempValue | (uint16_T)
+                    (CAN_2_Legs_B.CANRead_o2.Data[2]);
+                  tempValue = tempValue | (uint16_T)((uint16_T)
+                    (CAN_2_Legs_B.CANRead_o2.Data[1]) << 8);
+                }
+
+                unpackedValue = tempValue;
+              }
+
+              outValue = (real64_T) (unpackedValue);
+            }
+
+            {
+              real64_T result = (real64_T) outValue;
+              CAN_2_Legs_B.CANUnpack_o1 = result;
+            }
+          }
+
+          /* --------------- START Unpacking signal 1 ------------------
+           *  startBit                = 36
+           *  length                  = 12
+           *  desiredSignalByteLayout = BIGENDIAN
+           *  dataType                = UNSIGNED
+           *  factor                  = 1.0
+           *  offset                  = 0.0
+           * -----------------------------------------------------------------------*/
+          {
+            real64_T outValue = 0;
+
+            {
+              uint16_T unpackedValue = 0;
+
+              {
+                uint16_T tempValue = (uint16_T) (0);
+
+                {
+                  tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                    (CAN_2_Legs_B.CANRead_o2.Data[4]) & (uint16_T)(0xF0U)) >> 4);
+                  tempValue = tempValue | (uint16_T)((uint16_T)
+                    (CAN_2_Legs_B.CANRead_o2.Data[3]) << 4);
+                }
+
+                unpackedValue = tempValue;
+              }
+
+              outValue = (real64_T) (unpackedValue);
+            }
+
+            {
+              real64_T result = (real64_T) outValue;
+              CAN_2_Legs_B.CANUnpack_o2 = result;
+            }
+          }
+
+          /* --------------- START Unpacking signal 2 ------------------
+           *  startBit                = 40
+           *  length                  = 12
+           *  desiredSignalByteLayout = BIGENDIAN
+           *  dataType                = UNSIGNED
+           *  factor                  = 1.0
+           *  offset                  = 0.0
+           * -----------------------------------------------------------------------*/
+          {
+            real64_T outValue = 0;
+
+            {
+              uint16_T unpackedValue = 0;
+
+              {
+                uint16_T tempValue = (uint16_T) (0);
+
+                {
+                  tempValue = tempValue | (uint16_T)
+                    (CAN_2_Legs_B.CANRead_o2.Data[5]);
+                  tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                    (CAN_2_Legs_B.CANRead_o2.Data[4]) & (uint16_T)(0xFU)) << 8);
+                }
+
+                unpackedValue = tempValue;
+              }
+
+              outValue = (real64_T) (unpackedValue);
+            }
+
+            {
+              real64_T result = (real64_T) outValue;
+              CAN_2_Legs_B.CANUnpack_o3 = result;
+            }
+          }
+
+          /* --------------- START Unpacking signal 3 ------------------
+           *  startBit                = 0
+           *  length                  = 8
+           *  desiredSignalByteLayout = BIGENDIAN
+           *  dataType                = UNSIGNED
+           *  factor                  = 1.0
+           *  offset                  = 0.0
+           * -----------------------------------------------------------------------*/
+          {
+            real64_T outValue = 0;
+
+            {
+              uint8_T unpackedValue = 0;
+
+              {
+                uint8_T tempValue = (uint8_T) (0);
+
+                {
+                  tempValue = tempValue | (uint8_T)
+                    (CAN_2_Legs_B.CANRead_o2.Data[0]);
+                }
+
+                unpackedValue = tempValue;
+              }
+
+              outValue = (real64_T) (unpackedValue);
+            }
+
+            {
+              real64_T result = (real64_T) outValue;
+              CAN_2_Legs_B.CANUnpack_o4 = result;
+            }
+          }
+        }
+      }
+
+      /* Status port */
+      CAN_2_Legs_B.CANUnpack_o5 = msgReceived;
+    }
+
+    /* MATLAB Function: '<S8>/bytes -> floats' */
+    CAN_2_Legs_B.sf_bytesfloats_k.position = CAN_2_Legs_B.CANUnpack_o1;
+    CAN_2_Legs_B.sf_bytesfloats_k.velocity = CAN_2_Legs_B.CANUnpack_o2;
+    CAN_2_Legs_B.sf_bytesfloats_k.I_ff = CAN_2_Legs_B.CANUnpack_o3;
+    CAN_2_Legs_bytesfloats(&CAN_2_Legs_B.sf_bytesfloats_k);
+
+    /* Update for IfAction SubSystem: '<S4>/If Action Subsystem' incorporates:
+     *  ActionPort: '<S8>/Action Port'
+     */
+    /* Update for If: '<S4>/If' */
+    srUpdateBC(CAN_2_Legs_DW.IfActionSubsystem_SubsysRanBC);
+
+    /* End of Update for SubSystem: '<S4>/If Action Subsystem' */
+  }
+
+  /* End of If: '<S4>/If' */
+  /* MATLAB Function: '<S4>/floats -> bytes' incorporates:
+   *  Constant: '<Root>/Constant3'
+   *  Constant: '<Root>/Constant4'
+   *  Constant: '<Root>/Constant5'
+   */
+  u0 = CAN_2_Legs_B.Constant1;
+  if (!(u0 < 95.5)) {
+    u0 = 95.5;
+  }
+
+  if (!(u0 > -95.5)) {
+    u0 = -95.5;
+  }
+
+  CAN_2_Legs_dec2bin(std::floor((u0 - -95.5) * 65535.0 / 191.0), B, c_size);
+  outsize_idx_1 = static_cast<int8_T>(16 - c_size[1]);
+  i = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < i; first++) {
+    p_data[first] = '0';
+  }
+
+  for (first = 0; first < loop_ub; first++) {
+    p_data[first + i] = B[first];
+  }
+
+  u0 = CAN_2_Legs_B.Constant2;
+  if (!(u0 < 45.0)) {
+    u0 = 45.0;
+  }
+
+  if (!(u0 > -45.0)) {
+    u0 = -45.0;
+  }
+
+  CAN_2_Legs_dec2bin(std::floor((u0 - -45.0) * 4095.0 / 90.0), B, c_size);
+  outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
+  i = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < i; first++) {
+    v_data[first] = '0';
+  }
+
+  for (first = 0; first < loop_ub; first++) {
+    v_data[first + i] = B[first];
+  }
+
+  u0 = CAN_2_Legs_cal->Constant3_Value;
+  if (!(u0 < 500.0)) {
+    u0 = 500.0;
+  }
+
+  if (!(u0 > 0.0)) {
+    u0 = 0.0;
+  }
+
+  CAN_2_Legs_dec2bin(std::floor(u0 * 4095.0 / 500.0), B, c_size);
+  outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
+  i = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < i; first++) {
+    kp_data[first] = '0';
+  }
+
+  for (first = 0; first < loop_ub; first++) {
+    kp_data[first + i] = B[first];
+  }
+
+  u0 = CAN_2_Legs_cal->Constant4_Value;
+  if (!(u0 < 45.0)) {
+    u0 = 45.0;
+  }
+
+  if (!(u0 > -45.0)) {
+    u0 = -45.0;
+  }
+
+  CAN_2_Legs_dec2bin(std::floor(u0 * 4095.0 / 5.0), B, c_size);
+  outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
+  i = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < i; first++) {
+    kd_data[first] = '0';
+  }
+
+  for (first = 0; first < loop_ub; first++) {
+    kd_data[first + i] = B[first];
+  }
+
+  u0 = CAN_2_Legs_cal->Constant5_Value;
+  if (!(u0 < 45.0)) {
+    u0 = 45.0;
+  }
+
+  if (!(u0 > -45.0)) {
+    u0 = -45.0;
+  }
+
+  CAN_2_Legs_dec2bin(std::floor((u0 - -18.0) * 4095.0 / 36.0), B, c_size);
+  outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
+  i = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < i; first++) {
+    t_data[first] = '0';
+  }
+
+  for (first = 0; first < loop_ub; first++) {
+    t_data[first + i] = B[first];
+  }
+
+  for (first = 0; first < 64; first++) {
+    B[first] = '0';
+  }
+
+  for (first = 0; first < 8; first++) {
+    B[first << 3] = p_data[first];
+    B[(first << 3) + 1] = p_data[first + 8];
+    B[(first << 3) + 2] = v_data[first];
+  }
+
+  B[3] = v_data[8];
+  B[35] = kp_data[0];
+  B[11] = v_data[9];
+  B[43] = kp_data[1];
+  B[19] = v_data[10];
+  B[51] = kp_data[2];
+  B[27] = v_data[11];
+  B[59] = kp_data[3];
+  for (first = 0; first < 8; first++) {
+    B[(first << 3) + 4] = kp_data[first + 4];
+    B[(first << 3) + 5] = kd_data[first];
+  }
+
+  B[6] = kd_data[8];
+  B[38] = t_data[0];
+  B[14] = kd_data[9];
+  B[46] = t_data[1];
+  B[22] = kd_data[10];
+  B[54] = t_data[2];
+  B[30] = kd_data[11];
+  B[62] = t_data[3];
+  for (first = 0; first < 8; first++) {
+    B[(first << 3) + 7] = t_data[first + 4];
+  }
+
+  for (i = 0; i < 8; i++) {
+    first = 1;
+    while ((first < 8) && b[static_cast<uint8_T>(B[((first - 1) << 3) + i])]) {
+      first++;
+    }
+
+    loop_ub = 7;
+    while ((loop_ub + 1 > first) && b[static_cast<uint8_T>(B[(loop_ub << 3) + i])])
+    {
+      loop_ub--;
+    }
+
+    p2 = 1UL;
+    a = 0UL;
+    while ((first < loop_ub + 1) && b[static_cast<uint8_T>(B[((first - 1) << 3)
+            + i])]) {
+      first++;
+    }
+
+    while (loop_ub + 1 >= first) {
+      if (B[(loop_ub << 3) + i] == '1') {
+        a += p2;
+        p2 += p2;
+      } else if (B[(loop_ub << 3) + i] == '0') {
+        p2 += p2;
+      }
+
+      loop_ub--;
+    }
+
+    b_B[i] = static_cast<real_T>(a);
+    u0 = rt_roundd_snf(b_B[i]);
+    if (u0 < 256.0) {
+      if (u0 >= 0.0) {
+        tmp = static_cast<uint8_T>(u0);
+      } else {
+        tmp = 0U;
+      }
+    } else {
+      tmp = MAX_uint8_T;
+    }
+
+    CAN_2_Legs_B.b[i] = tmp;
+  }
+
+  /* End of MATLAB Function: '<S4>/floats -> bytes' */
+
+  /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
+   *  Constant: '<Root>/Constant'
+   */
+  switch (static_cast<int32_T>(CAN_2_Legs_cal->Constant_Value)) {
+   case 1:
+    /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
+     *  Constant: '<S4>/Constant'
+     */
+    for (i = 0; i < 8; i++) {
+      CAN_2_Legs_B.MultiportSwitch[i] = CAN_2_Legs_cal->Constant_Value_i[i];
+    }
+    break;
+
+   case 2:
+    /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
+     *  Constant: '<S4>/Constant1'
+     */
+    for (i = 0; i < 8; i++) {
+      CAN_2_Legs_B.MultiportSwitch[i] = CAN_2_Legs_cal->Constant1_Value_e[i];
+    }
+    break;
+
+   case 3:
+    /* MultiPortSwitch: '<S4>/Multiport Switch' */
+    for (i = 0; i < 8; i++) {
+      CAN_2_Legs_B.MultiportSwitch[i] = CAN_2_Legs_B.b[i];
+    }
+    break;
+
+   default:
+    /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
+     *  Constant: '<S4>/Constant2'
+     */
+    for (i = 0; i < 8; i++) {
+      CAN_2_Legs_B.MultiportSwitch[i] = CAN_2_Legs_cal->Constant2_Value_k[i];
+    }
+    break;
+  }
+
+  /* End of MultiPortSwitch: '<S4>/Multiport Switch' */
+
+  /* S-Function (slrealtimebytepacking): '<S4>/Byte Packing' */
+
+  /* Byte Packing: <S4>/Byte Packing */
+  (void)memcpy((uint8_T*)&CAN_2_Legs_B.BytePacking[0] + 0, (uint8_T*)
+               &CAN_2_Legs_B.MultiportSwitch[0], 8);
+
+  /* S-Function (scanpack): '<S4>/CAN Pack1' */
+  /* S-Function (scanpack): '<S4>/CAN Pack1' */
+  CAN_2_Legs_B.CANPack1.ID = 1U;
+  CAN_2_Legs_B.CANPack1.Length = 8U;
+  CAN_2_Legs_B.CANPack1.Extended = 0U;
+  CAN_2_Legs_B.CANPack1.Remote = 0;
+  CAN_2_Legs_B.CANPack1.Data[0] = 0;
+  CAN_2_Legs_B.CANPack1.Data[1] = 0;
+  CAN_2_Legs_B.CANPack1.Data[2] = 0;
+  CAN_2_Legs_B.CANPack1.Data[3] = 0;
+  CAN_2_Legs_B.CANPack1.Data[4] = 0;
+  CAN_2_Legs_B.CANPack1.Data[5] = 0;
+  CAN_2_Legs_B.CANPack1.Data[6] = 0;
+  CAN_2_Legs_B.CANPack1.Data[7] = 0;
+
+  {
+    (void) std::memcpy((CAN_2_Legs_B.CANPack1.Data), &CAN_2_Legs_B.BytePacking[0],
+                       8 * sizeof(uint8_T));
+  }
+
+  /* S-Function (sg_IO602_IO691_write_s): '<S4>/CAN Write1' */
+
+  /* Level2 S-Function Block: '<S4>/CAN Write1' (sg_IO602_IO691_write_s) */
+  {
+    SimStruct *rts = CAN_2_Legs_M->childSfunctions[3];
+    sfcnOutputs(rts,0);
+  }
+
+  /* Gain: '<Root>/Gain' incorporates:
+   *  Constant: '<Root>/Constant7'
+   */
+  CAN_2_Legs_B.Gain = CAN_2_Legs_cal->Gain_Gain *
+    CAN_2_Legs_cal->Constant7_Value;
 
   /* Constant: '<Root>/Constant8' */
   CAN_2_Legs_B.Constant8 = CAN_2_Legs_cal->Constant8_Value;
 
   /* Outputs for Atomic SubSystem: '<Root>/Simulink Function1' */
-  /* S-Function (sg_IO602_IO691_read_s): '<S1>/CAN Read' */
+  /* S-Function (sg_IO602_IO691_read_s): '<S3>/CAN Read' */
 
-  /* Level2 S-Function Block: '<S1>/CAN Read' (sg_IO602_IO691_read_s) */
+  /* Level2 S-Function Block: '<S3>/CAN Read' (sg_IO602_IO691_read_s) */
   {
     SimStruct *rts = CAN_2_Legs_M->childSfunctions[0];
     sfcnOutputs(rts,0);
   }
 
-  /* If: '<S1>/If' */
+  /* If: '<S3>/If' */
   if (CAN_2_Legs_B.CANRead_o1_e) {
-    /* Outputs for IfAction SubSystem: '<S1>/If Action Subsystem' incorporates:
-     *  ActionPort: '<S3>/Action Port'
+    /* Outputs for IfAction SubSystem: '<S3>/If Action Subsystem' incorporates:
+     *  ActionPort: '<S5>/Action Port'
      */
-    /* S-Function (scanunpack): '<S3>/CAN Unpack' */
+    /* S-Function (scanunpack): '<S5>/CAN Unpack' */
     {
-      /* S-Function (scanunpack): '<S3>/CAN Unpack' */
+      /* S-Function (scanunpack): '<S5>/CAN Unpack' */
       uint8_T msgReceived = 0;
       if ((6 == CAN_2_Legs_B.CANRead_o2_i.Length) &&
           (CAN_2_Legs_B.CANRead_o2_i.ID != INVALID_CAN_ID) ) {
@@ -667,38 +926,221 @@ void CAN_2_Legs_step(void)
       CAN_2_Legs_B.CANUnpack_o5_m = msgReceived;
     }
 
-    /* MATLAB Function: '<S3>/bytes -> floats' */
+    /* MATLAB Function: '<S5>/bytes -> floats' */
     CAN_2_Legs_B.sf_bytesfloats.position = CAN_2_Legs_B.CANUnpack_o1_o;
     CAN_2_Legs_B.sf_bytesfloats.velocity = CAN_2_Legs_B.CANUnpack_o2_m;
     CAN_2_Legs_B.sf_bytesfloats.I_ff = CAN_2_Legs_B.CANUnpack_o3_o;
     CAN_2_Legs_bytesfloats(&CAN_2_Legs_B.sf_bytesfloats);
 
-    /* Update for IfAction SubSystem: '<S1>/If Action Subsystem' incorporates:
-     *  ActionPort: '<S3>/Action Port'
+    /* Update for IfAction SubSystem: '<S3>/If Action Subsystem' incorporates:
+     *  ActionPort: '<S5>/Action Port'
      */
-    /* Update for If: '<S1>/If' */
+    /* Update for If: '<S3>/If' */
     srUpdateBC(CAN_2_Legs_DW.IfActionSubsystem_SubsysRanBC_j);
 
-    /* End of Update for SubSystem: '<S1>/If Action Subsystem' */
+    /* End of Update for SubSystem: '<S3>/If Action Subsystem' */
   }
 
-  /* End of If: '<S1>/If' */
-  /* MATLAB Function: '<S1>/floats -> bytes' incorporates:
+  /* End of If: '<S3>/If' */
+  /* MATLAB Function: '<S3>/floats -> bytes' incorporates:
    *  Constant: '<Root>/Constant10'
    *  Constant: '<Root>/Constant11'
    *  Constant: '<Root>/Constant9'
    */
-  CAN_2_Legs_floatsbytes(CAN_2_Legs_B.Constant7, CAN_2_Legs_B.Constant8,
-    CAN_2_Legs_cal->Constant9_Value, CAN_2_Legs_cal->Constant10_Value,
-    CAN_2_Legs_cal->Constant11_Value, &CAN_2_Legs_B.sf_floatsbytes);
+  u0 = CAN_2_Legs_B.Gain;
+  if (!(u0 < 95.5)) {
+    u0 = 95.5;
+  }
 
-  /* MultiPortSwitch: '<S1>/Multiport Switch' incorporates:
+  if (!(u0 > -95.5)) {
+    u0 = -95.5;
+  }
+
+  CAN_2_Legs_dec2bin(std::floor((u0 - -95.5) * 65535.0 / 191.0), B, c_size);
+  outsize_idx_1 = static_cast<int8_T>(16 - c_size[1]);
+  i = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < i; first++) {
+    p_data[first] = '0';
+  }
+
+  for (first = 0; first < loop_ub; first++) {
+    p_data[first + i] = B[first];
+  }
+
+  u0 = CAN_2_Legs_B.Constant8;
+  if (!(u0 < 45.0)) {
+    u0 = 45.0;
+  }
+
+  if (!(u0 > -45.0)) {
+    u0 = -45.0;
+  }
+
+  CAN_2_Legs_dec2bin(std::floor((u0 - -45.0) * 4095.0 / 90.0), B, c_size);
+  outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
+  i = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < i; first++) {
+    v_data[first] = '0';
+  }
+
+  for (first = 0; first < loop_ub; first++) {
+    v_data[first + i] = B[first];
+  }
+
+  u0 = CAN_2_Legs_cal->Constant9_Value;
+  if (!(u0 < 500.0)) {
+    u0 = 500.0;
+  }
+
+  if (!(u0 > 0.0)) {
+    u0 = 0.0;
+  }
+
+  CAN_2_Legs_dec2bin(std::floor(u0 * 4095.0 / 500.0), B, c_size);
+  outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
+  i = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < i; first++) {
+    kp_data[first] = '0';
+  }
+
+  for (first = 0; first < loop_ub; first++) {
+    kp_data[first + i] = B[first];
+  }
+
+  u0 = CAN_2_Legs_cal->Constant10_Value;
+  if (!(u0 < 45.0)) {
+    u0 = 45.0;
+  }
+
+  if (!(u0 > -45.0)) {
+    u0 = -45.0;
+  }
+
+  CAN_2_Legs_dec2bin(std::floor(u0 * 4095.0 / 5.0), B, c_size);
+  outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
+  i = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < i; first++) {
+    kd_data[first] = '0';
+  }
+
+  for (first = 0; first < loop_ub; first++) {
+    kd_data[first + i] = B[first];
+  }
+
+  u0 = CAN_2_Legs_cal->Constant11_Value;
+  if (!(u0 < 45.0)) {
+    u0 = 45.0;
+  }
+
+  if (!(u0 > -45.0)) {
+    u0 = -45.0;
+  }
+
+  CAN_2_Legs_dec2bin(std::floor((u0 - -18.0) * 4095.0 / 36.0), B, c_size);
+  outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
+  i = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < i; first++) {
+    t_data[first] = '0';
+  }
+
+  for (first = 0; first < loop_ub; first++) {
+    t_data[first + i] = B[first];
+  }
+
+  for (first = 0; first < 64; first++) {
+    B[first] = '0';
+  }
+
+  for (first = 0; first < 8; first++) {
+    B[first << 3] = p_data[first];
+    B[(first << 3) + 1] = p_data[first + 8];
+    B[(first << 3) + 2] = v_data[first];
+  }
+
+  B[3] = v_data[8];
+  B[35] = kp_data[0];
+  B[11] = v_data[9];
+  B[43] = kp_data[1];
+  B[19] = v_data[10];
+  B[51] = kp_data[2];
+  B[27] = v_data[11];
+  B[59] = kp_data[3];
+  for (first = 0; first < 8; first++) {
+    B[(first << 3) + 4] = kp_data[first + 4];
+    B[(first << 3) + 5] = kd_data[first];
+  }
+
+  B[6] = kd_data[8];
+  B[38] = t_data[0];
+  B[14] = kd_data[9];
+  B[46] = t_data[1];
+  B[22] = kd_data[10];
+  B[54] = t_data[2];
+  B[30] = kd_data[11];
+  B[62] = t_data[3];
+  for (first = 0; first < 8; first++) {
+    B[(first << 3) + 7] = t_data[first + 4];
+  }
+
+  for (i = 0; i < 8; i++) {
+    first = 1;
+    while ((first < 8) && b[static_cast<uint8_T>(B[((first - 1) << 3) + i])]) {
+      first++;
+    }
+
+    loop_ub = 7;
+    while ((loop_ub + 1 > first) && b[static_cast<uint8_T>(B[(loop_ub << 3) + i])])
+    {
+      loop_ub--;
+    }
+
+    p2 = 1UL;
+    a = 0UL;
+    while ((first < loop_ub + 1) && b[static_cast<uint8_T>(B[((first - 1) << 3)
+            + i])]) {
+      first++;
+    }
+
+    while (loop_ub + 1 >= first) {
+      if (B[(loop_ub << 3) + i] == '1') {
+        a += p2;
+        p2 += p2;
+      } else if (B[(loop_ub << 3) + i] == '0') {
+        p2 += p2;
+      }
+
+      loop_ub--;
+    }
+
+    b_B[i] = static_cast<real_T>(a);
+    u0 = rt_roundd_snf(b_B[i]);
+    if (u0 < 256.0) {
+      if (u0 >= 0.0) {
+        tmp = static_cast<uint8_T>(u0);
+      } else {
+        tmp = 0U;
+      }
+    } else {
+      tmp = MAX_uint8_T;
+    }
+
+    CAN_2_Legs_B.b_g[i] = tmp;
+  }
+
+  /* End of MATLAB Function: '<S3>/floats -> bytes' */
+
+  /* MultiPortSwitch: '<S3>/Multiport Switch' incorporates:
    *  Constant: '<Root>/Constant'
    */
   switch (static_cast<int32_T>(CAN_2_Legs_cal->Constant_Value)) {
    case 1:
-    /* MultiPortSwitch: '<S1>/Multiport Switch' incorporates:
-     *  Constant: '<S1>/Constant'
+    /* MultiPortSwitch: '<S3>/Multiport Switch' incorporates:
+     *  Constant: '<S3>/Constant'
      */
     for (i = 0; i < 8; i++) {
       CAN_2_Legs_B.MultiportSwitch_f[i] = CAN_2_Legs_cal->Constant_Value_l[i];
@@ -706,8 +1148,8 @@ void CAN_2_Legs_step(void)
     break;
 
    case 2:
-    /* MultiPortSwitch: '<S1>/Multiport Switch' incorporates:
-     *  Constant: '<S1>/Constant1'
+    /* MultiPortSwitch: '<S3>/Multiport Switch' incorporates:
+     *  Constant: '<S3>/Constant1'
      */
     for (i = 0; i < 8; i++) {
       CAN_2_Legs_B.MultiportSwitch_f[i] = CAN_2_Legs_cal->Constant1_Value_m[i];
@@ -715,15 +1157,15 @@ void CAN_2_Legs_step(void)
     break;
 
    case 3:
-    /* MultiPortSwitch: '<S1>/Multiport Switch' */
+    /* MultiPortSwitch: '<S3>/Multiport Switch' */
     for (i = 0; i < 8; i++) {
-      CAN_2_Legs_B.MultiportSwitch_f[i] = CAN_2_Legs_B.sf_floatsbytes.b[i];
+      CAN_2_Legs_B.MultiportSwitch_f[i] = CAN_2_Legs_B.b_g[i];
     }
     break;
 
    default:
-    /* MultiPortSwitch: '<S1>/Multiport Switch' incorporates:
-     *  Constant: '<S1>/Constant2'
+    /* MultiPortSwitch: '<S3>/Multiport Switch' incorporates:
+     *  Constant: '<S3>/Constant2'
      */
     for (i = 0; i < 8; i++) {
       CAN_2_Legs_B.MultiportSwitch_f[i] = CAN_2_Legs_cal->Constant2_Value_g[i];
@@ -731,16 +1173,16 @@ void CAN_2_Legs_step(void)
     break;
   }
 
-  /* End of MultiPortSwitch: '<S1>/Multiport Switch' */
+  /* End of MultiPortSwitch: '<S3>/Multiport Switch' */
 
-  /* S-Function (slrealtimebytepacking): '<S1>/Byte Packing' */
+  /* S-Function (slrealtimebytepacking): '<S3>/Byte Packing' */
 
-  /* Byte Packing: <S1>/Byte Packing */
+  /* Byte Packing: <S3>/Byte Packing */
   (void)memcpy((uint8_T*)&CAN_2_Legs_B.BytePacking_o[0] + 0, (uint8_T*)
                &CAN_2_Legs_B.MultiportSwitch_f[0], 8);
 
-  /* S-Function (scanpack): '<S1>/CAN Pack1' */
-  /* S-Function (scanpack): '<S1>/CAN Pack1' */
+  /* S-Function (scanpack): '<S3>/CAN Pack1' */
+  /* S-Function (scanpack): '<S3>/CAN Pack1' */
   CAN_2_Legs_B.CANPack1_i.ID = 2U;
   CAN_2_Legs_B.CANPack1_i.Length = 8U;
   CAN_2_Legs_B.CANPack1_i.Extended = 0U;
@@ -760,291 +1202,35 @@ void CAN_2_Legs_step(void)
                        8 * sizeof(uint8_T));
   }
 
-  /* S-Function (sg_IO602_IO691_write_s): '<S1>/CAN Write1' */
+  /* S-Function (sg_IO602_IO691_write_s): '<S3>/CAN Write1' */
 
-  /* Level2 S-Function Block: '<S1>/CAN Write1' (sg_IO602_IO691_write_s) */
+  /* Level2 S-Function Block: '<S3>/CAN Write1' (sg_IO602_IO691_write_s) */
   {
     SimStruct *rts = CAN_2_Legs_M->childSfunctions[1];
     sfcnOutputs(rts,0);
   }
 
-  /* Constant: '<Root>/Constant1' */
-  CAN_2_Legs_B.Constant1 = CAN_2_Legs_cal->Constant1_Value;
-
-  /* Constant: '<Root>/Constant2' */
-  CAN_2_Legs_B.Constant2 = CAN_2_Legs_cal->Constant2_Value;
-
-  /* Outputs for Atomic SubSystem: '<Root>/Simulink Function3' */
-  /* S-Function (sg_IO602_IO691_read_s): '<S2>/CAN Read' */
-
-  /* Level2 S-Function Block: '<S2>/CAN Read' (sg_IO602_IO691_read_s) */
-  {
-    SimStruct *rts = CAN_2_Legs_M->childSfunctions[2];
-    sfcnOutputs(rts,0);
-  }
-
-  /* If: '<S2>/If' */
-  if (CAN_2_Legs_B.CANRead_o1) {
-    /* Outputs for IfAction SubSystem: '<S2>/If Action Subsystem' incorporates:
-     *  ActionPort: '<S6>/Action Port'
-     */
-    /* S-Function (scanunpack): '<S6>/CAN Unpack' */
-    {
-      /* S-Function (scanunpack): '<S6>/CAN Unpack' */
-      uint8_T msgReceived = 0;
-      if ((6 == CAN_2_Legs_B.CANRead_o2.Length) && (CAN_2_Legs_B.CANRead_o2.ID
-           != INVALID_CAN_ID) ) {
-        msgReceived = 1;
-
-        {
-          /* --------------- START Unpacking signal 0 ------------------
-           *  startBit                = 16
-           *  length                  = 16
-           *  desiredSignalByteLayout = BIGENDIAN
-           *  dataType                = UNSIGNED
-           *  factor                  = 1.0
-           *  offset                  = 0.0
-           * -----------------------------------------------------------------------*/
-          {
-            real64_T outValue = 0;
-
-            {
-              uint16_T unpackedValue = 0;
-
-              {
-                uint16_T tempValue = (uint16_T) (0);
-
-                {
-                  tempValue = tempValue | (uint16_T)
-                    (CAN_2_Legs_B.CANRead_o2.Data[2]);
-                  tempValue = tempValue | (uint16_T)((uint16_T)
-                    (CAN_2_Legs_B.CANRead_o2.Data[1]) << 8);
-                }
-
-                unpackedValue = tempValue;
-              }
-
-              outValue = (real64_T) (unpackedValue);
-            }
-
-            {
-              real64_T result = (real64_T) outValue;
-              CAN_2_Legs_B.CANUnpack_o1 = result;
-            }
-          }
-
-          /* --------------- START Unpacking signal 1 ------------------
-           *  startBit                = 36
-           *  length                  = 12
-           *  desiredSignalByteLayout = BIGENDIAN
-           *  dataType                = UNSIGNED
-           *  factor                  = 1.0
-           *  offset                  = 0.0
-           * -----------------------------------------------------------------------*/
-          {
-            real64_T outValue = 0;
-
-            {
-              uint16_T unpackedValue = 0;
-
-              {
-                uint16_T tempValue = (uint16_T) (0);
-
-                {
-                  tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                    (CAN_2_Legs_B.CANRead_o2.Data[4]) & (uint16_T)(0xF0U)) >> 4);
-                  tempValue = tempValue | (uint16_T)((uint16_T)
-                    (CAN_2_Legs_B.CANRead_o2.Data[3]) << 4);
-                }
-
-                unpackedValue = tempValue;
-              }
-
-              outValue = (real64_T) (unpackedValue);
-            }
-
-            {
-              real64_T result = (real64_T) outValue;
-              CAN_2_Legs_B.CANUnpack_o2 = result;
-            }
-          }
-
-          /* --------------- START Unpacking signal 2 ------------------
-           *  startBit                = 40
-           *  length                  = 12
-           *  desiredSignalByteLayout = BIGENDIAN
-           *  dataType                = UNSIGNED
-           *  factor                  = 1.0
-           *  offset                  = 0.0
-           * -----------------------------------------------------------------------*/
-          {
-            real64_T outValue = 0;
-
-            {
-              uint16_T unpackedValue = 0;
-
-              {
-                uint16_T tempValue = (uint16_T) (0);
-
-                {
-                  tempValue = tempValue | (uint16_T)
-                    (CAN_2_Legs_B.CANRead_o2.Data[5]);
-                  tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                    (CAN_2_Legs_B.CANRead_o2.Data[4]) & (uint16_T)(0xFU)) << 8);
-                }
-
-                unpackedValue = tempValue;
-              }
-
-              outValue = (real64_T) (unpackedValue);
-            }
-
-            {
-              real64_T result = (real64_T) outValue;
-              CAN_2_Legs_B.CANUnpack_o3 = result;
-            }
-          }
-
-          /* --------------- START Unpacking signal 3 ------------------
-           *  startBit                = 0
-           *  length                  = 8
-           *  desiredSignalByteLayout = BIGENDIAN
-           *  dataType                = UNSIGNED
-           *  factor                  = 1.0
-           *  offset                  = 0.0
-           * -----------------------------------------------------------------------*/
-          {
-            real64_T outValue = 0;
-
-            {
-              uint8_T unpackedValue = 0;
-
-              {
-                uint8_T tempValue = (uint8_T) (0);
-
-                {
-                  tempValue = tempValue | (uint8_T)
-                    (CAN_2_Legs_B.CANRead_o2.Data[0]);
-                }
-
-                unpackedValue = tempValue;
-              }
-
-              outValue = (real64_T) (unpackedValue);
-            }
-
-            {
-              real64_T result = (real64_T) outValue;
-              CAN_2_Legs_B.CANUnpack_o4 = result;
-            }
-          }
-        }
-      }
-
-      /* Status port */
-      CAN_2_Legs_B.CANUnpack_o5 = msgReceived;
-    }
-
-    /* MATLAB Function: '<S6>/bytes -> floats' */
-    CAN_2_Legs_B.sf_bytesfloats_k.position = CAN_2_Legs_B.CANUnpack_o1;
-    CAN_2_Legs_B.sf_bytesfloats_k.velocity = CAN_2_Legs_B.CANUnpack_o2;
-    CAN_2_Legs_B.sf_bytesfloats_k.I_ff = CAN_2_Legs_B.CANUnpack_o3;
-    CAN_2_Legs_bytesfloats(&CAN_2_Legs_B.sf_bytesfloats_k);
-
-    /* Update for IfAction SubSystem: '<S2>/If Action Subsystem' incorporates:
-     *  ActionPort: '<S6>/Action Port'
-     */
-    /* Update for If: '<S2>/If' */
-    srUpdateBC(CAN_2_Legs_DW.IfActionSubsystem_SubsysRanBC);
-
-    /* End of Update for SubSystem: '<S2>/If Action Subsystem' */
-  }
-
-  /* End of If: '<S2>/If' */
-  /* MATLAB Function: '<S2>/floats -> bytes' incorporates:
-   *  Constant: '<Root>/Constant3'
-   *  Constant: '<Root>/Constant4'
-   *  Constant: '<Root>/Constant5'
+  /* SignalConversion generated from: '<S2>/ SFunction ' incorporates:
+   *  MATLAB Function: '<Root>/MATLAB Function1'
    */
-  CAN_2_Legs_floatsbytes(CAN_2_Legs_B.Constant1, CAN_2_Legs_B.Constant2,
-    CAN_2_Legs_cal->Constant3_Value, CAN_2_Legs_cal->Constant4_Value,
-    CAN_2_Legs_cal->Constant5_Value, &CAN_2_Legs_B.sf_floatsbytes_o);
+  CAN_2_Legs_B.TmpSignalConversionAtSFunctionI[0] =
+    CAN_2_Legs_B.sf_bytesfloats_k.position;
+  CAN_2_Legs_B.TmpSignalConversionAtSFunctionI[1] =
+    CAN_2_Legs_B.sf_bytesfloats.position;
 
-  /* MultiPortSwitch: '<S2>/Multiport Switch' incorporates:
-   *  Constant: '<Root>/Constant'
-   */
-  switch (static_cast<int32_T>(CAN_2_Legs_cal->Constant_Value)) {
-   case 1:
-    /* MultiPortSwitch: '<S2>/Multiport Switch' incorporates:
-     *  Constant: '<S2>/Constant'
-     */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_B.MultiportSwitch[i] = CAN_2_Legs_cal->Constant_Value_i[i];
-    }
-    break;
+  /* MATLAB Function: '<Root>/MATLAB Function1' */
+  CAN_2_Legs_B.danger = 0.0;
 
-   case 2:
-    /* MultiPortSwitch: '<S2>/Multiport Switch' incorporates:
-     *  Constant: '<S2>/Constant1'
-     */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_B.MultiportSwitch[i] = CAN_2_Legs_cal->Constant1_Value_e[i];
-    }
-    break;
-
-   case 3:
-    /* MultiPortSwitch: '<S2>/Multiport Switch' */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_B.MultiportSwitch[i] = CAN_2_Legs_B.sf_floatsbytes_o.b[i];
-    }
-    break;
-
-   default:
-    /* MultiPortSwitch: '<S2>/Multiport Switch' incorporates:
-     *  Constant: '<S2>/Constant2'
-     */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_B.MultiportSwitch[i] = CAN_2_Legs_cal->Constant2_Value_k[i];
-    }
-    break;
+  /* MATLAB Function: '<Root>/MATLAB Function' */
+  CAN_2_Legs_B.GRF = 0.0;
+  if (((CAN_2_Legs_B.sf_bytesfloats_k.position < 0.0) && (2.25 <
+        CAN_2_Legs_B.sf_bytesfloats_k.I_ff)) ||
+      ((CAN_2_Legs_B.sf_bytesfloats_k.position > 0.0) && (-2.25 >
+        CAN_2_Legs_B.sf_bytesfloats_k.I_ff))) {
+    CAN_2_Legs_B.GRF = 1.0;
   }
 
-  /* End of MultiPortSwitch: '<S2>/Multiport Switch' */
-
-  /* S-Function (slrealtimebytepacking): '<S2>/Byte Packing' */
-
-  /* Byte Packing: <S2>/Byte Packing */
-  (void)memcpy((uint8_T*)&CAN_2_Legs_B.BytePacking[0] + 0, (uint8_T*)
-               &CAN_2_Legs_B.MultiportSwitch[0], 8);
-
-  /* S-Function (scanpack): '<S2>/CAN Pack1' */
-  /* S-Function (scanpack): '<S2>/CAN Pack1' */
-  CAN_2_Legs_B.CANPack1.ID = 1U;
-  CAN_2_Legs_B.CANPack1.Length = 8U;
-  CAN_2_Legs_B.CANPack1.Extended = 0U;
-  CAN_2_Legs_B.CANPack1.Remote = 0;
-  CAN_2_Legs_B.CANPack1.Data[0] = 0;
-  CAN_2_Legs_B.CANPack1.Data[1] = 0;
-  CAN_2_Legs_B.CANPack1.Data[2] = 0;
-  CAN_2_Legs_B.CANPack1.Data[3] = 0;
-  CAN_2_Legs_B.CANPack1.Data[4] = 0;
-  CAN_2_Legs_B.CANPack1.Data[5] = 0;
-  CAN_2_Legs_B.CANPack1.Data[6] = 0;
-  CAN_2_Legs_B.CANPack1.Data[7] = 0;
-
-  {
-    (void) std::memcpy((CAN_2_Legs_B.CANPack1.Data), &CAN_2_Legs_B.BytePacking[0],
-                       8 * sizeof(uint8_T));
-  }
-
-  /* S-Function (sg_IO602_IO691_write_s): '<S2>/CAN Write1' */
-
-  /* Level2 S-Function Block: '<S2>/CAN Write1' (sg_IO602_IO691_write_s) */
-  {
-    SimStruct *rts = CAN_2_Legs_M->childSfunctions[3];
-    sfcnOutputs(rts,0);
-  }
-
+  /* End of MATLAB Function: '<Root>/MATLAB Function' */
   /* S-Function (sg_IO602_IO691_status_s): '<Root>/CAN Status' */
 
   /* Level2 S-Function Block: '<Root>/CAN Status' (sg_IO602_IO691_status_s) */
@@ -1168,7 +1354,7 @@ void CAN_2_Legs_initialize(void)
       }
     }
 
-    /* Level2 S-Function Block: CAN_2_Legs/<S1>/CAN Read (sg_IO602_IO691_read_s) */
+    /* Level2 S-Function Block: CAN_2_Legs/<S3>/CAN Read (sg_IO602_IO691_read_s) */
     {
       SimStruct *rts = CAN_2_Legs_M->childSfunctions[0];
 
@@ -1305,7 +1491,7 @@ void CAN_2_Legs_initialize(void)
       /* Update the BufferDstPort flags for each input port */
     }
 
-    /* Level2 S-Function Block: CAN_2_Legs/<S1>/CAN Write1 (sg_IO602_IO691_write_s) */
+    /* Level2 S-Function Block: CAN_2_Legs/<S3>/CAN Write1 (sg_IO602_IO691_write_s) */
     {
       SimStruct *rts = CAN_2_Legs_M->childSfunctions[1];
 
@@ -1430,7 +1616,7 @@ void CAN_2_Legs_initialize(void)
       ssSetInputPortBufferDstPort(rts, 0, -1);
     }
 
-    /* Level2 S-Function Block: CAN_2_Legs/<S2>/CAN Read (sg_IO602_IO691_read_s) */
+    /* Level2 S-Function Block: CAN_2_Legs/<S4>/CAN Read (sg_IO602_IO691_read_s) */
     {
       SimStruct *rts = CAN_2_Legs_M->childSfunctions[2];
 
@@ -1566,7 +1752,7 @@ void CAN_2_Legs_initialize(void)
       /* Update the BufferDstPort flags for each input port */
     }
 
-    /* Level2 S-Function Block: CAN_2_Legs/<S2>/CAN Write1 (sg_IO602_IO691_write_s) */
+    /* Level2 S-Function Block: CAN_2_Legs/<S4>/CAN Write1 (sg_IO602_IO691_write_s) */
     {
       SimStruct *rts = CAN_2_Legs_M->childSfunctions[3];
 
@@ -1938,17 +2124,14 @@ void CAN_2_Legs_initialize(void)
       return;
   }
 
-  /* Start for Constant: '<Root>/Constant7' */
-  CAN_2_Legs_B.Constant7 = CAN_2_Legs_cal->Constant7_Value;
-
-  /* Start for Constant: '<Root>/Constant8' */
-  CAN_2_Legs_B.Constant8 = CAN_2_Legs_cal->Constant8_Value;
-
   /* Start for Constant: '<Root>/Constant1' */
   CAN_2_Legs_B.Constant1 = CAN_2_Legs_cal->Constant1_Value;
 
   /* Start for Constant: '<Root>/Constant2' */
   CAN_2_Legs_B.Constant2 = CAN_2_Legs_cal->Constant2_Value;
+
+  /* Start for Constant: '<Root>/Constant8' */
+  CAN_2_Legs_B.Constant8 = CAN_2_Legs_cal->Constant8_Value;
 
   /* Start for S-Function (sg_IO602_IO691_status_s): '<Root>/CAN Status' */
   /* Level2 S-Function Block: '<Root>/CAN Status' (sg_IO602_IO691_status_s) */
@@ -1959,51 +2142,8 @@ void CAN_2_Legs_initialize(void)
       return;
   }
 
-  /* Start for S-Function (sg_IO602_IO691_read_s): '<S1>/CAN Read' */
-  /* Level2 S-Function Block: '<S1>/CAN Read' (sg_IO602_IO691_read_s) */
-  {
-    SimStruct *rts = CAN_2_Legs_M->childSfunctions[0];
-    sfcnStart(rts);
-    if (ssGetErrorStatus(rts) != (NULL))
-      return;
-  }
-
-  /* Start for S-Function (sg_IO602_IO691_write_s): '<S1>/CAN Write1' */
-  /* Level2 S-Function Block: '<S1>/CAN Write1' (sg_IO602_IO691_write_s) */
-  {
-    SimStruct *rts = CAN_2_Legs_M->childSfunctions[1];
-    sfcnStart(rts);
-    if (ssGetErrorStatus(rts) != (NULL))
-      return;
-  }
-
-  /* Start for S-Function (scanunpack): '<S3>/CAN Unpack' */
-
-  /*-----------S-Function Block: <S3>/CAN Unpack -----------------*/
-
-  /* SystemInitialize for Outport: '<S3>/Outport' */
-  CAN_2_Legs_B.sf_bytesfloats.position = CAN_2_Legs_cal->Outport_Y0;
-
-  /* SystemInitialize for Outport: '<S3>/Outport1' */
-  CAN_2_Legs_B.sf_bytesfloats.velocity = CAN_2_Legs_cal->Outport1_Y0;
-
-  /* SystemInitialize for Outport: '<S3>/Outport2' */
-  CAN_2_Legs_B.sf_bytesfloats.I_ff = CAN_2_Legs_cal->Outport2_Y0;
-
-  /* SystemInitialize for S-Function (scanunpack): '<S3>/CAN Unpack' incorporates:
-   *  Outport: '<S3>/Outport3'
-   */
-  CAN_2_Legs_B.CANUnpack_o4_f = CAN_2_Legs_cal->Outport3_Y0;
-
-  /* SystemInitialize for S-Function (scanunpack): '<S3>/CAN Unpack' incorporates:
-   *  Outport: '<S3>/Outport4'
-   */
-  CAN_2_Legs_B.CANUnpack_o5_m = CAN_2_Legs_cal->Outport4_Y0;
-
-  /* End of SystemInitialize for SubSystem: '<S1>/If Action Subsystem' */
-  /* End of SystemInitialize for SubSystem: '<Root>/Simulink Function1' */
-  /* Start for S-Function (sg_IO602_IO691_read_s): '<S2>/CAN Read' */
-  /* Level2 S-Function Block: '<S2>/CAN Read' (sg_IO602_IO691_read_s) */
+  /* Start for S-Function (sg_IO602_IO691_read_s): '<S4>/CAN Read' */
+  /* Level2 S-Function Block: '<S4>/CAN Read' (sg_IO602_IO691_read_s) */
   {
     SimStruct *rts = CAN_2_Legs_M->childSfunctions[2];
     sfcnStart(rts);
@@ -2011,8 +2151,8 @@ void CAN_2_Legs_initialize(void)
       return;
   }
 
-  /* Start for S-Function (sg_IO602_IO691_write_s): '<S2>/CAN Write1' */
-  /* Level2 S-Function Block: '<S2>/CAN Write1' (sg_IO602_IO691_write_s) */
+  /* Start for S-Function (sg_IO602_IO691_write_s): '<S4>/CAN Write1' */
+  /* Level2 S-Function Block: '<S4>/CAN Write1' (sg_IO602_IO691_write_s) */
   {
     SimStruct *rts = CAN_2_Legs_M->childSfunctions[3];
     sfcnStart(rts);
@@ -2020,31 +2160,74 @@ void CAN_2_Legs_initialize(void)
       return;
   }
 
-  /* Start for S-Function (scanunpack): '<S6>/CAN Unpack' */
+  /* Start for S-Function (scanunpack): '<S8>/CAN Unpack' */
 
-  /*-----------S-Function Block: <S6>/CAN Unpack -----------------*/
+  /*-----------S-Function Block: <S8>/CAN Unpack -----------------*/
 
-  /* SystemInitialize for Outport: '<S6>/Outport' */
+  /* SystemInitialize for Outport: '<S8>/Outport' */
   CAN_2_Legs_B.sf_bytesfloats_k.position = CAN_2_Legs_cal->Outport_Y0_e;
 
-  /* SystemInitialize for Outport: '<S6>/Outport1' */
+  /* SystemInitialize for Outport: '<S8>/Outport1' */
   CAN_2_Legs_B.sf_bytesfloats_k.velocity = CAN_2_Legs_cal->Outport1_Y0_c;
 
-  /* SystemInitialize for Outport: '<S6>/Outport2' */
+  /* SystemInitialize for Outport: '<S8>/Outport2' */
   CAN_2_Legs_B.sf_bytesfloats_k.I_ff = CAN_2_Legs_cal->Outport2_Y0_j;
 
-  /* SystemInitialize for S-Function (scanunpack): '<S6>/CAN Unpack' incorporates:
-   *  Outport: '<S6>/Outport3'
+  /* SystemInitialize for S-Function (scanunpack): '<S8>/CAN Unpack' incorporates:
+   *  Outport: '<S8>/Outport3'
    */
   CAN_2_Legs_B.CANUnpack_o4 = CAN_2_Legs_cal->Outport3_Y0_c;
 
-  /* SystemInitialize for S-Function (scanunpack): '<S6>/CAN Unpack' incorporates:
-   *  Outport: '<S6>/Outport4'
+  /* SystemInitialize for S-Function (scanunpack): '<S8>/CAN Unpack' incorporates:
+   *  Outport: '<S8>/Outport4'
    */
   CAN_2_Legs_B.CANUnpack_o5 = CAN_2_Legs_cal->Outport4_Y0_l;
 
-  /* End of SystemInitialize for SubSystem: '<S2>/If Action Subsystem' */
+  /* End of SystemInitialize for SubSystem: '<S4>/If Action Subsystem' */
   /* End of SystemInitialize for SubSystem: '<Root>/Simulink Function3' */
+  /* Start for S-Function (sg_IO602_IO691_read_s): '<S3>/CAN Read' */
+  /* Level2 S-Function Block: '<S3>/CAN Read' (sg_IO602_IO691_read_s) */
+  {
+    SimStruct *rts = CAN_2_Legs_M->childSfunctions[0];
+    sfcnStart(rts);
+    if (ssGetErrorStatus(rts) != (NULL))
+      return;
+  }
+
+  /* Start for S-Function (sg_IO602_IO691_write_s): '<S3>/CAN Write1' */
+  /* Level2 S-Function Block: '<S3>/CAN Write1' (sg_IO602_IO691_write_s) */
+  {
+    SimStruct *rts = CAN_2_Legs_M->childSfunctions[1];
+    sfcnStart(rts);
+    if (ssGetErrorStatus(rts) != (NULL))
+      return;
+  }
+
+  /* Start for S-Function (scanunpack): '<S5>/CAN Unpack' */
+
+  /*-----------S-Function Block: <S5>/CAN Unpack -----------------*/
+
+  /* SystemInitialize for Outport: '<S5>/Outport' */
+  CAN_2_Legs_B.sf_bytesfloats.position = CAN_2_Legs_cal->Outport_Y0;
+
+  /* SystemInitialize for Outport: '<S5>/Outport1' */
+  CAN_2_Legs_B.sf_bytesfloats.velocity = CAN_2_Legs_cal->Outport1_Y0;
+
+  /* SystemInitialize for Outport: '<S5>/Outport2' */
+  CAN_2_Legs_B.sf_bytesfloats.I_ff = CAN_2_Legs_cal->Outport2_Y0;
+
+  /* SystemInitialize for S-Function (scanunpack): '<S5>/CAN Unpack' incorporates:
+   *  Outport: '<S5>/Outport3'
+   */
+  CAN_2_Legs_B.CANUnpack_o4_f = CAN_2_Legs_cal->Outport3_Y0;
+
+  /* SystemInitialize for S-Function (scanunpack): '<S5>/CAN Unpack' incorporates:
+   *  Outport: '<S5>/Outport4'
+   */
+  CAN_2_Legs_B.CANUnpack_o5_m = CAN_2_Legs_cal->Outport4_Y0;
+
+  /* End of SystemInitialize for SubSystem: '<S3>/If Action Subsystem' */
+  /* End of SystemInitialize for SubSystem: '<Root>/Simulink Function1' */
 }
 
 /* Model terminate function */
@@ -2057,33 +2240,33 @@ void CAN_2_Legs_terminate(void)
     sfcnTerminate(rts);
   }
 
-  /* Terminate for Atomic SubSystem: '<Root>/Simulink Function1' */
-  /* Terminate for S-Function (sg_IO602_IO691_read_s): '<S1>/CAN Read' */
-  /* Level2 S-Function Block: '<S1>/CAN Read' (sg_IO602_IO691_read_s) */
-  {
-    SimStruct *rts = CAN_2_Legs_M->childSfunctions[0];
-    sfcnTerminate(rts);
-  }
-
-  /* Terminate for S-Function (sg_IO602_IO691_write_s): '<S1>/CAN Write1' */
-  /* Level2 S-Function Block: '<S1>/CAN Write1' (sg_IO602_IO691_write_s) */
-  {
-    SimStruct *rts = CAN_2_Legs_M->childSfunctions[1];
-    sfcnTerminate(rts);
-  }
-
   /* Terminate for Atomic SubSystem: '<Root>/Simulink Function3' */
-  /* Terminate for S-Function (sg_IO602_IO691_read_s): '<S2>/CAN Read' */
-  /* Level2 S-Function Block: '<S2>/CAN Read' (sg_IO602_IO691_read_s) */
+  /* Terminate for S-Function (sg_IO602_IO691_read_s): '<S4>/CAN Read' */
+  /* Level2 S-Function Block: '<S4>/CAN Read' (sg_IO602_IO691_read_s) */
   {
     SimStruct *rts = CAN_2_Legs_M->childSfunctions[2];
     sfcnTerminate(rts);
   }
 
-  /* Terminate for S-Function (sg_IO602_IO691_write_s): '<S2>/CAN Write1' */
-  /* Level2 S-Function Block: '<S2>/CAN Write1' (sg_IO602_IO691_write_s) */
+  /* Terminate for S-Function (sg_IO602_IO691_write_s): '<S4>/CAN Write1' */
+  /* Level2 S-Function Block: '<S4>/CAN Write1' (sg_IO602_IO691_write_s) */
   {
     SimStruct *rts = CAN_2_Legs_M->childSfunctions[3];
+    sfcnTerminate(rts);
+  }
+
+  /* Terminate for Atomic SubSystem: '<Root>/Simulink Function1' */
+  /* Terminate for S-Function (sg_IO602_IO691_read_s): '<S3>/CAN Read' */
+  /* Level2 S-Function Block: '<S3>/CAN Read' (sg_IO602_IO691_read_s) */
+  {
+    SimStruct *rts = CAN_2_Legs_M->childSfunctions[0];
+    sfcnTerminate(rts);
+  }
+
+  /* Terminate for S-Function (sg_IO602_IO691_write_s): '<S3>/CAN Write1' */
+  /* Level2 S-Function Block: '<S3>/CAN Write1' (sg_IO602_IO691_write_s) */
+  {
+    SimStruct *rts = CAN_2_Legs_M->childSfunctions[1];
     sfcnTerminate(rts);
   }
 

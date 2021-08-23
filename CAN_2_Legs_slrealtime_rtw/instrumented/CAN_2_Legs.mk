@@ -2,7 +2,7 @@
 ## Makefile generated for component 'CAN_2_Legs'. 
 ## 
 ## Makefile     : CAN_2_Legs.mk
-## Generated on : Fri Aug 20 17:03:58 2021
+## Generated on : Sun Aug 22 19:13:36 2021
 ## Final product: $(START_DIR)/CAN_2_Legs_slrealtime_rtw/CAN_2_Legs
 ## Product type : executable
 ## 
@@ -21,7 +21,7 @@ MAKEFILE                  = CAN_2_Legs.mk
 MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2021a
 MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2021a/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
-START_DIR                 = C:/Users/celwe/OneDrive/Desktop/GITHUB~1/LEGGED~1
+START_DIR                 = C:/Users/johna/Documents/MATtierLAB/MATtierLAB/LeggedRobotGithub/LeggedRobot
 SOLVER                    = 
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0

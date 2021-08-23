@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs".
  *
- * Model version              : 1.3
+ * Model version              : 1.4
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Fri Aug 20 17:03:54 2021
+ * C++ source code generated on : Sun Aug 22 19:13:31 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -125,53 +125,59 @@
 /* user code (top of export header file) */
 #include "can_message.h"
 
-/* Block signals for system '<S3>/bytes -> floats' */
+/* Block signals for system '<S5>/bytes -> floats' */
 struct B_bytesfloats_CAN_2_Legs_T {
-  real_T position;                     /* '<S3>/bytes -> floats' */
-  real_T velocity;                     /* '<S3>/bytes -> floats' */
-  real_T I_ff;                         /* '<S3>/bytes -> floats' */
-};
-
-/* Block signals for system '<S1>/floats -> bytes' */
-struct B_floatsbytes_CAN_2_Legs_T {
-  uint8_T b[8];                        /* '<S1>/floats -> bytes' */
+  real_T position;                     /* '<S5>/bytes -> floats' */
+  real_T velocity;                     /* '<S5>/bytes -> floats' */
+  real_T I_ff;                         /* '<S5>/bytes -> floats' */
 };
 
 /* Block signals (default storage) */
 struct B_CAN_2_Legs_T {
-  CAN_DATATYPE CANRead_o2;             /* '<S2>/CAN Read' */
-  CAN_DATATYPE CANPack1;               /* '<S2>/CAN Pack1' */
-  CAN_DATATYPE CANRead_o2_i;           /* '<S1>/CAN Read' */
-  CAN_DATATYPE CANPack1_i;             /* '<S1>/CAN Pack1' */
-  real_T Constant7;                    /* '<Root>/Constant7' */
-  real_T Constant8;                    /* '<Root>/Constant8' */
+  CAN_DATATYPE CANRead_o2;             /* '<S4>/CAN Read' */
+  CAN_DATATYPE CANPack1;               /* '<S4>/CAN Pack1' */
+  CAN_DATATYPE CANRead_o2_i;           /* '<S3>/CAN Read' */
+  CAN_DATATYPE CANPack1_i;             /* '<S3>/CAN Pack1' */
   real_T Constant1;                    /* '<Root>/Constant1' */
   real_T Constant2;                    /* '<Root>/Constant2' */
-  real_T CANUnpack_o1;                 /* '<S6>/CAN Unpack' */
-  real_T CANUnpack_o2;                 /* '<S6>/CAN Unpack' */
-  real_T CANUnpack_o3;                 /* '<S6>/CAN Unpack' */
-  real_T CANUnpack_o4;                 /* '<S6>/CAN Unpack' */
-  real_T CANUnpack_o1_o;               /* '<S3>/CAN Unpack' */
-  real_T CANUnpack_o2_m;               /* '<S3>/CAN Unpack' */
-  real_T CANUnpack_o3_o;               /* '<S3>/CAN Unpack' */
-  real_T CANUnpack_o4_f;               /* '<S3>/CAN Unpack' */
-  uint8_T MultiportSwitch[8];          /* '<S2>/Multiport Switch' */
-  uint8_T BytePacking[8];              /* '<S2>/Byte Packing' */
-  uint8_T CANUnpack_o5;                /* '<S6>/CAN Unpack' */
-  uint8_T MultiportSwitch_f[8];        /* '<S1>/Multiport Switch' */
-  uint8_T BytePacking_o[8];            /* '<S1>/Byte Packing' */
-  uint8_T CANUnpack_o5_m;              /* '<S3>/CAN Unpack' */
-  boolean_T CANRead_o1;                /* '<S2>/CAN Read' */
-  boolean_T CANRead_o1_e;              /* '<S1>/CAN Read' */
-  B_floatsbytes_CAN_2_Legs_T sf_floatsbytes_o;/* '<S2>/floats -> bytes' */
-  B_bytesfloats_CAN_2_Legs_T sf_bytesfloats_k;/* '<S6>/bytes -> floats' */
-  B_floatsbytes_CAN_2_Legs_T sf_floatsbytes;/* '<S1>/floats -> bytes' */
-  B_bytesfloats_CAN_2_Legs_T sf_bytesfloats;/* '<S3>/bytes -> floats' */
+  real_T Gain;                         /* '<Root>/Gain' */
+  real_T Constant8;                    /* '<Root>/Constant8' */
+  real_T CANUnpack_o1;                 /* '<S8>/CAN Unpack' */
+  real_T CANUnpack_o2;                 /* '<S8>/CAN Unpack' */
+  real_T CANUnpack_o3;                 /* '<S8>/CAN Unpack' */
+  real_T CANUnpack_o4;                 /* '<S8>/CAN Unpack' */
+  real_T CANUnpack_o1_o;               /* '<S5>/CAN Unpack' */
+  real_T CANUnpack_o2_m;               /* '<S5>/CAN Unpack' */
+  real_T CANUnpack_o3_o;               /* '<S5>/CAN Unpack' */
+  real_T CANUnpack_o4_f;               /* '<S5>/CAN Unpack' */
+  real_T TmpSignalConversionAtSFunctionI[2];/* '<Root>/MATLAB Function1' */
+  real_T danger;                       /* '<Root>/MATLAB Function1' */
+  real_T GRF;                          /* '<Root>/MATLAB Function' */
+  uint8_T MultiportSwitch[8];          /* '<S4>/Multiport Switch' */
+  uint8_T BytePacking[8];              /* '<S4>/Byte Packing' */
+  uint8_T b[8];                        /* '<S4>/floats -> bytes' */
+  uint8_T CANUnpack_o5;                /* '<S8>/CAN Unpack' */
+  uint8_T MultiportSwitch_f[8];        /* '<S3>/Multiport Switch' */
+  uint8_T BytePacking_o[8];            /* '<S3>/Byte Packing' */
+  uint8_T b_g[8];                      /* '<S3>/floats -> bytes' */
+  uint8_T CANUnpack_o5_m;              /* '<S5>/CAN Unpack' */
+  boolean_T CANRead_o1;                /* '<S4>/CAN Read' */
+  boolean_T CANRead_o1_e;              /* '<S3>/CAN Read' */
+  B_bytesfloats_CAN_2_Legs_T sf_bytesfloats_k;/* '<S8>/bytes -> floats' */
+  B_bytesfloats_CAN_2_Legs_T sf_bytesfloats;/* '<S5>/bytes -> floats' */
 };
 
 /* Block states (default storage) for system '<Root>' */
 struct DW_CAN_2_Legs_T {
   void *CANSetup_PWORK;                /* '<Root>/CAN Setup ' */
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_MATLA;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_MAT_h;   /* synthesized block */
+
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Simul;   /* synthesized block */
@@ -196,7 +202,7 @@ struct DW_CAN_2_Legs_T {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Sim_e;   /* synthesized block */
 
-  void *CANRead_PWORK;                 /* '<S2>/CAN Read' */
+  void *CANRead_PWORK;                 /* '<S4>/CAN Read' */
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_IfAct;   /* synthesized block */
@@ -205,7 +211,7 @@ struct DW_CAN_2_Legs_T {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_IfA_b;   /* synthesized block */
 
-  void *CANWrite1_PWORK;               /* '<S2>/CAN Write1' */
+  void *CANWrite1_PWORK;               /* '<S4>/CAN Write1' */
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Demux;   /* synthesized block */
@@ -222,7 +228,7 @@ struct DW_CAN_2_Legs_T {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_bytes;   /* synthesized block */
 
-  void *CANRead_PWORK_l;               /* '<S1>/CAN Read' */
+  void *CANRead_PWORK_l;               /* '<S3>/CAN Read' */
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_IfA_l;   /* synthesized block */
@@ -231,7 +237,7 @@ struct DW_CAN_2_Legs_T {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_If_bf;   /* synthesized block */
 
-  void *CANWrite1_PWORK_f;             /* '<S1>/CAN Write1' */
+  void *CANWrite1_PWORK_f;             /* '<S3>/CAN Write1' */
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Dem_e;   /* synthesized block */
@@ -249,14 +255,14 @@ struct DW_CAN_2_Legs_T {
   } TAQSigLogging_InsertedFor_byt_l;   /* synthesized block */
 
   int_T CANStatus_IWORK[34];           /* '<Root>/CAN Status' */
-  int_T BytePacking_IWORK[2];          /* '<S2>/Byte Packing' */
-  int_T CANUnpack_ModeSignalID;        /* '<S6>/CAN Unpack' */
-  int_T CANUnpack_StatusPortID;        /* '<S6>/CAN Unpack' */
-  int_T BytePacking_IWORK_n[2];        /* '<S1>/Byte Packing' */
-  int_T CANUnpack_ModeSignalID_l;      /* '<S3>/CAN Unpack' */
-  int_T CANUnpack_StatusPortID_g;      /* '<S3>/CAN Unpack' */
-  int8_T IfActionSubsystem_SubsysRanBC;/* '<S2>/If Action Subsystem' */
-  int8_T IfActionSubsystem_SubsysRanBC_j;/* '<S1>/If Action Subsystem' */
+  int_T BytePacking_IWORK[2];          /* '<S4>/Byte Packing' */
+  int_T CANUnpack_ModeSignalID;        /* '<S8>/CAN Unpack' */
+  int_T CANUnpack_StatusPortID;        /* '<S8>/CAN Unpack' */
+  int_T BytePacking_IWORK_n[2];        /* '<S3>/Byte Packing' */
+  int_T CANUnpack_ModeSignalID_l;      /* '<S5>/CAN Unpack' */
+  int_T CANUnpack_StatusPortID_g;      /* '<S5>/CAN Unpack' */
+  int8_T IfActionSubsystem_SubsysRanBC;/* '<S4>/If Action Subsystem' */
+  int8_T IfActionSubsystem_SubsysRanBC_j;/* '<S3>/If Action Subsystem' */
 };
 
 /* Real-time Model Data Structure */
@@ -478,13 +484,15 @@ extern "C" {
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'CAN_2_Legs'
- * '<S1>'   : 'CAN_2_Legs/Simulink Function1'
- * '<S2>'   : 'CAN_2_Legs/Simulink Function3'
- * '<S3>'   : 'CAN_2_Legs/Simulink Function1/If Action Subsystem'
- * '<S4>'   : 'CAN_2_Legs/Simulink Function1/floats -> bytes'
- * '<S5>'   : 'CAN_2_Legs/Simulink Function1/If Action Subsystem/bytes -> floats'
- * '<S6>'   : 'CAN_2_Legs/Simulink Function3/If Action Subsystem'
- * '<S7>'   : 'CAN_2_Legs/Simulink Function3/floats -> bytes'
- * '<S8>'   : 'CAN_2_Legs/Simulink Function3/If Action Subsystem/bytes -> floats'
+ * '<S1>'   : 'CAN_2_Legs/MATLAB Function'
+ * '<S2>'   : 'CAN_2_Legs/MATLAB Function1'
+ * '<S3>'   : 'CAN_2_Legs/Simulink Function1'
+ * '<S4>'   : 'CAN_2_Legs/Simulink Function3'
+ * '<S5>'   : 'CAN_2_Legs/Simulink Function1/If Action Subsystem'
+ * '<S6>'   : 'CAN_2_Legs/Simulink Function1/floats -> bytes'
+ * '<S7>'   : 'CAN_2_Legs/Simulink Function1/If Action Subsystem/bytes -> floats'
+ * '<S8>'   : 'CAN_2_Legs/Simulink Function3/If Action Subsystem'
+ * '<S9>'   : 'CAN_2_Legs/Simulink Function3/floats -> bytes'
+ * '<S10>'  : 'CAN_2_Legs/Simulink Function3/If Action Subsystem/bytes -> floats'
  */
 #endif                                 /* RTW_HEADER_CAN_2_Legs_h_ */

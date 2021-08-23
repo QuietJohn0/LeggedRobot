@@ -3,82 +3,82 @@
 /* Storage class 'PageSwitching' */
 CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
   /* Computed Parameter: Outport_Y0
-   * Referenced by: '<S3>/Outport'
+   * Referenced by: '<S5>/Outport'
    */
   0.0,
 
   /* Computed Parameter: Outport1_Y0
-   * Referenced by: '<S3>/Outport1'
+   * Referenced by: '<S5>/Outport1'
    */
   0.0,
 
   /* Computed Parameter: Outport2_Y0
-   * Referenced by: '<S3>/Outport2'
+   * Referenced by: '<S5>/Outport2'
    */
   0.0,
 
   /* Computed Parameter: Outport3_Y0
-   * Referenced by: '<S3>/Outport3'
+   * Referenced by: '<S5>/Outport3'
    */
   0.0,
 
   /* Computed Parameter: CANRead_P1_Size
-   * Referenced by: '<S1>/CAN Read'
+   * Referenced by: '<S3>/CAN Read'
    */
   { 1.0, 6.0 },
 
   /* Expression: [initValues(1:4) messageType initValues(6)]
-   * Referenced by: '<S1>/CAN Read'
+   * Referenced by: '<S3>/CAN Read'
    */
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0 },
 
   /* Computed Parameter: CANWrite1_P1_Size
-   * Referenced by: '<S1>/CAN Write1'
+   * Referenced by: '<S3>/CAN Write1'
    */
   { 1.0, 7.0 },
 
   /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
-   * Referenced by: '<S1>/CAN Write1'
+   * Referenced by: '<S3>/CAN Write1'
    */
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0, 0.0 },
 
   /* Computed Parameter: Outport_Y0_e
-   * Referenced by: '<S6>/Outport'
+   * Referenced by: '<S8>/Outport'
    */
   0.0,
 
   /* Computed Parameter: Outport1_Y0_c
-   * Referenced by: '<S6>/Outport1'
+   * Referenced by: '<S8>/Outport1'
    */
   0.0,
 
   /* Computed Parameter: Outport2_Y0_j
-   * Referenced by: '<S6>/Outport2'
+   * Referenced by: '<S8>/Outport2'
    */
   0.0,
 
   /* Computed Parameter: Outport3_Y0_c
-   * Referenced by: '<S6>/Outport3'
+   * Referenced by: '<S8>/Outport3'
    */
   0.0,
 
   /* Computed Parameter: CANRead_P1_Size_k
-   * Referenced by: '<S2>/CAN Read'
+   * Referenced by: '<S4>/CAN Read'
    */
   { 1.0, 6.0 },
 
   /* Expression: [initValues(1:4) messageType initValues(6)]
-   * Referenced by: '<S2>/CAN Read'
+   * Referenced by: '<S4>/CAN Read'
    */
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0 },
 
   /* Computed Parameter: CANWrite1_P1_Size_d
-   * Referenced by: '<S2>/CAN Write1'
+   * Referenced by: '<S4>/CAN Write1'
    */
   { 1.0, 7.0 },
 
   /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
-   * Referenced by: '<S2>/CAN Write1'
+   * Referenced by: '<S4>/CAN Write1'
    */
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0, 0.0 },
 
@@ -119,10 +119,40 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
    */
   3.0,
 
-  /* Expression: -0.15
+  /* Expression: 0.4
+   * Referenced by: '<Root>/Constant1'
+   */
+  0.4,
+
+  /* Expression: 0
+   * Referenced by: '<Root>/Constant2'
+   */
+  0.0,
+
+  /* Expression: 6
+   * Referenced by: '<Root>/Constant3'
+   */
+  6.0,
+
+  /* Expression: 0.1
+   * Referenced by: '<Root>/Constant4'
+   */
+  0.1,
+
+  /* Expression: 0
+   * Referenced by: '<Root>/Constant5'
+   */
+  0.0,
+
+  /* Expression: 1.4
    * Referenced by: '<Root>/Constant7'
    */
-  -0.15,
+  1.4,
+
+  /* Expression: 18/30
+   * Referenced by: '<Root>/Gain'
+   */
+  0.6,
 
   /* Expression: 0
    * Referenced by: '<Root>/Constant8'
@@ -134,38 +164,13 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
    */
   10.0,
 
-  /* Expression: 0.05
+  /* Expression: 0.1
    * Referenced by: '<Root>/Constant10'
    */
-  0.05,
+  0.1,
 
   /* Expression: 0
    * Referenced by: '<Root>/Constant11'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<Root>/Constant1'
-   */
-  0.0,
-
-  /* Expression: 0
-   * Referenced by: '<Root>/Constant2'
-   */
-  0.0,
-
-  /* Expression: 10
-   * Referenced by: '<Root>/Constant3'
-   */
-  10.0,
-
-  /* Expression: 0.05
-   * Referenced by: '<Root>/Constant4'
-   */
-  0.05,
-
-  /* Expression: 0
-   * Referenced by: '<Root>/Constant5'
    */
   0.0,
 
@@ -510,42 +515,42 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
   0.0,
 
   /* Computed Parameter: Outport4_Y0
-   * Referenced by: '<S3>/Outport4'
+   * Referenced by: '<S5>/Outport4'
    */
   0U,
 
   /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
-   * Referenced by: '<S1>/Constant'
+   * Referenced by: '<S3>/Constant'
    */
   { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 254U },
 
   /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC]
-   * Referenced by: '<S1>/Constant1'
+   * Referenced by: '<S3>/Constant1'
    */
   { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 252U },
 
   /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFD]
-   * Referenced by: '<S1>/Constant2'
+   * Referenced by: '<S3>/Constant2'
    */
   { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 253U },
 
   /* Computed Parameter: Outport4_Y0_l
-   * Referenced by: '<S6>/Outport4'
+   * Referenced by: '<S8>/Outport4'
    */
   0U,
 
   /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
-   * Referenced by: '<S2>/Constant'
+   * Referenced by: '<S4>/Constant'
    */
   { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 254U },
 
   /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC]
-   * Referenced by: '<S2>/Constant1'
+   * Referenced by: '<S4>/Constant1'
    */
   { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 252U },
 
   /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFD]
-   * Referenced by: '<S2>/Constant2'
+   * Referenced by: '<S4>/Constant2'
    */
   { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 253U }
 };
