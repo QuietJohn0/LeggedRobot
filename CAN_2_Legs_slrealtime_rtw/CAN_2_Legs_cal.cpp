@@ -3,22 +3,22 @@
 /* Storage class 'PageSwitching' */
 CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
   /* Computed Parameter: Outport_Y0
-   * Referenced by: '<S5>/Outport'
+   * Referenced by: '<S7>/Outport'
    */
   0.0,
 
   /* Computed Parameter: Outport1_Y0
-   * Referenced by: '<S5>/Outport1'
+   * Referenced by: '<S7>/Outport1'
    */
   0.0,
 
   /* Computed Parameter: Outport2_Y0
-   * Referenced by: '<S5>/Outport2'
+   * Referenced by: '<S7>/Outport2'
    */
   0.0,
 
   /* Computed Parameter: Outport3_Y0
-   * Referenced by: '<S5>/Outport3'
+   * Referenced by: '<S7>/Outport3'
    */
   0.0,
 
@@ -48,22 +48,22 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0, 0.0 },
 
   /* Computed Parameter: Outport_Y0_e
-   * Referenced by: '<S8>/Outport'
+   * Referenced by: '<S10>/Outport'
    */
   0.0,
 
   /* Computed Parameter: Outport1_Y0_c
-   * Referenced by: '<S8>/Outport1'
+   * Referenced by: '<S10>/Outport1'
    */
   0.0,
 
   /* Computed Parameter: Outport2_Y0_j
-   * Referenced by: '<S8>/Outport2'
+   * Referenced by: '<S10>/Outport2'
    */
   0.0,
 
   /* Computed Parameter: Outport3_Y0_c
-   * Referenced by: '<S8>/Outport3'
+   * Referenced by: '<S10>/Outport3'
    */
   0.0,
 
@@ -119,15 +119,20 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
    */
   0.0,
 
-  /* Expression: 0
+  /* Expression: 1
    * Referenced by: '<Root>/Constant1'
    */
-  0.0,
+  1.0,
 
-  /* Expression: 4
+  /* Expression: 3
    * Referenced by: '<Root>/Constant'
    */
-  4.0,
+  3.0,
+
+  /* Expression: 3
+   * Referenced by: '<Root>/Constant6'
+   */
+  3.0,
 
   /* Expression: 0
    * Referenced by: '<Root>/Constant2'
@@ -149,15 +154,10 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
    */
   0.0,
 
-  /* Expression: 0.4
-   * Referenced by: '<Root>/Constant7'
-   */
-  0.4,
-
-  /* Expression: 18/30
+  /* Expression: -2*18/30
    * Referenced by: '<Root>/Gain'
    */
-  0.6,
+  -1.2,
 
   /* Expression: 0
    * Referenced by: '<Root>/Constant8'
@@ -178,6 +178,31 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
    * Referenced by: '<Root>/Constant11'
    */
   0.0,
+
+  /* Expression: 0
+   * Referenced by: '<S5>/Data Store Memory'
+   */
+  0.0,
+
+  /* Expression: 0
+   * Referenced by: '<S5>/Data Store Memory1'
+   */
+  0.0,
+
+  /* Expression: 0
+   * Referenced by: '<S6>/Data Store Memory'
+   */
+  0.0,
+
+  /* Expression: 0
+   * Referenced by: '<S6>/Data Store Memory1'
+   */
+  0.0,
+
+  /* Expression: 2
+   * Referenced by: '<Root>/Constant7'
+   */
+  2.0,
 
   /* Computed Parameter: CANStatus_P1_Size
    * Referenced by: '<Root>/CAN Status'
@@ -520,7 +545,7 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
   0.0,
 
   /* Computed Parameter: Outport4_Y0
-   * Referenced by: '<S5>/Outport4'
+   * Referenced by: '<S7>/Outport4'
    */
   0U,
 
@@ -540,7 +565,7 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
   { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 253U },
 
   /* Computed Parameter: Outport4_Y0_l
-   * Referenced by: '<S8>/Outport4'
+   * Referenced by: '<S10>/Outport4'
    */
   0U,
 

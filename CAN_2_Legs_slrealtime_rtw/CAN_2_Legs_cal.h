@@ -6,16 +6,16 @@
 /* Storage class 'PageSwitching', for system '<Root>' */
 struct CAN_2_Legs_cal_type {
   real_T Outport_Y0;                   /* Computed Parameter: Outport_Y0
-                                        * Referenced by: '<S5>/Outport'
+                                        * Referenced by: '<S7>/Outport'
                                         */
   real_T Outport1_Y0;                  /* Computed Parameter: Outport1_Y0
-                                        * Referenced by: '<S5>/Outport1'
+                                        * Referenced by: '<S7>/Outport1'
                                         */
   real_T Outport2_Y0;                  /* Computed Parameter: Outport2_Y0
-                                        * Referenced by: '<S5>/Outport2'
+                                        * Referenced by: '<S7>/Outport2'
                                         */
   real_T Outport3_Y0;                  /* Computed Parameter: Outport3_Y0
-                                        * Referenced by: '<S5>/Outport3'
+                                        * Referenced by: '<S7>/Outport3'
                                         */
   real_T CANRead_P1_Size[2];           /* Computed Parameter: CANRead_P1_Size
                                         * Referenced by: '<S3>/CAN Read'
@@ -35,16 +35,16 @@ struct CAN_2_Legs_cal_type {
       * Referenced by: '<S3>/CAN Write1'
       */
   real_T Outport_Y0_e;                 /* Computed Parameter: Outport_Y0_e
-                                        * Referenced by: '<S8>/Outport'
+                                        * Referenced by: '<S10>/Outport'
                                         */
   real_T Outport1_Y0_c;                /* Computed Parameter: Outport1_Y0_c
-                                        * Referenced by: '<S8>/Outport1'
+                                        * Referenced by: '<S10>/Outport1'
                                         */
   real_T Outport2_Y0_j;                /* Computed Parameter: Outport2_Y0_j
-                                        * Referenced by: '<S8>/Outport2'
+                                        * Referenced by: '<S10>/Outport2'
                                         */
   real_T Outport3_Y0_c;                /* Computed Parameter: Outport3_Y0_c
-                                        * Referenced by: '<S8>/Outport3'
+                                        * Referenced by: '<S10>/Outport3'
                                         */
   real_T CANRead_P1_Size_k[2];         /* Computed Parameter: CANRead_P1_Size_k
                                         * Referenced by: '<S4>/CAN Read'
@@ -79,11 +79,14 @@ struct CAN_2_Legs_cal_type {
   real_T CANSetup_P3;                  /* Expression: termStruct
                                         * Referenced by: '<Root>/CAN Setup '
                                         */
-  real_T Constant1_Value;              /* Expression: 0
+  real_T Constant1_Value;              /* Expression: 1
                                         * Referenced by: '<Root>/Constant1'
                                         */
-  real_T Constant_Value;               /* Expression: 4
+  real_T Constant_Value;               /* Expression: 3
                                         * Referenced by: '<Root>/Constant'
+                                        */
+  real_T Constant6_Value;              /* Expression: 3
+                                        * Referenced by: '<Root>/Constant6'
                                         */
   real_T Constant2_Value;              /* Expression: 0
                                         * Referenced by: '<Root>/Constant2'
@@ -97,10 +100,7 @@ struct CAN_2_Legs_cal_type {
   real_T Constant5_Value;              /* Expression: 0
                                         * Referenced by: '<Root>/Constant5'
                                         */
-  real_T Constant7_Value;              /* Expression: 0.4
-                                        * Referenced by: '<Root>/Constant7'
-                                        */
-  real_T Gain_Gain_j;                  /* Expression: 18/30
+  real_T Gain_Gain_j;                  /* Expression: -2*18/30
                                         * Referenced by: '<Root>/Gain'
                                         */
   real_T Constant8_Value;              /* Expression: 0
@@ -114,6 +114,21 @@ struct CAN_2_Legs_cal_type {
                                         */
   real_T Constant11_Value;             /* Expression: 0
                                         * Referenced by: '<Root>/Constant11'
+                                        */
+  real_T DataStoreMemory_InitialValue; /* Expression: 0
+                                        * Referenced by: '<S5>/Data Store Memory'
+                                        */
+  real_T DataStoreMemory1_InitialValue;/* Expression: 0
+                                        * Referenced by: '<S5>/Data Store Memory1'
+                                        */
+  real_T DataStoreMemory_InitialValue_n;/* Expression: 0
+                                         * Referenced by: '<S6>/Data Store Memory'
+                                         */
+  real_T DataStoreMemory1_InitialValue_k;/* Expression: 0
+                                          * Referenced by: '<S6>/Data Store Memory1'
+                                          */
+  real_T Constant7_Value;              /* Expression: 2
+                                        * Referenced by: '<Root>/Constant7'
                                         */
   real_T CANStatus_P1_Size[2];         /* Computed Parameter: CANStatus_P1_Size
                                         * Referenced by: '<Root>/CAN Status'
@@ -320,7 +335,7 @@ struct CAN_2_Legs_cal_type {
                                         * Referenced by: '<Root>/CAN Status'
                                         */
   uint8_T Outport4_Y0;                 /* Computed Parameter: Outport4_Y0
-                                        * Referenced by: '<S5>/Outport4'
+                                        * Referenced by: '<S7>/Outport4'
                                         */
   uint8_T Constant_Value_l[8];
                  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
@@ -335,7 +350,7 @@ struct CAN_2_Legs_cal_type {
                   * Referenced by: '<S3>/Constant2'
                   */
   uint8_T Outport4_Y0_l;               /* Computed Parameter: Outport4_Y0_l
-                                        * Referenced by: '<S8>/Outport4'
+                                        * Referenced by: '<S10>/Outport4'
                                         */
   uint8_T Constant_Value_i[8];
                  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
