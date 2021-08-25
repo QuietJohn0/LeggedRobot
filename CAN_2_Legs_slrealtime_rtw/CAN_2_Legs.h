@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs".
  *
- * Model version              : 1.7
+ * Model version              : 1.8
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Tue Aug 24 17:24:18 2021
+ * C++ source code generated on : Tue Aug 24 17:53:26 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -126,9 +126,9 @@
 /* user code (top of export header file) */
 #include "can_message.h"
 
-/* Block signals for system '<S4>/floats -> bytes' */
+/* Block signals for system '<S5>/floats -> bytes' */
 struct B_floatsbytes_CAN_2_Legs_T {
-  uint8_T b[8];                        /* '<S4>/floats -> bytes' */
+  uint8_T b[8];                        /* '<S5>/floats -> bytes' */
 };
 
 /* Block signals for system '<S6>/Subsystem' */
@@ -144,20 +144,20 @@ struct DW_Subsystem_CAN_2_Legs_T {
 /* Block signals (default storage) */
 struct B_CAN_2_Legs_T {
   CAN_DATATYPE CANRead_o2;             /* '<Root>/CAN Read' */
-  CAN_DATATYPE CANPack1;               /* '<S5>/CAN Pack1' */
   CAN_DATATYPE CANmsg2;                /* '<S4>/CAN Pack1' */
+  CAN_DATATYPE CANPack1;               /* '<S5>/CAN Pack1' */
   real_T mode;                         /* '<Root>/Constant' */
-  real_T DataStoreRead;                /* '<S6>/Data Store Read' */
-  real_T Clock;                        /* '<S6>/Clock' */
-  real_T DataStoreRead1;               /* '<S6>/Data Store Read1' */
-  real_T Gain;                         /* '<Root>/Gain' */
-  real_T Delay;                        /* '<S6>/Delay' */
-  real_T Constant8;                    /* '<Root>/Constant8' */
-  real_T DataStoreRead_i;              /* '<S7>/Data Store Read' */
-  real_T Clock_m;                      /* '<S7>/Clock' */
-  real_T DataStoreRead1_e;             /* '<S7>/Data Store Read1' */
-  real_T Delay_i;                      /* '<S7>/Delay' */
   real_T Constant2;                    /* '<Root>/Constant2' */
+  real_T DataStoreRead;                /* '<S7>/Data Store Read' */
+  real_T Clock;                        /* '<S7>/Clock' */
+  real_T DataStoreRead1;               /* '<S7>/Data Store Read1' */
+  real_T Delay;                        /* '<S7>/Delay' */
+  real_T Constant8;                    /* '<Root>/Constant8' */
+  real_T DataStoreRead_k;              /* '<S6>/Data Store Read' */
+  real_T Clock_f;                      /* '<S6>/Clock' */
+  real_T DataStoreRead1_a;             /* '<S6>/Data Store Read1' */
+  real_T Gain;                         /* '<Root>/Gain' */
+  real_T Delay_f;                      /* '<S6>/Delay' */
   real_T Position;                     /* '<S2>/Position' */
   real_T Velocity;                     /* '<S2>/Velocity' */
   real_T Current;                      /* '<S2>/Current' */
@@ -173,22 +173,22 @@ struct B_CAN_2_Legs_T {
   real_T position;                     /* '<S3>/bytes -> floats' */
   real_T velocity;                     /* '<S3>/bytes -> floats' */
   real_T I_ff;                         /* '<S3>/bytes -> floats' */
-  uint8_T MultiportSwitch[8];          /* '<S5>/Multiport Switch' */
-  uint8_T BytePacking[8];              /* '<S5>/Byte Packing' */
-  uint8_T MultiportSwitch_f[8];        /* '<S4>/Multiport Switch' */
-  uint8_T BytePacking_o[8];            /* '<S4>/Byte Packing' */
+  uint8_T MultiportSwitch[8];          /* '<S4>/Multiport Switch' */
+  uint8_T BytePacking[8];              /* '<S4>/Byte Packing' */
+  uint8_T MultiportSwitch_i[8];        /* '<S5>/Multiport Switch' */
+  uint8_T BytePacking_d[8];            /* '<S5>/Byte Packing' */
   uint8_T CANUnpack_o5;                /* '<S3>/CAN Unpack' */
   boolean_T CANRead_o1;                /* '<Root>/CAN Read' */
   B_Subsystem_CAN_2_Legs_T Subsystem_d;/* '<S7>/Subsystem' */
   B_Subsystem_CAN_2_Legs_T Subsystem;  /* '<S6>/Subsystem' */
-  B_floatsbytes_CAN_2_Legs_T sf_floatsbytes_o;/* '<S5>/floats -> bytes' */
-  B_floatsbytes_CAN_2_Legs_T sf_floatsbytes;/* '<S4>/floats -> bytes' */
+  B_floatsbytes_CAN_2_Legs_T sf_floatsbytes_m;/* '<S4>/floats -> bytes' */
+  B_floatsbytes_CAN_2_Legs_T sf_floatsbytes;/* '<S5>/floats -> bytes' */
 };
 
 /* Block states (default storage) for system '<Root>' */
 struct DW_CAN_2_Legs_T {
-  real_T Delay_DSTATE;                 /* '<S6>/Delay' */
-  real_T Delay_DSTATE_b;               /* '<S7>/Delay' */
+  real_T Delay_DSTATE;                 /* '<S7>/Delay' */
+  real_T Delay_DSTATE_b;               /* '<S6>/Delay' */
   real_T to;                           /* '<S6>/Data Store Memory' */
   real_T po;                           /* '<S6>/Data Store Memory1' */
   real_T to_f;                         /* '<S7>/Data Store Memory' */
@@ -198,6 +198,10 @@ struct DW_CAN_2_Legs_T {
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_CANRe;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Const;   /* synthesized block */
 
   struct {
     void *AQHandles;
@@ -219,11 +223,7 @@ struct DW_CAN_2_Legs_T {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_IfAct;   /* synthesized block */
 
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_Const;   /* synthesized block */
-
-  void *CANWrite1_PWORK;               /* '<S5>/CAN Write1' */
+  void *CANWrite1_PWORK;               /* '<S4>/CAN Write1' */
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Demux;   /* synthesized block */
@@ -232,7 +232,7 @@ struct DW_CAN_2_Legs_T {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Dem_n;   /* synthesized block */
 
-  void *CANWrite1_PWORK_f;             /* '<S4>/CAN Write1' */
+  void *CANWrite1_PWORK_g;             /* '<S5>/CAN Write1' */
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Dem_e;   /* synthesized block */
@@ -242,17 +242,19 @@ struct DW_CAN_2_Legs_T {
   } TAQSigLogging_InsertedFor_De_ng;   /* synthesized block */
 
   int_T CANStatus_IWORK[34];           /* '<Root>/CAN Status' */
-  int_T BytePacking_IWORK[2];          /* '<S5>/Byte Packing' */
-  int_T BytePacking_IWORK_n[2];        /* '<S4>/Byte Packing' */
+  int_T BytePacking_IWORK[2];          /* '<S4>/Byte Packing' */
+  int_T BytePacking_IWORK_c[2];        /* '<S5>/Byte Packing' */
   int_T CANUnpack_ModeSignalID;        /* '<S3>/CAN Unpack' */
   int_T CANUnpack_StatusPortID;        /* '<S3>/CAN Unpack' */
   int8_T If_ActiveSubsystem;           /* '<S6>/If' */
   int8_T If_ActiveSubsystem_b;         /* '<S7>/If' */
   int8_T EnabledSubsystem1_SubsysRanBC;/* '<Root>/Enabled Subsystem1' */
   int8_T EnabledSubsystem_SubsysRanBC; /* '<Root>/Enabled Subsystem' */
+  int8_T SimulinkFunction1_SubsysRanBC;/* '<Root>/Simulink Function1' */
+  int8_T SimulinkFunction3_SubsysRanBC;/* '<Root>/Simulink Function3' */
   int8_T IfActionSubsystem_SubsysRanBC;/* '<Root>/If Action Subsystem' */
-  boolean_T icLoad;                    /* '<S6>/Delay' */
-  boolean_T icLoad_j;                  /* '<S7>/Delay' */
+  boolean_T icLoad;                    /* '<S7>/Delay' */
+  boolean_T icLoad_c;                  /* '<S6>/Delay' */
   DW_Subsystem_CAN_2_Legs_T Subsystem_d;/* '<S7>/Subsystem' */
   DW_Subsystem_CAN_2_Legs_T Subsystem; /* '<S6>/Subsystem' */
 };

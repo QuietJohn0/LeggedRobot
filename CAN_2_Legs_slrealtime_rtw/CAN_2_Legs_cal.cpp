@@ -23,22 +23,22 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
   0.0,
 
   /* Computed Parameter: CANWrite1_P1_Size
-   * Referenced by: '<S4>/CAN Write1'
+   * Referenced by: '<S5>/CAN Write1'
    */
   { 1.0, 7.0 },
 
   /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
-   * Referenced by: '<S4>/CAN Write1'
+   * Referenced by: '<S5>/CAN Write1'
    */
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0, 0.0 },
 
-  /* Computed Parameter: CANWrite1_P1_Size_d
-   * Referenced by: '<S5>/CAN Write1'
+  /* Computed Parameter: CANWrite1_P1_Size_k
+   * Referenced by: '<S4>/CAN Write1'
    */
   { 1.0, 7.0 },
 
   /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
-   * Referenced by: '<S5>/CAN Write1'
+   * Referenced by: '<S4>/CAN Write1'
    */
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0, 0.0 },
 
@@ -114,20 +114,35 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
    */
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0 },
 
-  /* Expression: 1
+  /* Expression: 4
    * Referenced by: '<Root>/Constant'
    */
-  1.0,
+  4.0,
 
   /* Expression: 0
-   * Referenced by: '<Root>/Constant7'
+   * Referenced by: '<Root>/Constant5'
    */
   0.0,
 
-  /* Expression: 18/30
-   * Referenced by: '<Root>/Gain'
+  /* Expression: 0.1
+   * Referenced by: '<Root>/Constant4'
    */
-  0.6,
+  0.1,
+
+  /* Expression: 6
+   * Referenced by: '<Root>/Constant3'
+   */
+  6.0,
+
+  /* Expression: 0
+   * Referenced by: '<Root>/Constant2'
+   */
+  0.0,
+
+  /* Expression: -0.5
+   * Referenced by: '<Root>/Constant1'
+   */
+  -0.5,
 
   /* Expression: 3
    * Referenced by: '<Root>/Constant6'
@@ -135,49 +150,34 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
   3.0,
 
   /* Expression: 0
-   * Referenced by: '<Root>/Constant8'
+   * Referenced by: '<Root>/Constant11'
    */
   0.0,
-
-  /* Expression: 10
-   * Referenced by: '<Root>/Constant9'
-   */
-  10.0,
 
   /* Expression: 0.1
    * Referenced by: '<Root>/Constant10'
    */
   0.1,
 
+  /* Expression: 10
+   * Referenced by: '<Root>/Constant9'
+   */
+  10.0,
+
   /* Expression: 0
-   * Referenced by: '<Root>/Constant11'
+   * Referenced by: '<Root>/Constant8'
    */
   0.0,
 
-  /* Expression: 0
-   * Referenced by: '<Root>/Constant1'
+  /* Expression: 1
+   * Referenced by: '<Root>/Constant7'
    */
-  0.0,
+  1.0,
 
-  /* Expression: 0
-   * Referenced by: '<Root>/Constant2'
+  /* Expression: 18/30
+   * Referenced by: '<Root>/Gain'
    */
-  0.0,
-
-  /* Expression: 6
-   * Referenced by: '<Root>/Constant3'
-   */
-  6.0,
-
-  /* Expression: 0.1
-   * Referenced by: '<Root>/Constant4'
-   */
-  0.1,
-
-  /* Expression: 0
-   * Referenced by: '<Root>/Constant5'
-   */
-  0.0,
+  0.6,
 
   /* Expression: 0
    * Referenced by: '<S6>/Data Store Memory'
@@ -545,21 +545,6 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
   0U,
 
   /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
-   * Referenced by: '<S4>/Constant'
-   */
-  { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 254U },
-
-  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC]
-   * Referenced by: '<S4>/Constant1'
-   */
-  { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 252U },
-
-  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFD]
-   * Referenced by: '<S4>/Constant2'
-   */
-  { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 253U },
-
-  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
    * Referenced by: '<S5>/Constant'
    */
   { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 254U },
@@ -571,6 +556,21 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
 
   /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFD]
    * Referenced by: '<S5>/Constant2'
+   */
+  { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 253U },
+
+  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
+   * Referenced by: '<S4>/Constant'
+   */
+  { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 254U },
+
+  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC]
+   * Referenced by: '<S4>/Constant1'
+   */
+  { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 252U },
+
+  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFD]
+   * Referenced by: '<S4>/Constant2'
    */
   { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 253U }
 };

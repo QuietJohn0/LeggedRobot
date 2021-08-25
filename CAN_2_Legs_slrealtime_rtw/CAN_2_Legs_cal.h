@@ -18,18 +18,18 @@ struct CAN_2_Legs_cal_type {
                                         * Referenced by: '<S3>/ID'
                                         */
   real_T CANWrite1_P1_Size[2];         /* Computed Parameter: CANWrite1_P1_Size
-                                        * Referenced by: '<S4>/CAN Write1'
+                                        * Referenced by: '<S5>/CAN Write1'
                                         */
   real_T CANWrite1_P1[7];
      /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
-      * Referenced by: '<S4>/CAN Write1'
-      */
-  real_T CANWrite1_P1_Size_d[2];      /* Computed Parameter: CANWrite1_P1_Size_d
-                                       * Referenced by: '<S5>/CAN Write1'
-                                       */
-  real_T CANWrite1_P1_j[7];
-     /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
       * Referenced by: '<S5>/CAN Write1'
+      */
+  real_T CANWrite1_P1_Size_k[2];      /* Computed Parameter: CANWrite1_P1_Size_k
+                                       * Referenced by: '<S4>/CAN Write1'
+                                       */
+  real_T CANWrite1_P1_p[7];
+     /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
+      * Referenced by: '<S4>/CAN Write1'
       */
   real_T P1_Y0;                        /* Computed Parameter: P1_Y0
                                         * Referenced by: '<S1>/P1'
@@ -75,44 +75,44 @@ struct CAN_2_Legs_cal_type {
                       /* Expression: [initValues(1:4) messageType initValues(6)]
                        * Referenced by: '<Root>/CAN Read'
                        */
-  real_T Constant_Value;               /* Expression: 1
+  real_T Constant_Value;               /* Expression: 4
                                         * Referenced by: '<Root>/Constant'
                                         */
-  real_T Constant7_Value;              /* Expression: 0
-                                        * Referenced by: '<Root>/Constant7'
-                                        */
-  real_T Gain_Gain;                    /* Expression: 18/30
-                                        * Referenced by: '<Root>/Gain'
-                                        */
-  real_T Constant6_Value;              /* Expression: 3
-                                        * Referenced by: '<Root>/Constant6'
-                                        */
-  real_T Constant8_Value;              /* Expression: 0
-                                        * Referenced by: '<Root>/Constant8'
-                                        */
-  real_T Constant9_Value;              /* Expression: 10
-                                        * Referenced by: '<Root>/Constant9'
-                                        */
-  real_T Constant10_Value;             /* Expression: 0.1
-                                        * Referenced by: '<Root>/Constant10'
-                                        */
-  real_T Constant11_Value;             /* Expression: 0
-                                        * Referenced by: '<Root>/Constant11'
-                                        */
-  real_T Constant1_Value;              /* Expression: 0
-                                        * Referenced by: '<Root>/Constant1'
-                                        */
-  real_T Constant2_Value;              /* Expression: 0
-                                        * Referenced by: '<Root>/Constant2'
-                                        */
-  real_T Constant3_Value;              /* Expression: 6
-                                        * Referenced by: '<Root>/Constant3'
+  real_T Constant5_Value;              /* Expression: 0
+                                        * Referenced by: '<Root>/Constant5'
                                         */
   real_T Constant4_Value;              /* Expression: 0.1
                                         * Referenced by: '<Root>/Constant4'
                                         */
-  real_T Constant5_Value;              /* Expression: 0
-                                        * Referenced by: '<Root>/Constant5'
+  real_T Constant3_Value;              /* Expression: 6
+                                        * Referenced by: '<Root>/Constant3'
+                                        */
+  real_T Constant2_Value;              /* Expression: 0
+                                        * Referenced by: '<Root>/Constant2'
+                                        */
+  real_T Constant1_Value;              /* Expression: -0.5
+                                        * Referenced by: '<Root>/Constant1'
+                                        */
+  real_T Constant6_Value;              /* Expression: 3
+                                        * Referenced by: '<Root>/Constant6'
+                                        */
+  real_T Constant11_Value;             /* Expression: 0
+                                        * Referenced by: '<Root>/Constant11'
+                                        */
+  real_T Constant10_Value;             /* Expression: 0.1
+                                        * Referenced by: '<Root>/Constant10'
+                                        */
+  real_T Constant9_Value;              /* Expression: 10
+                                        * Referenced by: '<Root>/Constant9'
+                                        */
+  real_T Constant8_Value;              /* Expression: 0
+                                        * Referenced by: '<Root>/Constant8'
+                                        */
+  real_T Constant7_Value;              /* Expression: 1
+                                        * Referenced by: '<Root>/Constant7'
+                                        */
+  real_T Gain_Gain;                    /* Expression: 18/30
+                                        * Referenced by: '<Root>/Gain'
                                         */
   real_T DataStoreMemory_InitialValue; /* Expression: 0
                                         * Referenced by: '<S6>/Data Store Memory'
@@ -333,18 +333,6 @@ struct CAN_2_Legs_cal_type {
   uint8_T Status_Y0;                   /* Computed Parameter: Status_Y0
                                         * Referenced by: '<S3>/Status'
                                         */
-  uint8_T Constant_Value_l[8];
-                 /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
-                  * Referenced by: '<S4>/Constant'
-                  */
-  uint8_T Constant1_Value_m[8];
-                 /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC]
-                  * Referenced by: '<S4>/Constant1'
-                  */
-  uint8_T Constant2_Value_g[8];
-                 /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFD]
-                  * Referenced by: '<S4>/Constant2'
-                  */
   uint8_T Constant_Value_i[8];
                  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
                   * Referenced by: '<S5>/Constant'
@@ -356,6 +344,18 @@ struct CAN_2_Legs_cal_type {
   uint8_T Constant2_Value_k[8];
                  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFD]
                   * Referenced by: '<S5>/Constant2'
+                  */
+  uint8_T Constant_Value_l[8];
+                 /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
+                  * Referenced by: '<S4>/Constant'
+                  */
+  uint8_T Constant1_Value_m[8];
+                 /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC]
+                  * Referenced by: '<S4>/Constant1'
+                  */
+  uint8_T Constant2_Value_g[8];
+                 /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFD]
+                  * Referenced by: '<S4>/Constant2'
                   */
 };
 

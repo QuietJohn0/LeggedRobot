@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs".
  *
- * Model version              : 1.7
+ * Model version              : 1.8
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Tue Aug 24 17:24:18 2021
+ * C++ source code generated on : Tue Aug 24 17:53:26 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -34,7 +34,7 @@ RT_MODEL_CAN_2_Legs_T *const CAN_2_Legs_M = &CAN_2_Legs_M_;
 /* Forward declaration for local functions */
 static void CAN_2_Legs_dec2bin(real_T d, char_T s_data[], int32_T s_size[2]);
 
-/* Function for MATLAB Function: '<S4>/floats -> bytes' */
+/* Function for MATLAB Function: '<S5>/floats -> bytes' */
 static void CAN_2_Legs_dec2bin(real_T d, char_T s_data[], int32_T s_size[2])
 {
   real_T b_d;
@@ -218,8 +218,8 @@ real_T rt_roundd_snf(real_T u)
 
 /*
  * Output and update for atomic system:
- *    '<S4>/floats -> bytes'
  *    '<S5>/floats -> bytes'
+ *    '<S4>/floats -> bytes'
  */
 void CAN_2_Legs_floatsbytes(real_T rtu_position, real_T rtu_velocity, real_T
   rtu_K_p, real_T rtu_K_d, real_T rtu_T_ff, B_floatsbytes_CAN_2_Legs_T *localB)
@@ -480,6 +480,12 @@ void CAN_2_Legs_step(void)
   srClearBC(CAN_2_Legs_DW.IfActionSubsystem_SubsysRanBC);
 
   /* Reset subsysRan breadcrumbs */
+  srClearBC(CAN_2_Legs_DW.SimulinkFunction3_SubsysRanBC);
+
+  /* Reset subsysRan breadcrumbs */
+  srClearBC(CAN_2_Legs_DW.SimulinkFunction1_SubsysRanBC);
+
+  /* Reset subsysRan breadcrumbs */
   srClearBC(CAN_2_Legs_DW.Subsystem.Subsystem_SubsysRanBC);
 
   /* Reset subsysRan breadcrumbs */
@@ -693,6 +699,286 @@ void CAN_2_Legs_step(void)
 
   /* End of If: '<Root>/If' */
 
+  /* Constant: '<Root>/Constant' */
+  CAN_2_Legs_B.mode = CAN_2_Legs_cal->Constant_Value;
+
+  /* Constant: '<Root>/Constant2' */
+  CAN_2_Legs_B.Constant2 = CAN_2_Legs_cal->Constant2_Value;
+
+  /* DataStoreRead: '<S7>/Data Store Read' */
+  CAN_2_Legs_B.DataStoreRead = CAN_2_Legs_DW.to_f;
+
+  /* Clock: '<S7>/Clock' */
+  CAN_2_Legs_B.Clock = CAN_2_Legs_M->Timing.t[0];
+
+  /* DataStoreRead: '<S7>/Data Store Read1' */
+  CAN_2_Legs_B.DataStoreRead1 = CAN_2_Legs_DW.po_m;
+
+  /* Delay: '<S7>/Delay' incorporates:
+   *  Constant: '<Root>/Constant1'
+   */
+  if (CAN_2_Legs_DW.icLoad) {
+    CAN_2_Legs_DW.Delay_DSTATE = CAN_2_Legs_cal->Constant1_Value;
+  }
+
+  /* Delay: '<S7>/Delay' */
+  CAN_2_Legs_B.Delay = CAN_2_Legs_DW.Delay_DSTATE;
+
+  /* MATLAB Function: '<S7>/MATLAB Function2' incorporates:
+   *  Constant: '<Root>/Constant1'
+   *  Constant: '<Root>/Constant6'
+   */
+  I_ff = (CAN_2_Legs_B.Delay - CAN_2_Legs_B.DataStoreRead1) /
+    CAN_2_Legs_cal->Constant6_Value;
+  CAN_2_Legs_B.p = (CAN_2_Legs_B.Clock - CAN_2_Legs_B.DataStoreRead) * I_ff +
+    CAN_2_Legs_B.DataStoreRead1;
+  if (((CAN_2_Legs_B.p > CAN_2_Legs_B.Delay) && (I_ff > 0.0)) ||
+      ((CAN_2_Legs_B.p < CAN_2_Legs_B.Delay) && (I_ff < 0.0))) {
+    CAN_2_Legs_B.p = CAN_2_Legs_B.Delay;
+  }
+
+  if (CAN_2_Legs_B.Clock == 0.0) {
+    CAN_2_Legs_B.p = CAN_2_Legs_cal->Constant1_Value;
+  }
+
+  /* End of MATLAB Function: '<S7>/MATLAB Function2' */
+
+  /* Constant: '<Root>/Constant8' */
+  CAN_2_Legs_B.Constant8 = CAN_2_Legs_cal->Constant8_Value;
+
+  /* DataStoreRead: '<S6>/Data Store Read' */
+  CAN_2_Legs_B.DataStoreRead_k = CAN_2_Legs_DW.to;
+
+  /* Clock: '<S6>/Clock' */
+  CAN_2_Legs_B.Clock_f = CAN_2_Legs_M->Timing.t[0];
+
+  /* DataStoreRead: '<S6>/Data Store Read1' */
+  CAN_2_Legs_B.DataStoreRead1_a = CAN_2_Legs_DW.po;
+
+  /* Gain: '<Root>/Gain' incorporates:
+   *  Constant: '<Root>/Constant7'
+   */
+  CAN_2_Legs_B.Gain = CAN_2_Legs_cal->Gain_Gain *
+    CAN_2_Legs_cal->Constant7_Value;
+
+  /* Delay: '<S6>/Delay' */
+  if (CAN_2_Legs_DW.icLoad_c) {
+    CAN_2_Legs_DW.Delay_DSTATE_b = CAN_2_Legs_B.Gain;
+  }
+
+  /* Delay: '<S6>/Delay' */
+  CAN_2_Legs_B.Delay_f = CAN_2_Legs_DW.Delay_DSTATE_b;
+
+  /* MATLAB Function: '<S6>/MATLAB Function2' incorporates:
+   *  Constant: '<Root>/Constant6'
+   */
+  I_ff = (CAN_2_Legs_B.Delay_f - CAN_2_Legs_B.DataStoreRead1_a) /
+    CAN_2_Legs_cal->Constant6_Value;
+  CAN_2_Legs_B.p_p = (CAN_2_Legs_B.Clock_f - CAN_2_Legs_B.DataStoreRead_k) *
+    I_ff + CAN_2_Legs_B.DataStoreRead1_a;
+  if (((CAN_2_Legs_B.p_p > CAN_2_Legs_B.Delay_f) && (I_ff > 0.0)) ||
+      ((CAN_2_Legs_B.p_p < CAN_2_Legs_B.Delay_f) && (I_ff < 0.0))) {
+    CAN_2_Legs_B.p_p = CAN_2_Legs_B.Delay_f;
+  }
+
+  if (CAN_2_Legs_B.Clock_f == 0.0) {
+    CAN_2_Legs_B.p_p = CAN_2_Legs_B.Gain;
+  }
+
+  /* End of MATLAB Function: '<S6>/MATLAB Function2' */
+
+  /* If: '<Root>/If1' */
+  if (CAN_2_Legs_B.CANUnpack_o4 > 1.0) {
+    /* Outputs for IfAction SubSystem: '<Root>/Simulink Function3' incorporates:
+     *  ActionPort: '<S5>/Action Port'
+     */
+    /* MATLAB Function: '<S5>/floats -> bytes' incorporates:
+     *  Constant: '<Root>/Constant3'
+     *  Constant: '<Root>/Constant4'
+     *  Constant: '<Root>/Constant5'
+     */
+    CAN_2_Legs_floatsbytes(CAN_2_Legs_B.p, CAN_2_Legs_B.Constant2,
+      CAN_2_Legs_cal->Constant3_Value, CAN_2_Legs_cal->Constant4_Value,
+      CAN_2_Legs_cal->Constant5_Value, &CAN_2_Legs_B.sf_floatsbytes);
+
+    /* MultiPortSwitch: '<S5>/Multiport Switch' */
+    switch (static_cast<int32_T>(CAN_2_Legs_B.mode)) {
+     case 1:
+      /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
+       *  Constant: '<S5>/Constant'
+       */
+      for (i = 0; i < 8; i++) {
+        CAN_2_Legs_B.MultiportSwitch_i[i] = CAN_2_Legs_cal->Constant_Value_i[i];
+      }
+      break;
+
+     case 2:
+      /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
+       *  Constant: '<S5>/Constant1'
+       */
+      for (i = 0; i < 8; i++) {
+        CAN_2_Legs_B.MultiportSwitch_i[i] = CAN_2_Legs_cal->Constant1_Value_e[i];
+      }
+      break;
+
+     case 3:
+      /* MultiPortSwitch: '<S5>/Multiport Switch' */
+      for (i = 0; i < 8; i++) {
+        CAN_2_Legs_B.MultiportSwitch_i[i] = CAN_2_Legs_B.sf_floatsbytes.b[i];
+      }
+      break;
+
+     default:
+      /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
+       *  Constant: '<S5>/Constant2'
+       */
+      for (i = 0; i < 8; i++) {
+        CAN_2_Legs_B.MultiportSwitch_i[i] = CAN_2_Legs_cal->Constant2_Value_k[i];
+      }
+      break;
+    }
+
+    /* End of MultiPortSwitch: '<S5>/Multiport Switch' */
+
+    /* S-Function (slrealtimebytepacking): '<S5>/Byte Packing' */
+
+    /* Byte Packing: <S5>/Byte Packing */
+    (void)memcpy((uint8_T*)&CAN_2_Legs_B.BytePacking_d[0] + 0, (uint8_T*)
+                 &CAN_2_Legs_B.MultiportSwitch_i[0], 8);
+
+    /* S-Function (scanpack): '<S5>/CAN Pack1' */
+    /* S-Function (scanpack): '<S5>/CAN Pack1' */
+    CAN_2_Legs_B.CANPack1.ID = 1U;
+    CAN_2_Legs_B.CANPack1.Length = 8U;
+    CAN_2_Legs_B.CANPack1.Extended = 0U;
+    CAN_2_Legs_B.CANPack1.Remote = 0;
+    CAN_2_Legs_B.CANPack1.Data[0] = 0;
+    CAN_2_Legs_B.CANPack1.Data[1] = 0;
+    CAN_2_Legs_B.CANPack1.Data[2] = 0;
+    CAN_2_Legs_B.CANPack1.Data[3] = 0;
+    CAN_2_Legs_B.CANPack1.Data[4] = 0;
+    CAN_2_Legs_B.CANPack1.Data[5] = 0;
+    CAN_2_Legs_B.CANPack1.Data[6] = 0;
+    CAN_2_Legs_B.CANPack1.Data[7] = 0;
+
+    {
+      (void) std::memcpy((CAN_2_Legs_B.CANPack1.Data),
+                         &CAN_2_Legs_B.BytePacking_d[0],
+                         8 * sizeof(uint8_T));
+    }
+
+    /* S-Function (sg_IO602_IO691_write_s): '<S5>/CAN Write1' */
+
+    /* Level2 S-Function Block: '<S5>/CAN Write1' (sg_IO602_IO691_write_s) */
+    {
+      SimStruct *rts = CAN_2_Legs_M->childSfunctions[0];
+      sfcnOutputs(rts,0);
+    }
+
+    /* Update for IfAction SubSystem: '<Root>/Simulink Function3' incorporates:
+     *  ActionPort: '<S5>/Action Port'
+     */
+    /* Update for If: '<Root>/If1' */
+    srUpdateBC(CAN_2_Legs_DW.SimulinkFunction3_SubsysRanBC);
+
+    /* End of Update for SubSystem: '<Root>/Simulink Function3' */
+  } else {
+    /* Outputs for IfAction SubSystem: '<Root>/Simulink Function1' incorporates:
+     *  ActionPort: '<S4>/Action Port'
+     */
+    /* MATLAB Function: '<S4>/floats -> bytes' incorporates:
+     *  Constant: '<Root>/Constant10'
+     *  Constant: '<Root>/Constant11'
+     *  Constant: '<Root>/Constant9'
+     */
+    CAN_2_Legs_floatsbytes(CAN_2_Legs_B.p_p, CAN_2_Legs_B.Constant8,
+      CAN_2_Legs_cal->Constant9_Value, CAN_2_Legs_cal->Constant10_Value,
+      CAN_2_Legs_cal->Constant11_Value, &CAN_2_Legs_B.sf_floatsbytes_m);
+
+    /* MultiPortSwitch: '<S4>/Multiport Switch' */
+    switch (static_cast<int32_T>(CAN_2_Legs_B.mode)) {
+     case 1:
+      /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
+       *  Constant: '<S4>/Constant'
+       */
+      for (i = 0; i < 8; i++) {
+        CAN_2_Legs_B.MultiportSwitch[i] = CAN_2_Legs_cal->Constant_Value_l[i];
+      }
+      break;
+
+     case 2:
+      /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
+       *  Constant: '<S4>/Constant1'
+       */
+      for (i = 0; i < 8; i++) {
+        CAN_2_Legs_B.MultiportSwitch[i] = CAN_2_Legs_cal->Constant1_Value_m[i];
+      }
+      break;
+
+     case 3:
+      /* MultiPortSwitch: '<S4>/Multiport Switch' */
+      for (i = 0; i < 8; i++) {
+        CAN_2_Legs_B.MultiportSwitch[i] = CAN_2_Legs_B.sf_floatsbytes_m.b[i];
+      }
+      break;
+
+     default:
+      /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
+       *  Constant: '<S4>/Constant2'
+       */
+      for (i = 0; i < 8; i++) {
+        CAN_2_Legs_B.MultiportSwitch[i] = CAN_2_Legs_cal->Constant2_Value_g[i];
+      }
+      break;
+    }
+
+    /* End of MultiPortSwitch: '<S4>/Multiport Switch' */
+
+    /* S-Function (slrealtimebytepacking): '<S4>/Byte Packing' */
+
+    /* Byte Packing: <S4>/Byte Packing */
+    (void)memcpy((uint8_T*)&CAN_2_Legs_B.BytePacking[0] + 0, (uint8_T*)
+                 &CAN_2_Legs_B.MultiportSwitch[0], 8);
+
+    /* S-Function (scanpack): '<S4>/CAN Pack1' */
+    /* S-Function (scanpack): '<S4>/CAN Pack1' */
+    CAN_2_Legs_B.CANmsg2.ID = 2U;
+    CAN_2_Legs_B.CANmsg2.Length = 8U;
+    CAN_2_Legs_B.CANmsg2.Extended = 0U;
+    CAN_2_Legs_B.CANmsg2.Remote = 0;
+    CAN_2_Legs_B.CANmsg2.Data[0] = 0;
+    CAN_2_Legs_B.CANmsg2.Data[1] = 0;
+    CAN_2_Legs_B.CANmsg2.Data[2] = 0;
+    CAN_2_Legs_B.CANmsg2.Data[3] = 0;
+    CAN_2_Legs_B.CANmsg2.Data[4] = 0;
+    CAN_2_Legs_B.CANmsg2.Data[5] = 0;
+    CAN_2_Legs_B.CANmsg2.Data[6] = 0;
+    CAN_2_Legs_B.CANmsg2.Data[7] = 0;
+
+    {
+      (void) std::memcpy((CAN_2_Legs_B.CANmsg2.Data), &CAN_2_Legs_B.BytePacking
+                         [0],
+                         8 * sizeof(uint8_T));
+    }
+
+    /* S-Function (sg_IO602_IO691_write_s): '<S4>/CAN Write1' */
+
+    /* Level2 S-Function Block: '<S4>/CAN Write1' (sg_IO602_IO691_write_s) */
+    {
+      SimStruct *rts = CAN_2_Legs_M->childSfunctions[1];
+      sfcnOutputs(rts,0);
+    }
+
+    /* Update for IfAction SubSystem: '<Root>/Simulink Function1' incorporates:
+     *  ActionPort: '<S4>/Action Port'
+     */
+    /* Update for If: '<Root>/If1' */
+    srUpdateBC(CAN_2_Legs_DW.SimulinkFunction1_SubsysRanBC);
+
+    /* End of Update for SubSystem: '<Root>/Simulink Function1' */
+  }
+
+  /* End of If: '<Root>/If1' */
   /* SwitchCase: '<Root>/Switch Case' incorporates:
    *  Inport: '<S1>/Current'
    *  Inport: '<S1>/Position'
@@ -764,264 +1050,10 @@ void CAN_2_Legs_step(void)
   }
 
   /* End of SwitchCase: '<Root>/Switch Case' */
-  /* Constant: '<Root>/Constant' */
-  CAN_2_Legs_B.mode = CAN_2_Legs_cal->Constant_Value;
-
-  /* DataStoreRead: '<S6>/Data Store Read' */
-  CAN_2_Legs_B.DataStoreRead = CAN_2_Legs_DW.to;
-
-  /* Clock: '<S6>/Clock' */
-  CAN_2_Legs_B.Clock = CAN_2_Legs_M->Timing.t[0];
-
-  /* DataStoreRead: '<S6>/Data Store Read1' */
-  CAN_2_Legs_B.DataStoreRead1 = CAN_2_Legs_DW.po;
-
-  /* Gain: '<Root>/Gain' incorporates:
-   *  Constant: '<Root>/Constant7'
-   */
-  CAN_2_Legs_B.Gain = CAN_2_Legs_cal->Gain_Gain *
-    CAN_2_Legs_cal->Constant7_Value;
-
-  /* Delay: '<S6>/Delay' */
-  if (CAN_2_Legs_DW.icLoad) {
-    CAN_2_Legs_DW.Delay_DSTATE = CAN_2_Legs_B.Gain;
-  }
-
-  /* Delay: '<S6>/Delay' */
-  CAN_2_Legs_B.Delay = CAN_2_Legs_DW.Delay_DSTATE;
-
-  /* MATLAB Function: '<S6>/MATLAB Function2' incorporates:
-   *  Constant: '<Root>/Constant6'
-   */
-  I_ff = (CAN_2_Legs_B.Delay - CAN_2_Legs_B.DataStoreRead1) /
-    CAN_2_Legs_cal->Constant6_Value;
-  CAN_2_Legs_B.p_p = (CAN_2_Legs_B.Clock - CAN_2_Legs_B.DataStoreRead) * I_ff +
-    CAN_2_Legs_B.DataStoreRead1;
-  if (((CAN_2_Legs_B.p_p > CAN_2_Legs_B.Delay) && (I_ff > 0.0)) ||
-      ((CAN_2_Legs_B.p_p < CAN_2_Legs_B.Delay) && (I_ff < 0.0))) {
-    CAN_2_Legs_B.p_p = CAN_2_Legs_B.Delay;
-  }
-
-  if (CAN_2_Legs_B.Clock == 0.0) {
-    CAN_2_Legs_B.p_p = CAN_2_Legs_B.Gain;
-  }
-
-  /* End of MATLAB Function: '<S6>/MATLAB Function2' */
-
-  /* Constant: '<Root>/Constant8' */
-  CAN_2_Legs_B.Constant8 = CAN_2_Legs_cal->Constant8_Value;
-
-  /* Outputs for Atomic SubSystem: '<Root>/Simulink Function1' */
-  /* MATLAB Function: '<S4>/floats -> bytes' incorporates:
-   *  Constant: '<Root>/Constant10'
-   *  Constant: '<Root>/Constant11'
-   *  Constant: '<Root>/Constant9'
-   */
-  CAN_2_Legs_floatsbytes(CAN_2_Legs_B.p_p, CAN_2_Legs_B.Constant8,
-    CAN_2_Legs_cal->Constant9_Value, CAN_2_Legs_cal->Constant10_Value,
-    CAN_2_Legs_cal->Constant11_Value, &CAN_2_Legs_B.sf_floatsbytes);
-
-  /* MultiPortSwitch: '<S4>/Multiport Switch' */
-  switch (static_cast<int32_T>(CAN_2_Legs_B.mode)) {
-   case 1:
-    /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
-     *  Constant: '<S4>/Constant'
-     */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_B.MultiportSwitch_f[i] = CAN_2_Legs_cal->Constant_Value_l[i];
-    }
-    break;
-
-   case 2:
-    /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
-     *  Constant: '<S4>/Constant1'
-     */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_B.MultiportSwitch_f[i] = CAN_2_Legs_cal->Constant1_Value_m[i];
-    }
-    break;
-
-   case 3:
-    /* MultiPortSwitch: '<S4>/Multiport Switch' */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_B.MultiportSwitch_f[i] = CAN_2_Legs_B.sf_floatsbytes.b[i];
-    }
-    break;
-
-   default:
-    /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
-     *  Constant: '<S4>/Constant2'
-     */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_B.MultiportSwitch_f[i] = CAN_2_Legs_cal->Constant2_Value_g[i];
-    }
-    break;
-  }
-
-  /* End of MultiPortSwitch: '<S4>/Multiport Switch' */
-
-  /* S-Function (slrealtimebytepacking): '<S4>/Byte Packing' */
-
-  /* Byte Packing: <S4>/Byte Packing */
-  (void)memcpy((uint8_T*)&CAN_2_Legs_B.BytePacking_o[0] + 0, (uint8_T*)
-               &CAN_2_Legs_B.MultiportSwitch_f[0], 8);
-
-  /* S-Function (scanpack): '<S4>/CAN Pack1' */
-  /* S-Function (scanpack): '<S4>/CAN Pack1' */
-  CAN_2_Legs_B.CANmsg2.ID = 2U;
-  CAN_2_Legs_B.CANmsg2.Length = 8U;
-  CAN_2_Legs_B.CANmsg2.Extended = 0U;
-  CAN_2_Legs_B.CANmsg2.Remote = 0;
-  CAN_2_Legs_B.CANmsg2.Data[0] = 0;
-  CAN_2_Legs_B.CANmsg2.Data[1] = 0;
-  CAN_2_Legs_B.CANmsg2.Data[2] = 0;
-  CAN_2_Legs_B.CANmsg2.Data[3] = 0;
-  CAN_2_Legs_B.CANmsg2.Data[4] = 0;
-  CAN_2_Legs_B.CANmsg2.Data[5] = 0;
-  CAN_2_Legs_B.CANmsg2.Data[6] = 0;
-  CAN_2_Legs_B.CANmsg2.Data[7] = 0;
-
-  {
-    (void) std::memcpy((CAN_2_Legs_B.CANmsg2.Data), &CAN_2_Legs_B.BytePacking_o
-                       [0],
-                       8 * sizeof(uint8_T));
-  }
-
-  /* S-Function (sg_IO602_IO691_write_s): '<S4>/CAN Write1' */
-
-  /* Level2 S-Function Block: '<S4>/CAN Write1' (sg_IO602_IO691_write_s) */
-  {
-    SimStruct *rts = CAN_2_Legs_M->childSfunctions[0];
-    sfcnOutputs(rts,0);
-  }
-
-  /* DataStoreRead: '<S7>/Data Store Read' */
-  CAN_2_Legs_B.DataStoreRead_i = CAN_2_Legs_DW.to_f;
-
-  /* Clock: '<S7>/Clock' */
-  CAN_2_Legs_B.Clock_m = CAN_2_Legs_M->Timing.t[0];
-
-  /* DataStoreRead: '<S7>/Data Store Read1' */
-  CAN_2_Legs_B.DataStoreRead1_e = CAN_2_Legs_DW.po_m;
-
-  /* Delay: '<S7>/Delay' incorporates:
-   *  Constant: '<Root>/Constant1'
-   */
-  if (CAN_2_Legs_DW.icLoad_j) {
-    CAN_2_Legs_DW.Delay_DSTATE_b = CAN_2_Legs_cal->Constant1_Value;
-  }
-
-  /* Delay: '<S7>/Delay' */
-  CAN_2_Legs_B.Delay_i = CAN_2_Legs_DW.Delay_DSTATE_b;
-
-  /* MATLAB Function: '<S7>/MATLAB Function2' incorporates:
-   *  Constant: '<Root>/Constant1'
-   *  Constant: '<Root>/Constant6'
-   */
-  I_ff = (CAN_2_Legs_B.Delay_i - CAN_2_Legs_B.DataStoreRead1_e) /
-    CAN_2_Legs_cal->Constant6_Value;
-  CAN_2_Legs_B.p = (CAN_2_Legs_B.Clock_m - CAN_2_Legs_B.DataStoreRead_i) * I_ff
-    + CAN_2_Legs_B.DataStoreRead1_e;
-  if (((CAN_2_Legs_B.p > CAN_2_Legs_B.Delay_i) && (I_ff > 0.0)) ||
-      ((CAN_2_Legs_B.p < CAN_2_Legs_B.Delay_i) && (I_ff < 0.0))) {
-    CAN_2_Legs_B.p = CAN_2_Legs_B.Delay_i;
-  }
-
-  if (CAN_2_Legs_B.Clock_m == 0.0) {
-    CAN_2_Legs_B.p = CAN_2_Legs_cal->Constant1_Value;
-  }
-
-  /* End of MATLAB Function: '<S7>/MATLAB Function2' */
-
-  /* Constant: '<Root>/Constant2' */
-  CAN_2_Legs_B.Constant2 = CAN_2_Legs_cal->Constant2_Value;
-
-  /* Outputs for Atomic SubSystem: '<Root>/Simulink Function3' */
-  /* MATLAB Function: '<S5>/floats -> bytes' incorporates:
-   *  Constant: '<Root>/Constant3'
-   *  Constant: '<Root>/Constant4'
-   *  Constant: '<Root>/Constant5'
-   */
-  CAN_2_Legs_floatsbytes(CAN_2_Legs_B.p, CAN_2_Legs_B.Constant2,
-    CAN_2_Legs_cal->Constant3_Value, CAN_2_Legs_cal->Constant4_Value,
-    CAN_2_Legs_cal->Constant5_Value, &CAN_2_Legs_B.sf_floatsbytes_o);
-
-  /* MultiPortSwitch: '<S5>/Multiport Switch' */
-  switch (static_cast<int32_T>(CAN_2_Legs_B.mode)) {
-   case 1:
-    /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
-     *  Constant: '<S5>/Constant'
-     */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_B.MultiportSwitch[i] = CAN_2_Legs_cal->Constant_Value_i[i];
-    }
-    break;
-
-   case 2:
-    /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
-     *  Constant: '<S5>/Constant1'
-     */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_B.MultiportSwitch[i] = CAN_2_Legs_cal->Constant1_Value_e[i];
-    }
-    break;
-
-   case 3:
-    /* MultiPortSwitch: '<S5>/Multiport Switch' */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_B.MultiportSwitch[i] = CAN_2_Legs_B.sf_floatsbytes_o.b[i];
-    }
-    break;
-
-   default:
-    /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
-     *  Constant: '<S5>/Constant2'
-     */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_B.MultiportSwitch[i] = CAN_2_Legs_cal->Constant2_Value_k[i];
-    }
-    break;
-  }
-
-  /* End of MultiPortSwitch: '<S5>/Multiport Switch' */
-
-  /* S-Function (slrealtimebytepacking): '<S5>/Byte Packing' */
-
-  /* Byte Packing: <S5>/Byte Packing */
-  (void)memcpy((uint8_T*)&CAN_2_Legs_B.BytePacking[0] + 0, (uint8_T*)
-               &CAN_2_Legs_B.MultiportSwitch[0], 8);
-
-  /* S-Function (scanpack): '<S5>/CAN Pack1' */
-  /* S-Function (scanpack): '<S5>/CAN Pack1' */
-  CAN_2_Legs_B.CANPack1.ID = 1U;
-  CAN_2_Legs_B.CANPack1.Length = 8U;
-  CAN_2_Legs_B.CANPack1.Extended = 0U;
-  CAN_2_Legs_B.CANPack1.Remote = 0;
-  CAN_2_Legs_B.CANPack1.Data[0] = 0;
-  CAN_2_Legs_B.CANPack1.Data[1] = 0;
-  CAN_2_Legs_B.CANPack1.Data[2] = 0;
-  CAN_2_Legs_B.CANPack1.Data[3] = 0;
-  CAN_2_Legs_B.CANPack1.Data[4] = 0;
-  CAN_2_Legs_B.CANPack1.Data[5] = 0;
-  CAN_2_Legs_B.CANPack1.Data[6] = 0;
-  CAN_2_Legs_B.CANPack1.Data[7] = 0;
-
-  {
-    (void) std::memcpy((CAN_2_Legs_B.CANPack1.Data), &CAN_2_Legs_B.BytePacking[0],
-                       8 * sizeof(uint8_T));
-  }
-
-  /* S-Function (sg_IO602_IO691_write_s): '<S5>/CAN Write1' */
-
-  /* Level2 S-Function Block: '<S5>/CAN Write1' (sg_IO602_IO691_write_s) */
-  {
-    SimStruct *rts = CAN_2_Legs_M->childSfunctions[1];
-    sfcnOutputs(rts,0);
-  }
-
   /* If: '<S6>/If' */
   rtAction = -1;
-  if ((CAN_2_Legs_B.Gain != CAN_2_Legs_B.Delay) || (CAN_2_Legs_B.Clock < 0.1)) {
+  if ((CAN_2_Legs_B.Gain != CAN_2_Legs_B.Delay_f) || (CAN_2_Legs_B.Clock_f < 0.1))
+  {
     rtAction = 0;
 
     /* Outputs for IfAction SubSystem: '<S6>/Subsystem' incorporates:
@@ -1042,8 +1074,8 @@ void CAN_2_Legs_step(void)
    *  Constant: '<Root>/Constant1'
    */
   rtAction = -1;
-  if ((CAN_2_Legs_cal->Constant1_Value != CAN_2_Legs_B.Delay_i) ||
-      (CAN_2_Legs_B.Clock_m < 0.1)) {
+  if ((CAN_2_Legs_cal->Constant1_Value != CAN_2_Legs_B.Delay) ||
+      (CAN_2_Legs_B.Clock < 0.1)) {
     rtAction = 0;
 
     /* Outputs for IfAction SubSystem: '<S7>/Subsystem' incorporates:
@@ -1068,15 +1100,15 @@ void CAN_2_Legs_step(void)
     sfcnOutputs(rts,0);
   }
 
-  /* Update for Delay: '<S6>/Delay' */
-  CAN_2_Legs_DW.icLoad = false;
-  CAN_2_Legs_DW.Delay_DSTATE = CAN_2_Legs_B.Gain;
-
   /* Update for Delay: '<S7>/Delay' incorporates:
    *  Constant: '<Root>/Constant1'
    */
-  CAN_2_Legs_DW.icLoad_j = false;
-  CAN_2_Legs_DW.Delay_DSTATE_b = CAN_2_Legs_cal->Constant1_Value;
+  CAN_2_Legs_DW.icLoad = false;
+  CAN_2_Legs_DW.Delay_DSTATE = CAN_2_Legs_cal->Constant1_Value;
+
+  /* Update for Delay: '<S6>/Delay' */
+  CAN_2_Legs_DW.icLoad_c = false;
+  CAN_2_Legs_DW.Delay_DSTATE_b = CAN_2_Legs_B.Gain;
 
   /* Update absolute time for base rate */
   /* The "clockTick0" counts the number of times the code of this task has
@@ -1180,8 +1212,8 @@ void CAN_2_Legs_initialize(void)
 
   {
     CAN_2_Legs_B.CANRead_o2 = CAN_DATATYPE_GROUND;
-    CAN_2_Legs_B.CANPack1 = CAN_DATATYPE_GROUND;
     CAN_2_Legs_B.CANmsg2 = CAN_DATATYPE_GROUND;
+    CAN_2_Legs_B.CANPack1 = CAN_DATATYPE_GROUND;
   }
 
   /* states (dwork) */
@@ -1231,7 +1263,7 @@ void CAN_2_Legs_initialize(void)
       }
     }
 
-    /* Level2 S-Function Block: CAN_2_Legs/<S4>/CAN Write1 (sg_IO602_IO691_write_s) */
+    /* Level2 S-Function Block: CAN_2_Legs/<S5>/CAN Write1 (sg_IO602_IO691_write_s) */
     {
       SimStruct *rts = CAN_2_Legs_M->childSfunctions[0];
 
@@ -1294,7 +1326,7 @@ void CAN_2_Legs_initialize(void)
         /* port 0 */
         {
           ssSetInputPortRequiredContiguous(rts, 0, 1);
-          ssSetInputPortSignal(rts, 0, &CAN_2_Legs_B.CANmsg2);
+          ssSetInputPortSignal(rts, 0, &CAN_2_Legs_B.CANPack1);
           _ssSetInputPortNumDimensions(rts, 0, 1);
           ssSetInputPortWidth(rts, 0, 1);
         }
@@ -1302,7 +1334,7 @@ void CAN_2_Legs_initialize(void)
 
       /* path info */
       ssSetModelName(rts, "CAN Write1");
-      ssSetPath(rts, "CAN_2_Legs/Simulink Function1/CAN Write1");
+      ssSetPath(rts, "CAN_2_Legs/Simulink Function3/CAN Write1");
       ssSetRTModel(rts,CAN_2_Legs_M);
       ssSetParentSS(rts, (NULL));
       ssSetRootSS(rts, rts);
@@ -1318,7 +1350,7 @@ void CAN_2_Legs_initialize(void)
       }
 
       /* work vectors */
-      ssSetPWork(rts, (void **) &CAN_2_Legs_DW.CANWrite1_PWORK_f);
+      ssSetPWork(rts, (void **) &CAN_2_Legs_DW.CANWrite1_PWORK_g);
 
       {
         struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
@@ -1333,7 +1365,7 @@ void CAN_2_Legs_initialize(void)
         ssSetDWorkWidth(rts, 0, 1);
         ssSetDWorkDataType(rts, 0,SS_POINTER);
         ssSetDWorkComplexSignal(rts, 0, 0);
-        ssSetDWork(rts, 0, &CAN_2_Legs_DW.CANWrite1_PWORK_f);
+        ssSetDWork(rts, 0, &CAN_2_Legs_DW.CANWrite1_PWORK_g);
       }
 
       /* registration */
@@ -1356,7 +1388,7 @@ void CAN_2_Legs_initialize(void)
       ssSetInputPortBufferDstPort(rts, 0, -1);
     }
 
-    /* Level2 S-Function Block: CAN_2_Legs/<S5>/CAN Write1 (sg_IO602_IO691_write_s) */
+    /* Level2 S-Function Block: CAN_2_Legs/<S4>/CAN Write1 (sg_IO602_IO691_write_s) */
     {
       SimStruct *rts = CAN_2_Legs_M->childSfunctions[1];
 
@@ -1419,7 +1451,7 @@ void CAN_2_Legs_initialize(void)
         /* port 0 */
         {
           ssSetInputPortRequiredContiguous(rts, 0, 1);
-          ssSetInputPortSignal(rts, 0, &CAN_2_Legs_B.CANPack1);
+          ssSetInputPortSignal(rts, 0, &CAN_2_Legs_B.CANmsg2);
           _ssSetInputPortNumDimensions(rts, 0, 1);
           ssSetInputPortWidth(rts, 0, 1);
         }
@@ -1427,7 +1459,7 @@ void CAN_2_Legs_initialize(void)
 
       /* path info */
       ssSetModelName(rts, "CAN Write1");
-      ssSetPath(rts, "CAN_2_Legs/Simulink Function3/CAN Write1");
+      ssSetPath(rts, "CAN_2_Legs/Simulink Function1/CAN Write1");
       ssSetRTModel(rts,CAN_2_Legs_M);
       ssSetParentSS(rts, (NULL));
       ssSetRootSS(rts, rts);
@@ -1439,7 +1471,7 @@ void CAN_2_Legs_initialize(void)
           &CAN_2_Legs_M->NonInlinedSFcns.Sfcn1.params;
         ssSetSFcnParamsCount(rts, 1);
         ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
-        ssSetSFcnParam(rts, 0, (mxArray*)CAN_2_Legs_cal->CANWrite1_P1_Size_d);
+        ssSetSFcnParam(rts, 0, (mxArray*)CAN_2_Legs_cal->CANWrite1_P1_Size_k);
       }
 
       /* work vectors */
@@ -1873,11 +1905,11 @@ void CAN_2_Legs_initialize(void)
       return;
   }
 
-  /* Start for Constant: '<Root>/Constant8' */
-  CAN_2_Legs_B.Constant8 = CAN_2_Legs_cal->Constant8_Value;
-
   /* Start for Constant: '<Root>/Constant2' */
   CAN_2_Legs_B.Constant2 = CAN_2_Legs_cal->Constant2_Value;
+
+  /* Start for Constant: '<Root>/Constant8' */
+  CAN_2_Legs_B.Constant8 = CAN_2_Legs_cal->Constant8_Value;
 
   /* Start for If: '<S6>/If' */
   CAN_2_Legs_DW.If_ActiveSubsystem = -1;
@@ -1906,11 +1938,11 @@ void CAN_2_Legs_initialize(void)
       return;
   }
 
-  /* InitializeConditions for Delay: '<S6>/Delay' */
+  /* InitializeConditions for Delay: '<S7>/Delay' */
   CAN_2_Legs_DW.icLoad = true;
 
-  /* InitializeConditions for Delay: '<S7>/Delay' */
-  CAN_2_Legs_DW.icLoad_j = true;
+  /* InitializeConditions for Delay: '<S6>/Delay' */
+  CAN_2_Legs_DW.icLoad_c = true;
 
   /* SystemInitialize for IfAction SubSystem: '<Root>/If Action Subsystem' */
   /* Start for S-Function (scanunpack): '<S3>/CAN Unpack' */
@@ -1937,6 +1969,32 @@ void CAN_2_Legs_initialize(void)
   CAN_2_Legs_B.CANUnpack_o5 = CAN_2_Legs_cal->Status_Y0;
 
   /* End of SystemInitialize for SubSystem: '<Root>/If Action Subsystem' */
+
+  /* SystemInitialize for IfAction SubSystem: '<Root>/Simulink Function3' */
+
+  /* Start for S-Function (sg_IO602_IO691_write_s): '<S5>/CAN Write1' */
+  /* Level2 S-Function Block: '<S5>/CAN Write1' (sg_IO602_IO691_write_s) */
+  {
+    SimStruct *rts = CAN_2_Legs_M->childSfunctions[0];
+    sfcnStart(rts);
+    if (ssGetErrorStatus(rts) != (NULL))
+      return;
+  }
+
+  /* End of SystemInitialize for SubSystem: '<Root>/Simulink Function3' */
+
+  /* SystemInitialize for IfAction SubSystem: '<Root>/Simulink Function1' */
+
+  /* Start for S-Function (sg_IO602_IO691_write_s): '<S4>/CAN Write1' */
+  /* Level2 S-Function Block: '<S4>/CAN Write1' (sg_IO602_IO691_write_s) */
+  {
+    SimStruct *rts = CAN_2_Legs_M->childSfunctions[1];
+    sfcnStart(rts);
+    if (ssGetErrorStatus(rts) != (NULL))
+      return;
+  }
+
+  /* End of SystemInitialize for SubSystem: '<Root>/Simulink Function1' */
 
   /* SystemInitialize for IfAction SubSystem: '<Root>/Enabled Subsystem' */
   /* SystemInitialize for Outport: '<S1>/P1' incorporates:
@@ -1973,32 +2031,6 @@ void CAN_2_Legs_initialize(void)
   CAN_2_Legs_B.Current = CAN_2_Legs_cal->I2_Y0;
 
   /* End of SystemInitialize for SubSystem: '<Root>/Enabled Subsystem1' */
-
-  /* SystemInitialize for Atomic SubSystem: '<Root>/Simulink Function1' */
-
-  /* Start for S-Function (sg_IO602_IO691_write_s): '<S4>/CAN Write1' */
-  /* Level2 S-Function Block: '<S4>/CAN Write1' (sg_IO602_IO691_write_s) */
-  {
-    SimStruct *rts = CAN_2_Legs_M->childSfunctions[0];
-    sfcnStart(rts);
-    if (ssGetErrorStatus(rts) != (NULL))
-      return;
-  }
-
-  /* End of SystemInitialize for SubSystem: '<Root>/Simulink Function1' */
-
-  /* SystemInitialize for Atomic SubSystem: '<Root>/Simulink Function3' */
-
-  /* Start for S-Function (sg_IO602_IO691_write_s): '<S5>/CAN Write1' */
-  /* Level2 S-Function Block: '<S5>/CAN Write1' (sg_IO602_IO691_write_s) */
-  {
-    SimStruct *rts = CAN_2_Legs_M->childSfunctions[1];
-    sfcnStart(rts);
-    if (ssGetErrorStatus(rts) != (NULL))
-      return;
-  }
-
-  /* End of SystemInitialize for SubSystem: '<Root>/Simulink Function3' */
 }
 
 /* Model terminate function */
@@ -2018,27 +2050,27 @@ void CAN_2_Legs_terminate(void)
     sfcnTerminate(rts);
   }
 
-  /* Terminate for Atomic SubSystem: '<Root>/Simulink Function1' */
+  /* Terminate for IfAction SubSystem: '<Root>/Simulink Function3' */
 
-  /* Terminate for S-Function (sg_IO602_IO691_write_s): '<S4>/CAN Write1' */
-  /* Level2 S-Function Block: '<S4>/CAN Write1' (sg_IO602_IO691_write_s) */
+  /* Terminate for S-Function (sg_IO602_IO691_write_s): '<S5>/CAN Write1' */
+  /* Level2 S-Function Block: '<S5>/CAN Write1' (sg_IO602_IO691_write_s) */
   {
     SimStruct *rts = CAN_2_Legs_M->childSfunctions[0];
     sfcnTerminate(rts);
   }
 
-  /* End of Terminate for SubSystem: '<Root>/Simulink Function1' */
+  /* End of Terminate for SubSystem: '<Root>/Simulink Function3' */
 
-  /* Terminate for Atomic SubSystem: '<Root>/Simulink Function3' */
+  /* Terminate for IfAction SubSystem: '<Root>/Simulink Function1' */
 
-  /* Terminate for S-Function (sg_IO602_IO691_write_s): '<S5>/CAN Write1' */
-  /* Level2 S-Function Block: '<S5>/CAN Write1' (sg_IO602_IO691_write_s) */
+  /* Terminate for S-Function (sg_IO602_IO691_write_s): '<S4>/CAN Write1' */
+  /* Level2 S-Function Block: '<S4>/CAN Write1' (sg_IO602_IO691_write_s) */
   {
     SimStruct *rts = CAN_2_Legs_M->childSfunctions[1];
     sfcnTerminate(rts);
   }
 
-  /* End of Terminate for SubSystem: '<Root>/Simulink Function3' */
+  /* End of Terminate for SubSystem: '<Root>/Simulink Function1' */
 
   /* Terminate for S-Function (sg_IO602_IO691_status_s): '<Root>/CAN Status' */
   /* Level2 S-Function Block: '<Root>/CAN Status' (sg_IO602_IO691_status_s) */
