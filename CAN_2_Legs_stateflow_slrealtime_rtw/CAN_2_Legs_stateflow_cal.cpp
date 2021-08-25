@@ -124,10 +124,10 @@ CAN_2_Legs_stateflow_cal_type CAN_2_Legs_stateflow_cal_impl = {
    */
   0.0,
 
-  /* Expression: 0
+  /* Expression: 2
    * Referenced by: '<Root>/Constant'
    */
-  0.0,
+  2.0,
 
   /* Expression: 0
    * Referenced by: '<Root>/Constant2'

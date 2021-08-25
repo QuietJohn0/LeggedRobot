@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs_stateflow".
  *
- * Model version              : 1.10
+ * Model version              : 1.11
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Tue Aug 24 14:43:35 2021
+ * C++ source code generated on : Tue Aug 24 15:02:32 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -566,7 +566,7 @@ void CAN_2_Legs_stateflow_step(void)
             CAN_2_Legs_stateflow_B.theta2 = CAN_2_Legs_stateflow_B.theta1 * -2.0;
             CAN_2_Legs_stateflow_DW.done = 1.0;
             CAN_2_Legs_stateflow_B.theta1 = CAN_2_Legs_stateflow_B.Delay;
-            CAN_2_Legs_stateflow_DW.pf = -0.7;
+            CAN_2_Legs_stateflow_DW.pf = -1.0;
             CAN_2_Legs_stateflow_DW.tstep = 3.0;
             CAN_2_Legs_stateflow_DW.is_Command = CAN_2_Legs_stateflow_IN_Stand;
             CAN_2_Legs_stateflow_DW.to = CAN_2_Legs_stateflow_M->Timing.t[0];
@@ -623,7 +623,7 @@ void CAN_2_Legs_stateflow_step(void)
           CAN_2_Legs_stateflow_IN_Command;
         CAN_2_Legs_stateflow_B.c = 3.0;
         CAN_2_Legs_stateflow_B.theta1 = CAN_2_Legs_stateflow_B.Delay;
-        CAN_2_Legs_stateflow_DW.pf = -0.7;
+        CAN_2_Legs_stateflow_DW.pf = -1.0;
         CAN_2_Legs_stateflow_DW.tstep = 3.0;
         CAN_2_Legs_stateflow_DW.is_Command = CAN_2_Legs_stateflow_IN_Stand;
         CAN_2_Legs_stateflow_DW.to = CAN_2_Legs_stateflow_M->Timing.t[0];

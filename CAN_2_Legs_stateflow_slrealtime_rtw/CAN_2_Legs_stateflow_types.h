@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs_stateflow".
  *
- * Model version              : 1.10
+ * Model version              : 1.11
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Tue Aug 24 14:43:35 2021
+ * C++ source code generated on : Tue Aug 24 15:02:32 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping

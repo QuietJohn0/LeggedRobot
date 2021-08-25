@@ -8,9 +8,9 @@
  *
  * Code generation for model "CAN_2_Legs_stateflow".
  *
- * Model version              : 1.10
+ * Model version              : 1.11
  * Simulink Coder version : 10.3 R2021a
- * C source code generated on : Tue Aug 24 14:45:04 2021
+ * C source code generated on : Tue Aug 24 15:02:45 2021
  *
  * Target selection: slrealtime.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)

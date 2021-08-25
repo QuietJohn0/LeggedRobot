@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs".
  *
- * Model version              : 1.5
+ * Model version              : 1.7
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Mon Aug 23 16:51:54 2021
+ * C++ source code generated on : Tue Aug 24 17:24:18 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -40,6 +40,7 @@
 /* Child system includes */
 #include "CAN_2_Legs_cal.h"
 #include "rt_nonfinite.h"
+#include "rtGetInf.h"
 
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetContTimeOutputInconsistentWithStateAtMajorStepFlag
@@ -125,126 +126,104 @@
 /* user code (top of export header file) */
 #include "can_message.h"
 
-/* Block signals for system '<S3>/floats -> bytes' */
+/* Block signals for system '<S4>/floats -> bytes' */
 struct B_floatsbytes_CAN_2_Legs_T {
-  uint8_T b[8];                        /* '<S3>/floats -> bytes' */
+  uint8_T b[8];                        /* '<S4>/floats -> bytes' */
 };
 
-/* Block signals for system '<S5>/Subsystem' */
+/* Block signals for system '<S6>/Subsystem' */
 struct B_Subsystem_CAN_2_Legs_T {
-  real_T Clock1;                       /* '<S14>/Clock1' */
+  real_T Clock1;                       /* '<S12>/Clock1' */
 };
 
-/* Block states (default storage) for system '<S5>/Subsystem' */
+/* Block states (default storage) for system '<S6>/Subsystem' */
 struct DW_Subsystem_CAN_2_Legs_T {
-  int8_T Subsystem_SubsysRanBC;        /* '<S5>/Subsystem' */
+  int8_T Subsystem_SubsysRanBC;        /* '<S6>/Subsystem' */
 };
 
 /* Block signals (default storage) */
 struct B_CAN_2_Legs_T {
-  CAN_DATATYPE CANRead_o2;             /* '<S4>/CAN Read' */
-  CAN_DATATYPE CANPack1;               /* '<S4>/CAN Pack1' */
-  CAN_DATATYPE CANRead_o2_i;           /* '<S3>/CAN Read' */
-  CAN_DATATYPE CANPack1_i;             /* '<S3>/CAN Pack1' */
+  CAN_DATATYPE CANRead_o2;             /* '<Root>/CAN Read' */
+  CAN_DATATYPE CANPack1;               /* '<S5>/CAN Pack1' */
+  CAN_DATATYPE CANmsg2;                /* '<S4>/CAN Pack1' */
   real_T mode;                         /* '<Root>/Constant' */
   real_T DataStoreRead;                /* '<S6>/Data Store Read' */
   real_T Clock;                        /* '<S6>/Clock' */
   real_T DataStoreRead1;               /* '<S6>/Data Store Read1' */
-  real_T Delay;                        /* '<S6>/Delay' */
-  real_T Constant2;                    /* '<Root>/Constant2' */
-  real_T pcp1;                         /* '<Root>/Add' */
-  real_T DataStoreRead_k;              /* '<S5>/Data Store Read' */
-  real_T Clock_f;                      /* '<S5>/Clock' */
-  real_T DataStoreRead1_a;             /* '<S5>/Data Store Read1' */
   real_T Gain;                         /* '<Root>/Gain' */
-  real_T Delay_f;                      /* '<S5>/Delay' */
+  real_T Delay;                        /* '<S6>/Delay' */
   real_T Constant8;                    /* '<Root>/Constant8' */
-  real_T Constant7;                    /* '<Root>/Constant7' */
-  real_T p;                            /* '<S6>/MATLAB Function2' */
-  real_T p_p;                          /* '<S5>/MATLAB Function2' */
-  real_T CANUnpack_o1;                 /* '<S10>/CAN Unpack' */
-  real_T CANUnpack_o2;                 /* '<S10>/CAN Unpack' */
-  real_T CANUnpack_o3;                 /* '<S10>/CAN Unpack' */
-  real_T CANUnpack_o4;                 /* '<S10>/CAN Unpack' */
-  real_T position;                     /* '<S10>/bytes -> floats' */
-  real_T velocity;                     /* '<S10>/bytes -> floats' */
-  real_T I_ff;                         /* '<S10>/bytes -> floats' */
-  real_T Gain_l;                       /* '<S3>/Gain' */
-  real_T CANUnpack_o1_o;               /* '<S7>/CAN Unpack' */
-  real_T CANUnpack_o2_m;               /* '<S7>/CAN Unpack' */
-  real_T CANUnpack_o3_o;               /* '<S7>/CAN Unpack' */
-  real_T CANUnpack_o4_f;               /* '<S7>/CAN Unpack' */
-  real_T position_f;                   /* '<S7>/bytes -> floats' */
-  real_T velocity_d;                   /* '<S7>/bytes -> floats' */
-  real_T I_ff_n;                       /* '<S7>/bytes -> floats' */
-  real_T TmpSignalConversionAtSFunctionI[2];/* '<Root>/MATLAB Function1' */
-  real_T danger;                       /* '<Root>/MATLAB Function1' */
-  real_T GRF;                          /* '<Root>/MATLAB Function' */
-  uint8_T MultiportSwitch[8];          /* '<S4>/Multiport Switch' */
-  uint8_T BytePacking[8];              /* '<S4>/Byte Packing' */
-  uint8_T CANUnpack_o5;                /* '<S10>/CAN Unpack' */
-  uint8_T MultiportSwitch_f[8];        /* '<S3>/Multiport Switch' */
-  uint8_T BytePacking_o[8];            /* '<S3>/Byte Packing' */
-  uint8_T CANUnpack_o5_m;              /* '<S7>/CAN Unpack' */
-  boolean_T CANRead_o1;                /* '<S4>/CAN Read' */
-  boolean_T CANRead_o1_e;              /* '<S3>/CAN Read' */
-  B_Subsystem_CAN_2_Legs_T Subsystem_d;/* '<S6>/Subsystem' */
-  B_Subsystem_CAN_2_Legs_T Subsystem;  /* '<S5>/Subsystem' */
-  B_floatsbytes_CAN_2_Legs_T sf_floatsbytes_o;/* '<S4>/floats -> bytes' */
-  B_floatsbytes_CAN_2_Legs_T sf_floatsbytes;/* '<S3>/floats -> bytes' */
+  real_T DataStoreRead_i;              /* '<S7>/Data Store Read' */
+  real_T Clock_m;                      /* '<S7>/Clock' */
+  real_T DataStoreRead1_e;             /* '<S7>/Data Store Read1' */
+  real_T Delay_i;                      /* '<S7>/Delay' */
+  real_T Constant2;                    /* '<Root>/Constant2' */
+  real_T Position;                     /* '<S2>/Position' */
+  real_T Velocity;                     /* '<S2>/Velocity' */
+  real_T Current;                      /* '<S2>/Current' */
+  real_T Position_o;                   /* '<S1>/Position' */
+  real_T Velocity_j;                   /* '<S1>/Velocity' */
+  real_T Current_h;                    /* '<S1>/Current' */
+  real_T p;                            /* '<S7>/MATLAB Function2' */
+  real_T p_p;                          /* '<S6>/MATLAB Function2' */
+  real_T CANUnpack_o1;                 /* '<S3>/CAN Unpack' */
+  real_T CANUnpack_o2;                 /* '<S3>/CAN Unpack' */
+  real_T CANUnpack_o3;                 /* '<S3>/CAN Unpack' */
+  real_T CANUnpack_o4;                 /* '<S3>/CAN Unpack' */
+  real_T position;                     /* '<S3>/bytes -> floats' */
+  real_T velocity;                     /* '<S3>/bytes -> floats' */
+  real_T I_ff;                         /* '<S3>/bytes -> floats' */
+  uint8_T MultiportSwitch[8];          /* '<S5>/Multiport Switch' */
+  uint8_T BytePacking[8];              /* '<S5>/Byte Packing' */
+  uint8_T MultiportSwitch_f[8];        /* '<S4>/Multiport Switch' */
+  uint8_T BytePacking_o[8];            /* '<S4>/Byte Packing' */
+  uint8_T CANUnpack_o5;                /* '<S3>/CAN Unpack' */
+  boolean_T CANRead_o1;                /* '<Root>/CAN Read' */
+  B_Subsystem_CAN_2_Legs_T Subsystem_d;/* '<S7>/Subsystem' */
+  B_Subsystem_CAN_2_Legs_T Subsystem;  /* '<S6>/Subsystem' */
+  B_floatsbytes_CAN_2_Legs_T sf_floatsbytes_o;/* '<S5>/floats -> bytes' */
+  B_floatsbytes_CAN_2_Legs_T sf_floatsbytes;/* '<S4>/floats -> bytes' */
 };
 
 /* Block states (default storage) for system '<Root>' */
 struct DW_CAN_2_Legs_T {
   real_T Delay_DSTATE;                 /* '<S6>/Delay' */
-  real_T Delay_DSTATE_b;               /* '<S5>/Delay' */
-  real_T to;                           /* '<S5>/Data Store Memory' */
-  real_T po;                           /* '<S5>/Data Store Memory1' */
-  real_T to_f;                         /* '<S6>/Data Store Memory' */
-  real_T po_m;                         /* '<S6>/Data Store Memory1' */
+  real_T Delay_DSTATE_b;               /* '<S7>/Delay' */
+  real_T to;                           /* '<S6>/Data Store Memory' */
+  real_T po;                           /* '<S6>/Data Store Memory1' */
+  real_T to_f;                         /* '<S7>/Data Store Memory' */
+  real_T po_m;                         /* '<S7>/Data Store Memory1' */
   void *CANSetup_PWORK;                /* '<Root>/CAN Setup ' */
+  void *CANRead_PWORK;                 /* '<Root>/CAN Read' */
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_Add_a;   /* synthesized block */
+  } TAQSigLogging_InsertedFor_CANRe;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Enabl;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Ena_o;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Ena_p;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Ena_a;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_IfAct;   /* synthesized block */
 
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Const;   /* synthesized block */
 
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_MATLA;   /* synthesized block */
-
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_MAT_h;   /* synthesized block */
-
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_Simul;   /* synthesized block */
-
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_Sim_b;   /* synthesized block */
-
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_Sim_i;   /* synthesized block */
-
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_Sim_f;   /* synthesized block */
-
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_Sim_p;   /* synthesized block */
-
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_Sim_e;   /* synthesized block */
-
-  void *CANRead_PWORK;                 /* '<S4>/CAN Read' */
-  void *CANWrite1_PWORK;               /* '<S4>/CAN Write1' */
+  void *CANWrite1_PWORK;               /* '<S5>/CAN Write1' */
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Demux;   /* synthesized block */
@@ -253,8 +232,7 @@ struct DW_CAN_2_Legs_T {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Dem_n;   /* synthesized block */
 
-  void *CANRead_PWORK_l;               /* '<S3>/CAN Read' */
-  void *CANWrite1_PWORK_f;             /* '<S3>/CAN Write1' */
+  void *CANWrite1_PWORK_f;             /* '<S4>/CAN Write1' */
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Dem_e;   /* synthesized block */
@@ -264,20 +242,19 @@ struct DW_CAN_2_Legs_T {
   } TAQSigLogging_InsertedFor_De_ng;   /* synthesized block */
 
   int_T CANStatus_IWORK[34];           /* '<Root>/CAN Status' */
-  int_T BytePacking_IWORK[2];          /* '<S4>/Byte Packing' */
-  int_T CANUnpack_ModeSignalID;        /* '<S10>/CAN Unpack' */
-  int_T CANUnpack_StatusPortID;        /* '<S10>/CAN Unpack' */
-  int_T BytePacking_IWORK_n[2];        /* '<S3>/Byte Packing' */
-  int_T CANUnpack_ModeSignalID_l;      /* '<S7>/CAN Unpack' */
-  int_T CANUnpack_StatusPortID_g;      /* '<S7>/CAN Unpack' */
-  int8_T If_ActiveSubsystem;           /* '<S5>/If' */
-  int8_T If_ActiveSubsystem_b;         /* '<S6>/If' */
-  int8_T IfActionSubsystem_SubsysRanBC;/* '<S4>/If Action Subsystem' */
-  int8_T IfActionSubsystem_SubsysRanBC_j;/* '<S3>/If Action Subsystem' */
+  int_T BytePacking_IWORK[2];          /* '<S5>/Byte Packing' */
+  int_T BytePacking_IWORK_n[2];        /* '<S4>/Byte Packing' */
+  int_T CANUnpack_ModeSignalID;        /* '<S3>/CAN Unpack' */
+  int_T CANUnpack_StatusPortID;        /* '<S3>/CAN Unpack' */
+  int8_T If_ActiveSubsystem;           /* '<S6>/If' */
+  int8_T If_ActiveSubsystem_b;         /* '<S7>/If' */
+  int8_T EnabledSubsystem1_SubsysRanBC;/* '<Root>/Enabled Subsystem1' */
+  int8_T EnabledSubsystem_SubsysRanBC; /* '<Root>/Enabled Subsystem' */
+  int8_T IfActionSubsystem_SubsysRanBC;/* '<Root>/If Action Subsystem' */
   boolean_T icLoad;                    /* '<S6>/Delay' */
-  boolean_T icLoad_c;                  /* '<S5>/Delay' */
-  DW_Subsystem_CAN_2_Legs_T Subsystem_d;/* '<S6>/Subsystem' */
-  DW_Subsystem_CAN_2_Legs_T Subsystem; /* '<S5>/Subsystem' */
+  boolean_T icLoad_j;                  /* '<S7>/Delay' */
+  DW_Subsystem_CAN_2_Legs_T Subsystem_d;/* '<S7>/Subsystem' */
+  DW_Subsystem_CAN_2_Legs_T Subsystem; /* '<S6>/Subsystem' */
 };
 
 /* Real-time Model Data Structure */
@@ -297,22 +274,22 @@ struct tag_RTM_CAN_2_Legs_T {
   struct {
     RTWSfcnInfo sfcnInfo;
     time_T *taskTimePtrs[2];
-    SimStruct childSFunctions[6];
-    SimStruct *childSFunctionPtrs[6];
-    struct _ssBlkInfo2 blkInfo2[6];
-    struct _ssSFcnModelMethods2 methods2[6];
-    struct _ssSFcnModelMethods3 methods3[6];
-    struct _ssSFcnModelMethods4 methods4[6];
-    struct _ssStatesInfo2 statesInfo2[6];
-    ssPeriodicStatesInfo periodicStatesInfo[6];
-    struct _ssPortInfo2 inputOutputPortInfo2[6];
+    SimStruct childSFunctions[5];
+    SimStruct *childSFunctionPtrs[5];
+    struct _ssBlkInfo2 blkInfo2[5];
+    struct _ssSFcnModelMethods2 methods2[5];
+    struct _ssSFcnModelMethods3 methods3[5];
+    struct _ssSFcnModelMethods4 methods4[5];
+    struct _ssStatesInfo2 statesInfo2[5];
+    ssPeriodicStatesInfo periodicStatesInfo[5];
+    struct _ssPortInfo2 inputOutputPortInfo2[5];
     struct {
       time_T sfcnPeriod[1];
       time_T sfcnOffset[1];
       int_T sfcnTsMap[1];
-      struct _ssPortOutputs outputPortInfo[2];
-      struct _ssOutPortUnit outputPortUnits[2];
-      struct _ssOutPortCoSimAttribute outputPortCoSimAttribute[2];
+      struct _ssPortInputs inputPortInfo[1];
+      struct _ssInPortUnit inputPortUnits[1];
+      struct _ssInPortCoSimAttribute inputPortCoSimAttribute[1];
       uint_T attribs[1];
       mxArray *params[1];
       struct _ssDWorkRecord dWork[1];
@@ -336,11 +313,8 @@ struct tag_RTM_CAN_2_Legs_T {
       time_T sfcnPeriod[1];
       time_T sfcnOffset[1];
       int_T sfcnTsMap[1];
-      struct _ssPortOutputs outputPortInfo[2];
-      struct _ssOutPortUnit outputPortUnits[2];
-      struct _ssOutPortCoSimAttribute outputPortCoSimAttribute[2];
-      uint_T attribs[1];
-      mxArray *params[1];
+      uint_T attribs[3];
+      mxArray *params[3];
       struct _ssDWorkRecord dWork[1];
       struct _ssDWorkAuxRecord dWorkAux[1];
     } Sfcn2;
@@ -349,9 +323,9 @@ struct tag_RTM_CAN_2_Legs_T {
       time_T sfcnPeriod[1];
       time_T sfcnOffset[1];
       int_T sfcnTsMap[1];
-      struct _ssPortInputs inputPortInfo[1];
-      struct _ssInPortUnit inputPortUnits[1];
-      struct _ssInPortCoSimAttribute inputPortCoSimAttribute[1];
+      struct _ssPortOutputs outputPortInfo[2];
+      struct _ssOutPortUnit outputPortUnits[2];
+      struct _ssOutPortCoSimAttribute outputPortCoSimAttribute[2];
       uint_T attribs[1];
       mxArray *params[1];
       struct _ssDWorkRecord dWork[1];
@@ -362,21 +336,11 @@ struct tag_RTM_CAN_2_Legs_T {
       time_T sfcnPeriod[1];
       time_T sfcnOffset[1];
       int_T sfcnTsMap[1];
-      uint_T attribs[3];
-      mxArray *params[3];
-      struct _ssDWorkRecord dWork[1];
-      struct _ssDWorkAuxRecord dWorkAux[1];
-    } Sfcn4;
-
-    struct {
-      time_T sfcnPeriod[1];
-      time_T sfcnOffset[1];
-      int_T sfcnTsMap[1];
       uint_T attribs[34];
       mxArray *params[34];
       struct _ssDWorkRecord dWork[1];
       struct _ssDWorkAuxRecord dWorkAux[1];
-    } Sfcn5;
+    } Sfcn4;
   } NonInlinedSFcns;
 
   boolean_T zCCacheNeedsReset;
@@ -503,21 +467,19 @@ extern "C" {
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'CAN_2_Legs'
- * '<S1>'   : 'CAN_2_Legs/MATLAB Function'
- * '<S2>'   : 'CAN_2_Legs/MATLAB Function1'
- * '<S3>'   : 'CAN_2_Legs/Simulink Function1'
- * '<S4>'   : 'CAN_2_Legs/Simulink Function3'
- * '<S5>'   : 'CAN_2_Legs/Subsystem'
- * '<S6>'   : 'CAN_2_Legs/Subsystem2'
- * '<S7>'   : 'CAN_2_Legs/Simulink Function1/If Action Subsystem'
- * '<S8>'   : 'CAN_2_Legs/Simulink Function1/floats -> bytes'
- * '<S9>'   : 'CAN_2_Legs/Simulink Function1/If Action Subsystem/bytes -> floats'
- * '<S10>'  : 'CAN_2_Legs/Simulink Function3/If Action Subsystem'
- * '<S11>'  : 'CAN_2_Legs/Simulink Function3/floats -> bytes'
- * '<S12>'  : 'CAN_2_Legs/Simulink Function3/If Action Subsystem/bytes -> floats'
- * '<S13>'  : 'CAN_2_Legs/Subsystem/MATLAB Function2'
- * '<S14>'  : 'CAN_2_Legs/Subsystem/Subsystem'
- * '<S15>'  : 'CAN_2_Legs/Subsystem2/MATLAB Function2'
- * '<S16>'  : 'CAN_2_Legs/Subsystem2/Subsystem'
+ * '<S1>'   : 'CAN_2_Legs/Enabled Subsystem'
+ * '<S2>'   : 'CAN_2_Legs/Enabled Subsystem1'
+ * '<S3>'   : 'CAN_2_Legs/If Action Subsystem'
+ * '<S4>'   : 'CAN_2_Legs/Simulink Function1'
+ * '<S5>'   : 'CAN_2_Legs/Simulink Function3'
+ * '<S6>'   : 'CAN_2_Legs/Subsystem'
+ * '<S7>'   : 'CAN_2_Legs/Subsystem2'
+ * '<S8>'   : 'CAN_2_Legs/If Action Subsystem/bytes -> floats'
+ * '<S9>'   : 'CAN_2_Legs/Simulink Function1/floats -> bytes'
+ * '<S10>'  : 'CAN_2_Legs/Simulink Function3/floats -> bytes'
+ * '<S11>'  : 'CAN_2_Legs/Subsystem/MATLAB Function2'
+ * '<S12>'  : 'CAN_2_Legs/Subsystem/Subsystem'
+ * '<S13>'  : 'CAN_2_Legs/Subsystem2/MATLAB Function2'
+ * '<S14>'  : 'CAN_2_Legs/Subsystem2/Subsystem'
  */
 #endif                                 /* RTW_HEADER_CAN_2_Legs_h_ */

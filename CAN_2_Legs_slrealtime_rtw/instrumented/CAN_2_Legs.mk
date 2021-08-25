@@ -2,7 +2,7 @@
 ## Makefile generated for component 'CAN_2_Legs'. 
 ## 
 ## Makefile     : CAN_2_Legs.mk
-## Generated on : Mon Aug 23 16:51:58 2021
+## Generated on : Tue Aug 24 17:24:22 2021
 ## Final product: $(START_DIR)/CAN_2_Legs_slrealtime_rtw/CAN_2_Legs
 ## Product type : executable
 ## 
@@ -303,19 +303,19 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(LIBS)
 	$(CPP) $(CPPFLAGS) -o $@ $<
 
 
-%.o : C:/ProgramData/Speedgoat/speedgoatlib/R2021a/9.2.1.1/sg_blocks/can/%.c
-	$(CC) $(CFLAGS) -o $@ $<
-
-
-%.o : C:/ProgramData/Speedgoat/speedgoatlib/R2021a/9.2.1.1/sg_blocks/can/%.cpp
-	$(CPP) $(CPPFLAGS) -o $@ $<
-
-
 %.o : $(MATLAB_ROOT)/toolbox/slrealtime/simulink/blocks/%.c
 	$(CC) $(CFLAGS) -o $@ $<
 
 
 %.o : $(MATLAB_ROOT)/toolbox/slrealtime/simulink/blocks/%.cpp
+	$(CPP) $(CPPFLAGS) -o $@ $<
+
+
+%.o : C:/ProgramData/Speedgoat/speedgoatlib/R2021a/9.2.1.1/sg_blocks/can/%.c
+	$(CC) $(CFLAGS) -o $@ $<
+
+
+%.o : C:/ProgramData/Speedgoat/speedgoatlib/R2021a/9.2.1.1/sg_blocks/can/%.cpp
 	$(CPP) $(CPPFLAGS) -o $@ $<
 
 

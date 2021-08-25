@@ -82,7 +82,7 @@ struct CAN_2_Legs_stateflow_cal_type {
   real_T Delay_InitialCondition;       /* Expression: 0.0
                                         * Referenced by: '<Root>/Delay'
                                         */
-  real_T Constant_Value;               /* Expression: 0
+  real_T Constant_Value;               /* Expression: 2
                                         * Referenced by: '<Root>/Constant'
                                         */
   real_T Constant2_Value;              /* Expression: 0
