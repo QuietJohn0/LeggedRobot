@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs".
  *
- * Model version              : 1.5
+ * Model version              : 1.6
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Mon Aug 23 16:51:54 2021
+ * C++ source code generated on : Wed Aug 25 16:05:07 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping

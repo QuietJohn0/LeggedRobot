@@ -79,29 +79,17 @@ struct CAN_2_Legs_cal_type {
   real_T CANSetup_P3;                  /* Expression: termStruct
                                         * Referenced by: '<Root>/CAN Setup '
                                         */
-  real_T Constant1_Value;              /* Expression: 1
-                                        * Referenced by: '<Root>/Constant1'
-                                        */
-  real_T Constant_Value;               /* Expression: 3
+  real_T Constant_Value;               /* Expression: 4
                                         * Referenced by: '<Root>/Constant'
                                         */
-  real_T Constant6_Value;              /* Expression: 3
-                                        * Referenced by: '<Root>/Constant6'
-                                        */
-  real_T Constant2_Value;              /* Expression: 0
-                                        * Referenced by: '<Root>/Constant2'
-                                        */
-  real_T Constant3_Value;              /* Expression: 6
-                                        * Referenced by: '<Root>/Constant3'
-                                        */
-  real_T Constant4_Value;              /* Expression: 0.1
-                                        * Referenced by: '<Root>/Constant4'
-                                        */
-  real_T Constant5_Value;              /* Expression: 0
-                                        * Referenced by: '<Root>/Constant5'
+  real_T Constant1_Value;              /* Expression: 0
+                                        * Referenced by: '<Root>/Constant1'
                                         */
   real_T Gain_Gain_j;                  /* Expression: -2*18/30
                                         * Referenced by: '<Root>/Gain'
+                                        */
+  real_T Constant6_Value;              /* Expression: 3
+                                        * Referenced by: '<Root>/Constant6'
                                         */
   real_T Constant8_Value;              /* Expression: 0
                                         * Referenced by: '<Root>/Constant8'
@@ -114,6 +102,18 @@ struct CAN_2_Legs_cal_type {
                                         */
   real_T Constant11_Value;             /* Expression: 0
                                         * Referenced by: '<Root>/Constant11'
+                                        */
+  real_T Constant2_Value;              /* Expression: 0
+                                        * Referenced by: '<Root>/Constant2'
+                                        */
+  real_T Constant3_Value;              /* Expression: 6
+                                        * Referenced by: '<Root>/Constant3'
+                                        */
+  real_T Constant4_Value;              /* Expression: 0.1
+                                        * Referenced by: '<Root>/Constant4'
+                                        */
+  real_T Constant5_Value;              /* Expression: 0
+                                        * Referenced by: '<Root>/Constant5'
                                         */
   real_T DataStoreMemory_InitialValue; /* Expression: 0
                                         * Referenced by: '<S5>/Data Store Memory'
@@ -334,8 +334,11 @@ struct CAN_2_Legs_cal_type {
   real_T CANStatus_P34;                /* Expression: isFDMod
                                         * Referenced by: '<Root>/CAN Status'
                                         */
-  uint8_T Outport4_Y0;                 /* Computed Parameter: Outport4_Y0
+  uint32_T Outport4_Y0;                /* Computed Parameter: Outport4_Y0
                                         * Referenced by: '<S7>/Outport4'
+                                        */
+  uint32_T Outport4_Y0_l;              /* Computed Parameter: Outport4_Y0_l
+                                        * Referenced by: '<S10>/Outport4'
                                         */
   uint8_T Constant_Value_l[8];
                  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
@@ -349,9 +352,6 @@ struct CAN_2_Legs_cal_type {
                  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFD]
                   * Referenced by: '<S3>/Constant2'
                   */
-  uint8_T Outport4_Y0_l;               /* Computed Parameter: Outport4_Y0_l
-                                        * Referenced by: '<S10>/Outport4'
-                                        */
   uint8_T Constant_Value_i[8];
                  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
                   * Referenced by: '<S4>/Constant'

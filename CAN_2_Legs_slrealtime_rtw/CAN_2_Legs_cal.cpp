@@ -119,38 +119,13 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
    */
   0.0,
 
-  /* Expression: 1
-   * Referenced by: '<Root>/Constant1'
-   */
-  1.0,
-
-  /* Expression: 3
+  /* Expression: 4
    * Referenced by: '<Root>/Constant'
    */
-  3.0,
-
-  /* Expression: 3
-   * Referenced by: '<Root>/Constant6'
-   */
-  3.0,
+  4.0,
 
   /* Expression: 0
-   * Referenced by: '<Root>/Constant2'
-   */
-  0.0,
-
-  /* Expression: 6
-   * Referenced by: '<Root>/Constant3'
-   */
-  6.0,
-
-  /* Expression: 0.1
-   * Referenced by: '<Root>/Constant4'
-   */
-  0.1,
-
-  /* Expression: 0
-   * Referenced by: '<Root>/Constant5'
+   * Referenced by: '<Root>/Constant1'
    */
   0.0,
 
@@ -158,6 +133,11 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
    * Referenced by: '<Root>/Gain'
    */
   -1.2,
+
+  /* Expression: 3
+   * Referenced by: '<Root>/Constant6'
+   */
+  3.0,
 
   /* Expression: 0
    * Referenced by: '<Root>/Constant8'
@@ -176,6 +156,26 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
 
   /* Expression: 0
    * Referenced by: '<Root>/Constant11'
+   */
+  0.0,
+
+  /* Expression: 0
+   * Referenced by: '<Root>/Constant2'
+   */
+  0.0,
+
+  /* Expression: 6
+   * Referenced by: '<Root>/Constant3'
+   */
+  6.0,
+
+  /* Expression: 0.1
+   * Referenced by: '<Root>/Constant4'
+   */
+  0.1,
+
+  /* Expression: 0
+   * Referenced by: '<Root>/Constant5'
    */
   0.0,
 
@@ -549,6 +549,11 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
    */
   0U,
 
+  /* Computed Parameter: Outport4_Y0_l
+   * Referenced by: '<S10>/Outport4'
+   */
+  0U,
+
   /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
    * Referenced by: '<S3>/Constant'
    */
@@ -563,11 +568,6 @@ CAN_2_Legs_cal_type CAN_2_Legs_cal_impl = {
    * Referenced by: '<S3>/Constant2'
    */
   { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 253U },
-
-  /* Computed Parameter: Outport4_Y0_l
-   * Referenced by: '<S10>/Outport4'
-   */
-  0U,
 
   /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
    * Referenced by: '<S4>/Constant'
