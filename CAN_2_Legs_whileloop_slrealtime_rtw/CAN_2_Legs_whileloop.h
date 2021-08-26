@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs_whileloop".
  *
- * Model version              : 1.9
+ * Model version              : 1.13
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Tue Aug 24 18:18:45 2021
+ * C++ source code generated on : Wed Aug 25 17:09:24 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -140,22 +140,14 @@ struct DW_Subsystem_CAN_2_Legs_while_T {
   int8_T Subsystem_SubsysRanBC;        /* '<S3>/Subsystem' */
 };
 
-/* Block signals for system '<S12>/bytes -> floats' */
-struct B_bytesfloats_CAN_2_Legs_whil_T {
-  real_T position;                     /* '<S12>/bytes -> floats' */
-  real_T velocity;                     /* '<S12>/bytes -> floats' */
-  real_T I_ff;                         /* '<S12>/bytes -> floats' */
-};
-
 /* Block signals (default storage) */
 struct B_CAN_2_Legs_whileloop_T {
   CAN_DATATYPE CANRead_o2;             /* '<S5>/CAN Read' */
   CAN_DATATYPE CANPack1;               /* '<S2>/CAN Pack1' */
   CAN_DATATYPE CANmsg2;                /* '<S1>/CAN Pack1' */
-  real_T Clock;                        /* '<Root>/Clock' */
   real_T mode;                         /* '<Root>/Constant' */
   real_T DataStoreRead;                /* '<S3>/Data Store Read' */
-  real_T Clock_f;                      /* '<S3>/Clock' */
+  real_T Clock;                        /* '<S3>/Clock' */
   real_T DataStoreRead1;               /* '<S3>/Data Store Read1' */
   real_T Gain;                         /* '<Root>/Gain' */
   real_T Delay;                        /* '<S3>/Delay' */
@@ -165,25 +157,30 @@ struct B_CAN_2_Legs_whileloop_T {
   real_T DataStoreRead1_e;             /* '<S4>/Data Store Read1' */
   real_T Delay_i;                      /* '<S4>/Delay' */
   real_T Constant2;                    /* '<Root>/Constant2' */
-  real_T CANUnpack1_o1;                /* '<S13>/CAN Unpack1' */
-  real_T CANUnpack1_o2;                /* '<S13>/CAN Unpack1' */
-  real_T CANUnpack1_o3;                /* '<S13>/CAN Unpack1' */
-  real_T CANUnpack1_o4;                /* '<S13>/CAN Unpack1' */
-  real_T CANUnpack1_o1_b;              /* '<S12>/CAN Unpack1' */
-  real_T CANUnpack1_o2_h;              /* '<S12>/CAN Unpack1' */
-  real_T CANUnpack1_o3_a;              /* '<S12>/CAN Unpack1' */
-  real_T CANUnpack1_o4_i;              /* '<S12>/CAN Unpack1' */
+  real_T CANUnpack_o1;                 /* '<S13>/CAN Unpack' */
+  real_T CANUnpack_o2;                 /* '<S13>/CAN Unpack' */
+  real_T CANUnpack_o3;                 /* '<S13>/CAN Unpack' */
+  real_T CANUnpack_o4;                 /* '<S13>/CAN Unpack' */
+  real_T position;                     /* '<S13>/bytes -> floats' */
+  real_T velocity;                     /* '<S13>/bytes -> floats' */
+  real_T I_ff;                         /* '<S13>/bytes -> floats' */
+  real_T CANUnpack_o1_f;               /* '<S12>/CAN Unpack' */
+  real_T CANUnpack_o2_l;               /* '<S12>/CAN Unpack' */
+  real_T CANUnpack_o3_k;               /* '<S12>/CAN Unpack' */
+  real_T CANUnpack_o4_i;               /* '<S12>/CAN Unpack' */
+  real_T position_j;                   /* '<S12>/bytes -> floats' */
+  real_T velocity_h;                   /* '<S12>/bytes -> floats' */
+  real_T I_ff_o;                       /* '<S12>/bytes -> floats' */
   real_T p;                            /* '<S4>/MATLAB Function2' */
   real_T p_p;                          /* '<S3>/MATLAB Function2' */
-  uint8_T CANUnpack1_o5;               /* '<S13>/CAN Unpack1' */
-  uint8_T CANUnpack1_o5_h;             /* '<S12>/CAN Unpack1' */
+  int32_T WhileIterator;               /* '<S5>/While Iterator' */
+  uint8_T CANUnpack_o5;                /* '<S13>/CAN Unpack' */
+  uint8_T CANUnpack_o5_p;              /* '<S12>/CAN Unpack' */
   uint8_T MultiportSwitch[8];          /* '<S2>/Multiport Switch' */
   uint8_T BytePacking[8];              /* '<S2>/Byte Packing' */
   uint8_T MultiportSwitch_f[8];        /* '<S1>/Multiport Switch' */
   uint8_T BytePacking_o[8];            /* '<S1>/Byte Packing' */
   boolean_T CANRead_o1;                /* '<S5>/CAN Read' */
-  B_bytesfloats_CAN_2_Legs_whil_T sf_bytesfloats_e;/* '<S13>/bytes -> floats' */
-  B_bytesfloats_CAN_2_Legs_whil_T sf_bytesfloats;/* '<S12>/bytes -> floats' */
   B_Subsystem_CAN_2_Legs_whilel_T Subsystem_d;/* '<S4>/Subsystem' */
   B_Subsystem_CAN_2_Legs_whilel_T Subsystem;/* '<S3>/Subsystem' */
   B_floatsbytes_CAN_2_Legs_whil_T sf_floatsbytes_o;/* '<S2>/floats -> bytes' */
@@ -199,6 +196,10 @@ struct DW_CAN_2_Legs_whileloop_T {
   real_T to_f;                         /* '<S4>/Data Store Memory' */
   real_T po_m;                         /* '<S4>/Data Store Memory1' */
   void *CANSetup_PWORK;                /* '<Root>/CAN Setup ' */
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Const;   /* synthesized block */
+
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_While;   /* synthesized block */
@@ -225,15 +226,7 @@ struct DW_CAN_2_Legs_whileloop_T {
 
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_Whi_i;   /* synthesized block */
-
-  struct {
-    void *AQHandles;
   } TAQSigLogging_InsertedFor_Wh_eg;   /* synthesized block */
-
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_Const;   /* synthesized block */
 
   void *CANRead_PWORK;                 /* '<S5>/CAN Read' */
   struct {
@@ -267,10 +260,10 @@ struct DW_CAN_2_Legs_whileloop_T {
   } TAQSigLogging_InsertedFor_De_ng;   /* synthesized block */
 
   int_T CANStatus_IWORK[34];           /* '<Root>/CAN Status' */
-  int_T CANUnpack1_ModeSignalID;       /* '<S13>/CAN Unpack1' */
-  int_T CANUnpack1_StatusPortID;       /* '<S13>/CAN Unpack1' */
-  int_T CANUnpack1_ModeSignalID_g;     /* '<S12>/CAN Unpack1' */
-  int_T CANUnpack1_StatusPortID_f;     /* '<S12>/CAN Unpack1' */
+  int_T CANUnpack_ModeSignalID;        /* '<S13>/CAN Unpack' */
+  int_T CANUnpack_StatusPortID;        /* '<S13>/CAN Unpack' */
+  int_T CANUnpack_ModeSignalID_d;      /* '<S12>/CAN Unpack' */
+  int_T CANUnpack_StatusPortID_f;      /* '<S12>/CAN Unpack' */
   int_T BytePacking_IWORK[2];          /* '<S2>/Byte Packing' */
   int_T BytePacking_IWORK_n[2];        /* '<S1>/Byte Packing' */
   int8_T If_ActiveSubsystem;           /* '<S3>/If' */

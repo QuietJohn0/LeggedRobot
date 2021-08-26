@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs_whileloop".
  *
- * Model version              : 1.9
+ * Model version              : 1.13
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Tue Aug 24 18:18:45 2021
+ * C++ source code generated on : Wed Aug 25 17:09:24 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -54,7 +54,5 @@ extern void CAN_2_Legs_whileloo_floatsbytes(real_T rtu_position, real_T
 extern void CAN_2_Legs_whileloop_Subsystem(RT_MODEL_CAN_2_Legs_whileloop_T *
   const CAN_2_Legs_whileloop_M, real_T rtu_po, real_T *rtd_po, real_T *rtd_to,
   B_Subsystem_CAN_2_Legs_whilel_T *localB);
-extern void CAN_2_Legs_whileloo_bytesfloats(B_bytesfloats_CAN_2_Legs_whil_T
-  *localB);
 
 #endif                          /* RTW_HEADER_CAN_2_Legs_whileloop_private_h_ */

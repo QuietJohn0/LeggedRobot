@@ -69,10 +69,10 @@ struct CAN_2_Legs_whileloop_cal_type {
   real_T CANSetup_P3;                  /* Expression: termStruct
                                         * Referenced by: '<Root>/CAN Setup '
                                         */
-  real_T Constant_Value;               /* Expression: 3
+  real_T Constant_Value;               /* Expression: 4
                                         * Referenced by: '<Root>/Constant'
                                         */
-  real_T Constant7_Value;              /* Expression: -0.5
+  real_T Constant7_Value;              /* Expression: 0
                                         * Referenced by: '<Root>/Constant7'
                                         */
   real_T Gain_Gain;                    /* Expression: 18/30
@@ -93,7 +93,7 @@ struct CAN_2_Legs_whileloop_cal_type {
   real_T Constant11_Value;             /* Expression: 0
                                         * Referenced by: '<Root>/Constant11'
                                         */
-  real_T Constant1_Value;              /* Expression: 0.5
+  real_T Constant1_Value;              /* Expression: 0
                                         * Referenced by: '<Root>/Constant1'
                                         */
   real_T Constant2_Value;              /* Expression: 0

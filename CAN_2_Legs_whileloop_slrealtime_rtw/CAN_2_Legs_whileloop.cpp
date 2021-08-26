@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs_whileloop".
  *
- * Model version              : 1.9
+ * Model version              : 1.13
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Tue Aug 24 18:18:45 2021
+ * C++ source code generated on : Wed Aug 25 17:09:24 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -476,32 +476,13 @@ void CAN_2_Legs_whileloop_Subsystem(RT_MODEL_CAN_2_Legs_whileloop_T * const
   *rtd_to = localB->Clock1;
 }
 
-/*
- * Output and update for atomic system:
- *    '<S12>/bytes -> floats'
- *    '<S13>/bytes -> floats'
- */
-void CAN_2_Legs_whileloo_bytesfloats(B_bytesfloats_CAN_2_Legs_whil_T *localB)
-{
-  real_T I_ff;
-  real_T position;
-  real_T velocity;
-  I_ff = localB->I_ff;
-  velocity = localB->velocity;
-  position = localB->position;
-  localB->I_ff = I_ff;
-  localB->velocity = velocity;
-  localB->position = position;
-  localB->position = localB->position * 191.0 / 65535.0 + -95.5;
-  localB->velocity = localB->velocity * 90.0 / 4095.0 + -45.0;
-  localB->I_ff = localB->I_ff * 80.0 / 4095.0 + -40.0;
-}
-
 /* Model step function */
 void CAN_2_Legs_whileloop_step(void)
 {
+  real_T position;
   real_T slope;
-  int32_T s5_iter;
+  real_T velocity;
+  int32_T i;
   int8_T rtAction;
 
   /* Reset subsysRan breadcrumbs */
@@ -515,361 +496,6 @@ void CAN_2_Legs_whileloop_step(void)
     sfcnOutputs(rts,0);
   }
 
-  /* Clock: '<Root>/Clock' */
-  CAN_2_Legs_whileloop_B.Clock = CAN_2_Legs_whileloop_M->Timing.t[0];
-
-  /* Outputs for Iterator SubSystem: '<Root>/While Iterator Subsystem' incorporates:
-   *  WhileIterator: '<S5>/While Iterator'
-   */
-  s5_iter = 1;
-  do {
-    /* Level2 S-Function Block: '<S5>/CAN Read' (sg_IO602_IO691_read_s) */
-    {
-      SimStruct *rts = CAN_2_Legs_whileloop_M->childSfunctions[2];
-      sfcnOutputs(rts,0);
-    }
-
-    {
-      /* S-Function (scanunpack): '<S13>/CAN Unpack1' */
-      uint8_T msgReceived = 0;
-      if ((6 == CAN_2_Legs_whileloop_B.CANRead_o2.Length) &&
-          (CAN_2_Legs_whileloop_B.CANRead_o2.ID != INVALID_CAN_ID) ) {
-        if ((2 == CAN_2_Legs_whileloop_B.CANRead_o2.ID) && (0U ==
-             CAN_2_Legs_whileloop_B.CANRead_o2.Extended) ) {
-          msgReceived = 1;
-
-          {
-            /* --------------- START Unpacking signal 0 ------------------
-             *  startBit                = 16
-             *  length                  = 16
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)
-                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[2]);
-                    tempValue = tempValue | (uint16_T)((uint16_T)
-                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[1]) << 8);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                CAN_2_Legs_whileloop_B.CANUnpack1_o1 = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 1 ------------------
-             *  startBit                = 36
-             *  length                  = 12
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[4]) & (uint16_T)
-                      (0xF0U)) >> 4);
-                    tempValue = tempValue | (uint16_T)((uint16_T)
-                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[3]) << 4);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                CAN_2_Legs_whileloop_B.CANUnpack1_o2 = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 2 ------------------
-             *  startBit                = 40
-             *  length                  = 12
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)
-                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[5]);
-                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[4]) & (uint16_T)
-                      (0xFU)) << 8);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                CAN_2_Legs_whileloop_B.CANUnpack1_o3 = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 3 ------------------
-             *  startBit                = 0
-             *  length                  = 8
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint8_T unpackedValue = 0;
-
-                {
-                  uint8_T tempValue = (uint8_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint8_T)
-                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[0]);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                CAN_2_Legs_whileloop_B.CANUnpack1_o4 = result;
-              }
-            }
-          }
-        }
-      }
-
-      /* Status port */
-      CAN_2_Legs_whileloop_B.CANUnpack1_o5 = msgReceived;
-    }
-
-    CAN_2_Legs_whileloop_B.sf_bytesfloats_e.position =
-      CAN_2_Legs_whileloop_B.CANUnpack1_o1;
-    CAN_2_Legs_whileloop_B.sf_bytesfloats_e.velocity =
-      CAN_2_Legs_whileloop_B.CANUnpack1_o2;
-    CAN_2_Legs_whileloop_B.sf_bytesfloats_e.I_ff =
-      CAN_2_Legs_whileloop_B.CANUnpack1_o3;
-    CAN_2_Legs_whileloo_bytesfloats(&CAN_2_Legs_whileloop_B.sf_bytesfloats_e);
-
-    {
-      /* S-Function (scanunpack): '<S12>/CAN Unpack1' */
-      uint8_T msgReceived = 0;
-      if ((6 == CAN_2_Legs_whileloop_B.CANRead_o2.Length) &&
-          (CAN_2_Legs_whileloop_B.CANRead_o2.ID != INVALID_CAN_ID) ) {
-        if ((1 == CAN_2_Legs_whileloop_B.CANRead_o2.ID) && (0U ==
-             CAN_2_Legs_whileloop_B.CANRead_o2.Extended) ) {
-          msgReceived = 1;
-
-          {
-            /* --------------- START Unpacking signal 0 ------------------
-             *  startBit                = 16
-             *  length                  = 16
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)
-                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[2]);
-                    tempValue = tempValue | (uint16_T)((uint16_T)
-                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[1]) << 8);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                CAN_2_Legs_whileloop_B.CANUnpack1_o1_b = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 1 ------------------
-             *  startBit                = 36
-             *  length                  = 12
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[4]) & (uint16_T)
-                      (0xF0U)) >> 4);
-                    tempValue = tempValue | (uint16_T)((uint16_T)
-                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[3]) << 4);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                CAN_2_Legs_whileloop_B.CANUnpack1_o2_h = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 2 ------------------
-             *  startBit                = 40
-             *  length                  = 12
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)
-                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[5]);
-                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[4]) & (uint16_T)
-                      (0xFU)) << 8);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                CAN_2_Legs_whileloop_B.CANUnpack1_o3_a = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 3 ------------------
-             *  startBit                = 0
-             *  length                  = 8
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint8_T unpackedValue = 0;
-
-                {
-                  uint8_T tempValue = (uint8_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint8_T)
-                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[0]);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                CAN_2_Legs_whileloop_B.CANUnpack1_o4_i = result;
-              }
-            }
-          }
-        }
-      }
-
-      /* Status port */
-      CAN_2_Legs_whileloop_B.CANUnpack1_o5_h = msgReceived;
-    }
-
-    CAN_2_Legs_whileloop_B.sf_bytesfloats.position =
-      CAN_2_Legs_whileloop_B.CANUnpack1_o1_b;
-    CAN_2_Legs_whileloop_B.sf_bytesfloats.velocity =
-      CAN_2_Legs_whileloop_B.CANUnpack1_o2_h;
-    CAN_2_Legs_whileloop_B.sf_bytesfloats.I_ff =
-      CAN_2_Legs_whileloop_B.CANUnpack1_o3_a;
-    CAN_2_Legs_whileloo_bytesfloats(&CAN_2_Legs_whileloop_B.sf_bytesfloats);
-    s5_iter++;
-  } while (CAN_2_Legs_whileloop_B.CANRead_o1 && (s5_iter <= 5));
-
-  /* End of Outputs for SubSystem: '<Root>/While Iterator Subsystem' */
   /* Constant: '<Root>/Constant' */
   CAN_2_Legs_whileloop_B.mode = CAN_2_Legs_whileloop_cal->Constant_Value;
 
@@ -877,7 +503,7 @@ void CAN_2_Legs_whileloop_step(void)
   CAN_2_Legs_whileloop_B.DataStoreRead = CAN_2_Legs_whileloop_DW.to;
 
   /* Clock: '<S3>/Clock' */
-  CAN_2_Legs_whileloop_B.Clock_f = CAN_2_Legs_whileloop_M->Timing.t[0];
+  CAN_2_Legs_whileloop_B.Clock = CAN_2_Legs_whileloop_M->Timing.t[0];
 
   /* DataStoreRead: '<S3>/Data Store Read1' */
   CAN_2_Legs_whileloop_B.DataStoreRead1 = CAN_2_Legs_whileloop_DW.po;
@@ -901,7 +527,7 @@ void CAN_2_Legs_whileloop_step(void)
    */
   slope = (CAN_2_Legs_whileloop_B.Delay - CAN_2_Legs_whileloop_B.DataStoreRead1)
     / CAN_2_Legs_whileloop_cal->Constant6_Value;
-  CAN_2_Legs_whileloop_B.p_p = (CAN_2_Legs_whileloop_B.Clock_f -
+  CAN_2_Legs_whileloop_B.p_p = (CAN_2_Legs_whileloop_B.Clock -
     CAN_2_Legs_whileloop_B.DataStoreRead) * slope +
     CAN_2_Legs_whileloop_B.DataStoreRead1;
   if (((CAN_2_Legs_whileloop_B.p_p > CAN_2_Legs_whileloop_B.Delay) && (slope >
@@ -910,7 +536,7 @@ void CAN_2_Legs_whileloop_step(void)
     CAN_2_Legs_whileloop_B.p_p = CAN_2_Legs_whileloop_B.Delay;
   }
 
-  if (CAN_2_Legs_whileloop_B.Clock_f == 0.0) {
+  if (CAN_2_Legs_whileloop_B.Clock == 0.0) {
     CAN_2_Legs_whileloop_B.p_p = CAN_2_Legs_whileloop_B.Gain;
   }
 
@@ -937,9 +563,9 @@ void CAN_2_Legs_whileloop_step(void)
     /* MultiPortSwitch: '<S1>/Multiport Switch' incorporates:
      *  Constant: '<S1>/Constant'
      */
-    for (s5_iter = 0; s5_iter < 8; s5_iter++) {
-      CAN_2_Legs_whileloop_B.MultiportSwitch_f[s5_iter] =
-        CAN_2_Legs_whileloop_cal->Constant_Value_l[s5_iter];
+    for (i = 0; i < 8; i++) {
+      CAN_2_Legs_whileloop_B.MultiportSwitch_f[i] =
+        CAN_2_Legs_whileloop_cal->Constant_Value_l[i];
     }
     break;
 
@@ -947,17 +573,17 @@ void CAN_2_Legs_whileloop_step(void)
     /* MultiPortSwitch: '<S1>/Multiport Switch' incorporates:
      *  Constant: '<S1>/Constant1'
      */
-    for (s5_iter = 0; s5_iter < 8; s5_iter++) {
-      CAN_2_Legs_whileloop_B.MultiportSwitch_f[s5_iter] =
-        CAN_2_Legs_whileloop_cal->Constant1_Value_m[s5_iter];
+    for (i = 0; i < 8; i++) {
+      CAN_2_Legs_whileloop_B.MultiportSwitch_f[i] =
+        CAN_2_Legs_whileloop_cal->Constant1_Value_m[i];
     }
     break;
 
    case 3:
     /* MultiPortSwitch: '<S1>/Multiport Switch' */
-    for (s5_iter = 0; s5_iter < 8; s5_iter++) {
-      CAN_2_Legs_whileloop_B.MultiportSwitch_f[s5_iter] =
-        CAN_2_Legs_whileloop_B.sf_floatsbytes.b[s5_iter];
+    for (i = 0; i < 8; i++) {
+      CAN_2_Legs_whileloop_B.MultiportSwitch_f[i] =
+        CAN_2_Legs_whileloop_B.sf_floatsbytes.b[i];
     }
     break;
 
@@ -965,9 +591,9 @@ void CAN_2_Legs_whileloop_step(void)
     /* MultiPortSwitch: '<S1>/Multiport Switch' incorporates:
      *  Constant: '<S1>/Constant2'
      */
-    for (s5_iter = 0; s5_iter < 8; s5_iter++) {
-      CAN_2_Legs_whileloop_B.MultiportSwitch_f[s5_iter] =
-        CAN_2_Legs_whileloop_cal->Constant2_Value_g[s5_iter];
+    for (i = 0; i < 8; i++) {
+      CAN_2_Legs_whileloop_B.MultiportSwitch_f[i] =
+        CAN_2_Legs_whileloop_cal->Constant2_Value_g[i];
     }
     break;
   }
@@ -1072,9 +698,9 @@ void CAN_2_Legs_whileloop_step(void)
     /* MultiPortSwitch: '<S2>/Multiport Switch' incorporates:
      *  Constant: '<S2>/Constant'
      */
-    for (s5_iter = 0; s5_iter < 8; s5_iter++) {
-      CAN_2_Legs_whileloop_B.MultiportSwitch[s5_iter] =
-        CAN_2_Legs_whileloop_cal->Constant_Value_i[s5_iter];
+    for (i = 0; i < 8; i++) {
+      CAN_2_Legs_whileloop_B.MultiportSwitch[i] =
+        CAN_2_Legs_whileloop_cal->Constant_Value_i[i];
     }
     break;
 
@@ -1082,17 +708,17 @@ void CAN_2_Legs_whileloop_step(void)
     /* MultiPortSwitch: '<S2>/Multiport Switch' incorporates:
      *  Constant: '<S2>/Constant1'
      */
-    for (s5_iter = 0; s5_iter < 8; s5_iter++) {
-      CAN_2_Legs_whileloop_B.MultiportSwitch[s5_iter] =
-        CAN_2_Legs_whileloop_cal->Constant1_Value_e[s5_iter];
+    for (i = 0; i < 8; i++) {
+      CAN_2_Legs_whileloop_B.MultiportSwitch[i] =
+        CAN_2_Legs_whileloop_cal->Constant1_Value_e[i];
     }
     break;
 
    case 3:
     /* MultiPortSwitch: '<S2>/Multiport Switch' */
-    for (s5_iter = 0; s5_iter < 8; s5_iter++) {
-      CAN_2_Legs_whileloop_B.MultiportSwitch[s5_iter] =
-        CAN_2_Legs_whileloop_B.sf_floatsbytes_o.b[s5_iter];
+    for (i = 0; i < 8; i++) {
+      CAN_2_Legs_whileloop_B.MultiportSwitch[i] =
+        CAN_2_Legs_whileloop_B.sf_floatsbytes_o.b[i];
     }
     break;
 
@@ -1100,9 +726,9 @@ void CAN_2_Legs_whileloop_step(void)
     /* MultiPortSwitch: '<S2>/Multiport Switch' incorporates:
      *  Constant: '<S2>/Constant2'
      */
-    for (s5_iter = 0; s5_iter < 8; s5_iter++) {
-      CAN_2_Legs_whileloop_B.MultiportSwitch[s5_iter] =
-        CAN_2_Legs_whileloop_cal->Constant2_Value_k[s5_iter];
+    for (i = 0; i < 8; i++) {
+      CAN_2_Legs_whileloop_B.MultiportSwitch[i] =
+        CAN_2_Legs_whileloop_cal->Constant2_Value_k[i];
     }
     break;
   }
@@ -1147,7 +773,7 @@ void CAN_2_Legs_whileloop_step(void)
   /* If: '<S3>/If' */
   rtAction = -1;
   if ((CAN_2_Legs_whileloop_B.Gain != CAN_2_Legs_whileloop_B.Delay) ||
-      (CAN_2_Legs_whileloop_B.Clock_f < 0.1)) {
+      (CAN_2_Legs_whileloop_B.Clock < 0.1)) {
     rtAction = 0;
 
     /* Outputs for IfAction SubSystem: '<S3>/Subsystem' incorporates:
@@ -1189,6 +815,376 @@ void CAN_2_Legs_whileloop_step(void)
 
   /* End of If: '<S4>/If' */
 
+  /* Outputs for Iterator SubSystem: '<Root>/While Iterator Subsystem' incorporates:
+   *  WhileIterator: '<S5>/While Iterator'
+   */
+  i = 1;
+  do {
+    CAN_2_Legs_whileloop_B.WhileIterator = i;
+
+    /* Level2 S-Function Block: '<S5>/CAN Read' (sg_IO602_IO691_read_s) */
+    {
+      SimStruct *rts = CAN_2_Legs_whileloop_M->childSfunctions[2];
+      sfcnOutputs(rts,0);
+    }
+
+    {
+      /* S-Function (scanunpack): '<S13>/CAN Unpack' */
+      uint8_T msgReceived = 0;
+      if ((6 == CAN_2_Legs_whileloop_B.CANRead_o2.Length) &&
+          (CAN_2_Legs_whileloop_B.CANRead_o2.ID != INVALID_CAN_ID) ) {
+        if ((2 == CAN_2_Legs_whileloop_B.CANRead_o2.ID) && (0U ==
+             CAN_2_Legs_whileloop_B.CANRead_o2.Extended) ) {
+          msgReceived = 1;
+
+          {
+            /* --------------- START Unpacking signal 0 ------------------
+             *  startBit                = 16
+             *  length                  = 16
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)
+                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[2]);
+                    tempValue = tempValue | (uint16_T)((uint16_T)
+                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[1]) << 8);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                CAN_2_Legs_whileloop_B.CANUnpack_o1 = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 1 ------------------
+             *  startBit                = 36
+             *  length                  = 12
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[4]) & (uint16_T)
+                      (0xF0U)) >> 4);
+                    tempValue = tempValue | (uint16_T)((uint16_T)
+                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[3]) << 4);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                CAN_2_Legs_whileloop_B.CANUnpack_o2 = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 2 ------------------
+             *  startBit                = 40
+             *  length                  = 12
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)
+                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[5]);
+                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[4]) & (uint16_T)
+                      (0xFU)) << 8);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                CAN_2_Legs_whileloop_B.CANUnpack_o3 = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 3 ------------------
+             *  startBit                = 0
+             *  length                  = 8
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint8_T unpackedValue = 0;
+
+                {
+                  uint8_T tempValue = (uint8_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint8_T)
+                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[0]);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                CAN_2_Legs_whileloop_B.CANUnpack_o4 = result;
+              }
+            }
+          }
+        }
+      }
+
+      /* Status port */
+      CAN_2_Legs_whileloop_B.CANUnpack_o5 = msgReceived;
+    }
+
+    CAN_2_Legs_whileloop_B.position = CAN_2_Legs_whileloop_B.CANUnpack_o1;
+    CAN_2_Legs_whileloop_B.velocity = CAN_2_Legs_whileloop_B.CANUnpack_o2;
+    CAN_2_Legs_whileloop_B.I_ff = CAN_2_Legs_whileloop_B.CANUnpack_o3;
+    slope = CAN_2_Legs_whileloop_B.I_ff;
+    velocity = CAN_2_Legs_whileloop_B.velocity;
+    position = CAN_2_Legs_whileloop_B.position;
+    CAN_2_Legs_whileloop_B.I_ff = slope;
+    CAN_2_Legs_whileloop_B.velocity = velocity;
+    CAN_2_Legs_whileloop_B.position = position;
+    CAN_2_Legs_whileloop_B.position = CAN_2_Legs_whileloop_B.position * 191.0 /
+      65535.0 + -95.5;
+    CAN_2_Legs_whileloop_B.velocity = CAN_2_Legs_whileloop_B.velocity * 90.0 /
+      4095.0 + -45.0;
+    CAN_2_Legs_whileloop_B.I_ff = CAN_2_Legs_whileloop_B.I_ff * 80.0 / 4095.0 +
+      -40.0;
+
+    {
+      /* S-Function (scanunpack): '<S12>/CAN Unpack' */
+      uint8_T msgReceived = 0;
+      if ((6 == CAN_2_Legs_whileloop_B.CANRead_o2.Length) &&
+          (CAN_2_Legs_whileloop_B.CANRead_o2.ID != INVALID_CAN_ID) ) {
+        if ((0 == CAN_2_Legs_whileloop_B.CANRead_o2.ID) && (0U ==
+             CAN_2_Legs_whileloop_B.CANRead_o2.Extended) ) {
+          msgReceived = 1;
+
+          {
+            /* --------------- START Unpacking signal 0 ------------------
+             *  startBit                = 16
+             *  length                  = 16
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)
+                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[2]);
+                    tempValue = tempValue | (uint16_T)((uint16_T)
+                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[1]) << 8);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                CAN_2_Legs_whileloop_B.CANUnpack_o1_f = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 1 ------------------
+             *  startBit                = 36
+             *  length                  = 12
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[4]) & (uint16_T)
+                      (0xF0U)) >> 4);
+                    tempValue = tempValue | (uint16_T)((uint16_T)
+                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[3]) << 4);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                CAN_2_Legs_whileloop_B.CANUnpack_o2_l = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 2 ------------------
+             *  startBit                = 40
+             *  length                  = 12
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)
+                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[5]);
+                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[4]) & (uint16_T)
+                      (0xFU)) << 8);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                CAN_2_Legs_whileloop_B.CANUnpack_o3_k = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 3 ------------------
+             *  startBit                = 0
+             *  length                  = 8
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint8_T unpackedValue = 0;
+
+                {
+                  uint8_T tempValue = (uint8_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint8_T)
+                      (CAN_2_Legs_whileloop_B.CANRead_o2.Data[0]);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                CAN_2_Legs_whileloop_B.CANUnpack_o4_i = result;
+              }
+            }
+          }
+        }
+      }
+
+      /* Status port */
+      CAN_2_Legs_whileloop_B.CANUnpack_o5_p = msgReceived;
+    }
+
+    CAN_2_Legs_whileloop_B.position_j = CAN_2_Legs_whileloop_B.CANUnpack_o1_f;
+    CAN_2_Legs_whileloop_B.velocity_h = CAN_2_Legs_whileloop_B.CANUnpack_o2_l;
+    CAN_2_Legs_whileloop_B.I_ff_o = CAN_2_Legs_whileloop_B.CANUnpack_o3_k;
+    slope = CAN_2_Legs_whileloop_B.I_ff_o;
+    velocity = CAN_2_Legs_whileloop_B.velocity_h;
+    position = CAN_2_Legs_whileloop_B.position_j;
+    CAN_2_Legs_whileloop_B.I_ff_o = slope;
+    CAN_2_Legs_whileloop_B.velocity_h = velocity;
+    CAN_2_Legs_whileloop_B.position_j = position;
+    CAN_2_Legs_whileloop_B.position_j = CAN_2_Legs_whileloop_B.position_j *
+      191.0 / 65535.0 + -95.5;
+    CAN_2_Legs_whileloop_B.velocity_h = CAN_2_Legs_whileloop_B.velocity_h * 90.0
+      / 4095.0 + -45.0;
+    CAN_2_Legs_whileloop_B.I_ff_o = CAN_2_Legs_whileloop_B.I_ff_o * 80.0 /
+      4095.0 + -40.0;
+    i++;
+  } while (CAN_2_Legs_whileloop_B.CANRead_o1);
+
+  /* End of Outputs for SubSystem: '<Root>/While Iterator Subsystem' */
   /* S-Function (sg_IO602_IO691_status_s): '<Root>/CAN Status' */
 
   /* Level2 S-Function Block: '<Root>/CAN Status' (sg_IO602_IO691_status_s) */
@@ -2133,74 +2129,6 @@ void CAN_2_Legs_whileloop_initialize(void)
   /* InitializeConditions for Delay: '<S4>/Delay' */
   CAN_2_Legs_whileloop_DW.icLoad_j = true;
 
-  /* Start for S-Function (sg_IO602_IO691_read_s): '<S5>/CAN Read' */
-  /* Level2 S-Function Block: '<S5>/CAN Read' (sg_IO602_IO691_read_s) */
-  {
-    SimStruct *rts = CAN_2_Legs_whileloop_M->childSfunctions[2];
-    sfcnStart(rts);
-    if (ssGetErrorStatus(rts) != (NULL))
-      return;
-  }
-
-  /* SystemInitialize for Atomic SubSystem: '<S5>/If Action Subsystem1' */
-  /* Start for S-Function (scanunpack): '<S13>/CAN Unpack1' */
-
-  /*-----------S-Function Block: <S13>/CAN Unpack1 -----------------*/
-
-  /* End of SystemInitialize for SubSystem: '<S5>/If Action Subsystem1' */
-
-  /* SystemInitialize for Atomic SubSystem: '<S5>/If Action Subsystem' */
-  /* Start for S-Function (scanunpack): '<S12>/CAN Unpack1' */
-
-  /*-----------S-Function Block: <S12>/CAN Unpack1 -----------------*/
-
-  /* End of SystemInitialize for SubSystem: '<S5>/If Action Subsystem' */
-
-  /* SystemInitialize for Outport: '<S5>/P1' */
-  CAN_2_Legs_whileloop_B.sf_bytesfloats.position =
-    CAN_2_Legs_whileloop_cal->P1_Y0;
-
-  /* SystemInitialize for Outport: '<S5>/V1' */
-  CAN_2_Legs_whileloop_B.sf_bytesfloats.velocity =
-    CAN_2_Legs_whileloop_cal->V1_Y0;
-
-  /* SystemInitialize for Outport: '<S5>/Curr1' */
-  CAN_2_Legs_whileloop_B.sf_bytesfloats.I_ff =
-    CAN_2_Legs_whileloop_cal->Curr1_Y0;
-
-  /* SystemInitialize for S-Function (scanunpack): '<S12>/CAN Unpack1' incorporates:
-   *  Outport: '<S5>/ID1'
-   */
-  CAN_2_Legs_whileloop_B.CANUnpack1_o4_i = CAN_2_Legs_whileloop_cal->ID1_Y0;
-
-  /* SystemInitialize for S-Function (scanunpack): '<S12>/CAN Unpack1' incorporates:
-   *  Outport: '<S5>/Status1'
-   */
-  CAN_2_Legs_whileloop_B.CANUnpack1_o5_h = CAN_2_Legs_whileloop_cal->Status1_Y0;
-
-  /* SystemInitialize for Outport: '<S5>/P3' */
-  CAN_2_Legs_whileloop_B.sf_bytesfloats_e.position =
-    CAN_2_Legs_whileloop_cal->P3_Y0;
-
-  /* SystemInitialize for Outport: '<S5>/V2' */
-  CAN_2_Legs_whileloop_B.sf_bytesfloats_e.velocity =
-    CAN_2_Legs_whileloop_cal->V2_Y0;
-
-  /* SystemInitialize for Outport: '<S5>/Curr2' */
-  CAN_2_Legs_whileloop_B.sf_bytesfloats_e.I_ff =
-    CAN_2_Legs_whileloop_cal->Curr2_Y0;
-
-  /* SystemInitialize for S-Function (scanunpack): '<S13>/CAN Unpack1' incorporates:
-   *  Outport: '<S5>/ID2'
-   */
-  CAN_2_Legs_whileloop_B.CANUnpack1_o4 = CAN_2_Legs_whileloop_cal->ID2_Y0;
-
-  /* SystemInitialize for S-Function (scanunpack): '<S13>/CAN Unpack1' incorporates:
-   *  Outport: '<S5>/Status2'
-   */
-  CAN_2_Legs_whileloop_B.CANUnpack1_o5 = CAN_2_Legs_whileloop_cal->Status2_Y0;
-
-  /* End of SystemInitialize for SubSystem: '<Root>/While Iterator Subsystem' */
   /* Start for S-Function (sg_IO602_IO691_write_s): '<S1>/CAN Write1' */
   /* Level2 S-Function Block: '<S1>/CAN Write1' (sg_IO602_IO691_write_s) */
   {
@@ -2218,6 +2146,69 @@ void CAN_2_Legs_whileloop_initialize(void)
     if (ssGetErrorStatus(rts) != (NULL))
       return;
   }
+
+  /* Start for S-Function (sg_IO602_IO691_read_s): '<S5>/CAN Read' */
+  /* Level2 S-Function Block: '<S5>/CAN Read' (sg_IO602_IO691_read_s) */
+  {
+    SimStruct *rts = CAN_2_Legs_whileloop_M->childSfunctions[2];
+    sfcnStart(rts);
+    if (ssGetErrorStatus(rts) != (NULL))
+      return;
+  }
+
+  /* SystemInitialize for Atomic SubSystem: '<S5>/If Action Subsystem1' */
+  /* Start for S-Function (scanunpack): '<S13>/CAN Unpack' */
+
+  /*-----------S-Function Block: <S13>/CAN Unpack -----------------*/
+
+  /* End of SystemInitialize for SubSystem: '<S5>/If Action Subsystem1' */
+
+  /* SystemInitialize for Atomic SubSystem: '<S5>/If Action Subsystem' */
+  /* Start for S-Function (scanunpack): '<S12>/CAN Unpack' */
+
+  /*-----------S-Function Block: <S12>/CAN Unpack -----------------*/
+
+  /* End of SystemInitialize for SubSystem: '<S5>/If Action Subsystem' */
+
+  /* SystemInitialize for Outport: '<S5>/P1' */
+  CAN_2_Legs_whileloop_B.position_j = CAN_2_Legs_whileloop_cal->P1_Y0;
+
+  /* SystemInitialize for Outport: '<S5>/V1' */
+  CAN_2_Legs_whileloop_B.velocity_h = CAN_2_Legs_whileloop_cal->V1_Y0;
+
+  /* SystemInitialize for Outport: '<S5>/Curr1' */
+  CAN_2_Legs_whileloop_B.I_ff_o = CAN_2_Legs_whileloop_cal->Curr1_Y0;
+
+  /* SystemInitialize for S-Function (scanunpack): '<S12>/CAN Unpack' incorporates:
+   *  Outport: '<S5>/ID1'
+   */
+  CAN_2_Legs_whileloop_B.CANUnpack_o4_i = CAN_2_Legs_whileloop_cal->ID1_Y0;
+
+  /* SystemInitialize for S-Function (scanunpack): '<S12>/CAN Unpack' incorporates:
+   *  Outport: '<S5>/Status1'
+   */
+  CAN_2_Legs_whileloop_B.CANUnpack_o5_p = CAN_2_Legs_whileloop_cal->Status1_Y0;
+
+  /* SystemInitialize for Outport: '<S5>/P3' */
+  CAN_2_Legs_whileloop_B.position = CAN_2_Legs_whileloop_cal->P3_Y0;
+
+  /* SystemInitialize for Outport: '<S5>/V2' */
+  CAN_2_Legs_whileloop_B.velocity = CAN_2_Legs_whileloop_cal->V2_Y0;
+
+  /* SystemInitialize for Outport: '<S5>/Curr2' */
+  CAN_2_Legs_whileloop_B.I_ff = CAN_2_Legs_whileloop_cal->Curr2_Y0;
+
+  /* SystemInitialize for S-Function (scanunpack): '<S13>/CAN Unpack' incorporates:
+   *  Outport: '<S5>/ID2'
+   */
+  CAN_2_Legs_whileloop_B.CANUnpack_o4 = CAN_2_Legs_whileloop_cal->ID2_Y0;
+
+  /* SystemInitialize for S-Function (scanunpack): '<S13>/CAN Unpack' incorporates:
+   *  Outport: '<S5>/Status2'
+   */
+  CAN_2_Legs_whileloop_B.CANUnpack_o5 = CAN_2_Legs_whileloop_cal->Status2_Y0;
+
+  /* End of SystemInitialize for SubSystem: '<Root>/While Iterator Subsystem' */
 }
 
 /* Model terminate function */
@@ -2229,17 +2220,6 @@ void CAN_2_Legs_whileloop_terminate(void)
     SimStruct *rts = CAN_2_Legs_whileloop_M->childSfunctions[3];
     sfcnTerminate(rts);
   }
-
-  /* Terminate for Iterator SubSystem: '<Root>/While Iterator Subsystem' */
-
-  /* Terminate for S-Function (sg_IO602_IO691_read_s): '<S5>/CAN Read' */
-  /* Level2 S-Function Block: '<S5>/CAN Read' (sg_IO602_IO691_read_s) */
-  {
-    SimStruct *rts = CAN_2_Legs_whileloop_M->childSfunctions[2];
-    sfcnTerminate(rts);
-  }
-
-  /* End of Terminate for SubSystem: '<Root>/While Iterator Subsystem' */
 
   /* Terminate for Atomic SubSystem: '<Root>/Simulink Function1' */
 
@@ -2262,6 +2242,17 @@ void CAN_2_Legs_whileloop_terminate(void)
   }
 
   /* End of Terminate for SubSystem: '<Root>/Simulink Function3' */
+
+  /* Terminate for Iterator SubSystem: '<Root>/While Iterator Subsystem' */
+
+  /* Terminate for S-Function (sg_IO602_IO691_read_s): '<S5>/CAN Read' */
+  /* Level2 S-Function Block: '<S5>/CAN Read' (sg_IO602_IO691_read_s) */
+  {
+    SimStruct *rts = CAN_2_Legs_whileloop_M->childSfunctions[2];
+    sfcnTerminate(rts);
+  }
+
+  /* End of Terminate for SubSystem: '<Root>/While Iterator Subsystem' */
 
   /* Terminate for S-Function (sg_IO602_IO691_status_s): '<Root>/CAN Status' */
   /* Level2 S-Function Block: '<Root>/CAN Status' (sg_IO602_IO691_status_s) */
