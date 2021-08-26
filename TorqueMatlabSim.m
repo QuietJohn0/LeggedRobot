@@ -12,7 +12,7 @@ for i = (1:length(r))
     x_coord(:,i+1) = x_coord(:,i) + r(i).*c(:,i);
     y_coord(:,i+1) = y_coord(:,i) + r(i).*s(:,i);
 end
-
+x_coord = x_coord - x_coord(:,3)
 
 
  for  i = (1:length(c))
