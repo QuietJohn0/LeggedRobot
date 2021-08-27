@@ -8,9 +8,9 @@
  *
  * Code generation for model "CAN_2_Legs_whileloop_johnmessingabout".
  *
- * Model version              : 1.14
+ * Model version              : 1.16
  * Simulink Coder version : 10.3 R2021a
- * C source code generated on : Wed Aug 25 18:14:36 2021
+ * C source code generated on : Fri Aug 27 14:06:13 2021
  *
  * Target selection: slrealtime.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -1133,69 +1133,69 @@ ASAP2_VERSION  1 71
     UBYTE CAN_2_Legs_whileloop_johnmessingabout_CM_uint8       0             0       0 255  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        8 
-    ECU_ADDRESS                       0x0021A2CE
+    ECU_ADDRESS                       0x0021A2C6
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.BytePacking_o ""  
     UBYTE CAN_2_Legs_whileloop_johnmessingabout_CM_uint8       0             0       0 255  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        8 
-    ECU_ADDRESS                       0x0021A2DE
+    ECU_ADDRESS                       0x0021A2D6
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.CANRead_o1 ""  
     UBYTE CAN_2_Legs_whileloop_johnmessingabout_CM_logical       0             0       0 1  
-    ECU_ADDRESS                       0x0021A2E6
+    ECU_ADDRESS                       0x0021A2DE
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.CANUnpack_o1 ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A230
+    ECU_ADDRESS                       0x0021A228
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.CANUnpack_o1_f ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A250
+    ECU_ADDRESS                       0x0021A248
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.CANUnpack_o2 ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A238
+    ECU_ADDRESS                       0x0021A230
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.CANUnpack_o2_l ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A258
+    ECU_ADDRESS                       0x0021A250
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.CANUnpack_o3 ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A240
+    ECU_ADDRESS                       0x0021A238
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.CANUnpack_o3_k ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A260
+    ECU_ADDRESS                       0x0021A258
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.CANUnpack_o4 ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A248
+    ECU_ADDRESS                       0x0021A240
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.CANUnpack_o4_i ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A268
+    ECU_ADDRESS                       0x0021A260
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.CANUnpack_o5 ""  
     UBYTE CAN_2_Legs_whileloop_johnmessingabout_CM_uint8       0             0       0 255  
-    ECU_ADDRESS                       0x0021A2C4
+    ECU_ADDRESS                       0x0021A2BC
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.CANUnpack_o5_p ""  
     UBYTE CAN_2_Legs_whileloop_johnmessingabout_CM_uint8       0             0       0 255  
-    ECU_ADDRESS                       0x0021A2C5
+    ECU_ADDRESS                       0x0021A2BD
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.Clock ""  
@@ -1250,7 +1250,7 @@ ASAP2_VERSION  1 71
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.GRF ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A2B8
+    ECU_ADDRESS                       0x0021A2B0
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.Gain ""  
@@ -1262,55 +1262,55 @@ ASAP2_VERSION  1 71
     UBYTE CAN_2_Legs_whileloop_johnmessingabout_CM_uint8       0             0       0 255  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        8 
-    ECU_ADDRESS                       0x0021A2C6
+    ECU_ADDRESS                       0x0021A2BE
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.MultiportSwitch_f ""  
     UBYTE CAN_2_Legs_whileloop_johnmessingabout_CM_uint8       0             0       0 255  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        8 
-    ECU_ADDRESS                       0x0021A2D6
+    ECU_ADDRESS                       0x0021A2CE
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.Subsystem.Clock1 ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A320
+    ECU_ADDRESS                       0x0021A318
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.Subsystem_d.Clock1 ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A318
+    ECU_ADDRESS                       0x0021A310
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.TmpSignalConversionAtSFunctio_i ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        2 
-    ECU_ADDRESS                       0x0021A2A8
+    ECU_ADDRESS                       0x0021A2A0
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.TmpSignalConversionAtSFunctio_l ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        2 
-    ECU_ADDRESS                       0x0021A298
+    ECU_ADDRESS                       0x0021A290
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.TmpSignalConversionAtSFunctionI ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        2 
-    ECU_ADDRESS                       0x0021A280
+    ECU_ADDRESS                       0x0021A278
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.WhileIterator ""  
     SLONG CAN_2_Legs_whileloop_johnmessingabout_CM_int32       0             0       -2147483648 2147483647  
-    ECU_ADDRESS                       0x0021A2C0
+    ECU_ADDRESS                       0x0021A2B8
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.danger ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A290
+    ECU_ADDRESS                       0x0021A288
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.mode ""  
@@ -1320,81 +1320,76 @@ ASAP2_VERSION  1 71
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.p ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A270
+    ECU_ADDRESS                       0x0021A268
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.p_p ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A278
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.pcp1 ""  
-    FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A228
+    ECU_ADDRESS                       0x0021A270
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.sf_bytesfloats.I_ff ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A310
+    ECU_ADDRESS                       0x0021A308
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.sf_bytesfloats.position ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A300
+    ECU_ADDRESS                       0x0021A2F8
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.sf_bytesfloats.velocity ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A308
+    ECU_ADDRESS                       0x0021A300
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.sf_bytesfloats_e.I_ff ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A2F8
+    ECU_ADDRESS                       0x0021A2F0
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.sf_bytesfloats_e.position ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A2E8
+    ECU_ADDRESS                       0x0021A2E0
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.sf_bytesfloats_e.velocity ""  
     FLOAT64_IEEE CAN_2_Legs_whileloop_johnmessingabout_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A2F0
+    ECU_ADDRESS                       0x0021A2E8
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.sf_floatsbytes.b ""  
     UBYTE CAN_2_Legs_whileloop_johnmessingabout_CM_uint8       0             0       0 255  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        8 
-    ECU_ADDRESS                       0x0021A330
+    ECU_ADDRESS                       0x0021A328
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_B.sf_floatsbytes_o.b ""  
     UBYTE CAN_2_Legs_whileloop_johnmessingabout_CM_uint8       0             0       0 255  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        8 
-    ECU_ADDRESS                       0x0021A328
+    ECU_ADDRESS                       0x0021A320
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_DW.CANUnpack_ModeSignalID ""  
     SLONG CAN_2_Legs_whileloop_johnmessingabout_CM_int_T       0             0       -2147483648 2147483647  
-    ECU_ADDRESS                       0x0021A150
+    ECU_ADDRESS                       0x0021A148
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_DW.CANUnpack_ModeSignalID_d ""  
     SLONG CAN_2_Legs_whileloop_johnmessingabout_CM_int_T       0             0       -2147483648 2147483647  
-    ECU_ADDRESS                       0x0021A158
+    ECU_ADDRESS                       0x0021A150
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_DW.CANUnpack_StatusPortID ""  
     SLONG CAN_2_Legs_whileloop_johnmessingabout_CM_int_T       0             0       -2147483648 2147483647  
-    ECU_ADDRESS                       0x0021A154
+    ECU_ADDRESS                       0x0021A14C
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_DW.CANUnpack_StatusPortID_f ""  
     SLONG CAN_2_Legs_whileloop_johnmessingabout_CM_int_T       0             0       -2147483648 2147483647  
-    ECU_ADDRESS                       0x0021A15C
+    ECU_ADDRESS                       0x0021A154
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_DW.Delay_DSTATE ""  
@@ -1409,32 +1404,32 @@ ASAP2_VERSION  1 71
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_DW.If_ActiveSubsystem ""  
     SBYTE CAN_2_Legs_whileloop_johnmessingabout_CM_int8       0             0       -128 127  
-    ECU_ADDRESS                       0x0021A170
+    ECU_ADDRESS                       0x0021A168
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_DW.If_ActiveSubsystem_b ""  
     SBYTE CAN_2_Legs_whileloop_johnmessingabout_CM_int8       0             0       -128 127  
-    ECU_ADDRESS                       0x0021A171
+    ECU_ADDRESS                       0x0021A169
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_DW.Subsystem.Subsystem_SubsysRanBC ""  
     SBYTE CAN_2_Legs_whileloop_johnmessingabout_CM_int8       0             0       -128 127  
-    ECU_ADDRESS                       0x0021A175
+    ECU_ADDRESS                       0x0021A16D
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_DW.Subsystem_d.Subsystem_SubsysRanBC ""  
     SBYTE CAN_2_Legs_whileloop_johnmessingabout_CM_int8       0             0       -128 127  
-    ECU_ADDRESS                       0x0021A174
+    ECU_ADDRESS                       0x0021A16C
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_DW.icLoad ""  
     UBYTE CAN_2_Legs_whileloop_johnmessingabout_CM_logical       0             0       0 1  
-    ECU_ADDRESS                       0x0021A172
+    ECU_ADDRESS                       0x0021A16A
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_DW.icLoad_j ""  
     UBYTE CAN_2_Legs_whileloop_johnmessingabout_CM_logical       0             0       0 1  
-    ECU_ADDRESS                       0x0021A173
+    ECU_ADDRESS                       0x0021A16B
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_whileloop_johnmessingabout_DW.po ""  

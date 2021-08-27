@@ -2,7 +2,7 @@
 ## Makefile generated for component 'CAN_2_Legs_ver2'. 
 ## 
 ## Makefile     : CAN_2_Legs_ver2.mk
-## Generated on : Thu Aug 26 17:52:24 2021
+## Generated on : Fri Aug 27 13:31:01 2021
 ## Final product: $(START_DIR)/CAN_2_Legs_ver2_slrealtime_rtw/CAN_2_Legs_ver2
 ## Product type : executable
 ## 

@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs_ver2".
  *
- * Model version              : 1.23
+ * Model version              : 1.24
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Thu Aug 26 17:52:19 2021
+ * C++ source code generated on : Fri Aug 27 13:30:56 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -203,6 +203,12 @@ struct DW_CAN_2_Legs_ver2_T {
   real_T oldKv2;                       /* '<Root>/Chart' */
   real_T exitY;                        /* '<Root>/Chart' */
   real_T hop;                          /* '<Root>/Chart' */
+  real_T po1;                          /* '<Root>/Chart' */
+  real_T po2;                          /* '<Root>/Chart' */
+  real_T slope1;                       /* '<Root>/Chart' */
+  real_T slope2;                       /* '<Root>/Chart' */
+  real_T LR;                           /* '<Root>/Chart' */
+  real_T Idle;                         /* '<Root>/Chart' */
   void *CANSetup_PWORK;                /* '<Root>/CAN Setup ' */
   struct {
     void *AQHandles;
@@ -310,6 +316,7 @@ struct DW_CAN_2_Legs_ver2_T {
   int32_T sfEvent;                     /* '<Root>/Chart' */
   uint32_T is_c8_CAN_2_Legs_ver2;      /* '<Root>/Chart' */
   uint32_T is_Command;                 /* '<Root>/Chart' */
+  uint32_T is_Flight;                  /* '<Root>/Chart' */
   int_T CANStatus_IWORK[34];           /* '<Root>/CAN Status' */
   int_T CANUnpack_ModeSignalID;        /* '<S10>/CAN Unpack' */
   int_T CANUnpack_StatusPortID;        /* '<S10>/CAN Unpack' */

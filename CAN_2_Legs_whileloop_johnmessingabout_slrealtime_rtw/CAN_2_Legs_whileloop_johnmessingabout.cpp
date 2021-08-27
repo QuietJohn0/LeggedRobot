@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs_whileloop_johnmessingabout".
  *
- * Model version              : 1.14
+ * Model version              : 1.16
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Wed Aug 25 18:14:19 2021
+ * C++ source code generated on : Fri Aug 27 14:06:02 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -821,12 +821,6 @@ void CAN_2_Legs_whileloop_johnmessingabout_step(void)
     sfcnOutputs(rts,0);
   }
 
-  /* Sum: '<Root>/Add' incorporates:
-   *  Constant: '<Root>/Constant1'
-   */
-  CAN_2_Legs_whileloop_johnmessingabout_B.pcp1 = 0.0 -
-    CAN_2_Legs_whileloop_johnme_cal->Constant1_Value;
-
   /* If: '<S5>/If' */
   rtAction = -1;
   if ((CAN_2_Legs_whileloop_johnmessingabout_B.Gain !=
@@ -1277,7 +1271,7 @@ void CAN_2_Legs_whileloop_johnmessingabout_step(void)
                        CAN_2_Legs_whileloop_johnmessingabout_B.TmpSignalConversionAtSFunctio_l
                        [0]) &&
        (CAN_2_Legs_whileloop_johnmessingabout_B.TmpSignalConversionAtSFunctio_i
-        [1] > 0.0) && (-2.25 >
+        [1] > 0.0) && (-1.8 >
                        CAN_2_Legs_whileloop_johnmessingabout_B.TmpSignalConversionAtSFunctio_l
                        [1])) ||
       ((CAN_2_Legs_whileloop_johnmessingabout_B.TmpSignalConversionAtSFunctio_i
@@ -1285,7 +1279,7 @@ void CAN_2_Legs_whileloop_johnmessingabout_step(void)
                        CAN_2_Legs_whileloop_johnmessingabout_B.TmpSignalConversionAtSFunctio_l
                        [0]) &&
        (CAN_2_Legs_whileloop_johnmessingabout_B.TmpSignalConversionAtSFunctio_i
-        [1] < 0.0) && (2.25 <
+        [1] < 0.0) && (1.8 <
                        CAN_2_Legs_whileloop_johnmessingabout_B.TmpSignalConversionAtSFunctio_l
                        [1]))) {
     CAN_2_Legs_whileloop_johnmessingabout_B.GRF = 1.0;

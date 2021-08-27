@@ -72,19 +72,19 @@ struct CAN_2_Legs_whileloop_j_cal_type {
   real_T Constant_Value;               /* Expression: 3
                                         * Referenced by: '<Root>/Constant'
                                         */
-  real_T Constant7_Value;              /* Expression: 1.4
+  real_T Constant7_Value;              /* Expression: 0.4
                                         * Referenced by: '<Root>/Constant7'
                                         */
   real_T Gain_Gain;                    /* Expression: 18/30
                                         * Referenced by: '<Root>/Gain'
                                         */
-  real_T Constant6_Value;              /* Expression: .1
+  real_T Constant6_Value;              /* Expression: 0.2
                                         * Referenced by: '<Root>/Constant6'
                                         */
   real_T Constant8_Value;              /* Expression: 0
                                         * Referenced by: '<Root>/Constant8'
                                         */
-  real_T Constant9_Value;              /* Expression: 10
+  real_T Constant9_Value;              /* Expression: 12
                                         * Referenced by: '<Root>/Constant9'
                                         */
   real_T Constant10_Value;             /* Expression: 0.1
@@ -93,7 +93,7 @@ struct CAN_2_Legs_whileloop_j_cal_type {
   real_T Constant11_Value;             /* Expression: 0
                                         * Referenced by: '<Root>/Constant11'
                                         */
-  real_T Constant1_Value;              /* Expression: -0.7
+  real_T Constant1_Value;              /* Expression: -0.9
                                         * Referenced by: '<Root>/Constant1'
                                         */
   real_T Constant2_Value;              /* Expression: 0

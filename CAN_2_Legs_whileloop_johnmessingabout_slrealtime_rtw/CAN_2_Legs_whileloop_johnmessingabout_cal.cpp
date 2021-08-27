@@ -109,30 +109,30 @@ CAN_2_Legs_whileloop_j_cal_type CAN_2_Legs_whileloop_j_cal_impl = {
    */
   3.0,
 
-  /* Expression: 1.4
+  /* Expression: 0.4
    * Referenced by: '<Root>/Constant7'
    */
-  1.4,
+  0.4,
 
   /* Expression: 18/30
    * Referenced by: '<Root>/Gain'
    */
   0.6,
 
-  /* Expression: .1
+  /* Expression: 0.2
    * Referenced by: '<Root>/Constant6'
    */
-  0.1,
+  0.2,
 
   /* Expression: 0
    * Referenced by: '<Root>/Constant8'
    */
   0.0,
 
-  /* Expression: 10
+  /* Expression: 12
    * Referenced by: '<Root>/Constant9'
    */
-  10.0,
+  12.0,
 
   /* Expression: 0.1
    * Referenced by: '<Root>/Constant10'
@@ -144,10 +144,10 @@ CAN_2_Legs_whileloop_j_cal_type CAN_2_Legs_whileloop_j_cal_impl = {
    */
   0.0,
 
-  /* Expression: -0.7
+  /* Expression: -0.9
    * Referenced by: '<Root>/Constant1'
    */
-  -0.7,
+  -0.9,
 
   /* Expression: 0
    * Referenced by: '<Root>/Constant2'

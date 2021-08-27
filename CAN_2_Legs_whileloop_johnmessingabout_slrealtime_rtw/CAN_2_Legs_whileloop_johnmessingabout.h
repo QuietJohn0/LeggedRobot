@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs_whileloop_johnmessingabout".
  *
- * Model version              : 1.14
+ * Model version              : 1.16
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Wed Aug 25 18:14:19 2021
+ * C++ source code generated on : Fri Aug 27 14:06:02 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -164,7 +164,6 @@ struct B_CAN_2_Legs_whileloop_johnmessingabout_T {
   real_T DataStoreRead1_e;             /* '<S6>/Data Store Read1' */
   real_T Delay_i;                      /* '<S6>/Delay' */
   real_T Constant2;                    /* '<Root>/Constant2' */
-  real_T pcp1;                         /* '<Root>/Add' */
   real_T CANUnpack_o1;                 /* '<S15>/CAN Unpack' */
   real_T CANUnpack_o2;                 /* '<S15>/CAN Unpack' */
   real_T CANUnpack_o3;                 /* '<S15>/CAN Unpack' */
@@ -205,10 +204,6 @@ struct DW_CAN_2_Legs_whileloop_johnmessingabout_T {
   real_T to_f;                         /* '<S6>/Data Store Memory' */
   real_T po_m;                         /* '<S6>/Data Store Memory1' */
   void *CANSetup_PWORK;                /* '<Root>/CAN Setup ' */
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_Add_a;   /* synthesized block */
-
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Const;   /* synthesized block */
