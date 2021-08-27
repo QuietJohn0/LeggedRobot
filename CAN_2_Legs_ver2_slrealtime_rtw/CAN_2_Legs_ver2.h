@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs_ver2".
  *
- * Model version              : 1.22
+ * Model version              : 1.23
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Thu Aug 26 16:01:18 2021
+ * C++ source code generated on : Thu Aug 26 17:52:19 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -197,13 +197,41 @@ struct DW_CAN_2_Legs_ver2_T {
   real_T tstep;                        /* '<Root>/Chart' */
   real_T to;                           /* '<Root>/Chart' */
   real_T time;                         /* '<Root>/Chart' */
-  real_T GRFy;                         /* '<Root>/Chart' */
   real_T oldKp1;                       /* '<Root>/Chart' */
   real_T oldKp2;                       /* '<Root>/Chart' */
   real_T oldKv1;                       /* '<Root>/Chart' */
   real_T oldKv2;                       /* '<Root>/Chart' */
   real_T exitY;                        /* '<Root>/Chart' */
+  real_T hop;                          /* '<Root>/Chart' */
   void *CANSetup_PWORK;                /* '<Root>/CAN Setup ' */
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Chart;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Cha_j;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Cha_b;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Cha_m;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Cha_e;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Cha_p;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Cha_f;   /* synthesized block */
+
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Const;   /* synthesized block */

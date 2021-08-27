@@ -8,9 +8,9 @@
  *
  * Code generation for model "CAN_2_Legs_ver2".
  *
- * Model version              : 1.22
+ * Model version              : 1.23
  * Simulink Coder version : 10.3 R2021a
- * C source code generated on : Thu Aug 26 16:05:30 2021
+ * C source code generated on : Thu Aug 26 17:55:15 2021
  *
  * Target selection: slrealtime.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -1093,268 +1093,268 @@ ASAP2_VERSION  1 71
     UBYTE CAN_2_Legs_ver2_CM_uint8       0             0       0 255  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        8 
-    ECU_ADDRESS                       0x0021A29E
+    ECU_ADDRESS                       0x0021A2DE
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.BytePacking_o ""  
     UBYTE CAN_2_Legs_ver2_CM_uint8       0             0       0 255  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        8 
-    ECU_ADDRESS                       0x0021A2AE
+    ECU_ADDRESS                       0x0021A2EE
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.CANRead_o1 ""  
     UBYTE CAN_2_Legs_ver2_CM_logical       0             0       0 1  
-    ECU_ADDRESS                       0x0021A2B6
+    ECU_ADDRESS                       0x0021A2F6
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.CANUnpack_o1 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A1C0
+    ECU_ADDRESS                       0x0021A200
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.CANUnpack_o1_f ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A1E0
+    ECU_ADDRESS                       0x0021A220
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.CANUnpack_o2 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A1C8
+    ECU_ADDRESS                       0x0021A208
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.CANUnpack_o2_l ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A1E8
+    ECU_ADDRESS                       0x0021A228
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.CANUnpack_o3 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A1D0
+    ECU_ADDRESS                       0x0021A210
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.CANUnpack_o3_k ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A1F0
+    ECU_ADDRESS                       0x0021A230
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.CANUnpack_o4 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A1D8
+    ECU_ADDRESS                       0x0021A218
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.CANUnpack_o4_i ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A1F8
+    ECU_ADDRESS                       0x0021A238
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.CANUnpack_o5 ""  
     UBYTE CAN_2_Legs_ver2_CM_uint8       0             0       0 255  
-    ECU_ADDRESS                       0x0021A294
+    ECU_ADDRESS                       0x0021A2D4
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.CANUnpack_o5_p ""  
     UBYTE CAN_2_Legs_ver2_CM_uint8       0             0       0 255  
-    ECU_ADDRESS                       0x0021A295
+    ECU_ADDRESS                       0x0021A2D5
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.Constant ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A198
+    ECU_ADDRESS                       0x0021A1D8
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.Constant1 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A188
+    ECU_ADDRESS                       0x0021A1C8
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.Constant2 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A1B8
+    ECU_ADDRESS                       0x0021A1F8
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.Constant8 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A1B0
+    ECU_ADDRESS                       0x0021A1F0
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.Delay ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A190
+    ECU_ADDRESS                       0x0021A1D0
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.Delay1 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A1A0
+    ECU_ADDRESS                       0x0021A1E0
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.GRF ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A238
+    ECU_ADDRESS                       0x0021A278
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.Gain ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A1A8
+    ECU_ADDRESS                       0x0021A1E8
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.Kd1 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A280
+    ECU_ADDRESS                       0x0021A2C0
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.Kd2 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A288
+    ECU_ADDRESS                       0x0021A2C8
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.Kp1 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A270
+    ECU_ADDRESS                       0x0021A2B0
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.Kp2 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A278
+    ECU_ADDRESS                       0x0021A2B8
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.MultiportSwitch ""  
     UBYTE CAN_2_Legs_ver2_CM_uint8       0             0       0 255  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        8 
-    ECU_ADDRESS                       0x0021A296
+    ECU_ADDRESS                       0x0021A2D6
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.MultiportSwitch_f ""  
     UBYTE CAN_2_Legs_ver2_CM_uint8       0             0       0 255  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        8 
-    ECU_ADDRESS                       0x0021A2A6
+    ECU_ADDRESS                       0x0021A2E6
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.T1 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A260
+    ECU_ADDRESS                       0x0021A2A0
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.T2 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A268
+    ECU_ADDRESS                       0x0021A2A8
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctio_i ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        2 
-    ECU_ADDRESS                       0x0021A228
+    ECU_ADDRESS                       0x0021A268
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctio_l ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        2 
-    ECU_ADDRESS                       0x0021A218
+    ECU_ADDRESS                       0x0021A258
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctionI ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        2 
-    ECU_ADDRESS                       0x0021A200
+    ECU_ADDRESS                       0x0021A240
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.WhileIterator ""  
     SLONG CAN_2_Legs_ver2_CM_int32       0             0       -2147483648 2147483647  
-    ECU_ADDRESS                       0x0021A290
+    ECU_ADDRESS                       0x0021A2D0
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.c ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A258
+    ECU_ADDRESS                       0x0021A298
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.danger ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A210
+    ECU_ADDRESS                       0x0021A250
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.sf_bytesfloats.I_ff ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A2E0
+    ECU_ADDRESS                       0x0021A320
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.sf_bytesfloats.position ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A2D0
+    ECU_ADDRESS                       0x0021A310
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.sf_bytesfloats.velocity ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A2D8
+    ECU_ADDRESS                       0x0021A318
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.sf_bytesfloats_e.I_ff ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A2C8
+    ECU_ADDRESS                       0x0021A308
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.sf_bytesfloats_e.position ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A2B8
+    ECU_ADDRESS                       0x0021A2F8
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.sf_bytesfloats_e.velocity ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A2C0
+    ECU_ADDRESS                       0x0021A300
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.sf_floatsbytes.b ""  
     UBYTE CAN_2_Legs_ver2_CM_uint8       0             0       0 255  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        8 
-    ECU_ADDRESS                       0x0021A2F0
+    ECU_ADDRESS                       0x0021A330
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.sf_floatsbytes_o.b ""  
     UBYTE CAN_2_Legs_ver2_CM_uint8       0             0       0 255  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        8 
-    ECU_ADDRESS                       0x0021A2E8
+    ECU_ADDRESS                       0x0021A328
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.stop ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A240
+    ECU_ADDRESS                       0x0021A280
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.theta1 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A248
+    ECU_ADDRESS                       0x0021A288
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_B.theta2 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x0021A250
+    ECU_ADDRESS                       0x0021A290
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.CANUnpack_ModeSignalID ""  
     SLONG CAN_2_Legs_ver2_CM_int_T       0             0       -2147483648 2147483647  
-    ECU_ADDRESS                       0x0021A11C
+    ECU_ADDRESS                       0x0021A154
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.CANUnpack_ModeSignalID_d ""  
     SLONG CAN_2_Legs_ver2_CM_int_T       0             0       -2147483648 2147483647  
-    ECU_ADDRESS                       0x0021A124
+    ECU_ADDRESS                       0x0021A15C
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.CANUnpack_StatusPortID ""  
     SLONG CAN_2_Legs_ver2_CM_int_T       0             0       -2147483648 2147483647  
-    ECU_ADDRESS                       0x0021A120
+    ECU_ADDRESS                       0x0021A158
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.CANUnpack_StatusPortID_f ""  
     SLONG CAN_2_Legs_ver2_CM_int_T       0             0       -2147483648 2147483647  
-    ECU_ADDRESS                       0x0021A128
+    ECU_ADDRESS                       0x0021A160
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.Delay1_DSTATE ""  
@@ -1367,11 +1367,6 @@ ASAP2_VERSION  1 71
     ECU_ADDRESS                       0x00219F60
   /end MEASUREMENT 
 
-  /begin MEASUREMENT  CAN_2_Legs_ver2_DW.GRFy ""  
-    FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x00219FA8
-  /end MEASUREMENT 
-
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.done ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
     ECU_ADDRESS                       0x00219F70
@@ -1379,42 +1374,47 @@ ASAP2_VERSION  1 71
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.exitY ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00219FC8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  CAN_2_Legs_ver2_DW.hop ""  
+    FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
     ECU_ADDRESS                       0x00219FD0
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.is_Command ""  
     ULONG CAN_2_Legs_ver2_CM_uint32       0             0       0 2147483646  
-    ECU_ADDRESS                       0x0021A090
+    ECU_ADDRESS                       0x0021A0C8
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.is_active_c8_CAN_2_Legs_ver2 ""  
     UBYTE CAN_2_Legs_ver2_CM_uint8       0             0       0 255  
-    ECU_ADDRESS                       0x0021A13C
+    ECU_ADDRESS                       0x0021A174
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2 ""  
     ULONG CAN_2_Legs_ver2_CM_uint32       0             0       0 2147483646  
-    ECU_ADDRESS                       0x0021A08C
+    ECU_ADDRESS                       0x0021A0C4
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.oldKp1 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x00219FB0
+    ECU_ADDRESS                       0x00219FA8
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.oldKp2 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x00219FB8
+    ECU_ADDRESS                       0x00219FB0
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.oldKv1 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x00219FC0
+    ECU_ADDRESS                       0x00219FB8
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.oldKv2 ""  
     FLOAT64_IEEE CAN_2_Legs_ver2_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x00219FC8
+    ECU_ADDRESS                       0x00219FC0
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.pf ""  
@@ -1429,7 +1429,7 @@ ASAP2_VERSION  1 71
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.sfEvent ""  
     SLONG CAN_2_Legs_ver2_CM_int32       0             0       -2147483648 2147483647  
-    ECU_ADDRESS                       0x0021A088
+    ECU_ADDRESS                       0x0021A0C0
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.slope ""  
@@ -1439,7 +1439,7 @@ ASAP2_VERSION  1 71
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.temporalCounter_i1 ""  
     UBYTE CAN_2_Legs_ver2_CM_uint8       0             0       0 255  
-    ECU_ADDRESS                       0x0021A13D
+    ECU_ADDRESS                       0x0021A175
   /end MEASUREMENT 
 
   /begin MEASUREMENT  CAN_2_Legs_ver2_DW.time ""  

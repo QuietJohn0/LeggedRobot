@@ -94,13 +94,6 @@
       SrcLocation  ""\
     }\
     ChartData {\
-      Name         "GRFy"\
-      Description  "ChartLocal"\
-      SFName       ""\
-      Path         "GRFy"\
-      SrcLocation  ""\
-    }\
-    ChartData {\
       Name         "oldKp1"\
       Description  "ChartLocal"\
       SFName       ""\
@@ -133,6 +126,13 @@
       Description  "ChartLocal"\
       SFName       ""\
       Path         "exitY"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "hop"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "hop"\
       SrcLocation  ""\
     }\
     ChartData {\

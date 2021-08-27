@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs_ver2".
  *
- * Model version              : 1.22
+ * Model version              : 1.23
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Thu Aug 26 16:01:18 2021
+ * C++ source code generated on : Thu Aug 26 17:52:19 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -26,12 +26,14 @@ const int32_T CAN_2_Legs_ver2_CALL_EVENT = -1;
 const uint32_T CAN_2_Legs_ver2_IN_Command = 1U;
 const uint32_T CAN_2_Legs_ver2_IN_Danger = 2U;
 const uint32_T CAN_2_Legs_ver2_IN_Deinitiate = 3U;
-const uint32_T CAN_2_Legs_ver2_IN_Idle = 1U;
-const uint32_T CAN_2_Legs_ver2_IN_Init = 4U;
-const uint32_T CAN_2_Legs_ver2_IN_Sit = 2U;
-const uint32_T CAN_2_Legs_ver2_IN_Stance = 3U;
-const uint32_T CAN_2_Legs_ver2_IN_Stand = 4U;
-const uint32_T CAN_2_Legs_ver2_IN_Zero = 5U;
+const uint32_T CAN_2_Legs_ver2_IN_Flight = 1U;
+const uint32_T CAN_2_Legs_ver2_IN_Idle = 2U;
+const uint32_T CAN_2_Legs_ver2_IN_Init = 5U;
+const uint32_T CAN_2_Legs_ver2_IN_Sit = 3U;
+const uint32_T CAN_2_Legs_ver2_IN_Stance = 4U;
+const uint32_T CAN_2_Legs_ver2_IN_Stand = 5U;
+const uint32_T CAN_2_Legs_ver2_IN_Zero = 6U;
+const uint32_T CAN_2_Legs_ver_IN_FinalShutdown = 4U;
 
 /* Block signals (default storage) */
 B_CAN_2_Legs_ver2_T CAN_2_Legs_ver2_B;
@@ -47,6 +49,7 @@ RT_MODEL_CAN_2_Legs_ver2_T *const CAN_2_Legs_ver2_M = &CAN_2_Legs_ver2_M_;
 static void CAN_2_Legs_ver2_dec2bin(real_T d, char_T s_data[], int32_T s_size[2]);
 
 /* Forward declaration for local functions */
+static void CAN_2_Legs__enter_atomic_Stance(void);
 static void CAN_2_Legs_ver2_getTorque(real_T pos1, real_T pos2, real_T currTime,
   real_T *Torque1, real_T *Torque2, real_T *y);
 static void CAN_2_Leg_exit_internal_Command(void);
@@ -489,6 +492,22 @@ void CAN_2_Legs_ver2_bytesfloats(B_bytesfloats_CAN_2_Legs_ver2_T *localB)
 }
 
 /* Function for Chart: '<Root>/Chart' */
+static void CAN_2_Legs__enter_atomic_Stance(void)
+{
+  CAN_2_Legs_ver2_DW.hop++;
+  CAN_2_Legs_ver2_DW.time = CAN_2_Legs_ver2_M->Timing.t[0];
+  CAN_2_Legs_ver2_DW.oldKp1 = CAN_2_Legs_ver2_B.Kp1;
+  CAN_2_Legs_ver2_DW.oldKp2 = CAN_2_Legs_ver2_B.Kp2;
+  CAN_2_Legs_ver2_DW.oldKv1 = CAN_2_Legs_ver2_B.Kd1;
+  CAN_2_Legs_ver2_DW.oldKv2 = CAN_2_Legs_ver2_B.Kd2;
+  CAN_2_Legs_ver2_B.Kp1 = 0.0;
+  CAN_2_Legs_ver2_B.Kp2 = 0.0;
+  CAN_2_Legs_ver2_B.Kd1 = 0.0;
+  CAN_2_Legs_ver2_B.Kd2 = 0.0;
+  CAN_2_Legs_ver2_DW.exitY = 1.0;
+}
+
+/* Function for Chart: '<Root>/Chart' */
 static void CAN_2_Legs_ver2_getTorque(real_T pos1, real_T pos2, real_T currTime,
   real_T *Torque1, real_T *Torque2, real_T *y)
 {
@@ -502,7 +521,7 @@ static void CAN_2_Legs_ver2_getTorque(real_T pos1, real_T pos2, real_T currTime,
   real_T t;
   int32_T r1;
   int32_T r2;
-  *y = std::sin(6.2831853071795862 * currTime) * 2.0;
+  *y = std::sin(12.566370614359172 * currTime) * 6.0;
   if (*y < 0.0) {
     *y = 0.0;
   }
@@ -570,7 +589,7 @@ void CAN_2_Legs_ver2_step(void)
   real_T T1;
   real_T T2;
   real_T exitY;
-  int32_T i;
+  int32_T s6_iter;
 
   /* S-Function (sg_IO602_IO691_setup_s): '<Root>/CAN Setup ' */
 
@@ -592,348 +611,12 @@ void CAN_2_Legs_ver2_step(void)
   /* Delay: '<Root>/Delay1' */
   CAN_2_Legs_ver2_B.Delay1 = CAN_2_Legs_ver2_DW.Delay1_DSTATE;
 
-  /* Chart: '<Root>/Chart' */
-  if (CAN_2_Legs_ver2_DW.temporalCounter_i1 < 255U) {
-    CAN_2_Legs_ver2_DW.temporalCounter_i1 = static_cast<uint8_T>
-      (CAN_2_Legs_ver2_DW.temporalCounter_i1 + 1U);
-  }
-
-  CAN_2_Legs_ver2_DW.sfEvent = CAN_2_Legs_ver2_CALL_EVENT;
-  if (CAN_2_Legs_ver2_DW.is_active_c8_CAN_2_Legs_ver2 == 0U) {
-    CAN_2_Legs_ver2_DW.is_active_c8_CAN_2_Legs_ver2 = 1U;
-    CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2 = CAN_2_Legs_ver2_IN_Zero;
-    CAN_2_Legs_ver2_DW.temporalCounter_i1 = 0U;
-    CAN_2_Legs_ver2_B.theta1 = 0.0;
-    CAN_2_Legs_ver2_B.theta2 = 0.0;
-    CAN_2_Legs_ver2_B.c = 1.0;
-  } else {
-    switch (CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2) {
-     case CAN_2_Legs_ver2_IN_Command:
-      CAN_2_Legs_ver2_B.c = 3.0;
-      if ((CAN_2_Legs_ver2_DW.done == 1.0) || (CAN_2_Legs_ver2_B.Constant == 4.0))
-      {
-        CAN_2_Leg_exit_internal_Command();
-        CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2 = CAN_2_Legs_ver2_IN_Deinitiate;
-        CAN_2_Legs_ver2_DW.temporalCounter_i1 = 0U;
-        CAN_2_Legs_ver2_B.c = 4.0;
-      } else if (CAN_2_Legs_ver2_B.Constant1 == 1.0) {
-        CAN_2_Leg_exit_internal_Command();
-        CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2 = CAN_2_Legs_ver2_IN_Danger;
-      } else {
-        switch (CAN_2_Legs_ver2_DW.is_Command) {
-         case CAN_2_Legs_ver2_IN_Idle:
-          if (CAN_2_Legs_ver2_B.Constant == 3.0) {
-            CAN_2_Legs_ver2_DW.is_Command = CAN_2_Legs_ver2_IN_Stance;
-            CAN_2_Legs_ver2_DW.time = CAN_2_Legs_ver2_M->Timing.t[0];
-            CAN_2_Legs_ver2_DW.oldKp1 = CAN_2_Legs_ver2_B.Kp1;
-            CAN_2_Legs_ver2_DW.oldKp2 = CAN_2_Legs_ver2_B.Kp2;
-            CAN_2_Legs_ver2_DW.oldKv1 = CAN_2_Legs_ver2_B.Kd1;
-            CAN_2_Legs_ver2_DW.oldKv2 = CAN_2_Legs_ver2_B.Kd2;
-            CAN_2_Legs_ver2_B.Kp1 = 0.0;
-            CAN_2_Legs_ver2_B.Kp2 = 0.0;
-            CAN_2_Legs_ver2_B.Kd1 = 0.0;
-            CAN_2_Legs_ver2_B.Kd2 = 0.0;
-            CAN_2_Legs_ver2_DW.exitY = 1.0;
-          }
-          break;
-
-         case CAN_2_Legs_ver2_IN_Sit:
-          if (((CAN_2_Legs_ver2_B.theta1 >= CAN_2_Legs_ver2_DW.pf) &&
-               (CAN_2_Legs_ver2_DW.slope > 0.0)) || ((CAN_2_Legs_ver2_B.theta1 <=
-                CAN_2_Legs_ver2_DW.pf) && (CAN_2_Legs_ver2_DW.slope < 0.0))) {
-            CAN_2_Legs_ver2_B.theta1 = CAN_2_Legs_ver2_DW.pf;
-            CAN_2_Legs_ver2_B.theta2 = CAN_2_Legs_ver2_B.theta1 * -2.0;
-            CAN_2_Legs_ver2_DW.done = 1.0;
-            CAN_2_Legs_ver2_B.theta1 = CAN_2_Legs_ver2_B.Delay;
-            CAN_2_Legs_ver2_DW.pf = -0.7;
-            CAN_2_Legs_ver2_DW.tstep = 3.0;
-            CAN_2_Legs_ver2_DW.is_Command = CAN_2_Legs_ver2_IN_Stand;
-            CAN_2_Legs_ver2_DW.to = CAN_2_Legs_ver2_M->Timing.t[0];
-            CAN_2_Legs_ver2_DW.po = CAN_2_Legs_ver2_B.theta1;
-            CAN_2_Legs_ver2_DW.slope = (CAN_2_Legs_ver2_DW.pf -
-              CAN_2_Legs_ver2_DW.po) / CAN_2_Legs_ver2_DW.tstep;
-          } else {
-            CAN_2_Legs_ver2_B.theta1 = (CAN_2_Legs_ver2_M->Timing.t[0] -
-              CAN_2_Legs_ver2_DW.to) * CAN_2_Legs_ver2_DW.slope +
-              CAN_2_Legs_ver2_DW.po;
-            CAN_2_Legs_ver2_B.theta2 = CAN_2_Legs_ver2_B.theta1 * -2.0;
-          }
-          break;
-
-         case CAN_2_Legs_ver2_IN_Stance:
-          if ((CAN_2_Legs_ver2_M->Timing.t[0] - CAN_2_Legs_ver2_DW.time != 0.0) &&
-              (CAN_2_Legs_ver2_DW.exitY == 0.0)) {
-            CAN_2_Legs_ver2_DW.pf = -0.7;
-            CAN_2_Legs_ver2_B.T1 = 0.0;
-            CAN_2_Legs_ver2_B.T2 = 0.0;
-            CAN_2_Legs_ver2_B.Kp1 = CAN_2_Legs_ver2_DW.oldKp1;
-            CAN_2_Legs_ver2_B.Kp2 = CAN_2_Legs_ver2_DW.oldKp2;
-            CAN_2_Legs_ver2_B.Kd1 = CAN_2_Legs_ver2_DW.oldKv1;
-            CAN_2_Legs_ver2_B.Kd2 = CAN_2_Legs_ver2_DW.oldKv2;
-            CAN_2_Legs_ver2_DW.is_Command = CAN_2_Legs_ver2_IN_Sit;
-            CAN_2_Legs_ver2_DW.to = CAN_2_Legs_ver2_M->Timing.t[0];
-            CAN_2_Legs_ver2_DW.po = CAN_2_Legs_ver2_B.theta1;
-            CAN_2_Legs_ver2_DW.slope = (CAN_2_Legs_ver2_DW.pf -
-              CAN_2_Legs_ver2_DW.po) / CAN_2_Legs_ver2_DW.tstep;
-          } else {
-            CAN_2_Legs_ver2_getTorque(CAN_2_Legs_ver2_B.Delay,
-              CAN_2_Legs_ver2_B.Delay1, CAN_2_Legs_ver2_M->Timing.t[0] -
-              CAN_2_Legs_ver2_DW.time, &T1, &T2, &exitY);
-            CAN_2_Legs_ver2_B.T1 = T1;
-            CAN_2_Legs_ver2_B.T2 = T2;
-            CAN_2_Legs_ver2_DW.exitY = exitY;
-          }
-          break;
-
-         default:
-          /* case IN_Stand: */
-          if (((CAN_2_Legs_ver2_B.theta1 >= CAN_2_Legs_ver2_DW.pf) &&
-               (CAN_2_Legs_ver2_DW.slope > 0.0)) || ((CAN_2_Legs_ver2_B.theta1 <=
-                CAN_2_Legs_ver2_DW.pf) && (CAN_2_Legs_ver2_DW.slope < 0.0))) {
-            CAN_2_Legs_ver2_B.theta1 = CAN_2_Legs_ver2_DW.pf;
-            CAN_2_Legs_ver2_B.theta2 = CAN_2_Legs_ver2_B.theta1 * -2.0;
-            CAN_2_Legs_ver2_DW.is_Command = CAN_2_Legs_ver2_IN_Idle;
-          } else {
-            CAN_2_Legs_ver2_B.theta1 = (CAN_2_Legs_ver2_M->Timing.t[0] -
-              CAN_2_Legs_ver2_DW.to) * CAN_2_Legs_ver2_DW.slope +
-              CAN_2_Legs_ver2_DW.po;
-            CAN_2_Legs_ver2_B.theta2 = CAN_2_Legs_ver2_B.theta1 * -2.0;
-          }
-          break;
-        }
-      }
-      break;
-
-     case CAN_2_Legs_ver2_IN_Danger:
-      break;
-
-     case CAN_2_Legs_ver2_IN_Deinitiate:
-      CAN_2_Legs_ver2_B.c = 4.0;
-      if (CAN_2_Legs_ver2_DW.temporalCounter_i1 >= 30U) {
-        CAN_2_Legs_ver2_B.stop = 1.0;
-        CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2 = CAN_2_Legs_ver2_IN_Deinitiate;
-        CAN_2_Legs_ver2_DW.temporalCounter_i1 = 0U;
-        CAN_2_Legs_ver2_B.c = 4.0;
-      }
-      break;
-
-     case CAN_2_Legs_ver2_IN_Init:
-      CAN_2_Legs_ver2_B.c = 2.0;
-      if (CAN_2_Legs_ver2_B.Constant == 2.0) {
-        CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2 = CAN_2_Legs_ver2_IN_Command;
-        CAN_2_Legs_ver2_B.c = 3.0;
-        CAN_2_Legs_ver2_B.theta1 = CAN_2_Legs_ver2_B.Delay;
-        CAN_2_Legs_ver2_DW.pf = -0.7;
-        CAN_2_Legs_ver2_DW.tstep = 3.0;
-        CAN_2_Legs_ver2_DW.is_Command = CAN_2_Legs_ver2_IN_Stand;
-        CAN_2_Legs_ver2_DW.to = CAN_2_Legs_ver2_M->Timing.t[0];
-        CAN_2_Legs_ver2_DW.po = CAN_2_Legs_ver2_B.theta1;
-        CAN_2_Legs_ver2_DW.slope = (CAN_2_Legs_ver2_DW.pf -
-          CAN_2_Legs_ver2_DW.po) / CAN_2_Legs_ver2_DW.tstep;
-      }
-      break;
-
-     default:
-      /* case IN_Zero: */
-      CAN_2_Legs_ver2_B.c = 1.0;
-      if (CAN_2_Legs_ver2_B.Constant == 1.0) {
-        CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2 = CAN_2_Legs_ver2_IN_Init;
-        CAN_2_Legs_ver2_DW.temporalCounter_i1 = 0U;
-        CAN_2_Legs_ver2_B.c = 2.0;
-      }
-      break;
-    }
-  }
-
-  /* End of Chart: '<Root>/Chart' */
-
-  /* Gain: '<Root>/Gain' */
-  CAN_2_Legs_ver2_B.Gain = CAN_2_Legs_ver2_cal->Gain_Gain *
-    CAN_2_Legs_ver2_B.theta2;
-
-  /* Constant: '<Root>/Constant8' */
-  CAN_2_Legs_ver2_B.Constant8 = CAN_2_Legs_ver2_cal->Constant8_Value;
-
-  /* Outputs for Atomic SubSystem: '<Root>/Simulink Function1' */
-  /* MATLAB Function: '<S4>/floats -> bytes' */
-  CAN_2_Legs_ver2_floatsbytes(CAN_2_Legs_ver2_B.Gain,
-    CAN_2_Legs_ver2_B.Constant8, CAN_2_Legs_ver2_B.Kp2, CAN_2_Legs_ver2_B.Kd2,
-    CAN_2_Legs_ver2_B.T2, &CAN_2_Legs_ver2_B.sf_floatsbytes);
-
-  /* MultiPortSwitch: '<S4>/Multiport Switch' */
-  switch (static_cast<int32_T>(CAN_2_Legs_ver2_B.c)) {
-   case 1:
-    /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
-     *  Constant: '<S4>/Constant'
-     */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_ver2_B.MultiportSwitch_f[i] =
-        CAN_2_Legs_ver2_cal->Constant_Value_l[i];
-    }
-    break;
-
-   case 2:
-    /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
-     *  Constant: '<S4>/Constant1'
-     */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_ver2_B.MultiportSwitch_f[i] =
-        CAN_2_Legs_ver2_cal->Constant1_Value_m[i];
-    }
-    break;
-
-   case 3:
-    /* MultiPortSwitch: '<S4>/Multiport Switch' */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_ver2_B.MultiportSwitch_f[i] =
-        CAN_2_Legs_ver2_B.sf_floatsbytes.b[i];
-    }
-    break;
-
-   default:
-    /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
-     *  Constant: '<S4>/Constant2'
-     */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_ver2_B.MultiportSwitch_f[i] =
-        CAN_2_Legs_ver2_cal->Constant2_Value_g[i];
-    }
-    break;
-  }
-
-  /* End of MultiPortSwitch: '<S4>/Multiport Switch' */
-
-  /* S-Function (slrealtimebytepacking): '<S4>/Byte Packing' */
-
-  /* Byte Packing: <S4>/Byte Packing */
-  (void)memcpy((uint8_T*)&CAN_2_Legs_ver2_B.BytePacking_o[0] + 0, (uint8_T*)
-               &CAN_2_Legs_ver2_B.MultiportSwitch_f[0], 8);
-
-  /* S-Function (scanpack): '<S4>/CAN Pack1' */
-  /* S-Function (scanpack): '<S4>/CAN Pack1' */
-  CAN_2_Legs_ver2_B.CANmsg2.ID = 2U;
-  CAN_2_Legs_ver2_B.CANmsg2.Length = 8U;
-  CAN_2_Legs_ver2_B.CANmsg2.Extended = 0U;
-  CAN_2_Legs_ver2_B.CANmsg2.Remote = 0;
-  CAN_2_Legs_ver2_B.CANmsg2.Data[0] = 0;
-  CAN_2_Legs_ver2_B.CANmsg2.Data[1] = 0;
-  CAN_2_Legs_ver2_B.CANmsg2.Data[2] = 0;
-  CAN_2_Legs_ver2_B.CANmsg2.Data[3] = 0;
-  CAN_2_Legs_ver2_B.CANmsg2.Data[4] = 0;
-  CAN_2_Legs_ver2_B.CANmsg2.Data[5] = 0;
-  CAN_2_Legs_ver2_B.CANmsg2.Data[6] = 0;
-  CAN_2_Legs_ver2_B.CANmsg2.Data[7] = 0;
-
-  {
-    (void) std::memcpy((CAN_2_Legs_ver2_B.CANmsg2.Data),
-                       &CAN_2_Legs_ver2_B.BytePacking_o[0],
-                       8 * sizeof(uint8_T));
-  }
-
-  /* S-Function (sg_IO602_IO691_write_s): '<S4>/CAN Write1' */
-
-  /* Level2 S-Function Block: '<S4>/CAN Write1' (sg_IO602_IO691_write_s) */
-  {
-    SimStruct *rts = CAN_2_Legs_ver2_M->childSfunctions[0];
-    sfcnOutputs(rts,0);
-  }
-
-  /* Constant: '<Root>/Constant2' */
-  CAN_2_Legs_ver2_B.Constant2 = CAN_2_Legs_ver2_cal->Constant2_Value;
-
-  /* Outputs for Atomic SubSystem: '<Root>/Simulink Function3' */
-  /* MATLAB Function: '<S5>/floats -> bytes' */
-  CAN_2_Legs_ver2_floatsbytes(CAN_2_Legs_ver2_B.theta1,
-    CAN_2_Legs_ver2_B.Constant2, CAN_2_Legs_ver2_B.Kp1, CAN_2_Legs_ver2_B.Kd1,
-    CAN_2_Legs_ver2_B.T1, &CAN_2_Legs_ver2_B.sf_floatsbytes_o);
-
-  /* MultiPortSwitch: '<S5>/Multiport Switch' */
-  switch (static_cast<int32_T>(CAN_2_Legs_ver2_B.c)) {
-   case 1:
-    /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
-     *  Constant: '<S5>/Constant'
-     */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_ver2_B.MultiportSwitch[i] =
-        CAN_2_Legs_ver2_cal->Constant_Value_i[i];
-    }
-    break;
-
-   case 2:
-    /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
-     *  Constant: '<S5>/Constant1'
-     */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_ver2_B.MultiportSwitch[i] =
-        CAN_2_Legs_ver2_cal->Constant1_Value_e[i];
-    }
-    break;
-
-   case 3:
-    /* MultiPortSwitch: '<S5>/Multiport Switch' */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_ver2_B.MultiportSwitch[i] =
-        CAN_2_Legs_ver2_B.sf_floatsbytes_o.b[i];
-    }
-    break;
-
-   default:
-    /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
-     *  Constant: '<S5>/Constant2'
-     */
-    for (i = 0; i < 8; i++) {
-      CAN_2_Legs_ver2_B.MultiportSwitch[i] =
-        CAN_2_Legs_ver2_cal->Constant2_Value_k[i];
-    }
-    break;
-  }
-
-  /* End of MultiPortSwitch: '<S5>/Multiport Switch' */
-
-  /* S-Function (slrealtimebytepacking): '<S5>/Byte Packing' */
-
-  /* Byte Packing: <S5>/Byte Packing */
-  (void)memcpy((uint8_T*)&CAN_2_Legs_ver2_B.BytePacking[0] + 0, (uint8_T*)
-               &CAN_2_Legs_ver2_B.MultiportSwitch[0], 8);
-
-  /* S-Function (scanpack): '<S5>/CAN Pack1' */
-  /* S-Function (scanpack): '<S5>/CAN Pack1' */
-  CAN_2_Legs_ver2_B.CANPack1.ID = 1U;
-  CAN_2_Legs_ver2_B.CANPack1.Length = 8U;
-  CAN_2_Legs_ver2_B.CANPack1.Extended = 0U;
-  CAN_2_Legs_ver2_B.CANPack1.Remote = 0;
-  CAN_2_Legs_ver2_B.CANPack1.Data[0] = 0;
-  CAN_2_Legs_ver2_B.CANPack1.Data[1] = 0;
-  CAN_2_Legs_ver2_B.CANPack1.Data[2] = 0;
-  CAN_2_Legs_ver2_B.CANPack1.Data[3] = 0;
-  CAN_2_Legs_ver2_B.CANPack1.Data[4] = 0;
-  CAN_2_Legs_ver2_B.CANPack1.Data[5] = 0;
-  CAN_2_Legs_ver2_B.CANPack1.Data[6] = 0;
-  CAN_2_Legs_ver2_B.CANPack1.Data[7] = 0;
-
-  {
-    (void) std::memcpy((CAN_2_Legs_ver2_B.CANPack1.Data),
-                       &CAN_2_Legs_ver2_B.BytePacking[0],
-                       8 * sizeof(uint8_T));
-  }
-
-  /* S-Function (sg_IO602_IO691_write_s): '<S5>/CAN Write1' */
-
-  /* Level2 S-Function Block: '<S5>/CAN Write1' (sg_IO602_IO691_write_s) */
-  {
-    SimStruct *rts = CAN_2_Legs_ver2_M->childSfunctions[1];
-    sfcnOutputs(rts,0);
-  }
-
-  /* Stop: '<Root>/Stop Simulation' */
-  i = 1;
-  if (CAN_2_Legs_ver2_B.stop != 0.0) {
-    rtmSetStopRequested(CAN_2_Legs_ver2_M, 1);
-  }
-
-  /* End of Stop: '<Root>/Stop Simulation' */
+  /* Outputs for Iterator SubSystem: '<Root>/While Iterator Subsystem' incorporates:
+   *  WhileIterator: '<S6>/While Iterator'
+   */
+  s6_iter = 1;
   do {
-    CAN_2_Legs_ver2_B.WhileIterator = i;
+    CAN_2_Legs_ver2_B.WhileIterator = s6_iter;
 
     /* Level2 S-Function Block: '<S6>/CAN Read' (sg_IO602_IO691_read_s) */
     {
@@ -1272,19 +955,10 @@ void CAN_2_Legs_ver2_step(void)
     CAN_2_Legs_ver2_B.sf_bytesfloats.velocity = CAN_2_Legs_ver2_B.CANUnpack_o2_l;
     CAN_2_Legs_ver2_B.sf_bytesfloats.I_ff = CAN_2_Legs_ver2_B.CANUnpack_o3_k;
     CAN_2_Legs_ver2_bytesfloats(&CAN_2_Legs_ver2_B.sf_bytesfloats);
-    i++;
+    s6_iter++;
   } while (CAN_2_Legs_ver2_B.CANRead_o1);
 
-  /* SignalConversion generated from: '<S3>/ SFunction ' incorporates:
-   *  MATLAB Function: '<Root>/MATLAB Function1'
-   */
-  CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctionI[0] =
-    CAN_2_Legs_ver2_B.sf_bytesfloats.position;
-  CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctionI[1] =
-    CAN_2_Legs_ver2_B.sf_bytesfloats_e.position;
-
-  /* MATLAB Function: '<Root>/MATLAB Function1' */
-  CAN_2_Legs_ver2_B.danger = 0.0;
+  /* End of Outputs for SubSystem: '<Root>/While Iterator Subsystem' */
 
   /* SignalConversion generated from: '<S2>/ SFunction ' incorporates:
    *  MATLAB Function: '<Root>/MATLAB Function'
@@ -1314,6 +988,392 @@ void CAN_2_Legs_ver2_step(void)
         CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctio_l[1]))) {
     CAN_2_Legs_ver2_B.GRF = 1.0;
   }
+
+  /* Chart: '<Root>/Chart' */
+  if (CAN_2_Legs_ver2_DW.temporalCounter_i1 < 255U) {
+    CAN_2_Legs_ver2_DW.temporalCounter_i1 = static_cast<uint8_T>
+      (CAN_2_Legs_ver2_DW.temporalCounter_i1 + 1U);
+  }
+
+  CAN_2_Legs_ver2_DW.sfEvent = CAN_2_Legs_ver2_CALL_EVENT;
+  if (CAN_2_Legs_ver2_DW.is_active_c8_CAN_2_Legs_ver2 == 0U) {
+    CAN_2_Legs_ver2_DW.is_active_c8_CAN_2_Legs_ver2 = 1U;
+    CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2 = CAN_2_Legs_ver2_IN_Zero;
+    CAN_2_Legs_ver2_DW.temporalCounter_i1 = 0U;
+    CAN_2_Legs_ver2_B.c = 1.0;
+  } else {
+    switch (CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2) {
+     case CAN_2_Legs_ver2_IN_Command:
+      CAN_2_Legs_ver2_B.c = 3.0;
+      if ((CAN_2_Legs_ver2_DW.done == 1.0) || (CAN_2_Legs_ver2_B.Constant == 4.0))
+      {
+        CAN_2_Leg_exit_internal_Command();
+        CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2 =
+          CAN_2_Legs_ver_IN_FinalShutdown;
+        CAN_2_Legs_ver2_DW.hop++;
+        CAN_2_Legs_ver2_B.Kp1 = 0.0;
+        CAN_2_Legs_ver2_B.Kp2 = 0.0;
+        CAN_2_Legs_ver2_B.theta1 = 0.0;
+        CAN_2_Legs_ver2_B.theta2 = 0.0;
+        CAN_2_Legs_ver2_B.T1 = 0.0;
+        CAN_2_Legs_ver2_B.T2 = 0.0;
+      } else if (CAN_2_Legs_ver2_B.Constant1 == 1.0) {
+        CAN_2_Leg_exit_internal_Command();
+        CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2 = CAN_2_Legs_ver2_IN_Danger;
+      } else {
+        switch (CAN_2_Legs_ver2_DW.is_Command) {
+         case CAN_2_Legs_ver2_IN_Flight:
+          if (((CAN_2_Legs_ver2_B.theta1 >= CAN_2_Legs_ver2_DW.pf) &&
+               (CAN_2_Legs_ver2_DW.slope > 0.0)) || ((CAN_2_Legs_ver2_B.theta1 <=
+                CAN_2_Legs_ver2_DW.pf) && (CAN_2_Legs_ver2_DW.slope < 0.0))) {
+            CAN_2_Legs_ver2_DW.is_Command = CAN_2_Legs_ver2_IN_Stance;
+            CAN_2_Legs__enter_atomic_Stance();
+          } else {
+            CAN_2_Legs_ver2_B.theta1 = (CAN_2_Legs_ver2_M->Timing.t[0] -
+              CAN_2_Legs_ver2_DW.to) * CAN_2_Legs_ver2_DW.slope +
+              CAN_2_Legs_ver2_DW.po;
+            CAN_2_Legs_ver2_B.theta2 = CAN_2_Legs_ver2_B.theta1 * -2.0;
+          }
+          break;
+
+         case CAN_2_Legs_ver2_IN_Idle:
+          if (CAN_2_Legs_ver2_B.Constant == 3.0) {
+            CAN_2_Legs_ver2_DW.hop = 0.0;
+            CAN_2_Legs_ver2_DW.is_Command = CAN_2_Legs_ver2_IN_Stance;
+            CAN_2_Legs__enter_atomic_Stance();
+          }
+          break;
+
+         case CAN_2_Legs_ver2_IN_Sit:
+          if (((CAN_2_Legs_ver2_B.theta1 >= CAN_2_Legs_ver2_DW.pf) &&
+               (CAN_2_Legs_ver2_DW.slope > 0.0)) || ((CAN_2_Legs_ver2_B.theta1 <=
+                CAN_2_Legs_ver2_DW.pf) && (CAN_2_Legs_ver2_DW.slope < 0.0))) {
+            CAN_2_Legs_ver2_DW.done = 1.0;
+            CAN_2_Legs_ver2_DW.pf = -0.7;
+            CAN_2_Legs_ver2_DW.is_Command = CAN_2_Legs_ver2_IN_Stand;
+            CAN_2_Legs_ver2_DW.tstep = 3.0;
+            CAN_2_Legs_ver2_DW.to = CAN_2_Legs_ver2_M->Timing.t[0];
+            CAN_2_Legs_ver2_B.theta1 = CAN_2_Legs_ver2_B.Delay;
+            CAN_2_Legs_ver2_B.theta2 = CAN_2_Legs_ver2_B.theta1 * -2.0;
+            CAN_2_Legs_ver2_DW.po = CAN_2_Legs_ver2_B.theta1;
+            CAN_2_Legs_ver2_DW.slope = (CAN_2_Legs_ver2_DW.pf -
+              CAN_2_Legs_ver2_DW.po) / CAN_2_Legs_ver2_DW.tstep;
+          } else {
+            CAN_2_Legs_ver2_B.theta1 = (CAN_2_Legs_ver2_M->Timing.t[0] -
+              CAN_2_Legs_ver2_DW.to) * CAN_2_Legs_ver2_DW.slope +
+              CAN_2_Legs_ver2_DW.po;
+            CAN_2_Legs_ver2_B.theta2 = CAN_2_Legs_ver2_B.theta1 * -2.0;
+          }
+          break;
+
+         case CAN_2_Legs_ver2_IN_Stance:
+          if (CAN_2_Legs_ver2_DW.hop == 4.0) {
+            CAN_2_Legs_ver2_DW.pf = -0.7;
+            CAN_2_Legs_ver2_B.T1 = 0.0;
+            CAN_2_Legs_ver2_B.T2 = 0.0;
+            CAN_2_Legs_ver2_B.Kp1 = CAN_2_Legs_ver2_DW.oldKp1;
+            CAN_2_Legs_ver2_B.Kp2 = CAN_2_Legs_ver2_DW.oldKp2;
+            CAN_2_Legs_ver2_B.Kd1 = CAN_2_Legs_ver2_DW.oldKv1;
+            CAN_2_Legs_ver2_B.Kd2 = CAN_2_Legs_ver2_DW.oldKv2;
+            CAN_2_Legs_ver2_DW.is_Command = CAN_2_Legs_ver2_IN_Sit;
+            CAN_2_Legs_ver2_DW.tstep = 3.0;
+            CAN_2_Legs_ver2_DW.to = CAN_2_Legs_ver2_M->Timing.t[0];
+            CAN_2_Legs_ver2_B.theta1 = CAN_2_Legs_ver2_B.Delay;
+            CAN_2_Legs_ver2_B.theta2 = CAN_2_Legs_ver2_B.theta1 * -2.0;
+            CAN_2_Legs_ver2_DW.po = CAN_2_Legs_ver2_B.theta1;
+            CAN_2_Legs_ver2_DW.slope = (CAN_2_Legs_ver2_DW.pf -
+              CAN_2_Legs_ver2_DW.po) / CAN_2_Legs_ver2_DW.tstep;
+          } else if ((CAN_2_Legs_ver2_M->Timing.t[0] - CAN_2_Legs_ver2_DW.time
+                      != 0.0) && (CAN_2_Legs_ver2_DW.exitY == 0.0) &&
+                     (CAN_2_Legs_ver2_B.GRF == 0.0)) {
+            CAN_2_Legs_ver2_DW.pf = -0.7;
+            CAN_2_Legs_ver2_B.T1 = 0.0;
+            CAN_2_Legs_ver2_B.T2 = 0.0;
+            CAN_2_Legs_ver2_B.Kp1 = CAN_2_Legs_ver2_DW.oldKp1;
+            CAN_2_Legs_ver2_B.Kp2 = CAN_2_Legs_ver2_DW.oldKp2;
+            CAN_2_Legs_ver2_B.Kd1 = CAN_2_Legs_ver2_DW.oldKv1;
+            CAN_2_Legs_ver2_B.Kd2 = CAN_2_Legs_ver2_DW.oldKv2;
+            CAN_2_Legs_ver2_DW.is_Command = CAN_2_Legs_ver2_IN_Flight;
+            CAN_2_Legs_ver2_DW.tstep = 0.5;
+            CAN_2_Legs_ver2_DW.to = CAN_2_Legs_ver2_M->Timing.t[0];
+            CAN_2_Legs_ver2_B.theta1 = CAN_2_Legs_ver2_B.Delay;
+            CAN_2_Legs_ver2_B.theta2 = CAN_2_Legs_ver2_B.theta1 * -2.0;
+            CAN_2_Legs_ver2_DW.po = CAN_2_Legs_ver2_B.theta1;
+            CAN_2_Legs_ver2_DW.slope = (CAN_2_Legs_ver2_DW.pf -
+              CAN_2_Legs_ver2_DW.po) / CAN_2_Legs_ver2_DW.tstep;
+          } else {
+            CAN_2_Legs_ver2_getTorque(CAN_2_Legs_ver2_B.Delay,
+              CAN_2_Legs_ver2_B.Delay1, CAN_2_Legs_ver2_M->Timing.t[0] -
+              CAN_2_Legs_ver2_DW.time, &T1, &T2, &exitY);
+            CAN_2_Legs_ver2_B.T1 = T1;
+            CAN_2_Legs_ver2_B.T2 = T2;
+            CAN_2_Legs_ver2_DW.exitY = exitY;
+          }
+          break;
+
+         default:
+          /* case IN_Stand: */
+          if (((CAN_2_Legs_ver2_B.theta1 >= CAN_2_Legs_ver2_DW.pf) &&
+               (CAN_2_Legs_ver2_DW.slope > 0.0)) || ((CAN_2_Legs_ver2_B.theta1 <=
+                CAN_2_Legs_ver2_DW.pf) && (CAN_2_Legs_ver2_DW.slope < 0.0))) {
+            CAN_2_Legs_ver2_B.theta1 = CAN_2_Legs_ver2_DW.pf;
+            CAN_2_Legs_ver2_B.theta2 = CAN_2_Legs_ver2_B.theta1 * -2.0;
+            CAN_2_Legs_ver2_DW.is_Command = CAN_2_Legs_ver2_IN_Idle;
+          } else {
+            CAN_2_Legs_ver2_B.theta1 = (CAN_2_Legs_ver2_M->Timing.t[0] -
+              CAN_2_Legs_ver2_DW.to) * CAN_2_Legs_ver2_DW.slope +
+              CAN_2_Legs_ver2_DW.po;
+            CAN_2_Legs_ver2_B.theta2 = CAN_2_Legs_ver2_B.theta1 * -2.0;
+          }
+          break;
+        }
+      }
+      break;
+
+     case CAN_2_Legs_ver2_IN_Danger:
+      break;
+
+     case CAN_2_Legs_ver2_IN_Deinitiate:
+      CAN_2_Legs_ver2_B.c = 4.0;
+      if (CAN_2_Legs_ver2_DW.temporalCounter_i1 >= 30U) {
+        CAN_2_Legs_ver2_B.stop = 1.0;
+        CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2 = CAN_2_Legs_ver2_IN_Deinitiate;
+        CAN_2_Legs_ver2_DW.temporalCounter_i1 = 0U;
+        CAN_2_Legs_ver2_B.c = 4.0;
+      }
+      break;
+
+     case CAN_2_Legs_ver_IN_FinalShutdown:
+      CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2 = CAN_2_Legs_ver2_IN_Deinitiate;
+      CAN_2_Legs_ver2_DW.temporalCounter_i1 = 0U;
+      CAN_2_Legs_ver2_B.c = 4.0;
+      break;
+
+     case CAN_2_Legs_ver2_IN_Init:
+      CAN_2_Legs_ver2_B.c = 2.0;
+      if (CAN_2_Legs_ver2_B.Constant == 2.0) {
+        CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2 = CAN_2_Legs_ver2_IN_Command;
+        CAN_2_Legs_ver2_B.c = 3.0;
+        CAN_2_Legs_ver2_DW.pf = -0.7;
+        CAN_2_Legs_ver2_DW.is_Command = CAN_2_Legs_ver2_IN_Stand;
+        CAN_2_Legs_ver2_DW.tstep = 3.0;
+        CAN_2_Legs_ver2_DW.to = CAN_2_Legs_ver2_M->Timing.t[0];
+        CAN_2_Legs_ver2_B.theta1 = CAN_2_Legs_ver2_B.Delay;
+        CAN_2_Legs_ver2_B.theta2 = CAN_2_Legs_ver2_B.theta1 * -2.0;
+        CAN_2_Legs_ver2_DW.po = CAN_2_Legs_ver2_B.theta1;
+        CAN_2_Legs_ver2_DW.slope = (CAN_2_Legs_ver2_DW.pf -
+          CAN_2_Legs_ver2_DW.po) / CAN_2_Legs_ver2_DW.tstep;
+      }
+      break;
+
+     default:
+      /* case IN_Zero: */
+      CAN_2_Legs_ver2_B.c = 1.0;
+      if (CAN_2_Legs_ver2_B.Constant == 1.0) {
+        CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2 = CAN_2_Legs_ver2_IN_Init;
+        CAN_2_Legs_ver2_DW.temporalCounter_i1 = 0U;
+        CAN_2_Legs_ver2_B.c = 2.0;
+      }
+      break;
+    }
+  }
+
+  /* End of Chart: '<Root>/Chart' */
+
+  /* Gain: '<Root>/Gain' */
+  CAN_2_Legs_ver2_B.Gain = CAN_2_Legs_ver2_cal->Gain_Gain *
+    CAN_2_Legs_ver2_B.theta2;
+
+  /* Constant: '<Root>/Constant8' */
+  CAN_2_Legs_ver2_B.Constant8 = CAN_2_Legs_ver2_cal->Constant8_Value;
+
+  /* Outputs for Atomic SubSystem: '<Root>/Simulink Function1' */
+  /* MATLAB Function: '<S4>/floats -> bytes' */
+  CAN_2_Legs_ver2_floatsbytes(CAN_2_Legs_ver2_B.Gain,
+    CAN_2_Legs_ver2_B.Constant8, CAN_2_Legs_ver2_B.Kp2, CAN_2_Legs_ver2_B.Kd2,
+    CAN_2_Legs_ver2_B.T2, &CAN_2_Legs_ver2_B.sf_floatsbytes);
+
+  /* MultiPortSwitch: '<S4>/Multiport Switch' */
+  switch (static_cast<int32_T>(CAN_2_Legs_ver2_B.c)) {
+   case 1:
+    /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
+     *  Constant: '<S4>/Constant'
+     */
+    for (s6_iter = 0; s6_iter < 8; s6_iter++) {
+      CAN_2_Legs_ver2_B.MultiportSwitch_f[s6_iter] =
+        CAN_2_Legs_ver2_cal->Constant_Value_l[s6_iter];
+    }
+    break;
+
+   case 2:
+    /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
+     *  Constant: '<S4>/Constant1'
+     */
+    for (s6_iter = 0; s6_iter < 8; s6_iter++) {
+      CAN_2_Legs_ver2_B.MultiportSwitch_f[s6_iter] =
+        CAN_2_Legs_ver2_cal->Constant1_Value_m[s6_iter];
+    }
+    break;
+
+   case 3:
+    /* MultiPortSwitch: '<S4>/Multiport Switch' */
+    for (s6_iter = 0; s6_iter < 8; s6_iter++) {
+      CAN_2_Legs_ver2_B.MultiportSwitch_f[s6_iter] =
+        CAN_2_Legs_ver2_B.sf_floatsbytes.b[s6_iter];
+    }
+    break;
+
+   default:
+    /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
+     *  Constant: '<S4>/Constant2'
+     */
+    for (s6_iter = 0; s6_iter < 8; s6_iter++) {
+      CAN_2_Legs_ver2_B.MultiportSwitch_f[s6_iter] =
+        CAN_2_Legs_ver2_cal->Constant2_Value_g[s6_iter];
+    }
+    break;
+  }
+
+  /* End of MultiPortSwitch: '<S4>/Multiport Switch' */
+
+  /* S-Function (slrealtimebytepacking): '<S4>/Byte Packing' */
+
+  /* Byte Packing: <S4>/Byte Packing */
+  (void)memcpy((uint8_T*)&CAN_2_Legs_ver2_B.BytePacking_o[0] + 0, (uint8_T*)
+               &CAN_2_Legs_ver2_B.MultiportSwitch_f[0], 8);
+
+  /* S-Function (scanpack): '<S4>/CAN Pack1' */
+  /* S-Function (scanpack): '<S4>/CAN Pack1' */
+  CAN_2_Legs_ver2_B.CANmsg2.ID = 2U;
+  CAN_2_Legs_ver2_B.CANmsg2.Length = 8U;
+  CAN_2_Legs_ver2_B.CANmsg2.Extended = 0U;
+  CAN_2_Legs_ver2_B.CANmsg2.Remote = 0;
+  CAN_2_Legs_ver2_B.CANmsg2.Data[0] = 0;
+  CAN_2_Legs_ver2_B.CANmsg2.Data[1] = 0;
+  CAN_2_Legs_ver2_B.CANmsg2.Data[2] = 0;
+  CAN_2_Legs_ver2_B.CANmsg2.Data[3] = 0;
+  CAN_2_Legs_ver2_B.CANmsg2.Data[4] = 0;
+  CAN_2_Legs_ver2_B.CANmsg2.Data[5] = 0;
+  CAN_2_Legs_ver2_B.CANmsg2.Data[6] = 0;
+  CAN_2_Legs_ver2_B.CANmsg2.Data[7] = 0;
+
+  {
+    (void) std::memcpy((CAN_2_Legs_ver2_B.CANmsg2.Data),
+                       &CAN_2_Legs_ver2_B.BytePacking_o[0],
+                       8 * sizeof(uint8_T));
+  }
+
+  /* S-Function (sg_IO602_IO691_write_s): '<S4>/CAN Write1' */
+
+  /* Level2 S-Function Block: '<S4>/CAN Write1' (sg_IO602_IO691_write_s) */
+  {
+    SimStruct *rts = CAN_2_Legs_ver2_M->childSfunctions[0];
+    sfcnOutputs(rts,0);
+  }
+
+  /* Constant: '<Root>/Constant2' */
+  CAN_2_Legs_ver2_B.Constant2 = CAN_2_Legs_ver2_cal->Constant2_Value;
+
+  /* Outputs for Atomic SubSystem: '<Root>/Simulink Function3' */
+  /* MATLAB Function: '<S5>/floats -> bytes' */
+  CAN_2_Legs_ver2_floatsbytes(CAN_2_Legs_ver2_B.theta1,
+    CAN_2_Legs_ver2_B.Constant2, CAN_2_Legs_ver2_B.Kp1, CAN_2_Legs_ver2_B.Kd1,
+    CAN_2_Legs_ver2_B.T1, &CAN_2_Legs_ver2_B.sf_floatsbytes_o);
+
+  /* MultiPortSwitch: '<S5>/Multiport Switch' */
+  switch (static_cast<int32_T>(CAN_2_Legs_ver2_B.c)) {
+   case 1:
+    /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
+     *  Constant: '<S5>/Constant'
+     */
+    for (s6_iter = 0; s6_iter < 8; s6_iter++) {
+      CAN_2_Legs_ver2_B.MultiportSwitch[s6_iter] =
+        CAN_2_Legs_ver2_cal->Constant_Value_i[s6_iter];
+    }
+    break;
+
+   case 2:
+    /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
+     *  Constant: '<S5>/Constant1'
+     */
+    for (s6_iter = 0; s6_iter < 8; s6_iter++) {
+      CAN_2_Legs_ver2_B.MultiportSwitch[s6_iter] =
+        CAN_2_Legs_ver2_cal->Constant1_Value_e[s6_iter];
+    }
+    break;
+
+   case 3:
+    /* MultiPortSwitch: '<S5>/Multiport Switch' */
+    for (s6_iter = 0; s6_iter < 8; s6_iter++) {
+      CAN_2_Legs_ver2_B.MultiportSwitch[s6_iter] =
+        CAN_2_Legs_ver2_B.sf_floatsbytes_o.b[s6_iter];
+    }
+    break;
+
+   default:
+    /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
+     *  Constant: '<S5>/Constant2'
+     */
+    for (s6_iter = 0; s6_iter < 8; s6_iter++) {
+      CAN_2_Legs_ver2_B.MultiportSwitch[s6_iter] =
+        CAN_2_Legs_ver2_cal->Constant2_Value_k[s6_iter];
+    }
+    break;
+  }
+
+  /* End of MultiPortSwitch: '<S5>/Multiport Switch' */
+
+  /* S-Function (slrealtimebytepacking): '<S5>/Byte Packing' */
+
+  /* Byte Packing: <S5>/Byte Packing */
+  (void)memcpy((uint8_T*)&CAN_2_Legs_ver2_B.BytePacking[0] + 0, (uint8_T*)
+               &CAN_2_Legs_ver2_B.MultiportSwitch[0], 8);
+
+  /* S-Function (scanpack): '<S5>/CAN Pack1' */
+  /* S-Function (scanpack): '<S5>/CAN Pack1' */
+  CAN_2_Legs_ver2_B.CANPack1.ID = 1U;
+  CAN_2_Legs_ver2_B.CANPack1.Length = 8U;
+  CAN_2_Legs_ver2_B.CANPack1.Extended = 0U;
+  CAN_2_Legs_ver2_B.CANPack1.Remote = 0;
+  CAN_2_Legs_ver2_B.CANPack1.Data[0] = 0;
+  CAN_2_Legs_ver2_B.CANPack1.Data[1] = 0;
+  CAN_2_Legs_ver2_B.CANPack1.Data[2] = 0;
+  CAN_2_Legs_ver2_B.CANPack1.Data[3] = 0;
+  CAN_2_Legs_ver2_B.CANPack1.Data[4] = 0;
+  CAN_2_Legs_ver2_B.CANPack1.Data[5] = 0;
+  CAN_2_Legs_ver2_B.CANPack1.Data[6] = 0;
+  CAN_2_Legs_ver2_B.CANPack1.Data[7] = 0;
+
+  {
+    (void) std::memcpy((CAN_2_Legs_ver2_B.CANPack1.Data),
+                       &CAN_2_Legs_ver2_B.BytePacking[0],
+                       8 * sizeof(uint8_T));
+  }
+
+  /* S-Function (sg_IO602_IO691_write_s): '<S5>/CAN Write1' */
+
+  /* Level2 S-Function Block: '<S5>/CAN Write1' (sg_IO602_IO691_write_s) */
+  {
+    SimStruct *rts = CAN_2_Legs_ver2_M->childSfunctions[1];
+    sfcnOutputs(rts,0);
+  }
+
+  /* Stop: '<Root>/Stop Simulation' */
+  if (CAN_2_Legs_ver2_B.stop != 0.0) {
+    rtmSetStopRequested(CAN_2_Legs_ver2_M, 1);
+  }
+
+  /* End of Stop: '<Root>/Stop Simulation' */
+  /* SignalConversion generated from: '<S3>/ SFunction ' incorporates:
+   *  MATLAB Function: '<Root>/MATLAB Function1'
+   */
+  CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctionI[0] =
+    CAN_2_Legs_ver2_B.sf_bytesfloats.position;
+  CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctionI[1] =
+    CAN_2_Legs_ver2_B.sf_bytesfloats_e.position;
+
+  /* MATLAB Function: '<Root>/MATLAB Function1' */
+  CAN_2_Legs_ver2_B.danger = 0.0;
 
   /* S-Function (sg_IO602_IO691_status_s): '<Root>/CAN Status' */
 
@@ -2136,54 +2196,6 @@ void CAN_2_Legs_ver2_initialize(void)
   CAN_2_Legs_ver2_DW.Delay1_DSTATE =
     CAN_2_Legs_ver2_cal->Delay1_InitialCondition;
 
-  /* SystemInitialize for Chart: '<Root>/Chart' */
-  CAN_2_Legs_ver2_DW.sfEvent = CAN_2_Legs_ver2_CALL_EVENT;
-  CAN_2_Legs_ver2_DW.is_Command = 0U;
-  CAN_2_Legs_ver2_DW.temporalCounter_i1 = 0U;
-  CAN_2_Legs_ver2_DW.is_active_c8_CAN_2_Legs_ver2 = 0U;
-  CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2 = 0U;
-  CAN_2_Legs_ver2_DW.done = 0.0;
-  CAN_2_Legs_ver2_DW.pf = 0.0;
-  CAN_2_Legs_ver2_DW.po = 0.0;
-  CAN_2_Legs_ver2_DW.slope = 0.0;
-  CAN_2_Legs_ver2_DW.tstep = 0.0;
-  CAN_2_Legs_ver2_DW.to = 0.0;
-  CAN_2_Legs_ver2_DW.time = 0.0;
-  CAN_2_Legs_ver2_DW.GRFy = 0.0;
-  CAN_2_Legs_ver2_DW.oldKp1 = 0.0;
-  CAN_2_Legs_ver2_DW.oldKp2 = 0.0;
-  CAN_2_Legs_ver2_DW.oldKv1 = 0.0;
-  CAN_2_Legs_ver2_DW.oldKv2 = 0.0;
-  CAN_2_Legs_ver2_DW.exitY = 0.0;
-  CAN_2_Legs_ver2_B.stop = 0.0;
-  CAN_2_Legs_ver2_B.theta1 = 0.0;
-  CAN_2_Legs_ver2_B.theta2 = 0.0;
-  CAN_2_Legs_ver2_B.c = 0.0;
-  CAN_2_Legs_ver2_B.T1 = 0.0;
-  CAN_2_Legs_ver2_B.T2 = 0.0;
-  CAN_2_Legs_ver2_B.Kp1 = 10.0;
-  CAN_2_Legs_ver2_B.Kp2 = 10.0;
-  CAN_2_Legs_ver2_B.Kd1 = 0.1;
-  CAN_2_Legs_ver2_B.Kd2 = 0.1;
-
-  /* Start for S-Function (sg_IO602_IO691_write_s): '<S4>/CAN Write1' */
-  /* Level2 S-Function Block: '<S4>/CAN Write1' (sg_IO602_IO691_write_s) */
-  {
-    SimStruct *rts = CAN_2_Legs_ver2_M->childSfunctions[0];
-    sfcnStart(rts);
-    if (ssGetErrorStatus(rts) != (NULL))
-      return;
-  }
-
-  /* Start for S-Function (sg_IO602_IO691_write_s): '<S5>/CAN Write1' */
-  /* Level2 S-Function Block: '<S5>/CAN Write1' (sg_IO602_IO691_write_s) */
-  {
-    SimStruct *rts = CAN_2_Legs_ver2_M->childSfunctions[1];
-    sfcnStart(rts);
-    if (ssGetErrorStatus(rts) != (NULL))
-      return;
-  }
-
   /* Start for S-Function (sg_IO602_IO691_read_s): '<S6>/CAN Read' */
   /* Level2 S-Function Block: '<S6>/CAN Read' (sg_IO602_IO691_read_s) */
   {
@@ -2246,6 +2258,54 @@ void CAN_2_Legs_ver2_initialize(void)
   CAN_2_Legs_ver2_B.CANUnpack_o5 = CAN_2_Legs_ver2_cal->Status2_Y0;
 
   /* End of SystemInitialize for SubSystem: '<Root>/While Iterator Subsystem' */
+
+  /* SystemInitialize for Chart: '<Root>/Chart' */
+  CAN_2_Legs_ver2_DW.sfEvent = CAN_2_Legs_ver2_CALL_EVENT;
+  CAN_2_Legs_ver2_DW.is_Command = 0U;
+  CAN_2_Legs_ver2_DW.temporalCounter_i1 = 0U;
+  CAN_2_Legs_ver2_DW.is_active_c8_CAN_2_Legs_ver2 = 0U;
+  CAN_2_Legs_ver2_DW.is_c8_CAN_2_Legs_ver2 = 0U;
+  CAN_2_Legs_ver2_DW.done = 0.0;
+  CAN_2_Legs_ver2_DW.pf = 0.0;
+  CAN_2_Legs_ver2_DW.po = 0.0;
+  CAN_2_Legs_ver2_DW.slope = 0.0;
+  CAN_2_Legs_ver2_DW.tstep = 0.0;
+  CAN_2_Legs_ver2_DW.to = 0.0;
+  CAN_2_Legs_ver2_DW.time = 0.0;
+  CAN_2_Legs_ver2_DW.oldKp1 = 0.0;
+  CAN_2_Legs_ver2_DW.oldKp2 = 0.0;
+  CAN_2_Legs_ver2_DW.oldKv1 = 0.0;
+  CAN_2_Legs_ver2_DW.oldKv2 = 0.0;
+  CAN_2_Legs_ver2_DW.exitY = 0.0;
+  CAN_2_Legs_ver2_DW.hop = 0.0;
+  CAN_2_Legs_ver2_B.stop = 0.0;
+  CAN_2_Legs_ver2_B.theta1 = 0.0;
+  CAN_2_Legs_ver2_B.theta2 = 0.0;
+  CAN_2_Legs_ver2_B.c = 0.0;
+  CAN_2_Legs_ver2_B.T1 = 0.0;
+  CAN_2_Legs_ver2_B.T2 = 0.0;
+  CAN_2_Legs_ver2_B.Kp1 = 10.0;
+  CAN_2_Legs_ver2_B.Kp2 = 10.0;
+  CAN_2_Legs_ver2_B.Kd1 = 0.1;
+  CAN_2_Legs_ver2_B.Kd2 = 0.1;
+
+  /* Start for S-Function (sg_IO602_IO691_write_s): '<S4>/CAN Write1' */
+  /* Level2 S-Function Block: '<S4>/CAN Write1' (sg_IO602_IO691_write_s) */
+  {
+    SimStruct *rts = CAN_2_Legs_ver2_M->childSfunctions[0];
+    sfcnStart(rts);
+    if (ssGetErrorStatus(rts) != (NULL))
+      return;
+  }
+
+  /* Start for S-Function (sg_IO602_IO691_write_s): '<S5>/CAN Write1' */
+  /* Level2 S-Function Block: '<S5>/CAN Write1' (sg_IO602_IO691_write_s) */
+  {
+    SimStruct *rts = CAN_2_Legs_ver2_M->childSfunctions[1];
+    sfcnStart(rts);
+    if (ssGetErrorStatus(rts) != (NULL))
+      return;
+  }
 }
 
 /* Model terminate function */
@@ -2257,6 +2317,17 @@ void CAN_2_Legs_ver2_terminate(void)
     SimStruct *rts = CAN_2_Legs_ver2_M->childSfunctions[3];
     sfcnTerminate(rts);
   }
+
+  /* Terminate for Iterator SubSystem: '<Root>/While Iterator Subsystem' */
+
+  /* Terminate for S-Function (sg_IO602_IO691_read_s): '<S6>/CAN Read' */
+  /* Level2 S-Function Block: '<S6>/CAN Read' (sg_IO602_IO691_read_s) */
+  {
+    SimStruct *rts = CAN_2_Legs_ver2_M->childSfunctions[2];
+    sfcnTerminate(rts);
+  }
+
+  /* End of Terminate for SubSystem: '<Root>/While Iterator Subsystem' */
 
   /* Terminate for Atomic SubSystem: '<Root>/Simulink Function1' */
 
@@ -2279,17 +2350,6 @@ void CAN_2_Legs_ver2_terminate(void)
   }
 
   /* End of Terminate for SubSystem: '<Root>/Simulink Function3' */
-
-  /* Terminate for Iterator SubSystem: '<Root>/While Iterator Subsystem' */
-
-  /* Terminate for S-Function (sg_IO602_IO691_read_s): '<S6>/CAN Read' */
-  /* Level2 S-Function Block: '<S6>/CAN Read' (sg_IO602_IO691_read_s) */
-  {
-    SimStruct *rts = CAN_2_Legs_ver2_M->childSfunctions[2];
-    sfcnTerminate(rts);
-  }
-
-  /* End of Terminate for SubSystem: '<Root>/While Iterator Subsystem' */
 
   /* Terminate for S-Function (sg_IO602_IO691_status_s): '<Root>/CAN Status' */
   /* Level2 S-Function Block: '<Root>/CAN Status' (sg_IO602_IO691_status_s) */
