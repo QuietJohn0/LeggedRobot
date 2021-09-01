@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs_whileloop_johnmessingabout".
  *
- * Model version              : 1.16
+ * Model version              : 1.20
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Fri Aug 27 14:06:02 2021
+ * C++ source code generated on : Fri Aug 27 15:31:49 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping

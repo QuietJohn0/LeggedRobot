@@ -72,19 +72,19 @@ struct CAN_2_Legs_whileloop_j_cal_type {
   real_T Constant_Value;               /* Expression: 3
                                         * Referenced by: '<Root>/Constant'
                                         */
-  real_T Constant7_Value;              /* Expression: 0.4
+  real_T Constant7_Value;              /* Expression: 0
                                         * Referenced by: '<Root>/Constant7'
                                         */
   real_T Gain_Gain;                    /* Expression: 18/30
                                         * Referenced by: '<Root>/Gain'
                                         */
-  real_T Constant6_Value;              /* Expression: 0.2
+  real_T Constant6_Value;              /* Expression: 3
                                         * Referenced by: '<Root>/Constant6'
                                         */
   real_T Constant8_Value;              /* Expression: 0
                                         * Referenced by: '<Root>/Constant8'
                                         */
-  real_T Constant9_Value;              /* Expression: 12
+  real_T Constant9_Value;              /* Expression: 25
                                         * Referenced by: '<Root>/Constant9'
                                         */
   real_T Constant10_Value;             /* Expression: 0.1
@@ -93,16 +93,16 @@ struct CAN_2_Legs_whileloop_j_cal_type {
   real_T Constant11_Value;             /* Expression: 0
                                         * Referenced by: '<Root>/Constant11'
                                         */
-  real_T Constant1_Value;              /* Expression: -0.9
+  real_T Constant1_Value;              /* Expression: -0.1
                                         * Referenced by: '<Root>/Constant1'
                                         */
   real_T Constant2_Value;              /* Expression: 0
                                         * Referenced by: '<Root>/Constant2'
                                         */
-  real_T Constant3_Value;              /* Expression: 12
+  real_T Constant3_Value;              /* Expression: 1
                                         * Referenced by: '<Root>/Constant3'
                                         */
-  real_T Constant4_Value;              /* Expression: 0.1
+  real_T Constant4_Value;              /* Expression: 0
                                         * Referenced by: '<Root>/Constant4'
                                         */
   real_T Constant5_Value;              /* Expression: 0

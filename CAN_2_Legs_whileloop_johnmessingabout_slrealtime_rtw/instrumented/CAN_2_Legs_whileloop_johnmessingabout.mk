@@ -2,7 +2,7 @@
 ## Makefile generated for component 'CAN_2_Legs_whileloop_johnmessingabout'. 
 ## 
 ## Makefile     : CAN_2_Legs_whileloop_johnmessingabout.mk
-## Generated on : Fri Aug 27 14:06:07 2021
+## Generated on : Fri Aug 27 15:31:54 2021
 ## Final product: $(START_DIR)/CAN_2_Legs_whileloop_johnmessingabout_slrealtime_rtw/CAN_2_Legs_whileloop_johnmessingabout
 ## Product type : executable
 ## 
@@ -21,7 +21,7 @@ MAKEFILE                  = CAN_2_Legs_whileloop_johnmessingabout.mk
 MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2021a
 MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2021a/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
-START_DIR                 = C:/Users/celwe/OneDrive/Desktop/GITHUB~1/LEGGED~1
+START_DIR                 = C:/Users/johna/Documents/MATtierLAB/MATtierLAB/LeggedRobotGithub/LeggedRobot
 SOLVER                    = 
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0

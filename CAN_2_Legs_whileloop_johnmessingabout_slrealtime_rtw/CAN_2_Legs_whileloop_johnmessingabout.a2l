@@ -8,9 +8,9 @@
  *
  * Code generation for model "CAN_2_Legs_whileloop_johnmessingabout".
  *
- * Model version              : 1.16
+ * Model version              : 1.20
  * Simulink Coder version : 10.3 R2021a
- * C source code generated on : Fri Aug 27 14:06:13 2021
+ * C source code generated on : Fri Aug 27 15:32:03 2021
  *
  * Target selection: slrealtime.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
