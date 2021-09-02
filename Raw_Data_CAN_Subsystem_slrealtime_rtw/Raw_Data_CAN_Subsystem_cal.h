@@ -43,18 +43,13 @@ struct Raw_Data_CAN_Subsystem_cal_type {
                       /* Expression: [initValues(1:4) messageType initValues(6)]
                        * Referenced by: '<S2>/CAN Read'
                        */
-  real_T SineWave1_Amp;                /* Expression: pi/2
-                                        * Referenced by: '<S2>/Sine Wave1'
+  real_T CANWrite1_P1_Size[2];         /* Computed Parameter: CANWrite1_P1_Size
+                                        * Referenced by: '<S2>/CAN Write1'
                                         */
-  real_T SineWave1_Bias;               /* Expression: 0
-                                        * Referenced by: '<S2>/Sine Wave1'
-                                        */
-  real_T SineWave1_Freq;               /* Expression: 2*pi/3
-                                        * Referenced by: '<S2>/Sine Wave1'
-                                        */
-  real_T SineWave1_Phase;              /* Expression: 0
-                                        * Referenced by: '<S2>/Sine Wave1'
-                                        */
+  real_T CANWrite1_P1[7];
+     /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
+      * Referenced by: '<S2>/CAN Write1'
+      */
   real_T SineWave_Amp;                 /* Expression: pi/2
                                         * Referenced by: '<S2>/Sine Wave'
                                         */
@@ -67,13 +62,18 @@ struct Raw_Data_CAN_Subsystem_cal_type {
   real_T SineWave_Phase;               /* Expression: pi/2
                                         * Referenced by: '<S2>/Sine Wave'
                                         */
-  real_T CANWrite1_P1_Size[2];         /* Computed Parameter: CANWrite1_P1_Size
-                                        * Referenced by: '<S2>/CAN Write1'
+  real_T SineWave1_Amp;                /* Expression: pi/2
+                                        * Referenced by: '<S2>/Sine Wave1'
                                         */
-  real_T CANWrite1_P1[7];
-     /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
-      * Referenced by: '<S2>/CAN Write1'
-      */
+  real_T SineWave1_Bias;               /* Expression: 0
+                                        * Referenced by: '<S2>/Sine Wave1'
+                                        */
+  real_T SineWave1_Freq;               /* Expression: 2*pi/3
+                                        * Referenced by: '<S2>/Sine Wave1'
+                                        */
+  real_T SineWave1_Phase;              /* Expression: 0
+                                        * Referenced by: '<S2>/Sine Wave1'
+                                        */
   real_T CANStatus_P1_Size[2];         /* Computed Parameter: CANStatus_P1_Size
                                         * Referenced by: '<S2>/CAN Status'
                                         */
@@ -287,7 +287,7 @@ struct Raw_Data_CAN_Subsystem_cal_type {
   real_T Constant_Value;               /* Expression: 0
                                         * Referenced by: '<S1>/Constant'
                                         */
-  real_T Onespin_Value[5];             /* Expression: [pi,0,.5,.5,0]
+  real_T Onespin_Value[5];             /* Expression: [pi,0,.5,0,0]
                                         * Referenced by: '<Root>/One spin'
                                         */
   real_T DataStoreMemory_InitialValue; /* Expression: 1

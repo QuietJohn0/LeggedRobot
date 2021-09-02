@@ -8,9 +8,9 @@
  *
  * Code generation for model "Raw_Data_CAN_Subsystem".
  *
- * Model version              : 1.18
+ * Model version              : 1.20
  * Simulink Coder version : 10.3 R2021a
- * C source code generated on : Fri Jul 30 16:16:42 2021
+ * C source code generated on : Thu Sep 02 12:26:07 2021
  *
  * Target selection: slrealtime.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -827,6 +827,10 @@ ASAP2_VERSION  1 71
       ALIGNMENT_INT64 4
     /end MOD_COMMON
 
+  /begin CHARACTERISTIC  Raw_Data_CAN_Subsystem_P.c ""  
+    VALUE 0x00218BA8 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
   /begin CHARACTERISTIC  Raw_Data_CAN_Subsystem_cal_impl.CANRead_P1 ""  
     VAL_BLK 0x002161D0 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
     MATRIX_DIM                        6 1 
@@ -982,7 +986,7 @@ ASAP2_VERSION  1 71
   /end CHARACTERISTIC 
 
   /begin CHARACTERISTIC  Raw_Data_CAN_Subsystem_cal_impl.CANWrite1_P1 ""  
-    VAL_BLK 0x00216250 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
+    VAL_BLK 0x00216210 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
     MATRIX_DIM                        7 1 
   /end CHARACTERISTIC 
 
@@ -1048,35 +1052,35 @@ ASAP2_VERSION  1 71
   /end CHARACTERISTIC 
 
   /begin CHARACTERISTIC  Raw_Data_CAN_Subsystem_cal_impl.SineWave1_Amp ""  
-    VALUE 0x00216200 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
+    VALUE 0x00216268 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
   /end CHARACTERISTIC 
 
   /begin CHARACTERISTIC  Raw_Data_CAN_Subsystem_cal_impl.SineWave1_Bias ""  
-    VALUE 0x00216208 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
+    VALUE 0x00216270 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
   /end CHARACTERISTIC 
 
   /begin CHARACTERISTIC  Raw_Data_CAN_Subsystem_cal_impl.SineWave1_Freq ""  
-    VALUE 0x00216210 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
+    VALUE 0x00216278 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
   /end CHARACTERISTIC 
 
   /begin CHARACTERISTIC  Raw_Data_CAN_Subsystem_cal_impl.SineWave1_Phase ""  
-    VALUE 0x00216218 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
+    VALUE 0x00216280 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
   /end CHARACTERISTIC 
 
   /begin CHARACTERISTIC  Raw_Data_CAN_Subsystem_cal_impl.SineWave_Amp ""  
-    VALUE 0x00216220 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
+    VALUE 0x00216248 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
   /end CHARACTERISTIC 
 
   /begin CHARACTERISTIC  Raw_Data_CAN_Subsystem_cal_impl.SineWave_Bias ""  
-    VALUE 0x00216228 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
+    VALUE 0x00216250 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
   /end CHARACTERISTIC 
 
   /begin CHARACTERISTIC  Raw_Data_CAN_Subsystem_cal_impl.SineWave_Freq ""  
-    VALUE 0x00216230 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
+    VALUE 0x00216258 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
   /end CHARACTERISTIC 
 
   /begin CHARACTERISTIC  Raw_Data_CAN_Subsystem_cal_impl.SineWave_Phase ""  
-    VALUE 0x00216238 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
+    VALUE 0x00216260 Scalar_FLOAT64_IEEE 0 Raw_Data_CAN_Subsystem_CM_double -1.7E+308 1.7E+308  
   /end CHARACTERISTIC 
 
   /begin CHARACTERISTIC  Raw_Data_CAN_Subsystem_cal_impl.Status_Y0 ""  
@@ -1088,46 +1092,51 @@ ASAP2_VERSION  1 71
     ECU_ADDRESS                       0x00218B20
   /end MEASUREMENT 
 
+  /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.Add_e ""  
+    FLOAT64_IEEE Raw_Data_CAN_Subsystem_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00218B30
+  /end MEASUREMENT 
+
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.BytePacking ""  
     UBYTE Raw_Data_CAN_Subsystem_CM_uint8       0             0       0 255  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        8 
-    ECU_ADDRESS                       0x00218B8D
+    ECU_ADDRESS                       0x00218B95
   /end MEASUREMENT 
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.CANRead_o1 ""  
     UBYTE Raw_Data_CAN_Subsystem_CM_logical       0             0       0 1  
-    ECU_ADDRESS                       0x00218B9F
+    ECU_ADDRESS                       0x00218BA7
   /end MEASUREMENT 
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.CANUnpack_o1 ""  
     FLOAT64_IEEE Raw_Data_CAN_Subsystem_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x00218B48
+    ECU_ADDRESS                       0x00218B50
   /end MEASUREMENT 
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.CANUnpack_o2 ""  
     FLOAT64_IEEE Raw_Data_CAN_Subsystem_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x00218B50
+    ECU_ADDRESS                       0x00218B58
   /end MEASUREMENT 
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.CANUnpack_o3 ""  
     FLOAT64_IEEE Raw_Data_CAN_Subsystem_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x00218B58
+    ECU_ADDRESS                       0x00218B60
   /end MEASUREMENT 
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.CANUnpack_o4 ""  
     FLOAT64_IEEE Raw_Data_CAN_Subsystem_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x00218B60
+    ECU_ADDRESS                       0x00218B68
   /end MEASUREMENT 
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.CANUnpack_o5 ""  
     UBYTE Raw_Data_CAN_Subsystem_CM_uint8       0             0       0 255  
-    ECU_ADDRESS                       0x00218B9D
+    ECU_ADDRESS                       0x00218BA5
   /end MEASUREMENT 
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.CANWrite1 ""  
     SBYTE Raw_Data_CAN_Subsystem_CM_int8       0             0       -128 127  
-    ECU_ADDRESS                       0x00218B9E
+    ECU_ADDRESS                       0x00218BA6
   /end MEASUREMENT 
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.CastToDouble ""  
@@ -1146,7 +1155,7 @@ ASAP2_VERSION  1 71
     UBYTE Raw_Data_CAN_Subsystem_CM_uint8       0             0       0 255  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        5 
-    ECU_ADDRESS                       0x00218B80
+    ECU_ADDRESS                       0x00218B88
   /end MEASUREMENT 
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.DataStoreRead ""  
@@ -1183,14 +1192,14 @@ ASAP2_VERSION  1 71
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.I_ff ""  
     FLOAT64_IEEE Raw_Data_CAN_Subsystem_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x00218B78
+    ECU_ADDRESS                       0x00218B80
   /end MEASUREMENT 
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.MultiportSwitch ""  
     UBYTE Raw_Data_CAN_Subsystem_CM_uint8       0             0       0 255  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        8 
-    ECU_ADDRESS                       0x00218B85
+    ECU_ADDRESS                       0x00218B8D
   /end MEASUREMENT 
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.Onespin ""  
@@ -1207,7 +1216,7 @@ ASAP2_VERSION  1 71
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.SineWave1 ""  
     FLOAT64_IEEE Raw_Data_CAN_Subsystem_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x00218B30
+    ECU_ADDRESS                       0x00218B40
   /end MEASUREMENT 
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.Sum ""  
@@ -1226,22 +1235,22 @@ ASAP2_VERSION  1 71
     UBYTE Raw_Data_CAN_Subsystem_CM_uint8       0             0       0 255  
     LAYOUT                            COLUMN_DIR
     MATRIX_DIM                        8 
-    ECU_ADDRESS                       0x00218B95
+    ECU_ADDRESS                       0x00218B9D
   /end MEASUREMENT 
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.pc ""  
     FLOAT64_IEEE Raw_Data_CAN_Subsystem_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x00218B40
+    ECU_ADDRESS                       0x00218B48
   /end MEASUREMENT 
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.position ""  
     FLOAT64_IEEE Raw_Data_CAN_Subsystem_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x00218B68
+    ECU_ADDRESS                       0x00218B70
   /end MEASUREMENT 
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_B.velocity ""  
     FLOAT64_IEEE Raw_Data_CAN_Subsystem_CM_double       0             0       -1.7E+308 1.7E+308  
-    ECU_ADDRESS                       0x00218B70
+    ECU_ADDRESS                       0x00218B78
   /end MEASUREMENT 
 
   /begin MEASUREMENT  Raw_Data_CAN_Subsystem_DW.CANUnpack_ModeSignalID ""  

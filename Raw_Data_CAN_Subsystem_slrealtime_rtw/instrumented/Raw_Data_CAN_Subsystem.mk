@@ -2,7 +2,7 @@
 ## Makefile generated for component 'Raw_Data_CAN_Subsystem'. 
 ## 
 ## Makefile     : Raw_Data_CAN_Subsystem.mk
-## Generated on : Fri Jul 30 16:15:54 2021
+## Generated on : Thu Sep 02 12:25:12 2021
 ## Final product: $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/Raw_Data_CAN_Subsystem
 ## Product type : executable
 ## 
@@ -21,7 +21,7 @@ MAKEFILE                  = Raw_Data_CAN_Subsystem.mk
 MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2021a
 MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2021a/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
-START_DIR                 = C:/Users/johna/Documents/MATtierLAB/MATtierLAB/LeggedRobotGithub/LeggedRobot
+START_DIR                 = C:/Users/celwe/OneDrive/Desktop/GITHUB~1/LEGGED~1
 SOLVER                    = 
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0
@@ -150,7 +150,7 @@ DEFINES = $(DEFINES_) $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(MATLAB_ROOT)/rtw/c/src/rt_matrx.c $(MATLAB_ROOT)/rtw/c/src/rt_printf.c $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/slrealtime_datatype_ground.c $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/Raw_Data_CAN_Subsystem.cpp $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/Raw_Data_CAN_Subsystem_cal.cpp $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/can_datatype_ground.cpp $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/rtGetInf.cpp $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/rtGetNaN.cpp $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/rt_nonfinite.cpp $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/Raw_Data_CAN_Subsystem_calintf.cpp $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/main.cpp C:/ProgramData/Speedgoat/speedgoatlib/R2021a/9.2.1.1/sg_blocks/can/sg_IO602_IO691_read_s.cpp C:/ProgramData/Speedgoat/speedgoatlib/R2021a/9.2.1.1/sg_blocks/can/sg_IO602_IO691_setup_s.cpp C:/ProgramData/Speedgoat/speedgoatlib/R2021a/9.2.1.1/sg_blocks/can/sg_IO602_IO691_status_s.cpp C:/ProgramData/Speedgoat/speedgoatlib/R2021a/9.2.1.1/sg_blocks/can/sg_IO602_IO691_write_s.cpp $(MATLAB_ROOT)/toolbox/coder/profile/src/host_timer_x86.c $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/slrealtime_code_profiling_utility_functions.cpp
+SRCS = $(MATLAB_ROOT)/rtw/c/src/rt_matrx.c $(MATLAB_ROOT)/rtw/c/src/rt_printf.c $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/slrealtime_datatype_ground.c $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/Raw_Data_CAN_Subsystem.cpp $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/Raw_Data_CAN_Subsystem_cal.cpp $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/Raw_Data_CAN_Subsystem_data.cpp $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/can_datatype_ground.cpp $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/rtGetInf.cpp $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/rtGetNaN.cpp $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/rt_nonfinite.cpp $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/Raw_Data_CAN_Subsystem_calintf.cpp $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/main.cpp C:/ProgramData/Speedgoat/speedgoatlib/R2021a/9.2.1.1/sg_blocks/can/sg_IO602_IO691_read_s.cpp C:/ProgramData/Speedgoat/speedgoatlib/R2021a/9.2.1.1/sg_blocks/can/sg_IO602_IO691_setup_s.cpp C:/ProgramData/Speedgoat/speedgoatlib/R2021a/9.2.1.1/sg_blocks/can/sg_IO602_IO691_status_s.cpp C:/ProgramData/Speedgoat/speedgoatlib/R2021a/9.2.1.1/sg_blocks/can/sg_IO602_IO691_write_s.cpp $(MATLAB_ROOT)/toolbox/coder/profile/src/host_timer_x86.c $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/slrealtime_code_profiling_utility_functions.cpp
 
 ALL_SRCS = $(SRCS)
 
@@ -158,7 +158,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = rt_matrx.o rt_printf.o slrealtime_datatype_ground.o Raw_Data_CAN_Subsystem.o Raw_Data_CAN_Subsystem_cal.o can_datatype_ground.o rtGetInf.o rtGetNaN.o rt_nonfinite.o Raw_Data_CAN_Subsystem_calintf.o main.o sg_IO602_IO691_read_s.o sg_IO602_IO691_setup_s.o sg_IO602_IO691_status_s.o sg_IO602_IO691_write_s.o host_timer_x86.o slrealtime_code_profiling_utility_functions.o
+OBJS = rt_matrx.o rt_printf.o slrealtime_datatype_ground.o Raw_Data_CAN_Subsystem.o Raw_Data_CAN_Subsystem_cal.o Raw_Data_CAN_Subsystem_data.o can_datatype_ground.o rtGetInf.o rtGetNaN.o rt_nonfinite.o Raw_Data_CAN_Subsystem_calintf.o main.o sg_IO602_IO691_read_s.o sg_IO602_IO691_setup_s.o sg_IO602_IO691_status_s.o sg_IO602_IO691_write_s.o host_timer_x86.o slrealtime_code_profiling_utility_functions.o
 
 ALL_OBJS = $(OBJS)
 
@@ -384,6 +384,10 @@ Raw_Data_CAN_Subsystem.o : $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/Ra
 
 
 Raw_Data_CAN_Subsystem_cal.o : $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/Raw_Data_CAN_Subsystem_cal.cpp
+	$(CPP) $(CPPFLAGS) -o $@ $<
+
+
+Raw_Data_CAN_Subsystem_data.o : $(START_DIR)/Raw_Data_CAN_Subsystem_slrealtime_rtw/Raw_Data_CAN_Subsystem_data.cpp
 	$(CPP) $(CPPFLAGS) -o $@ $<
 
 

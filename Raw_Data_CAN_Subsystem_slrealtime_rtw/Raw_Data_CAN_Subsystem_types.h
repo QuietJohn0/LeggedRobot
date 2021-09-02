@@ -7,9 +7,9 @@
  *
  * Code generation for model "Raw_Data_CAN_Subsystem".
  *
- * Model version              : 1.18
+ * Model version              : 1.20
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Fri Jul 30 16:15:50 2021
+ * C++ source code generated on : Thu Sep  2 12:25:01 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -20,8 +20,13 @@
 
 #ifndef RTW_HEADER_Raw_Data_CAN_Subsystem_types_h_
 #define RTW_HEADER_Raw_Data_CAN_Subsystem_types_h_
+#include "rtwtypes.h"
+#include "multiword_types.h"
 
 /* Model Code Variants */
+
+/* Parameters (default storage) */
+typedef struct P_Raw_Data_CAN_Subsystem_T_ P_Raw_Data_CAN_Subsystem_T;
 
 /* Forward declaration for rtModel */
 typedef struct tag_RTM_Raw_Data_CAN_Subsystem_T

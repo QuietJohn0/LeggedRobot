@@ -7,9 +7,9 @@
  *
  * Code generation for model "Raw_Data_CAN_Subsystem".
  *
- * Model version              : 1.18
+ * Model version              : 1.20
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Fri Jul 30 16:15:50 2021
+ * C++ source code generated on : Thu Sep  2 12:25:01 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -562,29 +562,19 @@ void Raw_Data_CAN_Subsystem_step(void)
     /* DataStoreRead: '<S2>/Data Store Read' */
     Raw_Data_CAN_Subsystem_B.DataStoreRead_b = Raw_Data_CAN_Subsystem_DW.c;
 
+    /* Sum: '<S2>/Add' incorporates:
+     *  Constant: '<S2>/Constant2'
+     */
+    Raw_Data_CAN_Subsystem_B.Add_e = Raw_Data_CAN_Subsystem_P.c +
+      Raw_Data_CAN_Subsystem_B.DataStoreRead_b;
+
     /* MATLAB Function: '<S2>/MATLAB Function' */
     Raw_Data_CAN_Subsystem_B.pc = (Raw_Data_CAN_Subsystem_B.Onespin[1] *
       Raw_Data_CAN_Subsystem_B.Onespin[3] + Raw_Data_CAN_Subsystem_B.Onespin[4])
       / Raw_Data_CAN_Subsystem_B.Onespin[2] + Raw_Data_CAN_Subsystem_B.Onespin[0];
 
-    /* Sin: '<S2>/Sine Wave1' */
-    Raw_Data_CAN_Subsystem_B.SineWave1 = std::sin
-      (Raw_Data_CAN_Subsystem_cal->SineWave1_Freq *
-       Raw_Data_CAN_Subsystem_M->Timing.t[0] +
-       Raw_Data_CAN_Subsystem_cal->SineWave1_Phase) *
-      Raw_Data_CAN_Subsystem_cal->SineWave1_Amp +
-      Raw_Data_CAN_Subsystem_cal->SineWave1_Bias;
-
-    /* Sin: '<S2>/Sine Wave' */
-    Raw_Data_CAN_Subsystem_B.SineWave = std::sin
-      (Raw_Data_CAN_Subsystem_cal->SineWave_Freq *
-       Raw_Data_CAN_Subsystem_M->Timing.t[0] +
-       Raw_Data_CAN_Subsystem_cal->SineWave_Phase) *
-      Raw_Data_CAN_Subsystem_cal->SineWave_Amp +
-      Raw_Data_CAN_Subsystem_cal->SineWave_Bias;
-
     /* MATLAB Function: '<S2>/floats -> bytes' */
-    I_ff = Raw_Data_CAN_Subsystem_B.SineWave1;
+    I_ff = Raw_Data_CAN_Subsystem_B.Onespin[0];
     if (!(I_ff < 95.5)) {
       I_ff = 95.5;
     }
@@ -606,7 +596,7 @@ void Raw_Data_CAN_Subsystem_step(void)
       p_data[i + loop_ub] = B[i];
     }
 
-    I_ff = Raw_Data_CAN_Subsystem_B.SineWave;
+    I_ff = Raw_Data_CAN_Subsystem_B.Onespin[1];
     if (!(I_ff < 45.0)) {
       I_ff = 45.0;
     }
@@ -775,7 +765,7 @@ void Raw_Data_CAN_Subsystem_step(void)
     /* End of MATLAB Function: '<S2>/floats -> bytes' */
 
     /* MultiPortSwitch: '<S2>/Multiport Switch' */
-    switch (static_cast<int32_T>(Raw_Data_CAN_Subsystem_B.DataStoreRead_b)) {
+    switch (static_cast<int32_T>(Raw_Data_CAN_Subsystem_B.Add_e)) {
      case 1:
       /* MultiPortSwitch: '<S2>/Multiport Switch' incorporates:
        *  Constant: '<S2>/Constant'
@@ -851,6 +841,22 @@ void Raw_Data_CAN_Subsystem_step(void)
       SimStruct *rts = Raw_Data_CAN_Subsystem_M->childSfunctions[2];
       sfcnOutputs(rts,0);
     }
+
+    /* Sin: '<S2>/Sine Wave' */
+    Raw_Data_CAN_Subsystem_B.SineWave = std::sin
+      (Raw_Data_CAN_Subsystem_cal->SineWave_Freq *
+       Raw_Data_CAN_Subsystem_M->Timing.t[0] +
+       Raw_Data_CAN_Subsystem_cal->SineWave_Phase) *
+      Raw_Data_CAN_Subsystem_cal->SineWave_Amp +
+      Raw_Data_CAN_Subsystem_cal->SineWave_Bias;
+
+    /* Sin: '<S2>/Sine Wave1' */
+    Raw_Data_CAN_Subsystem_B.SineWave1 = std::sin
+      (Raw_Data_CAN_Subsystem_cal->SineWave1_Freq *
+       Raw_Data_CAN_Subsystem_M->Timing.t[0] +
+       Raw_Data_CAN_Subsystem_cal->SineWave1_Phase) *
+      Raw_Data_CAN_Subsystem_cal->SineWave1_Amp +
+      Raw_Data_CAN_Subsystem_cal->SineWave1_Bias;
 
     /* S-Function (sg_IO602_IO691_status_s): '<S2>/CAN Status' */
 

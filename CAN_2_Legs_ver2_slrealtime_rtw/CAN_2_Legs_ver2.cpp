@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs_ver2".
  *
- * Model version              : 1.28
+ * Model version              : 1.30
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Wed Sep  1 16:49:08 2021
+ * C++ source code generated on : Thu Sep  2 13:27:41 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -1143,10 +1143,12 @@ void CAN_2_Legs_ver2_step(void)
 
   /* MATLAB Function: '<Root>/MATLAB Function1' */
   CAN_2_Legs_ver2_B.danger = 0.0;
-  if ((0 < (CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctionI[0] > 2.0) +
-       (CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctionI[0] < -2.0)) || (0 <
-       (CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctionI[1] > 2.0) +
-       (CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctionI[1] < -2.0))) {
+  if ((0 < ((CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctionI[0] > 2.0) +
+            (CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctionI[0] < -2.0)) -
+       (CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctionI[0] <= -95.5)) || (0 <
+       ((CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctionI[1] > 2.0) +
+        (CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctionI[1] < -2.0)) -
+       (CAN_2_Legs_ver2_B.TmpSignalConversionAtSFunctionI[1] <= -95.5))) {
     CAN_2_Legs_ver2_B.danger = 1.0;
   }
 

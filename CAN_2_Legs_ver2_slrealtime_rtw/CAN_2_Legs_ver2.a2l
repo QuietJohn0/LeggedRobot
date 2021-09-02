@@ -8,9 +8,9 @@
  *
  * Code generation for model "CAN_2_Legs_ver2".
  *
- * Model version              : 1.28
+ * Model version              : 1.30
  * Simulink Coder version : 10.3 R2021a
- * C source code generated on : Wed Sep 01 16:49:22 2021
+ * C source code generated on : Thu Sep 02 13:27:52 2021
  *
  * Target selection: slrealtime.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)

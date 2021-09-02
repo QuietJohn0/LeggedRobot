@@ -64,46 +64,6 @@ Raw_Data_CAN_Subsystem_cal_type Raw_Data_CAN_Subsystem_cal_impl = {
    */
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0 },
 
-  /* Expression: pi/2
-   * Referenced by: '<S2>/Sine Wave1'
-   */
-  1.5707963267948966,
-
-  /* Expression: 0
-   * Referenced by: '<S2>/Sine Wave1'
-   */
-  0.0,
-
-  /* Expression: 2*pi/3
-   * Referenced by: '<S2>/Sine Wave1'
-   */
-  2.0943951023931953,
-
-  /* Expression: 0
-   * Referenced by: '<S2>/Sine Wave1'
-   */
-  0.0,
-
-  /* Expression: pi/2
-   * Referenced by: '<S2>/Sine Wave'
-   */
-  1.5707963267948966,
-
-  /* Expression: 0
-   * Referenced by: '<S2>/Sine Wave'
-   */
-  0.0,
-
-  /* Expression: 2*pi/3
-   * Referenced by: '<S2>/Sine Wave'
-   */
-  2.0943951023931953,
-
-  /* Expression: pi/2
-   * Referenced by: '<S2>/Sine Wave'
-   */
-  1.5707963267948966,
-
   /* Computed Parameter: CANWrite1_P1_Size
    * Referenced by: '<S2>/CAN Write1'
    */
@@ -113,6 +73,46 @@ Raw_Data_CAN_Subsystem_cal_type Raw_Data_CAN_Subsystem_cal_impl = {
    * Referenced by: '<S2>/CAN Write1'
    */
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0, 1.0 },
+
+  /* Expression: pi/2
+   * Referenced by: '<S2>/Sine Wave'
+   */
+  1.5707963267948966,
+
+  /* Expression: 0
+   * Referenced by: '<S2>/Sine Wave'
+   */
+  0.0,
+
+  /* Expression: 2*pi/3
+   * Referenced by: '<S2>/Sine Wave'
+   */
+  2.0943951023931953,
+
+  /* Expression: pi/2
+   * Referenced by: '<S2>/Sine Wave'
+   */
+  1.5707963267948966,
+
+  /* Expression: pi/2
+   * Referenced by: '<S2>/Sine Wave1'
+   */
+  1.5707963267948966,
+
+  /* Expression: 0
+   * Referenced by: '<S2>/Sine Wave1'
+   */
+  0.0,
+
+  /* Expression: 2*pi/3
+   * Referenced by: '<S2>/Sine Wave1'
+   */
+  2.0943951023931953,
+
+  /* Expression: 0
+   * Referenced by: '<S2>/Sine Wave1'
+   */
+  0.0,
 
   /* Computed Parameter: CANStatus_P1_Size
    * Referenced by: '<S2>/CAN Status'
@@ -469,10 +469,10 @@ Raw_Data_CAN_Subsystem_cal_type Raw_Data_CAN_Subsystem_cal_impl = {
    */
   0.0,
 
-  /* Expression: [pi,0,.5,.5,0]
+  /* Expression: [pi,0,.5,0,0]
    * Referenced by: '<Root>/One spin'
    */
-  { 3.1415926535897931, 0.0, 0.5, 0.5, 0.0 },
+  { 3.1415926535897931, 0.0, 0.5, 0.0, 0.0 },
 
   /* Expression: 1
    * Referenced by: '<Root>/Data Store Memory'

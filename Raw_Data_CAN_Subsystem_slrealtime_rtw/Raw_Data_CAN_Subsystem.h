@@ -7,9 +7,9 @@
  *
  * Code generation for model "Raw_Data_CAN_Subsystem".
  *
- * Model version              : 1.18
+ * Model version              : 1.20
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Fri Jul 30 16:15:50 2021
+ * C++ source code generated on : Thu Sep  2 12:25:01 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -141,8 +141,9 @@ struct B_Raw_Data_CAN_Subsystem_T {
   real_T DataStoreRead1_p;             /* '<S9>/Data Store Read1' */
   real_T Add;                          /* '<S9>/Add' */
   real_T DataStoreRead_b;              /* '<S2>/Data Store Read' */
-  real_T SineWave1;                    /* '<S2>/Sine Wave1' */
+  real_T Add_e;                        /* '<S2>/Add' */
   real_T SineWave;                     /* '<S2>/Sine Wave' */
+  real_T SineWave1;                    /* '<S2>/Sine Wave1' */
   real_T pc;                           /* '<S2>/MATLAB Function' */
   real_T CANUnpack_o1;                 /* '<S5>/CAN Unpack' */
   real_T CANUnpack_o2;                 /* '<S5>/CAN Unpack' */
@@ -229,6 +230,13 @@ struct DW_Raw_Data_CAN_Subsystem_T {
   int8_T Subsystem_SubsysRanBC_o;      /* '<Root>/Subsystem' */
   int8_T If_ActiveSubsystem_f;         /* '<S2>/If' */
   int8_T IfActionSubsystem_SubsysRanBC;/* '<S2>/If Action Subsystem' */
+};
+
+/* Parameters (default storage) */
+struct P_Raw_Data_CAN_Subsystem_T_ {
+  real_T c;                            /* Variable: c
+                                        * Referenced by: '<S2>/Constant2'
+                                        */
 };
 
 /* Real-time Model Data Structure */
@@ -368,6 +376,20 @@ struct tag_RTM_Raw_Data_CAN_Subsystem_T {
     time_T tArray[2];
   } Timing;
 };
+
+/* Block parameters (default storage) */
+#ifdef __cplusplus
+
+extern "C" {
+
+#endif
+
+  extern P_Raw_Data_CAN_Subsystem_T Raw_Data_CAN_Subsystem_P;
+
+#ifdef __cplusplus
+
+}
+#endif
 
 /* Block signals (default storage) */
 #ifdef __cplusplus
