@@ -72,6 +72,11 @@ CAN_2_Legs_ver2_cal_type CAN_2_Legs_ver2_cal_impl = {
    */
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0 },
 
+  /* Expression: 30/18
+   * Referenced by: '<S6>/Gain'
+   */
+  1.6666666666666667,
+
   /* Computed Parameter: CANSetup_P1_Size
    * Referenced by: '<Root>/CAN Setup '
    */
@@ -104,23 +109,18 @@ CAN_2_Legs_ver2_cal_type CAN_2_Legs_ver2_cal_impl = {
    */
   0.0,
 
-  /* Expression: 0
-   * Referenced by: '<Root>/Constant1'
-   */
-  0.0,
-
   /* Expression: 0.0
    * Referenced by: '<Root>/Delay'
    */
   0.0,
 
-  /* Expression: 0
-   * Referenced by: '<Root>/Constant'
+  /* Expression: 0.0
+   * Referenced by: '<Root>/Delay1'
    */
   0.0,
 
-  /* Expression: 0.0
-   * Referenced by: '<Root>/Delay1'
+  /* Expression: 0
+   * Referenced by: '<Root>/Constant'
    */
   0.0,
 

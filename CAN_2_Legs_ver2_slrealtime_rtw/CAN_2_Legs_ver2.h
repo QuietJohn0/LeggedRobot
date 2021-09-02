@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs_ver2".
  *
- * Model version              : 1.24
+ * Model version              : 1.28
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Fri Aug 27 13:30:56 2021
+ * C++ source code generated on : Wed Sep  1 16:49:08 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -130,33 +130,32 @@ struct B_floatsbytes_CAN_2_Legs_ver2_T {
   uint8_T b[8];                        /* '<S4>/floats -> bytes' */
 };
 
-/* Block signals for system '<S9>/bytes -> floats' */
-struct B_bytesfloats_CAN_2_Legs_ver2_T {
-  real_T position;                     /* '<S9>/bytes -> floats' */
-  real_T velocity;                     /* '<S9>/bytes -> floats' */
-  real_T I_ff;                         /* '<S9>/bytes -> floats' */
-};
-
 /* Block signals (default storage) */
 struct B_CAN_2_Legs_ver2_T {
   CAN_DATATYPE CANRead_o2;             /* '<S6>/CAN Read' */
   CAN_DATATYPE CANPack1;               /* '<S5>/CAN Pack1' */
   CAN_DATATYPE CANmsg2;                /* '<S4>/CAN Pack1' */
-  real_T Constant1;                    /* '<Root>/Constant1' */
   real_T Delay;                        /* '<Root>/Delay' */
-  real_T Constant;                     /* '<Root>/Constant' */
   real_T Delay1;                       /* '<Root>/Delay1' */
+  real_T Constant;                     /* '<Root>/Constant' */
   real_T Gain;                         /* '<Root>/Gain' */
   real_T Constant8;                    /* '<Root>/Constant8' */
   real_T Constant2;                    /* '<Root>/Constant2' */
+  real_T Gain_m;                       /* '<S6>/Gain' */
   real_T CANUnpack_o1;                 /* '<S10>/CAN Unpack' */
   real_T CANUnpack_o2;                 /* '<S10>/CAN Unpack' */
   real_T CANUnpack_o3;                 /* '<S10>/CAN Unpack' */
   real_T CANUnpack_o4;                 /* '<S10>/CAN Unpack' */
+  real_T position;                     /* '<S10>/bytes -> floats' */
+  real_T velocity;                     /* '<S10>/bytes -> floats' */
+  real_T I_ff;                         /* '<S10>/bytes -> floats' */
   real_T CANUnpack_o1_f;               /* '<S9>/CAN Unpack' */
   real_T CANUnpack_o2_l;               /* '<S9>/CAN Unpack' */
   real_T CANUnpack_o3_k;               /* '<S9>/CAN Unpack' */
   real_T CANUnpack_o4_i;               /* '<S9>/CAN Unpack' */
+  real_T position_j;                   /* '<S9>/bytes -> floats' */
+  real_T velocity_h;                   /* '<S9>/bytes -> floats' */
+  real_T I_ff_o;                       /* '<S9>/bytes -> floats' */
   real_T TmpSignalConversionAtSFunctionI[2];/* '<Root>/MATLAB Function1' */
   real_T danger;                       /* '<Root>/MATLAB Function1' */
   real_T TmpSignalConversionAtSFunctio_l[2];/* '<Root>/MATLAB Function' */
@@ -180,8 +179,6 @@ struct B_CAN_2_Legs_ver2_T {
   uint8_T MultiportSwitch_f[8];        /* '<S4>/Multiport Switch' */
   uint8_T BytePacking_o[8];            /* '<S4>/Byte Packing' */
   boolean_T CANRead_o1;                /* '<S6>/CAN Read' */
-  B_bytesfloats_CAN_2_Legs_ver2_T sf_bytesfloats_e;/* '<S10>/bytes -> floats' */
-  B_bytesfloats_CAN_2_Legs_ver2_T sf_bytesfloats;/* '<S9>/bytes -> floats' */
   B_floatsbytes_CAN_2_Legs_ver2_T sf_floatsbytes_o;/* '<S5>/floats -> bytes' */
   B_floatsbytes_CAN_2_Legs_ver2_T sf_floatsbytes;/* '<S4>/floats -> bytes' */
 };
@@ -207,7 +204,6 @@ struct DW_CAN_2_Legs_ver2_T {
   real_T po2;                          /* '<Root>/Chart' */
   real_T slope1;                       /* '<Root>/Chart' */
   real_T slope2;                       /* '<Root>/Chart' */
-  real_T LR;                           /* '<Root>/Chart' */
   real_T Idle;                         /* '<Root>/Chart' */
   void *CANSetup_PWORK;                /* '<Root>/CAN Setup ' */
   struct {
@@ -303,6 +299,10 @@ struct DW_CAN_2_Legs_ver2_T {
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Dem_n;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Mode_;   /* synthesized block */
 
   void *CANWrite1_PWORK_f;             /* '<S4>/CAN Write1' */
   struct {

@@ -50,6 +50,9 @@ struct CAN_2_Legs_ver2_cal_type {
                       /* Expression: [initValues(1:4) messageType initValues(6)]
                        * Referenced by: '<S6>/CAN Read'
                        */
+  real_T Gain_Gain;                    /* Expression: 30/18
+                                        * Referenced by: '<S6>/Gain'
+                                        */
   real_T CANSetup_P1_Size[2];          /* Computed Parameter: CANSetup_P1_Size
                                         * Referenced by: '<Root>/CAN Setup '
                                         */
@@ -69,19 +72,16 @@ struct CAN_2_Legs_ver2_cal_type {
   real_T CANSetup_P3;                  /* Expression: termStruct
                                         * Referenced by: '<Root>/CAN Setup '
                                         */
-  real_T Constant1_Value;              /* Expression: 0
-                                        * Referenced by: '<Root>/Constant1'
-                                        */
   real_T Delay_InitialCondition;       /* Expression: 0.0
                                         * Referenced by: '<Root>/Delay'
-                                        */
-  real_T Constant_Value;               /* Expression: 0
-                                        * Referenced by: '<Root>/Constant'
                                         */
   real_T Delay1_InitialCondition;      /* Expression: 0.0
                                         * Referenced by: '<Root>/Delay1'
                                         */
-  real_T Gain_Gain;                    /* Expression: 18/30
+  real_T Constant_Value;               /* Expression: 0
+                                        * Referenced by: '<Root>/Constant'
+                                        */
+  real_T Gain_Gain_j;                  /* Expression: 18/30
                                         * Referenced by: '<Root>/Gain'
                                         */
   real_T Constant8_Value;              /* Expression: 0
@@ -298,7 +298,7 @@ struct CAN_2_Legs_ver2_cal_type {
                  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
                   * Referenced by: '<S4>/Constant'
                   */
-  uint8_T Constant1_Value_m[8];
+  uint8_T Constant1_Value[8];
                  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC]
                   * Referenced by: '<S4>/Constant1'
                   */

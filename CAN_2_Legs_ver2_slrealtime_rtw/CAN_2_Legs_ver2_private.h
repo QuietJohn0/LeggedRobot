@@ -7,9 +7,9 @@
  *
  * Code generation for model "CAN_2_Legs_ver2".
  *
- * Model version              : 1.24
+ * Model version              : 1.28
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Fri Aug 27 13:30:56 2021
+ * C++ source code generated on : Wed Sep  1 16:49:08 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -43,6 +43,5 @@ extern "C" void sg_IO602_IO691_status_s(SimStruct *rts);
 extern void CAN_2_Legs_ver2_floatsbytes(real_T rtu_position, real_T rtu_velocity,
   real_T rtu_K_p, real_T rtu_K_d, real_T rtu_T_ff,
   B_floatsbytes_CAN_2_Legs_ver2_T *localB);
-extern void CAN_2_Legs_ver2_bytesfloats(B_bytesfloats_CAN_2_Legs_ver2_T *localB);
 
 #endif                               /* RTW_HEADER_CAN_2_Legs_ver2_private_h_ */
