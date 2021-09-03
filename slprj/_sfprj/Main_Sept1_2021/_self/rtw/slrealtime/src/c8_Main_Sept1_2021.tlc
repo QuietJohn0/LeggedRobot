@@ -7,7 +7,7 @@
 %endfunction
 %function ChartDataMap(block, system) void
   %createrecord ChartDataElements {\
-    NumChartData   24 \
+    NumChartData   19 \
     ChartDataDefaults {\
       RecordType   "ChartData"\
       Dimensions   []\
@@ -95,55 +95,6 @@
       SrcLocation  ""\
     }\
     ChartData {\
-      Name         "time"\
-      Description  "ChartLocal"\
-      SFName       ""\
-      Path         "time"\
-      SrcLocation  ""\
-    }\
-    ChartData {\
-      Name         "oldKp1"\
-      Description  "ChartLocal"\
-      SFName       ""\
-      Path         "oldKp1"\
-      SrcLocation  ""\
-    }\
-    ChartData {\
-      Name         "oldKp2"\
-      Description  "ChartLocal"\
-      SFName       ""\
-      Path         "oldKp2"\
-      SrcLocation  ""\
-    }\
-    ChartData {\
-      Name         "oldKv1"\
-      Description  "ChartLocal"\
-      SFName       ""\
-      Path         "oldKv1"\
-      SrcLocation  ""\
-    }\
-    ChartData {\
-      Name         "oldKv2"\
-      Description  "ChartLocal"\
-      SFName       ""\
-      Path         "oldKv2"\
-      SrcLocation  ""\
-    }\
-    ChartData {\
-      Name         "exitY"\
-      Description  "ChartLocal"\
-      SFName       ""\
-      Path         "exitY"\
-      SrcLocation  ""\
-    }\
-    ChartData {\
-      Name         "hop"\
-      Description  "ChartLocal"\
-      SFName       ""\
-      Path         "hop"\
-      SrcLocation  ""\
-    }\
-    ChartData {\
       Name         "po1"\
       Description  "ChartLocal"\
       SFName       ""\
@@ -176,6 +127,20 @@
       Description  "ChartLocal"\
       SFName       ""\
       Path         "Idle"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "hop"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "hop"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "time"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "time"\
       SrcLocation  ""\
     }\
     ChartData {\

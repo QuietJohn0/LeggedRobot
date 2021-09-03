@@ -7,9 +7,9 @@
  *
  * Code generation for model "Main_Sept1_2021".
  *
- * Model version              : 1.32
+ * Model version              : 1.33
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Thu Sep  2 15:01:37 2021
+ * C++ source code generated on : Fri Sep  3 16:26:37 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -171,6 +171,7 @@ struct B_Main_Sept1_2021_T {
   real_T Kp2;                          /* '<Root>/Chart' */
   real_T Kd1;                          /* '<Root>/Chart' */
   real_T Kd2;                          /* '<Root>/Chart' */
+  real_T exitY;                        /* '<Root>/Chart' */
   int32_T WhileIterator;               /* '<S6>/While Iterator' */
   uint8_T CANUnpack_o5;                /* '<S10>/CAN Unpack' */
   uint8_T CANUnpack_o5_p;              /* '<S9>/CAN Unpack' */
@@ -193,18 +194,13 @@ struct DW_Main_Sept1_2021_T {
   real_T slope;                        /* '<Root>/Chart' */
   real_T tstep;                        /* '<Root>/Chart' */
   real_T to;                           /* '<Root>/Chart' */
-  real_T time;                         /* '<Root>/Chart' */
-  real_T oldKp1;                       /* '<Root>/Chart' */
-  real_T oldKp2;                       /* '<Root>/Chart' */
-  real_T oldKv1;                       /* '<Root>/Chart' */
-  real_T oldKv2;                       /* '<Root>/Chart' */
-  real_T exitY;                        /* '<Root>/Chart' */
-  real_T hop;                          /* '<Root>/Chart' */
   real_T po1;                          /* '<Root>/Chart' */
   real_T po2;                          /* '<Root>/Chart' */
   real_T slope1;                       /* '<Root>/Chart' */
   real_T slope2;                       /* '<Root>/Chart' */
   real_T Idle;                         /* '<Root>/Chart' */
+  real_T hop;                          /* '<Root>/Chart' */
+  real_T time;                         /* '<Root>/Chart' */
   void *CANSetup_PWORK;                /* '<Root>/CAN Setup ' */
   struct {
     void *AQHandles;
@@ -212,11 +208,15 @@ struct DW_Main_Sept1_2021_T {
 
   struct {
     void *AQHandles;
+  } TAQSigLogging_InsertedFor_Cha_b;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
   } TAQSigLogging_InsertedFor_Cha_j;   /* synthesized block */
 
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_Cha_b;   /* synthesized block */
+  } TAQSigLogging_InsertedFor_Ch_bl;   /* synthesized block */
 
   struct {
     void *AQHandles;
@@ -324,8 +324,8 @@ struct DW_Main_Sept1_2021_T {
   int_T CANUnpack_StatusPortID_f;      /* '<S9>/CAN Unpack' */
   int_T BytePacking_IWORK[2];          /* '<S5>/Byte Packing' */
   int_T BytePacking_IWORK_n[2];        /* '<S4>/Byte Packing' */
+  uint16_T temporalCounter_i1;         /* '<Root>/Chart' */
   uint8_T is_active_c8_Main_Sept1_2021;/* '<Root>/Chart' */
-  uint8_T temporalCounter_i1;          /* '<Root>/Chart' */
 };
 
 /* Real-time Model Data Structure */

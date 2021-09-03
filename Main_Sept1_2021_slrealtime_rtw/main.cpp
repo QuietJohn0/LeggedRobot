@@ -5,7 +5,7 @@
 #include "Main_Sept1_2021_calintf.h"
 
 /* Task descriptors */
-slrealtime::TaskInfo task_1( 0u, std::bind(Main_Sept1_2021_step), slrealtime::TaskInfo::PERIODIC, 0.1, 0, 40);
+slrealtime::TaskInfo task_1( 0u, std::bind(Main_Sept1_2021_step), slrealtime::TaskInfo::PERIODIC, 0.001, 0, 40);
 
 /* Executable base address for XCP */
 #ifdef __linux__

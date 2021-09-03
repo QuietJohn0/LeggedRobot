@@ -119,10 +119,10 @@ Main_Sept1_2021_cal_type Main_Sept1_2021_cal_impl = {
    */
   0.0,
 
-  /* Expression: 1
+  /* Expression: 0
    * Referenced by: '<Root>/Constant'
    */
-  1.0,
+  0.0,
 
   /* Expression: 18/30
    * Referenced by: '<Root>/Gain'

@@ -7,9 +7,9 @@
  *
  * Code generation for model "Main_Sept1_2021".
  *
- * Model version              : 1.32
+ * Model version              : 1.33
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Thu Sep  2 15:01:37 2021
+ * C++ source code generated on : Fri Sep  3 16:26:37 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -485,7 +485,7 @@ static void Main_Sept1_2021_getTorque(real_T pos1, real_T pos2, real_T currTime,
   real_T t;
   int32_T r1;
   int32_T r2;
-  *y = std::sin(12.566370614359172 * currTime) * 6.0;
+  *y = std::sin(62.831853071795862 * currTime) * 350.0;
   if (*y < 0.0) {
     *y = 0.0;
   }
@@ -537,16 +537,13 @@ static void Main_Sept1_2021_Command(void)
   real_T T1;
   real_T T2;
   real_T exitY;
+  boolean_T sf_internal_predicateOutput;
   Main_Sept1_2021_B.c = 3.0;
   if ((Main_Sept1_2021_DW.done == 1.0) || (Main_Sept1_2021_B.Constant == 4.0) ||
       (Main_Sept1_2021_B.danger == 1.0)) {
     if (Main_Sept1_2021_DW.is_Command == Main_Sept1_2021_IN_Stance) {
       Main_Sept1_2021_B.T1 = 0.0;
       Main_Sept1_2021_B.T2 = 0.0;
-      Main_Sept1_2021_B.Kp1 = Main_Sept1_2021_DW.oldKp1;
-      Main_Sept1_2021_B.Kp2 = Main_Sept1_2021_DW.oldKp2;
-      Main_Sept1_2021_B.Kd1 = Main_Sept1_2021_DW.oldKv1;
-      Main_Sept1_2021_B.Kd2 = Main_Sept1_2021_DW.oldKv2;
       Main_Sept1_2021_DW.hop++;
       Main_Sept1_2021_DW.is_Command = 0U;
     } else {
@@ -564,19 +561,17 @@ static void Main_Sept1_2021_Command(void)
   } else {
     switch (Main_Sept1_2021_DW.is_Command) {
      case Main_Sept1_2021_IN_Flight:
-      if (Main_Sept1_2021_DW.Idle == 1.0) {
+      sf_internal_predicateOutput = ((Main_Sept1_2021_DW.temporalCounter_i1 >=
+        5000U) && (Main_Sept1_2021_DW.Idle == 1.0));
+      if (sf_internal_predicateOutput) {
         Main_Sept1_2021_DW.is_Flight = 0U;
         Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Stance;
         Main_Sept1_2021_DW.time = Main_Sept1_2021_M->Timing.t[0];
-        Main_Sept1_2021_DW.oldKp1 = Main_Sept1_2021_B.Kp1;
-        Main_Sept1_2021_DW.oldKp2 = Main_Sept1_2021_B.Kp2;
-        Main_Sept1_2021_DW.oldKv1 = Main_Sept1_2021_B.Kd1;
-        Main_Sept1_2021_DW.oldKv2 = Main_Sept1_2021_B.Kd2;
         Main_Sept1_2021_B.Kp1 = 0.0;
         Main_Sept1_2021_B.Kp2 = 0.0;
         Main_Sept1_2021_B.Kd1 = 0.0;
         Main_Sept1_2021_B.Kd2 = 0.0;
-        Main_Sept1_2021_DW.exitY = 1.0;
+        Main_Sept1_2021_B.exitY = 1.0;
       } else {
         switch (Main_Sept1_2021_DW.is_Flight) {
          case Main_Sept1_2021_IN_Idle1:
@@ -584,6 +579,10 @@ static void Main_Sept1_2021_Command(void)
 
          default:
           /* case IN_ToPosition: */
+          Main_Sept1_2021_B.Kp1 = 22.75;
+          Main_Sept1_2021_B.Kp2 = 17.0;
+          Main_Sept1_2021_B.Kd1 = 0.95;
+          Main_Sept1_2021_B.Kd2 = 1.45;
           if (((Main_Sept1_2021_B.theta1 >= Main_Sept1_2021_DW.pf) &&
                (Main_Sept1_2021_DW.slope > 0.0)) || ((Main_Sept1_2021_B.theta1 <=
                 Main_Sept1_2021_DW.pf) && (Main_Sept1_2021_DW.slope < 0.0))) {
@@ -605,24 +604,24 @@ static void Main_Sept1_2021_Command(void)
         Main_Sept1_2021_DW.hop = 0.0;
         Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Stance;
         Main_Sept1_2021_DW.time = Main_Sept1_2021_M->Timing.t[0];
-        Main_Sept1_2021_DW.oldKp1 = Main_Sept1_2021_B.Kp1;
-        Main_Sept1_2021_DW.oldKp2 = Main_Sept1_2021_B.Kp2;
-        Main_Sept1_2021_DW.oldKv1 = Main_Sept1_2021_B.Kd1;
-        Main_Sept1_2021_DW.oldKv2 = Main_Sept1_2021_B.Kd2;
         Main_Sept1_2021_B.Kp1 = 0.0;
         Main_Sept1_2021_B.Kp2 = 0.0;
         Main_Sept1_2021_B.Kd1 = 0.0;
         Main_Sept1_2021_B.Kd2 = 0.0;
-        Main_Sept1_2021_DW.exitY = 1.0;
+        Main_Sept1_2021_B.exitY = 1.0;
       }
       break;
 
      case Main_Sept1_2021_IN_Sit:
+      Main_Sept1_2021_B.Kp1 = 25.0;
+      Main_Sept1_2021_B.Kp2 = 25.0;
+      Main_Sept1_2021_B.Kd1 = 0.1;
+      Main_Sept1_2021_B.Kd2 = 0.1;
       if (((Main_Sept1_2021_B.theta1 >= Main_Sept1_2021_DW.pf) &&
            (Main_Sept1_2021_DW.slope > 0.0)) || ((Main_Sept1_2021_B.theta1 <=
             Main_Sept1_2021_DW.pf) && (Main_Sept1_2021_DW.slope < 0.0))) {
         Main_Sept1_2021_DW.done = 1.0;
-        Main_Sept1_2021_DW.pf = -0.6;
+        Main_Sept1_2021_DW.pf = -0.35;
         Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Stand;
         Main_Sept1_2021_DW.to = Main_Sept1_2021_M->Timing.t[0];
         Main_Sept1_2021_DW.tstep = 3.0;
@@ -643,16 +642,20 @@ static void Main_Sept1_2021_Command(void)
       break;
 
      case Main_Sept1_2021_IN_Stance:
+      Main_Sept1_2021_B.Kp1 = 0.0;
+      Main_Sept1_2021_B.Kp2 = 0.0;
+      Main_Sept1_2021_B.Kd1 = 0.0;
+      Main_Sept1_2021_B.Kd2 = 0.0;
       if (Main_Sept1_2021_DW.hop == 2.0) {
         Main_Sept1_2021_DW.pf = -0.7;
         Main_Sept1_2021_B.T1 = 0.0;
         Main_Sept1_2021_B.T2 = 0.0;
-        Main_Sept1_2021_B.Kp1 = Main_Sept1_2021_DW.oldKp1;
-        Main_Sept1_2021_B.Kp2 = Main_Sept1_2021_DW.oldKp2;
-        Main_Sept1_2021_B.Kd1 = Main_Sept1_2021_DW.oldKv1;
-        Main_Sept1_2021_B.Kd2 = Main_Sept1_2021_DW.oldKv2;
         Main_Sept1_2021_DW.hop++;
         Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Sit;
+        Main_Sept1_2021_B.Kp1 = 25.0;
+        Main_Sept1_2021_B.Kp2 = 25.0;
+        Main_Sept1_2021_B.Kd1 = 0.1;
+        Main_Sept1_2021_B.Kd2 = 0.1;
         Main_Sept1_2021_DW.tstep = 3.0;
         Main_Sept1_2021_DW.to = Main_Sept1_2021_M->Timing.t[0];
         Main_Sept1_2021_B.theta1 = Main_Sept1_2021_B.Delay;
@@ -661,20 +664,21 @@ static void Main_Sept1_2021_Command(void)
         Main_Sept1_2021_DW.slope = (Main_Sept1_2021_DW.pf -
           Main_Sept1_2021_DW.po) / Main_Sept1_2021_DW.tstep;
       } else if ((Main_Sept1_2021_M->Timing.t[0] - Main_Sept1_2021_DW.time !=
-                  0.0) && (Main_Sept1_2021_DW.exitY == 0.0) &&
+                  0.0) && (Main_Sept1_2021_B.exitY == 0.0) &&
                  (Main_Sept1_2021_B.GRF == 0.0)) {
-        Main_Sept1_2021_DW.pf = -0.6;
+        Main_Sept1_2021_DW.pf = -0.35;
         Main_Sept1_2021_B.T1 = 0.0;
         Main_Sept1_2021_B.T2 = 0.0;
-        Main_Sept1_2021_B.Kp1 = Main_Sept1_2021_DW.oldKp1;
-        Main_Sept1_2021_B.Kp2 = Main_Sept1_2021_DW.oldKp2;
-        Main_Sept1_2021_B.Kd1 = Main_Sept1_2021_DW.oldKv1;
-        Main_Sept1_2021_B.Kd2 = Main_Sept1_2021_DW.oldKv2;
         Main_Sept1_2021_DW.hop++;
         Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Flight;
+        Main_Sept1_2021_DW.temporalCounter_i1 = 0U;
         Main_Sept1_2021_DW.Idle = 0.0;
         Main_Sept1_2021_DW.is_Flight = Main_Sept1_2021_IN_ToPosition;
-        Main_Sept1_2021_DW.tstep = 3.0;
+        Main_Sept1_2021_B.Kp1 = 22.75;
+        Main_Sept1_2021_B.Kp2 = 17.0;
+        Main_Sept1_2021_B.Kd1 = 0.95;
+        Main_Sept1_2021_B.Kd2 = 1.45;
+        Main_Sept1_2021_DW.tstep = 0.1;
         Main_Sept1_2021_DW.to = Main_Sept1_2021_M->Timing.t[0];
         Main_Sept1_2021_B.theta1 = Main_Sept1_2021_B.Delay;
         Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.theta1 * -2.0;
@@ -687,7 +691,7 @@ static void Main_Sept1_2021_Command(void)
           Main_Sept1_2021_DW.time, &T1, &T2, &exitY);
         Main_Sept1_2021_B.T1 = T1;
         Main_Sept1_2021_B.T2 = T2;
-        Main_Sept1_2021_DW.exitY = exitY;
+        Main_Sept1_2021_B.exitY = exitY;
       }
       break;
 
@@ -1122,13 +1126,13 @@ void Main_Sept1_2021_step(void)
 
   /* MATLAB Function: '<Root>/MATLAB Function' */
   Main_Sept1_2021_B.GRF = 0.0;
-  if (((Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_i[0] < 0.0) && (2.0 <
+  if (((Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_i[0] < 0.0) && (2.25 <
         Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_l[0]) &&
-       (Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_i[1] > 0.0) && (-2.0 >
+       (Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_i[1] > 0.0) && (-1.2 >
         Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_l[1])) ||
-      ((Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_i[0] > 0.0) && (-2.0 >
+      ((Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_i[0] > 0.0) && (-2.25 >
         Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_l[0]) &&
-       (Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_i[1] < 0.0) && (2.0 <
+       (Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_i[1] < 0.0) && (1.2 <
         Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_l[1]))) {
     Main_Sept1_2021_B.GRF = 1.0;
   }
@@ -1156,8 +1160,8 @@ void Main_Sept1_2021_step(void)
   Main_Sept1_2021_B.Constant = Main_Sept1_2021_cal->Constant_Value;
 
   /* Chart: '<Root>/Chart' */
-  if (Main_Sept1_2021_DW.temporalCounter_i1 < 31U) {
-    Main_Sept1_2021_DW.temporalCounter_i1 = static_cast<uint8_T>
+  if (Main_Sept1_2021_DW.temporalCounter_i1 < 8191U) {
+    Main_Sept1_2021_DW.temporalCounter_i1 = static_cast<uint16_T>
       (Main_Sept1_2021_DW.temporalCounter_i1 + 1U);
   }
 
@@ -1174,7 +1178,7 @@ void Main_Sept1_2021_step(void)
 
      case Main_Sept1_2021_IN_Deinitiate:
       Main_Sept1_2021_B.c = 4.0;
-      if (Main_Sept1_2021_DW.temporalCounter_i1 >= 30U) {
+      if (Main_Sept1_2021_DW.temporalCounter_i1 >= 3000U) {
         Main_Sept1_2021_B.stop = 1.0;
         Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_2021_IN_Deinitiate;
         Main_Sept1_2021_DW.temporalCounter_i1 = 0U;
@@ -1183,6 +1187,8 @@ void Main_Sept1_2021_step(void)
       break;
 
      case Main_Sept1_202_IN_FinalShutdown:
+      Main_Sept1_2021_B.Kp1 = 0.0;
+      Main_Sept1_2021_B.Kp2 = 0.0;
       Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_2021_IN_Deinitiate;
       Main_Sept1_2021_DW.temporalCounter_i1 = 0U;
       Main_Sept1_2021_B.c = 4.0;
@@ -1193,7 +1199,7 @@ void Main_Sept1_2021_step(void)
       if (Main_Sept1_2021_B.Constant == 2.0) {
         Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_2021_IN_Command;
         Main_Sept1_2021_B.c = 3.0;
-        Main_Sept1_2021_DW.pf = -0.6;
+        Main_Sept1_2021_DW.pf = -0.35;
         Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Stand;
         Main_Sept1_2021_DW.to = Main_Sept1_2021_M->Timing.t[0];
         Main_Sept1_2021_DW.tstep = 3.0;
@@ -1481,7 +1487,7 @@ void Main_Sept1_2021_initialize(void)
       (&Main_Sept1_2021_M->Timing.offsetTimesArray[0]);
 
     /* task periods */
-    Main_Sept1_2021_M->Timing.sampleTimes[0] = (0.1);
+    Main_Sept1_2021_M->Timing.sampleTimes[0] = (0.001);
 
     /* task offsets */
     Main_Sept1_2021_M->Timing.offsetTimes[0] = (0.0);
@@ -1496,10 +1502,10 @@ void Main_Sept1_2021_initialize(void)
   }
 
   rtmSetTFinal(Main_Sept1_2021_M, -1);
-  Main_Sept1_2021_M->Timing.stepSize0 = 0.1;
+  Main_Sept1_2021_M->Timing.stepSize0 = 0.001;
   Main_Sept1_2021_M->solverInfoPtr = (&Main_Sept1_2021_M->solverInfo);
-  Main_Sept1_2021_M->Timing.stepSize = (0.1);
-  rtsiSetFixedStepSize(&Main_Sept1_2021_M->solverInfo, 0.1);
+  Main_Sept1_2021_M->Timing.stepSize = (0.001);
+  rtsiSetFixedStepSize(&Main_Sept1_2021_M->solverInfo, 0.001);
   rtsiSetSolverMode(&Main_Sept1_2021_M->solverInfo, SOLVER_MODE_SINGLETASKING);
 
   /* block I/O */
@@ -1673,7 +1679,7 @@ void Main_Sept1_2021_initialize(void)
       sfcnInitializeSampleTimes(rts);
 
       /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.1);
+      ssSetSampleTime(rts, 0, 0.001);
       ssSetOffsetTime(rts, 0, 0.0);
       sfcnTsMap[0] = 0;
 
@@ -1799,7 +1805,7 @@ void Main_Sept1_2021_initialize(void)
       sfcnInitializeSampleTimes(rts);
 
       /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.1);
+      ssSetSampleTime(rts, 0, 0.001);
       ssSetOffsetTime(rts, 0, 0.0);
       sfcnTsMap[0] = 0;
 
@@ -1934,7 +1940,7 @@ void Main_Sept1_2021_initialize(void)
       sfcnInitializeSampleTimes(rts);
 
       /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.1);
+      ssSetSampleTime(rts, 0, 0.001);
       ssSetOffsetTime(rts, 0, 0.0);
       sfcnTsMap[0] = 0;
 
@@ -2042,7 +2048,7 @@ void Main_Sept1_2021_initialize(void)
       sfcnInitializeSampleTimes(rts);
 
       /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.1);
+      ssSetSampleTime(rts, 0, 0.001);
       ssSetOffsetTime(rts, 0, 0.0);
       sfcnTsMap[0] = 0;
 
@@ -2200,7 +2206,7 @@ void Main_Sept1_2021_initialize(void)
       sfcnInitializeSampleTimes(rts);
 
       /* adjust sample time */
-      ssSetSampleTime(rts, 0, 0.1);
+      ssSetSampleTime(rts, 0, 0.001);
       ssSetOffsetTime(rts, 0, 0.0);
       sfcnTsMap[0] = 0;
 
@@ -2324,18 +2330,13 @@ void Main_Sept1_2021_initialize(void)
   Main_Sept1_2021_DW.slope = 0.0;
   Main_Sept1_2021_DW.tstep = 0.0;
   Main_Sept1_2021_DW.to = 0.0;
-  Main_Sept1_2021_DW.time = 0.0;
-  Main_Sept1_2021_DW.oldKp1 = 0.0;
-  Main_Sept1_2021_DW.oldKp2 = 0.0;
-  Main_Sept1_2021_DW.oldKv1 = 0.0;
-  Main_Sept1_2021_DW.oldKv2 = 0.0;
-  Main_Sept1_2021_DW.exitY = 0.0;
-  Main_Sept1_2021_DW.hop = 0.0;
   Main_Sept1_2021_DW.po1 = 0.0;
   Main_Sept1_2021_DW.po2 = 0.0;
   Main_Sept1_2021_DW.slope1 = 0.0;
   Main_Sept1_2021_DW.slope2 = 0.0;
   Main_Sept1_2021_DW.Idle = 0.0;
+  Main_Sept1_2021_DW.hop = 0.0;
+  Main_Sept1_2021_DW.time = 0.0;
   Main_Sept1_2021_B.stop = 0.0;
   Main_Sept1_2021_B.theta1 = 0.0;
   Main_Sept1_2021_B.theta2 = 0.0;
@@ -2346,6 +2347,7 @@ void Main_Sept1_2021_initialize(void)
   Main_Sept1_2021_B.Kp2 = 25.0;
   Main_Sept1_2021_B.Kd1 = 0.1;
   Main_Sept1_2021_B.Kd2 = 0.1;
+  Main_Sept1_2021_B.exitY = 0.0;
 
   /* Start for S-Function (sg_IO602_IO691_write_s): '<S4>/CAN Write1' */
   /* Level2 S-Function Block: '<S4>/CAN Write1' (sg_IO602_IO691_write_s) */
