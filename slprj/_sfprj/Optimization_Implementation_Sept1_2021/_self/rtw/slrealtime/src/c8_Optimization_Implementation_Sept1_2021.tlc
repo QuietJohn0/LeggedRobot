@@ -1,0 +1,213 @@
+%implements "chartSource" "C"
+%function ChartConfig(block, system) void
+  %createrecord chartConfiguration { ...
+          executeAtInitialization  0 ...
+  }
+  %return chartConfiguration
+%endfunction
+%function ChartDataMap(block, system) void
+  %createrecord ChartDataElements {\
+    NumChartData   27 \
+    ChartDataDefaults {\
+      RecordType   "ChartData"\
+      Dimensions   []\
+      IsTestPoint  0\
+    }\
+    ChartData {\
+      Name         "sfEvent"\
+      Description  "ActiveChartEvent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "is_active_c8_Optimization_Implementation_Sept1_2021"\
+      Description  "StateIsActive"\
+      SFName       "is_active_c8_Optimization_Implementation_Sept1_2021"\
+      Path         "is_active_c8_Optimization_Implementation_Sept1_2021"\
+      SrcLocation  ""\
+      IsTestPoint  1\
+    }\
+    ChartData {\
+      Name         "is_c8_Optimization_Implementation_Sept1_2021"\
+      Description  "StateActiveChild"\
+      SFName       "is_c8_Optimization_Implementation_Sept1_2021"\
+      Path         "is_c8_Optimization_Implementation_Sept1_2021"\
+      SrcLocation  ""\
+      IsTestPoint  1\
+    }\
+    ChartData {\
+      Name         "is_Command"\
+      Description  "StateActiveChild"\
+      SFName       "is_Command"\
+      Path         "Command.is_Command"\
+      SrcLocation  ""\
+      IsTestPoint  1\
+    }\
+    ChartData {\
+      Name         "tstep"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "tstep"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "to"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "to"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "po1"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "po1"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "po2"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "po2"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "slope1"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "slope1"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "slope2"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "slope2"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "theta1Release"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "theta1Release"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "theta1Goal"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "theta1Goal"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "theta2Goal"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "theta2Goal"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "theta2Release"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "theta2Release"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "Ksaved"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "Ksaved"\
+      SrcLocation  ""\
+      Dimensions   [1,4]\
+    }\
+    ChartData {\
+      Name         "a1"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "a1"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "b1"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "b1"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "c1"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "c1"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "d1"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "d1"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "delt1"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "delt1"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "delt2"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "delt2"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "e1"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "e1"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "oldScore"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "oldScore"\
+      SrcLocation  ""\
+      Dimensions   [1,4]\
+    }\
+    ChartData {\
+      Name         "oldScoreSlope"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "oldScoreSlope"\
+      SrcLocation  ""\
+      Dimensions   [1,4]\
+    }\
+    ChartData {\
+      Name         "temp"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "temp"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "tr"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "tr"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "temporalCounter_i1"\
+      Description  "TemporalCounter"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+  }
+  %return ChartDataElements
+%endfunction
