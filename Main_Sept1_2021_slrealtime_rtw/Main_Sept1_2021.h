@@ -7,9 +7,9 @@
  *
  * Code generation for model "Main_Sept1_2021".
  *
- * Model version              : 1.33
+ * Model version              : 1.34
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Fri Sep  3 16:26:37 2021
+ * C++ source code generated on : Mon Sep  6 16:10:10 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -141,6 +141,7 @@ struct B_Main_Sept1_2021_T {
   real_T Gain;                         /* '<Root>/Gain' */
   real_T Constant8;                    /* '<Root>/Constant8' */
   real_T Constant2;                    /* '<Root>/Constant2' */
+  real_T Clock;                        /* '<Root>/Clock' */
   real_T Gain_m;                       /* '<S6>/Gain' */
   real_T CANUnpack_o1;                 /* '<S10>/CAN Unpack' */
   real_T CANUnpack_o2;                 /* '<S10>/CAN Unpack' */
@@ -172,6 +173,8 @@ struct B_Main_Sept1_2021_T {
   real_T Kd1;                          /* '<Root>/Chart' */
   real_T Kd2;                          /* '<Root>/Chart' */
   real_T exitY;                        /* '<Root>/Chart' */
+  real_T Tcalc1;                       /* '<Root>/Chart' */
+  real_T Tcalc2;                       /* '<Root>/Chart' */
   int32_T WhileIterator;               /* '<S6>/While Iterator' */
   uint8_T CANUnpack_o5;                /* '<S10>/CAN Unpack' */
   uint8_T CANUnpack_o5_p;              /* '<S9>/CAN Unpack' */
@@ -201,6 +204,8 @@ struct DW_Main_Sept1_2021_T {
   real_T Idle;                         /* '<Root>/Chart' */
   real_T hop;                          /* '<Root>/Chart' */
   real_T time;                         /* '<Root>/Chart' */
+  real_T Tcalc1Entry;                  /* '<Root>/Chart' */
+  real_T Tcalc2Entry;                  /* '<Root>/Chart' */
   void *CANSetup_PWORK;                /* '<Root>/CAN Setup ' */
   struct {
     void *AQHandles;
@@ -209,6 +214,14 @@ struct DW_Main_Sept1_2021_T {
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Cha_b;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Cha_d;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Cha_o;   /* synthesized block */
 
   struct {
     void *AQHandles;
@@ -278,6 +291,26 @@ struct DW_Main_Sept1_2021_T {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Wh_eg;   /* synthesized block */
 
+  struct {
+    void *LoggedData;
+  } ToWorkspace_PWORK;                 /* '<Root>/To Workspace' */
+
+  struct {
+    void *LoggedData;
+  } ToWorkspace1_PWORK;                /* '<Root>/To Workspace1' */
+
+  struct {
+    void *LoggedData;
+  } ToWorkspace2_PWORK;                /* '<Root>/To Workspace2' */
+
+  struct {
+    void *LoggedData;
+  } ToWorkspace3_PWORK;                /* '<Root>/To Workspace3' */
+
+  struct {
+    void *LoggedData;
+  } ToWorkspace4_PWORK;                /* '<Root>/To Workspace4' */
+
   void *CANRead_PWORK;                 /* '<S6>/CAN Read' */
   struct {
     void *AQHandles;
@@ -344,7 +377,7 @@ struct tag_RTM_Main_Sept1_2021_T {
    */
   struct {
     RTWSfcnInfo sfcnInfo;
-    time_T *taskTimePtrs[1];
+    time_T *taskTimePtrs[2];
     SimStruct childSFunctions[5];
     SimStruct *childSFunctionPtrs[5];
     struct _ssBlkInfo2 blkInfo2[5];
@@ -453,9 +486,13 @@ struct tag_RTM_Main_Sept1_2021_T {
     uint32_T clockTick0;
     uint32_T clockTickH0;
     time_T stepSize0;
+    uint32_T clockTick1;
+    uint32_T clockTickH1;
+    time_T stepSize1;
     time_T tStart;
     time_T tFinal;
     time_T timeOfLastOutput;
+    SimTimeStep simTimeStep;
     boolean_T stopRequestedFlag;
     time_T *sampleTimes;
     time_T *offsetTimes;
@@ -463,12 +500,12 @@ struct tag_RTM_Main_Sept1_2021_T {
     int_T *sampleHits;
     int_T *perTaskSampleHits;
     time_T *t;
-    time_T sampleTimesArray[1];
-    time_T offsetTimesArray[1];
-    int_T sampleTimeTaskIDArray[1];
-    int_T sampleHitArray[1];
-    int_T perTaskSampleHitsArray[1];
-    time_T tArray[1];
+    time_T sampleTimesArray[2];
+    time_T offsetTimesArray[2];
+    int_T sampleTimeTaskIDArray[2];
+    int_T sampleHitArray[2];
+    int_T perTaskSampleHitsArray[4];
+    time_T tArray[2];
   } Timing;
 };
 

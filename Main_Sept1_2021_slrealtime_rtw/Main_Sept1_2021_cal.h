@@ -78,7 +78,7 @@ struct Main_Sept1_2021_cal_type {
   real_T Delay1_InitialCondition;      /* Expression: 0.0
                                         * Referenced by: '<Root>/Delay1'
                                         */
-  real_T Constant_Value;               /* Expression: 0
+  real_T Constant_Value;               /* Expression: 1
                                         * Referenced by: '<Root>/Constant'
                                         */
   real_T Gain_Gain_j;                  /* Expression: 18/30

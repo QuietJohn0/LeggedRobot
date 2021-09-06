@@ -7,9 +7,9 @@
  *
  * Code generation for model "Main_Sept1_2021".
  *
- * Model version              : 1.33
+ * Model version              : 1.34
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Fri Sep  3 16:26:37 2021
+ * C++ source code generated on : Mon Sep  6 16:10:10 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -25,6 +25,14 @@
 #include "Main_Sept1_2021.h"
 
 /* Private macros used by the generated code to access rtModel */
+#ifndef rtmIsMajorTimeStep
+#define rtmIsMajorTimeStep(rtm)        (((rtm)->Timing.simTimeStep) == MAJOR_TIME_STEP)
+#endif
+
+#ifndef rtmIsMinorTimeStep
+#define rtmIsMinorTimeStep(rtm)        (((rtm)->Timing.simTimeStep) == MINOR_TIME_STEP)
+#endif
+
 #ifndef rtmSetTFinal
 #define rtmSetTFinal(rtm, val)         ((rtm)->Timing.tFinal = (val))
 #endif
