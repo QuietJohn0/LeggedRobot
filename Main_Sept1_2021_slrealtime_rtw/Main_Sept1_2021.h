@@ -7,9 +7,9 @@
  *
  * Code generation for model "Main_Sept1_2021".
  *
- * Model version              : 1.35
+ * Model version              : 1.36
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Mon Sep  6 17:34:34 2021
+ * C++ source code generated on : Tue Sep  7 16:38:21 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -39,6 +39,7 @@
 
 /* Child system includes */
 #include "Main_Sept1_2021_cal.h"
+#include "rtGetInf.h"
 #include "rt_nonfinite.h"
 
 /* Macros for accessing real-time model data structure */
@@ -141,6 +142,8 @@ struct B_Main_Sept1_2021_T {
   real_T Gain;                         /* '<Root>/Gain' */
   real_T Constant8;                    /* '<Root>/Constant8' */
   real_T Constant2;                    /* '<Root>/Constant2' */
+  real_T Current1Derivative;           /* '<Root>/Current1Derivative' */
+  real_T Current2Derivative;           /* '<Root>/Current2Derivative' */
   real_T Clock;                        /* '<Root>/Clock' */
   real_T Gain_m;                       /* '<S6>/Gain' */
   real_T CANUnpack_o1;                 /* '<S10>/CAN Unpack' */
@@ -175,6 +178,8 @@ struct B_Main_Sept1_2021_T {
   real_T exitY;                        /* '<Root>/Chart' */
   real_T Tcalc1;                       /* '<Root>/Chart' */
   real_T Tcalc2;                       /* '<Root>/Chart' */
+  real_T calcForceX;                   /* '<Root>/Chart' */
+  real_T GRF_e;                        /* '<Root>/Chart' */
   int32_T WhileIterator;               /* '<S6>/While Iterator' */
   uint8_T CANUnpack_o5;                /* '<S10>/CAN Unpack' */
   uint8_T CANUnpack_o5_p;              /* '<S9>/CAN Unpack' */
@@ -191,6 +196,14 @@ struct B_Main_Sept1_2021_T {
 struct DW_Main_Sept1_2021_T {
   real_T Delay_DSTATE;                 /* '<Root>/Delay' */
   real_T Delay1_DSTATE;                /* '<Root>/Delay1' */
+  real_T TimeStampA;                   /* '<Root>/Current1Derivative' */
+  real_T LastUAtTimeA;                 /* '<Root>/Current1Derivative' */
+  real_T TimeStampB;                   /* '<Root>/Current1Derivative' */
+  real_T LastUAtTimeB;                 /* '<Root>/Current1Derivative' */
+  real_T TimeStampA_o;                 /* '<Root>/Current2Derivative' */
+  real_T LastUAtTimeA_d;               /* '<Root>/Current2Derivative' */
+  real_T TimeStampB_m;                 /* '<Root>/Current2Derivative' */
+  real_T LastUAtTimeB_p;               /* '<Root>/Current2Derivative' */
   real_T done;                         /* '<Root>/Chart' */
   real_T pf;                           /* '<Root>/Chart' */
   real_T po;                           /* '<Root>/Chart' */
@@ -204,9 +217,13 @@ struct DW_Main_Sept1_2021_T {
   real_T Idle;                         /* '<Root>/Chart' */
   real_T hop;                          /* '<Root>/Chart' */
   real_T time;                         /* '<Root>/Chart' */
-  real_T Tcalc1Entry;                  /* '<Root>/Chart' */
-  real_T Tcalc2Entry;                  /* '<Root>/Chart' */
+  real_T FStart;                       /* '<Root>/Chart' */
+  real_T Th2Th1;                       /* '<Root>/Chart' */
   void *CANSetup_PWORK;                /* '<Root>/CAN Setup ' */
+  struct {
+    void *LoggedData[2];
+  } Scope_PWORK;                       /* '<Root>/Scope' */
+
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Chart;   /* synthesized block */
@@ -222,6 +239,14 @@ struct DW_Main_Sept1_2021_T {
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Cha_o;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Ch_dg;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Ch_bg;   /* synthesized block */
 
   struct {
     void *AQHandles;
@@ -250,6 +275,14 @@ struct DW_Main_Sept1_2021_T {
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Const;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Curre;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Cur_j;   /* synthesized block */
 
   struct {
     void *AQHandles;
@@ -357,8 +390,9 @@ struct DW_Main_Sept1_2021_T {
   int_T CANUnpack_StatusPortID_f;      /* '<S9>/CAN Unpack' */
   int_T BytePacking_IWORK[2];          /* '<S5>/Byte Packing' */
   int_T BytePacking_IWORK_n[2];        /* '<S4>/Byte Packing' */
-  uint16_T temporalCounter_i1;         /* '<Root>/Chart' */
+  uint16_T temporalCounter_i2;         /* '<Root>/Chart' */
   uint8_T is_active_c8_Main_Sept1_2021;/* '<Root>/Chart' */
+  uint8_T temporalCounter_i1;          /* '<Root>/Chart' */
 };
 
 /* Real-time Model Data Structure */

@@ -7,7 +7,7 @@
 %endfunction
 %function ChartDataMap(block, system) void
   %createrecord ChartDataElements {\
-    NumChartData   21 \
+    NumChartData   22 \
     ChartDataDefaults {\
       RecordType   "ChartData"\
       Dimensions   []\
@@ -144,21 +144,28 @@
       SrcLocation  ""\
     }\
     ChartData {\
-      Name         "Tcalc1Entry"\
+      Name         "FStart"\
       Description  "ChartLocal"\
       SFName       ""\
-      Path         "Tcalc1Entry"\
+      Path         "FStart"\
       SrcLocation  ""\
     }\
     ChartData {\
-      Name         "Tcalc2Entry"\
+      Name         "Th2Th1"\
       Description  "ChartLocal"\
       SFName       ""\
-      Path         "Tcalc2Entry"\
+      Path         "Th2Th1"\
       SrcLocation  ""\
     }\
     ChartData {\
       Name         "temporalCounter_i1"\
+      Description  "TemporalCounter"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "temporalCounter_i2"\
       Description  "TemporalCounter"\
       SFName       ""\
       Path         ""\
