@@ -7,9 +7,9 @@
  *
  * Code generation for model "Main_Sept1_2021".
  *
- * Model version              : 1.34
+ * Model version              : 1.35
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Mon Sep  6 16:10:10 2021
+ * C++ source code generated on : Mon Sep  6 17:34:34 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -53,6 +53,7 @@ static void Main_Sept1_2021_dec2bin(real_T d, char_T s_data[], int32_T s_size[2]
 /* Forward declaration for local functions */
 static real_T Main_Sept1_2021_getT(real_T p, real_T Kp, real_T Kd, real_T Tff,
   real_T currP, real_T currV);
+static void Main_Sept_enter_internal_Flight(void);
 static void Main_Sept1_2021_getTorque(real_T pos1, real_T pos2, real_T currTime,
   real_T Tc1, real_T Tc2, real_T *Torque1, real_T *Torque2, real_T *y);
 static void Main_Sept1_2021_Command(void);
@@ -481,6 +482,24 @@ static real_T Main_Sept1_2021_getT(real_T p, real_T Kp, real_T Kd, real_T Tff,
 }
 
 /* Function for Chart: '<Root>/Chart' */
+static void Main_Sept_enter_internal_Flight(void)
+{
+  Main_Sept1_2021_DW.is_Flight = Main_Sept1_2021_IN_ToPosition;
+  Main_Sept1_2021_B.Kp1 = 22.75;
+  Main_Sept1_2021_B.Kp2 = 17.0;
+  Main_Sept1_2021_B.Kd1 = 0.95;
+  Main_Sept1_2021_B.Kd2 = 1.45;
+  Main_Sept1_2021_DW.tstep = 0.1;
+  Main_Sept1_2021_DW.to = (((Main_Sept1_2021_M->Timing.clockTick1+
+    Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001);
+  Main_Sept1_2021_B.theta1 = Main_Sept1_2021_B.Delay;
+  Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.theta1 * -2.0;
+  Main_Sept1_2021_DW.po = Main_Sept1_2021_B.theta1;
+  Main_Sept1_2021_DW.slope = (Main_Sept1_2021_DW.pf - Main_Sept1_2021_DW.po) /
+    Main_Sept1_2021_DW.tstep;
+}
+
+/* Function for Chart: '<Root>/Chart' */
 static void Main_Sept1_2021_getTorque(real_T pos1, real_T pos2, real_T currTime,
   real_T Tc1, real_T Tc2, real_T *Torque1, real_T *Torque2, real_T *y)
 {
@@ -579,7 +598,7 @@ static void Main_Sept1_2021_Command(void)
     switch (Main_Sept1_2021_DW.is_Command) {
      case Main_Sept1_2021_IN_Flight:
       sf_internal_predicateOutput = ((Main_Sept1_2021_DW.temporalCounter_i1 >=
-        5000U) && (Main_Sept1_2021_DW.Idle == 1.0));
+        200U) && (Main_Sept1_2021_DW.Idle == 1.0));
       if (sf_internal_predicateOutput) {
         Main_Sept1_2021_DW.is_Flight = 0U;
         Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Stance;
@@ -592,27 +611,24 @@ static void Main_Sept1_2021_Command(void)
         Main_Sept1_2021_B.Kd1 = 0.0;
         Main_Sept1_2021_B.Kd2 = 0.0;
         Main_Sept1_2021_B.exitY = 1.0;
-      } else {
-        switch (Main_Sept1_2021_DW.is_Flight) {
-         case Main_Sept1_2021_IN_Idle1:
-          break;
-
-         default:
-          /* case IN_ToPosition: */
-          if (((Main_Sept1_2021_B.theta1 >= Main_Sept1_2021_DW.pf) &&
-               (Main_Sept1_2021_DW.slope > 0.0)) || ((Main_Sept1_2021_B.theta1 <=
-                Main_Sept1_2021_DW.pf) && (Main_Sept1_2021_DW.slope < 0.0))) {
-            Main_Sept1_2021_DW.is_Flight = Main_Sept1_2021_IN_Idle1;
-            Main_Sept1_2021_DW.Idle = 1.0;
-          } else {
-            Main_Sept1_2021_B.theta1 = ((((Main_Sept1_2021_M->Timing.clockTick1+
-              Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
-              Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope +
-              Main_Sept1_2021_DW.po;
-            Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.theta1 * -2.0;
-          }
-          break;
+      } else if (Main_Sept1_2021_DW.is_Flight == Main_Sept1_2021_IN_Idle1) {
+        if (Main_Sept1_2021_B.theta1 > Main_Sept1_2021_B.Delay + 0.02) {
+          Main_Sept1_2021_DW.Idle = 1.0;
+          Main_Sept_enter_internal_Flight();
         }
+
+        /* case IN_ToPosition: */
+      } else if (((Main_Sept1_2021_B.theta1 >= Main_Sept1_2021_DW.pf) &&
+                  (Main_Sept1_2021_DW.slope > 0.0)) ||
+                 ((Main_Sept1_2021_B.theta1 <= Main_Sept1_2021_DW.pf) &&
+                  (Main_Sept1_2021_DW.slope < 0.0))) {
+        Main_Sept1_2021_DW.is_Flight = Main_Sept1_2021_IN_Idle1;
+      } else {
+        Main_Sept1_2021_B.theta1 = ((((Main_Sept1_2021_M->Timing.clockTick1+
+          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
+          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope +
+          Main_Sept1_2021_DW.po;
+        Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.theta1 * -2.0;
       }
       break;
 
@@ -660,7 +676,7 @@ static void Main_Sept1_2021_Command(void)
       break;
 
      case Main_Sept1_2021_IN_Stance:
-      if (Main_Sept1_2021_DW.hop == 2.0) {
+      if (Main_Sept1_2021_DW.hop == 3.0) {
         Main_Sept1_2021_DW.pf = -0.7;
         Main_Sept1_2021_B.T1 = 0.0;
         Main_Sept1_2021_B.T2 = 0.0;
@@ -690,19 +706,7 @@ static void Main_Sept1_2021_Command(void)
         Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Flight;
         Main_Sept1_2021_DW.temporalCounter_i1 = 0U;
         Main_Sept1_2021_DW.Idle = 0.0;
-        Main_Sept1_2021_DW.is_Flight = Main_Sept1_2021_IN_ToPosition;
-        Main_Sept1_2021_B.Kp1 = 22.75;
-        Main_Sept1_2021_B.Kp2 = 17.0;
-        Main_Sept1_2021_B.Kd1 = 0.95;
-        Main_Sept1_2021_B.Kd2 = 1.45;
-        Main_Sept1_2021_DW.tstep = 0.1;
-        Main_Sept1_2021_DW.to = (((Main_Sept1_2021_M->Timing.clockTick1+
-          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001);
-        Main_Sept1_2021_B.theta1 = Main_Sept1_2021_B.Delay;
-        Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.theta1 * -2.0;
-        Main_Sept1_2021_DW.po = Main_Sept1_2021_B.theta1;
-        Main_Sept1_2021_DW.slope = (Main_Sept1_2021_DW.pf -
-          Main_Sept1_2021_DW.po) / Main_Sept1_2021_DW.tstep;
+        Main_Sept_enter_internal_Flight();
       } else {
         Main_Sept1_2021_getTorque(Main_Sept1_2021_B.Delay,
           Main_Sept1_2021_B.Delay1, (((Main_Sept1_2021_M->Timing.clockTick1+
@@ -1182,7 +1186,7 @@ void Main_Sept1_2021_step(void)
   Main_Sept1_2021_B.Constant = Main_Sept1_2021_cal->Constant_Value;
 
   /* Chart: '<Root>/Chart' */
-  if (Main_Sept1_2021_DW.temporalCounter_i1 < 8191U) {
+  if (Main_Sept1_2021_DW.temporalCounter_i1 < 4095U) {
     Main_Sept1_2021_DW.temporalCounter_i1 = static_cast<uint16_T>
       (Main_Sept1_2021_DW.temporalCounter_i1 + 1U);
   }
