@@ -7,9 +7,9 @@
  *
  * Code generation for model "Main_Sept1_2021".
  *
- * Model version              : 1.36
+ * Model version              : 1.38
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Tue Sep  7 16:38:21 2021
+ * C++ source code generated on : Wed Sep  8 14:05:53 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -550,8 +550,8 @@ static void Main_Sept1_2021_getTorque(real_T pos1, real_T pos2, real_T currTime,
   real_T tmp_3;
   int32_T r1;
   int32_T r2;
-  *y = std::sin(62.831853071795862 * currTime + std::asin(StartF / 350.0)) *
-    350.0;
+  *y = std::sin(62.831853071795862 * currTime + std::asin(StartF / 450.0)) *
+    450.0;
   if (*y < 0.0) {
     *y = 0.0;
   }
@@ -647,17 +647,19 @@ static void Main_Sept1_2021_Command(void)
 
         /* case IN_ToPosition: */
       } else if (((Main_Sept1_2021_B.theta1 >= Main_Sept1_2021_DW.pf) &&
-                  (Main_Sept1_2021_DW.slope > 0.0)) ||
+                  (Main_Sept1_2021_DW.slope1 > 0.0)) ||
                  ((Main_Sept1_2021_B.theta1 <= Main_Sept1_2021_DW.pf) &&
-                  (Main_Sept1_2021_DW.slope < 0.0))) {
+                  (Main_Sept1_2021_DW.slope1 < 0.0))) {
         Main_Sept1_2021_DW.is_Flight = Main_Sept1_2021_IN_Idle1;
       } else {
         Main_Sept1_2021_B.theta1 = ((((Main_Sept1_2021_M->Timing.clockTick1+
           Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
-          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope +
-          Main_Sept1_2021_DW.po;
-        Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.theta1 *
-          Main_Sept1_2021_DW.Th2Th1;
+          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope1 +
+          Main_Sept1_2021_DW.po1;
+        Main_Sept1_2021_B.theta2 = ((((Main_Sept1_2021_M->Timing.clockTick1+
+          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
+          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope2 +
+          Main_Sept1_2021_DW.po2;
       }
       break;
 
@@ -681,8 +683,8 @@ static void Main_Sept1_2021_Command(void)
 
      case Main_Sept1_2021_IN_Sit:
       if (((Main_Sept1_2021_B.theta1 >= Main_Sept1_2021_DW.pf) &&
-           (Main_Sept1_2021_DW.slope > 0.0)) || ((Main_Sept1_2021_B.theta1 <=
-            Main_Sept1_2021_DW.pf) && (Main_Sept1_2021_DW.slope < 0.0))) {
+           (Main_Sept1_2021_DW.slope1 > 0.0)) || ((Main_Sept1_2021_B.theta1 <=
+            Main_Sept1_2021_DW.pf) && (Main_Sept1_2021_DW.slope1 < 0.0))) {
         Main_Sept1_2021_DW.done = 1.0;
         Main_Sept1_2021_DW.pf = -0.35;
         Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Stand;
@@ -701,10 +703,12 @@ static void Main_Sept1_2021_Command(void)
       } else {
         Main_Sept1_2021_B.theta1 = ((((Main_Sept1_2021_M->Timing.clockTick1+
           Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
-          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope +
-          Main_Sept1_2021_DW.po;
-        Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.theta1 *
-          Main_Sept1_2021_DW.Th2Th1;
+          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope1 +
+          Main_Sept1_2021_DW.po1;
+        Main_Sept1_2021_B.theta2 = ((((Main_Sept1_2021_M->Timing.clockTick1+
+          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
+          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope2 +
+          Main_Sept1_2021_DW.po2;
       }
       break;
 
@@ -723,11 +727,14 @@ static void Main_Sept1_2021_Command(void)
         Main_Sept1_2021_DW.to = (((Main_Sept1_2021_M->Timing.clockTick1+
           Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001);
         Main_Sept1_2021_B.theta1 = Main_Sept1_2021_B.Delay;
-        Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.theta1 *
-          Main_Sept1_2021_DW.Th2Th1;
-        Main_Sept1_2021_DW.po = Main_Sept1_2021_B.theta1;
-        Main_Sept1_2021_DW.slope = (Main_Sept1_2021_DW.pf -
-          Main_Sept1_2021_DW.po) / Main_Sept1_2021_DW.tstep;
+        Main_Sept1_2021_DW.po1 = Main_Sept1_2021_B.theta1;
+        Main_Sept1_2021_DW.slope1 = (Main_Sept1_2021_DW.pf -
+          Main_Sept1_2021_DW.po1) / Main_Sept1_2021_DW.tstep;
+        Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.Delay1;
+        Main_Sept1_2021_DW.po2 = Main_Sept1_2021_B.theta2;
+        Main_Sept1_2021_DW.slope2 = (Main_Sept1_2021_DW.Th2Th1 *
+          Main_Sept1_2021_DW.pf - Main_Sept1_2021_DW.po2) /
+          Main_Sept1_2021_DW.tstep;
       } else {
         sf_internal_predicateOutput = ((Main_Sept1_2021_DW.temporalCounter_i1 >=
           3) && (((((Main_Sept1_2021_M->Timing.clockTick1+
@@ -752,11 +759,14 @@ static void Main_Sept1_2021_Command(void)
           Main_Sept1_2021_DW.to = (((Main_Sept1_2021_M->Timing.clockTick1+
             Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001);
           Main_Sept1_2021_B.theta1 = Main_Sept1_2021_B.Delay;
-          Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.theta1 *
-            Main_Sept1_2021_DW.Th2Th1;
-          Main_Sept1_2021_DW.po = Main_Sept1_2021_B.theta1;
-          Main_Sept1_2021_DW.slope = (Main_Sept1_2021_DW.pf -
-            Main_Sept1_2021_DW.po) / Main_Sept1_2021_DW.tstep;
+          Main_Sept1_2021_DW.po1 = Main_Sept1_2021_B.theta1;
+          Main_Sept1_2021_DW.slope1 = (Main_Sept1_2021_DW.pf -
+            Main_Sept1_2021_DW.po1) / Main_Sept1_2021_DW.tstep;
+          Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.Delay1;
+          Main_Sept1_2021_DW.po2 = Main_Sept1_2021_B.theta2;
+          Main_Sept1_2021_DW.slope2 = (Main_Sept1_2021_DW.Th2Th1 *
+            Main_Sept1_2021_DW.pf - Main_Sept1_2021_DW.po2) /
+            Main_Sept1_2021_DW.tstep;
         } else {
           Main_Sept1_2021_getTorque(Main_Sept1_2021_B.Delay,
             Main_Sept1_2021_B.Delay1, (((Main_Sept1_2021_M->Timing.clockTick1+
@@ -2563,8 +2573,6 @@ void Main_Sept1_2021_initialize(void)
   Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = 0U;
   Main_Sept1_2021_DW.done = 0.0;
   Main_Sept1_2021_DW.pf = 0.0;
-  Main_Sept1_2021_DW.po = 0.0;
-  Main_Sept1_2021_DW.slope = 0.0;
   Main_Sept1_2021_DW.tstep = 0.0;
   Main_Sept1_2021_DW.to = 0.0;
   Main_Sept1_2021_DW.po1 = 0.0;

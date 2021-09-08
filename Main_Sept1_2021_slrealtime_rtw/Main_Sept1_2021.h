@@ -7,9 +7,9 @@
  *
  * Code generation for model "Main_Sept1_2021".
  *
- * Model version              : 1.36
+ * Model version              : 1.38
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Tue Sep  7 16:38:21 2021
+ * C++ source code generated on : Wed Sep  8 14:05:53 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -206,8 +206,6 @@ struct DW_Main_Sept1_2021_T {
   real_T LastUAtTimeB_p;               /* '<Root>/Current2Derivative' */
   real_T done;                         /* '<Root>/Chart' */
   real_T pf;                           /* '<Root>/Chart' */
-  real_T po;                           /* '<Root>/Chart' */
-  real_T slope;                        /* '<Root>/Chart' */
   real_T tstep;                        /* '<Root>/Chart' */
   real_T to;                           /* '<Root>/Chart' */
   real_T po1;                          /* '<Root>/Chart' */

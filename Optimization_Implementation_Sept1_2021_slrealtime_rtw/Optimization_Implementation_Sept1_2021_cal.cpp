@@ -114,10 +114,10 @@ Optimization_Implement_cal_type Optimization_Implement_cal_impl = {
    */
   0.0,
 
-  /* Expression: 4
+  /* Expression: 1
    * Referenced by: '<Root>/Constant'
    */
-  4.0,
+  1.0,
 
   /* Expression: 0.0
    * Referenced by: '<Root>/Delay'

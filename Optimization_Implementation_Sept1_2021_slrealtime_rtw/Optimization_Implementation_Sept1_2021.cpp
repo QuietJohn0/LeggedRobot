@@ -7,9 +7,9 @@
  *
  * Code generation for model "Optimization_Implementation_Sept1_2021".
  *
- * Model version              : 1.33
+ * Model version              : 1.34
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Thu Sep  2 16:29:43 2021
+ * C++ source code generated on : Wed Sep  8 14:56:44 2021
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -57,8 +57,8 @@ static void Optimization_Implementa_dec2bin(real_T d, char_T s_data[], int32_T
 /* Forward declaration for local functions */
 static void Optimization_enter_atomic_Stand(void);
 static void Optimization_Implementat_Record(real_T delp, real_T OSin, real_T
-  deltin, real_T deltold, real_T tss, real_T *OSout, real_T *deltout, real_T
-  *tssOut);
+  deltin, real_T deltold, real_T tss, real_T b_sign, real_T *OSout, real_T
+  *deltout, real_T *tssOut);
 static void Optimization_Implementa_Changes(real_T K, real_T KOld, real_T
   kStepIn, real_T S, real_T oldS, real_T oldSSlope, real_T *KGuess, real_T *Ko,
   real_T *kStepOut, real_T *newS, real_T *Sdot);
@@ -515,16 +515,16 @@ static void Optimization_enter_atomic_Stand(void)
 
 /* Function for Chart: '<Root>/Chart' */
 static void Optimization_Implementat_Record(real_T delp, real_T OSin, real_T
-  deltin, real_T deltold, real_T tss, real_T *OSout, real_T *deltout, real_T
-  *tssOut)
+  deltin, real_T deltold, real_T tss, real_T b_sign, real_T *OSout, real_T
+  *deltout, real_T *tssOut)
 {
-  if ((delp < OSin) || rtIsNaN(OSin)) {
+  if (delp * b_sign < OSin * b_sign) {
     *OSout = delp;
   } else {
     *OSout = OSin;
   }
 
-  if (OSin <= 0.01) {
+  if (OSin * b_sign <= 0.01) {
     *deltout = deltin;
   } else {
     *deltout = deltold;
@@ -624,7 +624,7 @@ static void Optimization_Impleme_testSwitch(real_T testN, real_T old, real_T
 void Optimization_Implementation_Sept1_2021_step(void)
 {
   real_T I_ff;
-  real_T d1;
+  real_T d_a;
   real_T e1;
   real_T position;
   real_T velocity;
@@ -1086,10 +1086,10 @@ void Optimization_Implementation_Sept1_2021_step(void)
       0U) {
     Optimization_Implementation_Sept1_2021_DW.is_active_c8_Optimization_Imple =
       1U;
-    Optimization_Implementation_Sept1_2021_DW.theta1Release = 0.1;
-    Optimization_Implementation_Sept1_2021_DW.theta2Release = 0.0;
-    Optimization_Implementation_Sept1_2021_DW.theta1Goal = -0.1;
-    Optimization_Implementation_Sept1_2021_DW.theta2Goal = 0.0;
+    Optimization_Implementation_Sept1_2021_DW.theta1Release = 0.06;
+    Optimization_Implementation_Sept1_2021_DW.theta2Release = -0.19;
+    Optimization_Implementation_Sept1_2021_DW.theta1Goal = -0.35;
+    Optimization_Implementation_Sept1_2021_DW.theta2Goal = 0.63;
     Optimization_Implementation_Sept1_2021_DW.is_c8_Optimization_Implementati =
       Optimization_Implement_IN_Start;
     Optimization_Implementation_Sept1_2021_DW.temporalCounter_i1 = 0U;
@@ -1126,14 +1126,12 @@ void Optimization_Implementation_Sept1_2021_step(void)
               Optimization_Implementation_Sept1_2021_DW.theta2Goal;
             I_ff = Optimization_Implementation_Sept1_2021_B.pss1 * 10.0;
             velocity = Optimization_Implementation_Sept1_2021_B.pss2 * 10.0;
+            position = 10.0 * Optimization_Implementation_Sept1_2021_B.tss1;
+            d_a = 10.0 * Optimization_Implementation_Sept1_2021_B.tss2;
             Optimization_Implementation_Sept1_2021_B.Score = ((((((I_ff * I_ff +
-              velocity * velocity) +
-              Optimization_Implementation_Sept1_2021_B.tss1 *
-              Optimization_Implementation_Sept1_2021_B.tss1) +
-              Optimization_Implementation_Sept1_2021_B.tss2 *
-              Optimization_Implementation_Sept1_2021_B.tss2) +
+              velocity * velocity) + position * position) + d_a * d_a) +
               Optimization_Implementation_Sept1_2021_B.OS1 *
-              Optimization_Implementation_Sept1_2021_B.OS1 * 100.0) +
+              Optimization_Implementation_Sept1_2021_B.OS1 * 10.0) +
               Optimization_Implementation_Sept1_2021_B.OS2 *
               Optimization_Implementation_Sept1_2021_B.OS2 * 10.0) +
               Optimization_Implementation_Sept1_2021_DW.delt1 *
@@ -1160,11 +1158,11 @@ void Optimization_Implementation_Sept1_2021_step(void)
                Optimization_Implementation_Sept1_2021_DW.oldScoreSlope[
                static_cast<int32_T>
                (Optimization_Implementation_Sept1_2021_B.test) - 1], &I_ff,
-               &velocity, &position, &d1, &e1);
+               &velocity, &position, &d_a, &e1);
             Optimization_Implementation_Sept1_2021_DW.a1 = I_ff;
             Optimization_Implementation_Sept1_2021_DW.b1 = velocity;
             Optimization_Implementation_Sept1_2021_DW.c1 = position;
-            Optimization_Implementation_Sept1_2021_DW.d1 = d1;
+            Optimization_Implementation_Sept1_2021_DW.d1 = d_a;
             Optimization_Implementation_Sept1_2021_DW.e1 = e1;
             Optimization_Implementation_Sept1_2021_B.Kguess[static_cast<int32_T>
               (Optimization_Implementation_Sept1_2021_B.test) - 1] =
@@ -1199,8 +1197,8 @@ void Optimization_Implementation_Sept1_2021_step(void)
                Optimization_Implementation_Sept1_2021_M->Timing.t[0] -
                Optimization_Implementation_Sept1_2021_DW.tr,
                Optimization_Implementation_Sept1_2021_DW.delt1,
-               Optimization_Implementation_Sept1_2021_B.tss1, &I_ff, &velocity,
-               &position);
+               Optimization_Implementation_Sept1_2021_B.tss1, 1.0, &I_ff,
+               &velocity, &position);
             Optimization_Implementation_Sept1_2021_B.OS1 = I_ff;
             Optimization_Implementation_Sept1_2021_DW.delt1 = velocity;
             Optimization_Implementation_Sept1_2021_B.tss1 = position;
@@ -1211,8 +1209,8 @@ void Optimization_Implementation_Sept1_2021_step(void)
                Optimization_Implementation_Sept1_2021_M->Timing.t[0] -
                Optimization_Implementation_Sept1_2021_DW.tr,
                Optimization_Implementation_Sept1_2021_DW.delt2,
-               Optimization_Implementation_Sept1_2021_B.tss2, &I_ff, &velocity,
-               &position);
+               Optimization_Implementation_Sept1_2021_B.tss2, -1.0, &I_ff,
+               &velocity, &position);
             Optimization_Implementation_Sept1_2021_B.OS2 = I_ff;
             Optimization_Implementation_Sept1_2021_DW.delt2 = velocity;
             Optimization_Implementation_Sept1_2021_B.tss2 = position;
@@ -1318,24 +1316,24 @@ void Optimization_Implementation_Sept1_2021_step(void)
         Optimization_Implementation_Sept1_2021_B.c = 3.0;
         Optimization_Implementation_Sept1_2021_B.test = 1.0;
         Optimization_Implementation_Sept1_2021_B.cycles = 0.0;
-        Optimization_Implementation_Sept1_2021_B.Kguess[0] = 14.5;
+        Optimization_Implementation_Sept1_2021_B.Kguess[0] = 22.75;
         Optimization_Implementation_Sept1_2021_DW.Ksaved[0] = 0.0;
-        Optimization_Implementation_Sept1_2021_B.kStep[0] = 3.0;
+        Optimization_Implementation_Sept1_2021_B.kStep[0] = -0.4;
         Optimization_Implementation_Sept1_2021_DW.oldScore[0] = 0.0;
         Optimization_Implementation_Sept1_2021_DW.oldScoreSlope[0] = 0.0;
-        Optimization_Implementation_Sept1_2021_B.Kguess[1] = 14.5;
+        Optimization_Implementation_Sept1_2021_B.Kguess[1] = 17.1;
         Optimization_Implementation_Sept1_2021_DW.Ksaved[1] = 0.0;
-        Optimization_Implementation_Sept1_2021_B.kStep[1] = 3.0;
+        Optimization_Implementation_Sept1_2021_B.kStep[1] = -0.4;
         Optimization_Implementation_Sept1_2021_DW.oldScore[1] = 0.0;
         Optimization_Implementation_Sept1_2021_DW.oldScoreSlope[1] = 0.0;
-        Optimization_Implementation_Sept1_2021_B.Kguess[2] = 0.5;
+        Optimization_Implementation_Sept1_2021_B.Kguess[2] = 0.92;
         Optimization_Implementation_Sept1_2021_DW.Ksaved[2] = 0.0;
-        Optimization_Implementation_Sept1_2021_B.kStep[2] = 0.5;
+        Optimization_Implementation_Sept1_2021_B.kStep[2] = -0.08;
         Optimization_Implementation_Sept1_2021_DW.oldScore[2] = 0.0;
         Optimization_Implementation_Sept1_2021_DW.oldScoreSlope[2] = 0.0;
-        Optimization_Implementation_Sept1_2021_B.Kguess[3] = 1.4;
+        Optimization_Implementation_Sept1_2021_B.Kguess[3] = 1.41;
         Optimization_Implementation_Sept1_2021_DW.Ksaved[3] = 0.0;
-        Optimization_Implementation_Sept1_2021_B.kStep[3] = 0.5;
+        Optimization_Implementation_Sept1_2021_B.kStep[3] = 0.08;
         Optimization_Implementation_Sept1_2021_DW.oldScore[3] = 0.0;
         Optimization_Implementation_Sept1_2021_DW.oldScoreSlope[3] = 0.0;
         Optimization_Implementation_Sept1_2021_DW.a1 = 0.0;

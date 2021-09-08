@@ -75,7 +75,7 @@ struct Optimization_Implement_cal_type {
   real_T Delay1_InitialCondition;      /* Expression: 0.0
                                         * Referenced by: '<Root>/Delay1'
                                         */
-  real_T Constant_Value;               /* Expression: 4
+  real_T Constant_Value;               /* Expression: 1
                                         * Referenced by: '<Root>/Constant'
                                         */
   real_T Delay_InitialCondition;       /* Expression: 0.0
