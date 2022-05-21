@@ -7,9 +7,9 @@
  *
  * Code generation for model "Main_Sept1_2021".
  *
- * Model version              : 1.38
+ * Model version              : 1.51
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Wed Sep  8 14:05:53 2021
+ * C++ source code generated on : Thu May 19 16:43:57 2022
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -22,7 +22,6 @@
 #define RTW_HEADER_Main_Sept1_2021_private_h_
 #include "rtwtypes.h"
 #include "multiword_types.h"
-#include "Main_Sept1_2021.h"
 
 /* Private macros used by the generated code to access rtModel */
 #ifndef rtmIsMajorTimeStep
@@ -48,8 +47,5 @@ extern "C" void sg_IO602_IO691_write_s(SimStruct *rts);
 extern "C" void sg_IO602_IO691_read_s(SimStruct *rts);
 extern "C" void sg_IO602_IO691_setup_s(SimStruct *rts);
 extern "C" void sg_IO602_IO691_status_s(SimStruct *rts);
-extern void Main_Sept1_2021_floatsbytes(real_T rtu_position, real_T rtu_velocity,
-  real_T rtu_K_p, real_T rtu_K_d, real_T rtu_T_ff,
-  B_floatsbytes_Main_Sept1_2021_T *localB);
 
 #endif                               /* RTW_HEADER_Main_Sept1_2021_private_h_ */

@@ -7,9 +7,9 @@
  *
  * Code generation for model "Main_Sept1_2021".
  *
- * Model version              : 1.38
+ * Model version              : 1.51
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Wed Sep  8 14:05:53 2021
+ * C++ source code generated on : Thu May 19 16:43:57 2022
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -39,7 +39,6 @@
 
 /* Child system includes */
 #include "Main_Sept1_2021_cal.h"
-#include "rtGetInf.h"
 #include "rt_nonfinite.h"
 
 /* Macros for accessing real-time model data structure */
@@ -126,45 +125,35 @@
 /* user code (top of export header file) */
 #include "can_message.h"
 
-/* Block signals for system '<S4>/floats -> bytes' */
-struct B_floatsbytes_Main_Sept1_2021_T {
-  uint8_T b[8];                        /* '<S4>/floats -> bytes' */
-};
-
 /* Block signals (default storage) */
 struct B_Main_Sept1_2021_T {
-  CAN_DATATYPE CANRead_o2;             /* '<S6>/CAN Read' */
-  CAN_DATATYPE CANPack1;               /* '<S5>/CAN Pack1' */
-  CAN_DATATYPE CANmsg2;                /* '<S4>/CAN Pack1' */
-  real_T Delay;                        /* '<Root>/Delay' */
-  real_T Delay1;                       /* '<Root>/Delay1' */
+  CAN_DATATYPE CANRead_o2;             /* '<S5>/CAN Read' */
+  CAN_DATATYPE bytesvectorscanmessage; /* '<S3>/bytes vectors -> can message' */
+  CAN_DATATYPE bytesvectorscanmessage_c;/* '<S2>/bytes vectors -> can message' */
+  real_T P1;                           /* '<Root>/Delay' */
+  real_T P2;                           /* '<Root>/Delay1' */
   real_T Constant;                     /* '<Root>/Constant' */
-  real_T Gain;                         /* '<Root>/Gain' */
-  real_T Constant8;                    /* '<Root>/Constant8' */
   real_T Constant2;                    /* '<Root>/Constant2' */
-  real_T Current1Derivative;           /* '<Root>/Current1Derivative' */
-  real_T Current2Derivative;           /* '<Root>/Current2Derivative' */
+  real_T Th2;                          /* '<Root>/Gain' */
+  real_T Thdot2;                       /* '<Root>/Constant8' */
   real_T Clock;                        /* '<Root>/Clock' */
-  real_T Gain_m;                       /* '<S6>/Gain' */
-  real_T CANUnpack_o1;                 /* '<S10>/CAN Unpack' */
-  real_T CANUnpack_o2;                 /* '<S10>/CAN Unpack' */
-  real_T CANUnpack_o3;                 /* '<S10>/CAN Unpack' */
-  real_T CANUnpack_o4;                 /* '<S10>/CAN Unpack' */
-  real_T position;                     /* '<S10>/bytes -> floats' */
-  real_T velocity;                     /* '<S10>/bytes -> floats' */
-  real_T I_ff;                         /* '<S10>/bytes -> floats' */
-  real_T CANUnpack_o1_f;               /* '<S9>/CAN Unpack' */
-  real_T CANUnpack_o2_l;               /* '<S9>/CAN Unpack' */
-  real_T CANUnpack_o3_k;               /* '<S9>/CAN Unpack' */
-  real_T CANUnpack_o4_i;               /* '<S9>/CAN Unpack' */
-  real_T position_j;                   /* '<S9>/bytes -> floats' */
-  real_T velocity_h;                   /* '<S9>/bytes -> floats' */
-  real_T I_ff_o;                       /* '<S9>/bytes -> floats' */
+  real_T GearRatio;                    /* '<S5>/Gear Ratio' */
+  real_T CANUnpack_o1;                 /* '<S9>/CAN Unpack' */
+  real_T CANUnpack_o2;                 /* '<S9>/CAN Unpack' */
+  real_T CANUnpack_o3;                 /* '<S9>/CAN Unpack' */
+  real_T CANUnpack_o4;                 /* '<S9>/CAN Unpack' */
+  real_T position;                     /* '<S9>/bytes -> floats' */
+  real_T velocity;                     /* '<S9>/bytes -> floats' */
+  real_T I_ff;                         /* '<S9>/bytes -> floats' */
+  real_T CANMsgbytes_o1;               /* '<S8>/CAN Msg -> bytes' */
+  real_T CANMsgbytes_o2;               /* '<S8>/CAN Msg -> bytes' */
+  real_T CANMsgbytes_o3;               /* '<S8>/CAN Msg -> bytes' */
+  real_T CANMsgbytes_o4;               /* '<S8>/CAN Msg -> bytes' */
+  real_T position_j;                   /* '<S8>/bytes -> floats' */
+  real_T velocity_h;                   /* '<S8>/bytes -> floats' */
+  real_T I_ff_o;                       /* '<S8>/bytes -> floats' */
   real_T TmpSignalConversionAtSFunctionI[2];/* '<Root>/MATLAB Function1' */
   real_T danger;                       /* '<Root>/MATLAB Function1' */
-  real_T TmpSignalConversionAtSFunctio_l[2];/* '<Root>/MATLAB Function' */
-  real_T TmpSignalConversionAtSFunctio_i[2];/* '<Root>/MATLAB Function' */
-  real_T GRF;                          /* '<Root>/MATLAB Function' */
   real_T stop;                         /* '<Root>/Chart' */
   real_T theta1;                       /* '<Root>/Chart' */
   real_T theta2;                       /* '<Root>/Chart' */
@@ -175,35 +164,27 @@ struct B_Main_Sept1_2021_T {
   real_T Kp2;                          /* '<Root>/Chart' */
   real_T Kd1;                          /* '<Root>/Chart' */
   real_T Kd2;                          /* '<Root>/Chart' */
-  real_T exitY;                        /* '<Root>/Chart' */
   real_T Tcalc1;                       /* '<Root>/Chart' */
   real_T Tcalc2;                       /* '<Root>/Chart' */
   real_T calcForceX;                   /* '<Root>/Chart' */
-  real_T GRF_e;                        /* '<Root>/Chart' */
-  int32_T WhileIterator;               /* '<S6>/While Iterator' */
-  uint8_T CANUnpack_o5;                /* '<S10>/CAN Unpack' */
-  uint8_T CANUnpack_o5_p;              /* '<S9>/CAN Unpack' */
-  uint8_T MultiportSwitch[8];          /* '<S5>/Multiport Switch' */
-  uint8_T BytePacking[8];              /* '<S5>/Byte Packing' */
-  uint8_T MultiportSwitch_f[8];        /* '<S4>/Multiport Switch' */
-  uint8_T BytePacking_o[8];            /* '<S4>/Byte Packing' */
-  boolean_T CANRead_o1;                /* '<S6>/CAN Read' */
-  B_floatsbytes_Main_Sept1_2021_T sf_floatsbytes_o;/* '<S5>/floats -> bytes' */
-  B_floatsbytes_Main_Sept1_2021_T sf_floatsbytes;/* '<S4>/floats -> bytes' */
+  real_T GRF;                          /* '<Root>/Chart' */
+  real_T hop;                          /* '<Root>/Chart' */
+  int32_T WhileIterator;               /* '<S5>/While Iterator' */
+  uint8_T CANUnpack_o5;                /* '<S9>/CAN Unpack' */
+  uint8_T CANMsgbytes_o5;              /* '<S8>/CAN Msg -> bytes' */
+  uint8_T CommandSwitch[8];            /* '<S3>/Command Switch' */
+  uint8_T bytesbytevectors[8];         /* '<S3>/bytes -> byte vectors' */
+  uint8_T b[8];                        /* '<S3>/floats -> bytes1' */
+  uint8_T CommandSwitch_h[8];          /* '<S2>/Command Switch' */
+  uint8_T bytesbytevectors_l[8];       /* '<S2>/bytes -> byte vectors' */
+  uint8_T b_i[8];                      /* '<S2>/floats -> bytes' */
+  boolean_T CANRead_o1;                /* '<S5>/CAN Read' */
 };
 
 /* Block states (default storage) for system '<Root>' */
 struct DW_Main_Sept1_2021_T {
   real_T Delay_DSTATE;                 /* '<Root>/Delay' */
   real_T Delay1_DSTATE;                /* '<Root>/Delay1' */
-  real_T TimeStampA;                   /* '<Root>/Current1Derivative' */
-  real_T LastUAtTimeA;                 /* '<Root>/Current1Derivative' */
-  real_T TimeStampB;                   /* '<Root>/Current1Derivative' */
-  real_T LastUAtTimeB;                 /* '<Root>/Current1Derivative' */
-  real_T TimeStampA_o;                 /* '<Root>/Current2Derivative' */
-  real_T LastUAtTimeA_d;               /* '<Root>/Current2Derivative' */
-  real_T TimeStampB_m;                 /* '<Root>/Current2Derivative' */
-  real_T LastUAtTimeB_p;               /* '<Root>/Current2Derivative' */
   real_T done;                         /* '<Root>/Chart' */
   real_T pf;                           /* '<Root>/Chart' */
   real_T tstep;                        /* '<Root>/Chart' */
@@ -213,10 +194,11 @@ struct DW_Main_Sept1_2021_T {
   real_T slope1;                       /* '<Root>/Chart' */
   real_T slope2;                       /* '<Root>/Chart' */
   real_T Idle;                         /* '<Root>/Chart' */
-  real_T hop;                          /* '<Root>/Chart' */
   real_T time;                         /* '<Root>/Chart' */
   real_T FStart;                       /* '<Root>/Chart' */
   real_T Th2Th1;                       /* '<Root>/Chart' */
+  real_T GRFy;                         /* '<Root>/Chart' */
+  real_T exitY;                        /* '<Root>/Chart' */
   void *CANSetup_PWORK;                /* '<Root>/CAN Setup ' */
   struct {
     void *LoggedData[2];
@@ -241,10 +223,6 @@ struct DW_Main_Sept1_2021_T {
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Ch_dg;   /* synthesized block */
-
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_Ch_bg;   /* synthesized block */
 
   struct {
     void *AQHandles;
@@ -276,51 +254,31 @@ struct DW_Main_Sept1_2021_T {
 
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_Curre;   /* synthesized block */
-
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_Cur_j;   /* synthesized block */
-
-  struct {
-    void *AQHandles;
   } TAQSigLogging_InsertedFor_MATLA;   /* synthesized block */
 
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_MAT_h;   /* synthesized block */
+  } TAQSigLogging_InsertedFor_Reada;   /* synthesized block */
 
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_While;   /* synthesized block */
+  } TAQSigLogging_InsertedFor_Rea_a;   /* synthesized block */
 
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_Whi_b;   /* synthesized block */
+  } TAQSigLogging_InsertedFor_Rea_e;   /* synthesized block */
 
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_Whi_m;   /* synthesized block */
+  } TAQSigLogging_InsertedFor_Rea_j;   /* synthesized block */
 
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_Whi_e;   /* synthesized block */
+  } TAQSigLogging_InsertedFor_Rea_k;   /* synthesized block */
 
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_Whi_d;   /* synthesized block */
-
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_Whi_g;   /* synthesized block */
-
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_Whi_i;   /* synthesized block */
-
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_Wh_eg;   /* synthesized block */
+  } TAQSigLogging_InsertedFor_Rea_g;   /* synthesized block */
 
   struct {
     void *LoggedData;
@@ -342,23 +300,28 @@ struct DW_Main_Sept1_2021_T {
     void *LoggedData;
   } ToWorkspace4_PWORK;                /* '<Root>/To Workspace4' */
 
-  void *CANRead_PWORK;                 /* '<S6>/CAN Read' */
+  void *CANRead_PWORK;                 /* '<S5>/CAN Read' */
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_CANRe;   /* synthesized block */
 
   struct {
     void *AQHandles;
-  } TAQSigLogging_InsertedFor_IfAct;   /* synthesized block */
+  } TAQSigLogging_InsertedFor_ID1Re;   /* synthesized block */
 
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_IfA_p;   /* synthesized block */
-
-  void *CANWrite1_PWORK;               /* '<S5>/CAN Write1' */
+  void *Motor2_PWORK;                  /* '<S3>/Motor 2' */
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Demux;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Dem_f;   /* synthesized block */
+
+  void *Motor1_PWORK;                  /* '<S2>/Motor 1' */
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Dem_e;   /* synthesized block */
 
   struct {
     void *AQHandles;
@@ -368,26 +331,17 @@ struct DW_Main_Sept1_2021_T {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Mode_;   /* synthesized block */
 
-  void *CANWrite1_PWORK_f;             /* '<S4>/CAN Write1' */
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_Dem_e;   /* synthesized block */
-
-  struct {
-    void *AQHandles;
-  } TAQSigLogging_InsertedFor_De_ng;   /* synthesized block */
-
   int32_T sfEvent;                     /* '<Root>/Chart' */
   uint32_T is_c8_Main_Sept1_2021;      /* '<Root>/Chart' */
   uint32_T is_Command;                 /* '<Root>/Chart' */
   uint32_T is_Flight;                  /* '<Root>/Chart' */
   int_T CANStatus_IWORK[34];           /* '<Root>/CAN Status' */
-  int_T CANUnpack_ModeSignalID;        /* '<S10>/CAN Unpack' */
-  int_T CANUnpack_StatusPortID;        /* '<S10>/CAN Unpack' */
-  int_T CANUnpack_ModeSignalID_d;      /* '<S9>/CAN Unpack' */
-  int_T CANUnpack_StatusPortID_f;      /* '<S9>/CAN Unpack' */
-  int_T BytePacking_IWORK[2];          /* '<S5>/Byte Packing' */
-  int_T BytePacking_IWORK_n[2];        /* '<S4>/Byte Packing' */
+  int_T CANUnpack_ModeSignalID;        /* '<S9>/CAN Unpack' */
+  int_T CANUnpack_StatusPortID;        /* '<S9>/CAN Unpack' */
+  int_T CANMsgbytes_ModeSignalID;      /* '<S8>/CAN Msg -> bytes' */
+  int_T CANMsgbytes_StatusPortID;      /* '<S8>/CAN Msg -> bytes' */
+  int_T bytesbytevectors_IWORK[2];     /* '<S3>/bytes -> byte vectors' */
+  int_T bytesbytevectors_IWORK_n[2];   /* '<S2>/bytes -> byte vectors' */
   uint16_T temporalCounter_i2;         /* '<Root>/Chart' */
   uint8_T is_active_c8_Main_Sept1_2021;/* '<Root>/Chart' */
   uint8_T temporalCounter_i1;          /* '<Root>/Chart' */
@@ -604,16 +558,15 @@ extern "C" {
  *
  * '<Root>' : 'Main_Sept1_2021'
  * '<S1>'   : 'Main_Sept1_2021/Chart'
- * '<S2>'   : 'Main_Sept1_2021/MATLAB Function'
- * '<S3>'   : 'Main_Sept1_2021/MATLAB Function1'
- * '<S4>'   : 'Main_Sept1_2021/Simulink Function1'
- * '<S5>'   : 'Main_Sept1_2021/Simulink Function3'
- * '<S6>'   : 'Main_Sept1_2021/While Iterator Subsystem'
- * '<S7>'   : 'Main_Sept1_2021/Simulink Function1/floats -> bytes'
- * '<S8>'   : 'Main_Sept1_2021/Simulink Function3/floats -> bytes'
- * '<S9>'   : 'Main_Sept1_2021/While Iterator Subsystem/If Action Subsystem'
- * '<S10>'  : 'Main_Sept1_2021/While Iterator Subsystem/If Action Subsystem1'
- * '<S11>'  : 'Main_Sept1_2021/While Iterator Subsystem/If Action Subsystem/bytes -> floats'
- * '<S12>'  : 'Main_Sept1_2021/While Iterator Subsystem/If Action Subsystem1/bytes -> floats'
+ * '<S2>'   : 'Main_Sept1_2021/HIP Actuator'
+ * '<S3>'   : 'Main_Sept1_2021/Knee Actuator'
+ * '<S4>'   : 'Main_Sept1_2021/MATLAB Function1'
+ * '<S5>'   : 'Main_Sept1_2021/Read and Sort CAN Responces'
+ * '<S6>'   : 'Main_Sept1_2021/HIP Actuator/floats -> bytes'
+ * '<S7>'   : 'Main_Sept1_2021/Knee Actuator/floats -> bytes1'
+ * '<S8>'   : 'Main_Sept1_2021/Read and Sort CAN Responces/ID 1 Read  '
+ * '<S9>'   : 'Main_Sept1_2021/Read and Sort CAN Responces/ID 2 Read'
+ * '<S10>'  : 'Main_Sept1_2021/Read and Sort CAN Responces/ID 1 Read  /bytes -> floats'
+ * '<S11>'  : 'Main_Sept1_2021/Read and Sort CAN Responces/ID 2 Read/bytes -> floats'
  */
 #endif                                 /* RTW_HEADER_Main_Sept1_2021_h_ */

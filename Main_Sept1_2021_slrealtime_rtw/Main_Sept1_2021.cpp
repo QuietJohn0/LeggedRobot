@@ -7,9 +7,9 @@
  *
  * Code generation for model "Main_Sept1_2021".
  *
- * Model version              : 1.38
+ * Model version              : 1.51
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Wed Sep  8 14:05:53 2021
+ * C++ source code generated on : Thu May 19 16:43:57 2022
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -48,9 +48,6 @@ RT_MODEL_Main_Sept1_2021_T Main_Sept1_2021_M_ = RT_MODEL_Main_Sept1_2021_T();
 RT_MODEL_Main_Sept1_2021_T *const Main_Sept1_2021_M = &Main_Sept1_2021_M_;
 
 /* Forward declaration for local functions */
-static void Main_Sept1_2021_dec2bin(real_T d, char_T s_data[], int32_T s_size[2]);
-
-/* Forward declaration for local functions */
 static real_T Main_Sept1_2021_getT(real_T p, real_T Kp, real_T Kd, real_T Tff,
   real_T currP, real_T currV);
 static void Main_Sept1_2021_mpower(const real_T a[4], real_T c[4]);
@@ -59,8 +56,336 @@ static void Main_Sept1_2021_getF(real_T pos1, real_T pos2, real_T Tc1, real_T
 static void Main_Sept1_2021_getTorque(real_T pos1, real_T pos2, real_T currTime,
   real_T StartF, real_T *Torque1, real_T *Torque2, real_T *y);
 static void Main_Sept1_2021_Command(void);
+static void Main_Sept1_2021_dec2bin(real_T d, char_T s_data[], int32_T s_size[2]);
 
-/* Function for MATLAB Function: '<S4>/floats -> bytes' */
+/* Function for Chart: '<Root>/Chart' */
+static real_T Main_Sept1_2021_getT(real_T p, real_T Kp, real_T Kd, real_T Tff,
+  real_T currP, real_T currV)
+{
+  return ((p - currP) * Kp + (0.0 - currV) * Kd) + Tff;
+}
+
+/* Function for Chart: '<Root>/Chart' */
+static void Main_Sept1_2021_mpower(const real_T a[4], real_T c[4])
+{
+  real_T r;
+  real_T t;
+  if (std::abs(a[1]) > std::abs(a[0])) {
+    r = a[0] / a[1];
+    t = 1.0 / (r * a[3] - a[2]);
+    c[0] = a[3] / a[1] * t;
+    c[1] = -t;
+    c[2] = -a[2] / a[1] * t;
+    c[3] = r * t;
+  } else {
+    r = a[1] / a[0];
+    t = 1.0 / (a[3] - r * a[2]);
+    c[0] = a[3] / a[0] * t;
+    c[1] = -r * t;
+    c[2] = -a[2] / a[0] * t;
+    c[3] = t;
+  }
+}
+
+/* Function for Chart: '<Root>/Chart' */
+static void Main_Sept1_2021_getF(real_T pos1, real_T pos2, real_T Tc1, real_T
+  Tc2, real_T *calcF, real_T *calcFX)
+{
+  real_T a[4];
+  real_T tmp_5[4];
+  real_T tmp;
+  real_T tmp_0;
+  real_T tmp_1;
+  real_T tmp_2;
+  real_T tmp_3;
+  real_T tmp_4;
+  tmp = std::cos(pos1);
+  tmp_0 = std::cos(pos1 + pos2);
+  tmp_1 = std::cos(pos1 + pos2);
+  tmp_2 = std::sin(pos1);
+  tmp_3 = std::sin(pos1 + pos2);
+  tmp_4 = std::sin(pos1 + pos2);
+  tmp_5[0] = 0.13462 * tmp + 0.161544 * tmp_0;
+  tmp_5[1] = 0.161544 * tmp_1;
+  tmp_5[2] = -0.13462 * tmp_2 - 0.161544 * tmp_3;
+  tmp_5[3] = -0.161544 * tmp_4;
+  Main_Sept1_2021_mpower(tmp_5, a);
+  *calcF = a[0] * Tc1;
+  *calcF += a[2] * Tc2;
+  *calcFX = *calcF;
+  *calcF = a[1] * Tc1;
+  *calcF += a[3] * Tc2;
+}
+
+/* Function for Chart: '<Root>/Chart' */
+static void Main_Sept1_2021_getTorque(real_T pos1, real_T pos2, real_T currTime,
+  real_T StartF, real_T *Torque1, real_T *Torque2, real_T *y)
+{
+  real_T A[4];
+  real_T tmp_4[4];
+  real_T F[2];
+  real_T a21;
+  real_T tmp;
+  real_T tmp_0;
+  real_T tmp_1;
+  real_T tmp_2;
+  real_T tmp_3;
+  int32_T r1;
+  int32_T r2;
+  *y = std::sin(21.991148575128552 * currTime + std::asin(StartF / 150.0)) *
+    150.0;
+  if (*y < 0.0) {
+    *y = 0.0;
+  }
+
+  F[0] = 0.0;
+  F[1] = *y;
+  a21 = std::cos(pos1);
+  tmp = std::cos(pos1 + pos2);
+  tmp_0 = std::cos(pos1 + pos2);
+  tmp_1 = std::sin(pos1);
+  tmp_2 = std::sin(pos1 + pos2);
+  tmp_3 = std::sin(pos1 + pos2);
+  tmp_4[0] = 0.13462 * a21 + 0.161544 * tmp;
+  tmp_4[1] = 0.161544 * tmp_0;
+  tmp_4[2] = -0.13462 * tmp_1 - 0.161544 * tmp_2;
+  tmp_4[3] = -0.161544 * tmp_3;
+  Main_Sept1_2021_mpower(tmp_4, A);
+  if (std::abs(A[1]) > std::abs(A[0])) {
+    r1 = 1;
+    r2 = 0;
+  } else {
+    r1 = 0;
+    r2 = 1;
+  }
+
+  a21 = A[r2] / A[r1];
+  *Torque2 = (F[r2] - F[r1] * a21) / (A[r2 + 2] - A[r1 + 2] * a21);
+  *Torque1 = (F[r1] - A[r1 + 2] * *Torque2) / A[r1];
+}
+
+/* Function for Chart: '<Root>/Chart' */
+static void Main_Sept1_2021_Command(void)
+{
+  real_T GRF;
+  real_T calcForceX;
+  real_T exitY;
+  boolean_T sf_internal_predicateOutput;
+  Main_Sept1_2021_B.c = 3.0;
+  if ((Main_Sept1_2021_DW.done == 1.0) || (Main_Sept1_2021_B.Constant == 4.0) ||
+      (Main_Sept1_2021_B.danger == 1.0)) {
+    if (Main_Sept1_2021_DW.is_Command == Main_Sept1_2021_IN_Stance) {
+      Main_Sept1_2021_B.T1 = 0.0;
+      Main_Sept1_2021_B.T2 = 0.0;
+      Main_Sept1_2021_B.hop++;
+      Main_Sept1_2021_DW.is_Command = 0U;
+    } else {
+      Main_Sept1_2021_DW.is_Flight = 0U;
+      Main_Sept1_2021_DW.is_Command = 0U;
+    }
+
+    Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_202_IN_FinalShutdown;
+    Main_Sept1_2021_B.Kp1 = 0.0;
+    Main_Sept1_2021_B.Kp2 = 0.0;
+    Main_Sept1_2021_B.theta1 = 0.0;
+    Main_Sept1_2021_B.theta2 = 0.0;
+    Main_Sept1_2021_B.T1 = 0.0;
+    Main_Sept1_2021_B.T2 = 0.0;
+  } else {
+    Main_Sept1_2021_B.Tcalc1 = Main_Sept1_2021_getT(Main_Sept1_2021_B.theta1,
+      Main_Sept1_2021_B.Kp1, Main_Sept1_2021_B.Kd1, Main_Sept1_2021_B.T1,
+      Main_Sept1_2021_B.P1, Main_Sept1_2021_B.velocity_h);
+    Main_Sept1_2021_B.Tcalc2 = Main_Sept1_2021_getT(Main_Sept1_2021_B.theta2,
+      Main_Sept1_2021_B.Kp2, Main_Sept1_2021_B.Kd2, Main_Sept1_2021_B.T2,
+      Main_Sept1_2021_B.P2, Main_Sept1_2021_B.velocity);
+    Main_Sept1_2021_getF(Main_Sept1_2021_B.P1, Main_Sept1_2021_B.P2,
+                         Main_Sept1_2021_B.Tcalc1, Main_Sept1_2021_B.Tcalc2,
+                         &GRF, &calcForceX);
+    Main_Sept1_2021_B.GRF = GRF;
+    Main_Sept1_2021_B.calcForceX = calcForceX;
+    switch (Main_Sept1_2021_DW.is_Command) {
+     case Main_Sept1_2021_IN_Flight:
+      sf_internal_predicateOutput = ((Main_Sept1_2021_DW.temporalCounter_i2 >=
+        2000U) && (Main_Sept1_2021_DW.Idle == 1.0));
+      if (sf_internal_predicateOutput) {
+        Main_Sept1_2021_DW.is_Flight = 0U;
+        Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Stance;
+        Main_Sept1_2021_DW.temporalCounter_i1 = 0U;
+        Main_Sept1_2021_DW.FStart = Main_Sept1_2021_B.GRF;
+        Main_Sept1_2021_B.T1 = Main_Sept1_2021_B.Tcalc1;
+        Main_Sept1_2021_B.T2 = Main_Sept1_2021_B.Tcalc2;
+        Main_Sept1_2021_DW.time = (((Main_Sept1_2021_M->Timing.clockTick1+
+          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001);
+        Main_Sept1_2021_B.Kp1 = 0.0;
+        Main_Sept1_2021_B.Kp2 = 0.0;
+        Main_Sept1_2021_B.Kd1 = 0.0;
+        Main_Sept1_2021_B.Kd2 = 0.0;
+        Main_Sept1_2021_DW.exitY = 0.0;
+      } else if (Main_Sept1_2021_DW.is_Flight == Main_Sept1_2021_IN_Idle1) {
+        if (Main_Sept1_2021_B.GRF > 0.0) {
+          Main_Sept1_2021_DW.Idle = 1.0;
+          Main_Sept1_2021_DW.is_Flight = Main_Sept1_2021_IN_Idle1;
+        }
+
+        /* case IN_ToPosition: */
+      } else if (((Main_Sept1_2021_B.theta1 >= Main_Sept1_2021_DW.pf) &&
+                  (Main_Sept1_2021_DW.slope1 > 0.0)) ||
+                 ((Main_Sept1_2021_B.theta1 <= Main_Sept1_2021_DW.pf) &&
+                  (Main_Sept1_2021_DW.slope1 < 0.0))) {
+        Main_Sept1_2021_DW.is_Flight = Main_Sept1_2021_IN_Idle1;
+      } else {
+        Main_Sept1_2021_B.theta1 = ((((Main_Sept1_2021_M->Timing.clockTick1+
+          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
+          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope1 +
+          Main_Sept1_2021_DW.po1;
+        Main_Sept1_2021_B.theta2 = ((((Main_Sept1_2021_M->Timing.clockTick1+
+          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
+          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope2 +
+          Main_Sept1_2021_DW.po2;
+      }
+      break;
+
+     case Main_Sept1_2021_IN_Idle:
+      if (Main_Sept1_2021_B.Constant == 3.0) {
+        Main_Sept1_2021_B.hop = 0.0;
+        Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Stance;
+        Main_Sept1_2021_DW.temporalCounter_i1 = 0U;
+        Main_Sept1_2021_DW.FStart = Main_Sept1_2021_B.GRF;
+        Main_Sept1_2021_B.T1 = Main_Sept1_2021_B.Tcalc1;
+        Main_Sept1_2021_B.T2 = Main_Sept1_2021_B.Tcalc2;
+        Main_Sept1_2021_DW.time = (((Main_Sept1_2021_M->Timing.clockTick1+
+          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001);
+        Main_Sept1_2021_B.Kp1 = 0.0;
+        Main_Sept1_2021_B.Kp2 = 0.0;
+        Main_Sept1_2021_B.Kd1 = 0.0;
+        Main_Sept1_2021_B.Kd2 = 0.0;
+        Main_Sept1_2021_DW.exitY = 0.0;
+      }
+      break;
+
+     case Main_Sept1_2021_IN_Sit:
+      if (((Main_Sept1_2021_B.theta1 >= Main_Sept1_2021_DW.pf) &&
+           (Main_Sept1_2021_DW.slope1 > 0.0)) || ((Main_Sept1_2021_B.theta1 <=
+            Main_Sept1_2021_DW.pf) && (Main_Sept1_2021_DW.slope1 < 0.0))) {
+        Main_Sept1_2021_DW.done = 1.0;
+        Main_Sept1_2021_DW.pf = -0.6;
+        Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Stand;
+        Main_Sept1_2021_DW.to = (((Main_Sept1_2021_M->Timing.clockTick1+
+          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001);
+        Main_Sept1_2021_DW.tstep = 3.0;
+        Main_Sept1_2021_B.theta1 = Main_Sept1_2021_B.P1;
+        Main_Sept1_2021_DW.po1 = Main_Sept1_2021_B.theta1;
+        Main_Sept1_2021_DW.slope1 = (Main_Sept1_2021_DW.pf -
+          Main_Sept1_2021_DW.po1) / Main_Sept1_2021_DW.tstep;
+        Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.P2;
+        Main_Sept1_2021_DW.po2 = Main_Sept1_2021_B.theta2;
+        Main_Sept1_2021_DW.slope2 = (Main_Sept1_2021_DW.Th2Th1 *
+          Main_Sept1_2021_DW.pf - Main_Sept1_2021_DW.po2) /
+          Main_Sept1_2021_DW.tstep;
+      } else {
+        Main_Sept1_2021_B.theta1 = ((((Main_Sept1_2021_M->Timing.clockTick1+
+          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
+          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope1 +
+          Main_Sept1_2021_DW.po1;
+        Main_Sept1_2021_B.theta2 = ((((Main_Sept1_2021_M->Timing.clockTick1+
+          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
+          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope2 +
+          Main_Sept1_2021_DW.po2;
+      }
+      break;
+
+     case Main_Sept1_2021_IN_Stance:
+      if (Main_Sept1_2021_B.hop == 3.0) {
+        Main_Sept1_2021_DW.pf = -0.7;
+        Main_Sept1_2021_B.T1 = 0.0;
+        Main_Sept1_2021_B.T2 = 0.0;
+        Main_Sept1_2021_B.hop++;
+        Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Sit;
+        Main_Sept1_2021_B.Kp1 = 25.0;
+        Main_Sept1_2021_B.Kp2 = 25.0;
+        Main_Sept1_2021_B.Kd1 = 0.1;
+        Main_Sept1_2021_B.Kd2 = 0.1;
+        Main_Sept1_2021_DW.tstep = 3.0;
+        Main_Sept1_2021_DW.to = (((Main_Sept1_2021_M->Timing.clockTick1+
+          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001);
+        Main_Sept1_2021_B.theta1 = Main_Sept1_2021_B.P1;
+        Main_Sept1_2021_DW.po1 = Main_Sept1_2021_B.theta1;
+        Main_Sept1_2021_DW.slope1 = (Main_Sept1_2021_DW.pf -
+          Main_Sept1_2021_DW.po1) / Main_Sept1_2021_DW.tstep;
+        Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.P2;
+        Main_Sept1_2021_DW.po2 = Main_Sept1_2021_B.theta2;
+        Main_Sept1_2021_DW.slope2 = (Main_Sept1_2021_DW.Th2Th1 *
+          Main_Sept1_2021_DW.pf - Main_Sept1_2021_DW.po2) /
+          Main_Sept1_2021_DW.tstep;
+      } else {
+        sf_internal_predicateOutput = ((Main_Sept1_2021_DW.temporalCounter_i1 >=
+          3) && (((((Main_Sept1_2021_M->Timing.clockTick1+
+                     Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) *
+                   0.001) - Main_Sept1_2021_DW.time != 0.0) &&
+                 (Main_Sept1_2021_DW.exitY == 0.0)));
+        if (sf_internal_predicateOutput) {
+          Main_Sept1_2021_DW.pf = -0.6;
+          Main_Sept1_2021_B.T1 = 0.0;
+          Main_Sept1_2021_B.T2 = 0.0;
+          Main_Sept1_2021_B.hop++;
+          Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Flight;
+          Main_Sept1_2021_DW.temporalCounter_i2 = 0U;
+          Main_Sept1_2021_DW.Idle = 0.0;
+          Main_Sept1_2021_DW.is_Flight = Main_Sept1_2021_IN_ToPosition;
+          Main_Sept1_2021_B.Kp1 = 22.75;
+          Main_Sept1_2021_B.Kp2 = 17.0;
+          Main_Sept1_2021_B.Kd1 = 0.95;
+          Main_Sept1_2021_B.Kd2 = 1.45;
+          Main_Sept1_2021_DW.tstep = 0.15;
+          Main_Sept1_2021_DW.to = (((Main_Sept1_2021_M->Timing.clockTick1+
+            Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001);
+          Main_Sept1_2021_B.theta1 = Main_Sept1_2021_B.P1;
+          Main_Sept1_2021_DW.po1 = Main_Sept1_2021_B.theta1;
+          Main_Sept1_2021_DW.slope1 = (Main_Sept1_2021_DW.pf -
+            Main_Sept1_2021_DW.po1) / Main_Sept1_2021_DW.tstep;
+          Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.P2;
+          Main_Sept1_2021_DW.po2 = Main_Sept1_2021_B.theta2;
+          Main_Sept1_2021_DW.slope2 = (Main_Sept1_2021_DW.Th2Th1 *
+            Main_Sept1_2021_DW.pf - Main_Sept1_2021_DW.po2) /
+            Main_Sept1_2021_DW.tstep;
+        } else {
+          Main_Sept1_2021_getTorque(Main_Sept1_2021_B.P1, Main_Sept1_2021_B.P2,
+            (((Main_Sept1_2021_M->Timing.clockTick1+
+               Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
+            Main_Sept1_2021_DW.time, Main_Sept1_2021_DW.FStart, &GRF,
+            &calcForceX, &exitY);
+          Main_Sept1_2021_B.T1 = GRF;
+          Main_Sept1_2021_B.T2 = calcForceX;
+          Main_Sept1_2021_DW.exitY = exitY;
+        }
+      }
+      break;
+
+     default:
+      /* case IN_Stand: */
+      if (((Main_Sept1_2021_B.theta1 >= Main_Sept1_2021_DW.pf) &&
+           (Main_Sept1_2021_DW.slope1 > 0.0)) || ((Main_Sept1_2021_B.theta1 <=
+            Main_Sept1_2021_DW.pf) && (Main_Sept1_2021_DW.slope1 < 0.0))) {
+        Main_Sept1_2021_B.theta1 = Main_Sept1_2021_DW.pf;
+        Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.theta1 *
+          Main_Sept1_2021_DW.Th2Th1;
+        Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Idle;
+      } else {
+        Main_Sept1_2021_B.theta1 = ((((Main_Sept1_2021_M->Timing.clockTick1+
+          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
+          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope1 +
+          Main_Sept1_2021_DW.po1;
+        Main_Sept1_2021_B.theta2 = ((((Main_Sept1_2021_M->Timing.clockTick1+
+          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
+          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope2 +
+          Main_Sept1_2021_DW.po2;
+      }
+      break;
+    }
+  }
+}
+
+/* Function for MATLAB Function: '<S2>/floats -> bytes' */
 static void Main_Sept1_2021_dec2bin(real_T d, char_T s_data[], int32_T s_size[2])
 {
   real_T b_d;
@@ -242,22 +567,18 @@ real_T rt_roundd_snf(real_T u)
   return y;
 }
 
-/*
- * Output and update for atomic system:
- *    '<S4>/floats -> bytes'
- *    '<S5>/floats -> bytes'
- */
-void Main_Sept1_2021_floatsbytes(real_T rtu_position, real_T rtu_velocity,
-  real_T rtu_K_p, real_T rtu_K_d, real_T rtu_T_ff,
-  B_floatsbytes_Main_Sept1_2021_T *localB)
+/* Model step function */
+void Main_Sept1_2021_step(void)
 {
   real_T b_B[8];
-  real_T y;
+  real_T I_ff;
+  real_T position;
+  real_T velocity;
   uint64_T a;
   uint64_T p2;
-  int32_T i;
+  int32_T first;
   int32_T loop_ub;
-  int32_T loop_ub_0;
+  int32_T s5_iter;
   char_T p_data[79];
   char_T kd_data[75];
   char_T kp_data[75];
@@ -281,124 +602,628 @@ void Main_Sept1_2021_floatsbytes(real_T rtu_position, real_T rtu_velocity,
     false };
 
   int32_T c_size[2];
-  if (rtu_position < 95.5) {
-    y = rtu_position;
+
+  /* S-Function (sg_IO602_IO691_setup_s): '<Root>/CAN Setup ' */
+
+  /* Level2 S-Function Block: '<Root>/CAN Setup ' (sg_IO602_IO691_setup_s) */
+  {
+    SimStruct *rts = Main_Sept1_2021_M->childSfunctions[3];
+    sfcnOutputs(rts,0);
+  }
+
+  /* Delay: '<Root>/Delay' */
+  Main_Sept1_2021_B.P1 = Main_Sept1_2021_DW.Delay_DSTATE;
+
+  /* Delay: '<Root>/Delay1' */
+  Main_Sept1_2021_B.P2 = Main_Sept1_2021_DW.Delay1_DSTATE;
+
+  /* Outputs for Iterator SubSystem: '<Root>/Read and Sort CAN Responces' incorporates:
+   *  WhileIterator: '<S5>/While Iterator'
+   */
+  s5_iter = 1;
+  do {
+    Main_Sept1_2021_B.WhileIterator = s5_iter;
+
+    /* Level2 S-Function Block: '<S5>/CAN Read' (sg_IO602_IO691_read_s) */
+    {
+      SimStruct *rts = Main_Sept1_2021_M->childSfunctions[2];
+      sfcnOutputs(rts,0);
+    }
+
+    {
+      /* S-Function (scanunpack): '<S8>/CAN Msg -> bytes' */
+      uint8_T msgReceived = 0;
+      if ((6 == Main_Sept1_2021_B.CANRead_o2.Length) &&
+          (Main_Sept1_2021_B.CANRead_o2.ID != INVALID_CAN_ID) ) {
+        if ((7 == Main_Sept1_2021_B.CANRead_o2.ID) && (0U ==
+             Main_Sept1_2021_B.CANRead_o2.Extended) ) {
+          msgReceived = 1;
+
+          {
+            /* --------------- START Unpacking signal 0 ------------------
+             *  startBit                = 16
+             *  length                  = 16
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)
+                      (Main_Sept1_2021_B.CANRead_o2.Data[2]);
+                    tempValue = tempValue | (uint16_T)((uint16_T)
+                      (Main_Sept1_2021_B.CANRead_o2.Data[1]) << 8);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                Main_Sept1_2021_B.CANMsgbytes_o1 = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 1 ------------------
+             *  startBit                = 36
+             *  length                  = 12
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                      (Main_Sept1_2021_B.CANRead_o2.Data[4]) & (uint16_T)(0xF0U))
+                      >> 4);
+                    tempValue = tempValue | (uint16_T)((uint16_T)
+                      (Main_Sept1_2021_B.CANRead_o2.Data[3]) << 4);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                Main_Sept1_2021_B.CANMsgbytes_o2 = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 2 ------------------
+             *  startBit                = 40
+             *  length                  = 12
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)
+                      (Main_Sept1_2021_B.CANRead_o2.Data[5]);
+                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                      (Main_Sept1_2021_B.CANRead_o2.Data[4]) & (uint16_T)(0xFU))
+                      << 8);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                Main_Sept1_2021_B.CANMsgbytes_o3 = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 3 ------------------
+             *  startBit                = 0
+             *  length                  = 8
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint8_T unpackedValue = 0;
+
+                {
+                  uint8_T tempValue = (uint8_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint8_T)
+                      (Main_Sept1_2021_B.CANRead_o2.Data[0]);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                Main_Sept1_2021_B.CANMsgbytes_o4 = result;
+              }
+            }
+          }
+        }
+      }
+
+      /* Status port */
+      Main_Sept1_2021_B.CANMsgbytes_o5 = msgReceived;
+    }
+
+    Main_Sept1_2021_B.position_j = Main_Sept1_2021_B.CANMsgbytes_o1;
+    Main_Sept1_2021_B.velocity_h = Main_Sept1_2021_B.CANMsgbytes_o2;
+    Main_Sept1_2021_B.I_ff_o = Main_Sept1_2021_B.CANMsgbytes_o3;
+    I_ff = Main_Sept1_2021_B.I_ff_o;
+    velocity = Main_Sept1_2021_B.velocity_h;
+    position = Main_Sept1_2021_B.position_j;
+    Main_Sept1_2021_B.I_ff_o = I_ff;
+    Main_Sept1_2021_B.velocity_h = velocity;
+    Main_Sept1_2021_B.position_j = position;
+    Main_Sept1_2021_B.position_j = Main_Sept1_2021_B.position_j * 191.0 /
+      65535.0 + -95.5;
+    Main_Sept1_2021_B.velocity_h = Main_Sept1_2021_B.velocity_h * 90.0 / 4095.0
+      + -45.0;
+    Main_Sept1_2021_B.I_ff_o = Main_Sept1_2021_B.I_ff_o * 80.0 / 4095.0 + -40.0;
+
+    {
+      /* S-Function (scanunpack): '<S9>/CAN Unpack' */
+      uint8_T msgReceived = 0;
+      if ((6 == Main_Sept1_2021_B.CANRead_o2.Length) &&
+          (Main_Sept1_2021_B.CANRead_o2.ID != INVALID_CAN_ID) ) {
+        if ((8 == Main_Sept1_2021_B.CANRead_o2.ID) && (0U ==
+             Main_Sept1_2021_B.CANRead_o2.Extended) ) {
+          msgReceived = 1;
+
+          {
+            /* --------------- START Unpacking signal 0 ------------------
+             *  startBit                = 16
+             *  length                  = 16
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)
+                      (Main_Sept1_2021_B.CANRead_o2.Data[2]);
+                    tempValue = tempValue | (uint16_T)((uint16_T)
+                      (Main_Sept1_2021_B.CANRead_o2.Data[1]) << 8);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                Main_Sept1_2021_B.CANUnpack_o1 = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 1 ------------------
+             *  startBit                = 36
+             *  length                  = 12
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                      (Main_Sept1_2021_B.CANRead_o2.Data[4]) & (uint16_T)(0xF0U))
+                      >> 4);
+                    tempValue = tempValue | (uint16_T)((uint16_T)
+                      (Main_Sept1_2021_B.CANRead_o2.Data[3]) << 4);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                Main_Sept1_2021_B.CANUnpack_o2 = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 2 ------------------
+             *  startBit                = 40
+             *  length                  = 12
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)
+                      (Main_Sept1_2021_B.CANRead_o2.Data[5]);
+                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                      (Main_Sept1_2021_B.CANRead_o2.Data[4]) & (uint16_T)(0xFU))
+                      << 8);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                Main_Sept1_2021_B.CANUnpack_o3 = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 3 ------------------
+             *  startBit                = 0
+             *  length                  = 8
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint8_T unpackedValue = 0;
+
+                {
+                  uint8_T tempValue = (uint8_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint8_T)
+                      (Main_Sept1_2021_B.CANRead_o2.Data[0]);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                Main_Sept1_2021_B.CANUnpack_o4 = result;
+              }
+            }
+          }
+        }
+      }
+
+      /* Status port */
+      Main_Sept1_2021_B.CANUnpack_o5 = msgReceived;
+    }
+
+    Main_Sept1_2021_B.position = Main_Sept1_2021_B.CANUnpack_o1;
+    Main_Sept1_2021_B.velocity = Main_Sept1_2021_B.CANUnpack_o2;
+    Main_Sept1_2021_B.I_ff = Main_Sept1_2021_B.CANUnpack_o3;
+    I_ff = Main_Sept1_2021_B.I_ff;
+    velocity = Main_Sept1_2021_B.velocity;
+    position = Main_Sept1_2021_B.position;
+    Main_Sept1_2021_B.I_ff = I_ff;
+    Main_Sept1_2021_B.velocity = velocity;
+    Main_Sept1_2021_B.position = position;
+    Main_Sept1_2021_B.position = Main_Sept1_2021_B.position * 191.0 / 65535.0 +
+      -95.5;
+    Main_Sept1_2021_B.velocity = Main_Sept1_2021_B.velocity * 90.0 / 4095.0 +
+      -45.0;
+    Main_Sept1_2021_B.I_ff = Main_Sept1_2021_B.I_ff * 80.0 / 4095.0 + -40.0;
+    Main_Sept1_2021_B.GearRatio = Main_Sept1_2021_cal->GearRatio_Gain *
+      Main_Sept1_2021_B.position;
+    s5_iter++;
+  } while (Main_Sept1_2021_B.CANRead_o1);
+
+  /* End of Outputs for SubSystem: '<Root>/Read and Sort CAN Responces' */
+
+  /* SignalConversion generated from: '<S4>/ SFunction ' incorporates:
+   *  MATLAB Function: '<Root>/MATLAB Function1'
+   */
+  Main_Sept1_2021_B.TmpSignalConversionAtSFunctionI[0] =
+    Main_Sept1_2021_B.position_j;
+  Main_Sept1_2021_B.TmpSignalConversionAtSFunctionI[1] =
+    Main_Sept1_2021_B.GearRatio;
+
+  /* MATLAB Function: '<Root>/MATLAB Function1' */
+  Main_Sept1_2021_B.danger = 0.0;
+  if ((0 < ((Main_Sept1_2021_B.TmpSignalConversionAtSFunctionI[0] > 2.0) +
+            (Main_Sept1_2021_B.TmpSignalConversionAtSFunctionI[0] < -2.0)) -
+       (Main_Sept1_2021_B.TmpSignalConversionAtSFunctionI[0] <= -95.5)) || (0 <
+       ((Main_Sept1_2021_B.TmpSignalConversionAtSFunctionI[1] > 2.0) +
+        (Main_Sept1_2021_B.TmpSignalConversionAtSFunctionI[1] < -2.0)) -
+       (Main_Sept1_2021_B.TmpSignalConversionAtSFunctionI[1] <= -95.5))) {
+    Main_Sept1_2021_B.danger = 1.0;
+  }
+
+  /* Constant: '<Root>/Constant' */
+  Main_Sept1_2021_B.Constant = Main_Sept1_2021_cal->Constant_Value;
+
+  /* Chart: '<Root>/Chart' */
+  if (Main_Sept1_2021_DW.temporalCounter_i2 < 4095U) {
+    Main_Sept1_2021_DW.temporalCounter_i2 = static_cast<uint16_T>
+      (Main_Sept1_2021_DW.temporalCounter_i2 + 1U);
+  }
+
+  Main_Sept1_2021_DW.sfEvent = Main_Sept1_2021_CALL_EVENT;
+  if (Main_Sept1_2021_DW.temporalCounter_i1 < 3U) {
+    Main_Sept1_2021_DW.temporalCounter_i1 = static_cast<uint8_T>
+      (Main_Sept1_2021_DW.temporalCounter_i1 + 1U);
+  }
+
+  if (Main_Sept1_2021_DW.is_active_c8_Main_Sept1_2021 == 0U) {
+    Main_Sept1_2021_DW.is_active_c8_Main_Sept1_2021 = 1U;
+    Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_2021_IN_Start;
+    Main_Sept1_2021_DW.temporalCounter_i2 = 0U;
   } else {
-    y = 95.5;
+    switch (Main_Sept1_2021_DW.is_c8_Main_Sept1_2021) {
+     case Main_Sept1_2021_IN_Command:
+      Main_Sept1_2021_Command();
+      break;
+
+     case Main_Sept1_2021_IN_Deinitiate:
+      Main_Sept1_2021_B.c = 4.0;
+      if (Main_Sept1_2021_DW.temporalCounter_i2 >= 3000U) {
+        Main_Sept1_2021_B.stop = 1.0;
+        Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_2021_IN_Deinitiate;
+        Main_Sept1_2021_DW.temporalCounter_i2 = 0U;
+        Main_Sept1_2021_B.c = 4.0;
+      }
+      break;
+
+     case Main_Sept1_202_IN_FinalShutdown:
+      Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_2021_IN_Deinitiate;
+      Main_Sept1_2021_DW.temporalCounter_i2 = 0U;
+      Main_Sept1_2021_B.c = 4.0;
+      break;
+
+     case Main_Sept1_2021_IN_Init:
+      Main_Sept1_2021_B.c = 2.0;
+      if (Main_Sept1_2021_B.Constant == 2.0) {
+        Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_2021_IN_Command;
+        Main_Sept1_2021_B.c = 3.0;
+        Main_Sept1_2021_DW.pf = -0.6;
+        Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Stand;
+        Main_Sept1_2021_DW.to = Main_Sept1_2021_M->Timing.t[1];
+        Main_Sept1_2021_DW.tstep = 3.0;
+        Main_Sept1_2021_B.theta1 = Main_Sept1_2021_B.P1;
+        Main_Sept1_2021_DW.po1 = Main_Sept1_2021_B.theta1;
+        Main_Sept1_2021_DW.slope1 = (Main_Sept1_2021_DW.pf -
+          Main_Sept1_2021_DW.po1) / Main_Sept1_2021_DW.tstep;
+        Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.P2;
+        Main_Sept1_2021_DW.po2 = Main_Sept1_2021_B.theta2;
+        Main_Sept1_2021_DW.slope2 = (Main_Sept1_2021_DW.Th2Th1 *
+          Main_Sept1_2021_DW.pf - Main_Sept1_2021_DW.po2) /
+          Main_Sept1_2021_DW.tstep;
+      } else if ((Main_Sept1_2021_B.Constant == 4.0) ||
+                 (Main_Sept1_2021_B.danger == 1.0)) {
+        Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 =
+          Main_Sept1_202_IN_FinalShutdown;
+        Main_Sept1_2021_B.Kp1 = 0.0;
+        Main_Sept1_2021_B.Kp2 = 0.0;
+        Main_Sept1_2021_B.theta1 = 0.0;
+        Main_Sept1_2021_B.theta2 = 0.0;
+        Main_Sept1_2021_B.T1 = 0.0;
+        Main_Sept1_2021_B.T2 = 0.0;
+      }
+      break;
+
+     case Main_Sept1_2021_IN_Start:
+      if (Main_Sept1_2021_B.Constant == 0.0) {
+        Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_2021_IN_Zero;
+        Main_Sept1_2021_DW.temporalCounter_i2 = 0U;
+        Main_Sept1_2021_B.c = 1.0;
+      } else if (Main_Sept1_2021_B.Constant == 1.0) {
+        Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_2021_IN_Init;
+        Main_Sept1_2021_DW.temporalCounter_i2 = 0U;
+        Main_Sept1_2021_B.c = 2.0;
+      }
+      break;
+
+     default:
+      /* case IN_Zero: */
+      Main_Sept1_2021_B.c = 1.0;
+      if (Main_Sept1_2021_B.Constant == 1.0) {
+        Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_2021_IN_Init;
+        Main_Sept1_2021_DW.temporalCounter_i2 = 0U;
+        Main_Sept1_2021_B.c = 2.0;
+      }
+      break;
+    }
   }
 
-  if (!(y > -95.5)) {
-    y = -95.5;
+  /* End of Chart: '<Root>/Chart' */
+
+  /* Constant: '<Root>/Constant2' */
+  Main_Sept1_2021_B.Constant2 = Main_Sept1_2021_cal->Constant2_Value;
+
+  /* Outputs for Atomic SubSystem: '<Root>/HIP Actuator' */
+  /* MATLAB Function: '<S2>/floats -> bytes' */
+  I_ff = Main_Sept1_2021_B.theta1;
+  if (!(I_ff < 95.5)) {
+    I_ff = 95.5;
   }
 
-  Main_Sept1_2021_dec2bin(std::floor((y - -95.5) * 65535.0 / 191.0), B, c_size);
+  if (!(I_ff > -95.5)) {
+    I_ff = -95.5;
+  }
+
+  Main_Sept1_2021_dec2bin(std::floor((I_ff - -95.5) * 65535.0 / 191.0), B,
+    c_size);
   outsize_idx_1 = static_cast<int8_T>(16 - c_size[1]);
-  loop_ub = outsize_idx_1;
-  loop_ub_0 = c_size[1];
-  for (i = 0; i < loop_ub; i++) {
-    p_data[i] = '0';
+  s5_iter = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < s5_iter; first++) {
+    p_data[first] = '0';
   }
 
-  for (i = 0; i < loop_ub_0; i++) {
-    p_data[i + loop_ub] = B[i];
+  for (first = 0; first < loop_ub; first++) {
+    p_data[first + s5_iter] = B[first];
   }
 
-  if (rtu_velocity < 45.0) {
-    y = rtu_velocity;
-  } else {
-    y = 45.0;
+  I_ff = Main_Sept1_2021_B.Constant2;
+  if (!(I_ff < 45.0)) {
+    I_ff = 45.0;
   }
 
-  if (!(y > -45.0)) {
-    y = -45.0;
+  if (!(I_ff > -45.0)) {
+    I_ff = -45.0;
   }
 
-  Main_Sept1_2021_dec2bin(std::floor((y - -45.0) * 4095.0 / 90.0), B, c_size);
+  Main_Sept1_2021_dec2bin(std::floor((I_ff - -45.0) * 4095.0 / 90.0), B, c_size);
   outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
-  loop_ub = outsize_idx_1;
-  loop_ub_0 = c_size[1];
-  for (i = 0; i < loop_ub; i++) {
-    v_data[i] = '0';
+  s5_iter = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < s5_iter; first++) {
+    v_data[first] = '0';
   }
 
-  for (i = 0; i < loop_ub_0; i++) {
-    v_data[i + loop_ub] = B[i];
+  for (first = 0; first < loop_ub; first++) {
+    v_data[first + s5_iter] = B[first];
   }
 
-  if (rtu_K_p < 500.0) {
-    y = rtu_K_p;
-  } else {
-    y = 500.0;
+  I_ff = Main_Sept1_2021_B.Kp1;
+  if (!(I_ff < 500.0)) {
+    I_ff = 500.0;
   }
 
-  if (!(y > 0.0)) {
-    y = 0.0;
+  if (!(I_ff > 0.0)) {
+    I_ff = 0.0;
   }
 
-  Main_Sept1_2021_dec2bin(std::floor(y * 4095.0 / 500.0), B, c_size);
+  Main_Sept1_2021_dec2bin(std::floor(I_ff * 4095.0 / 500.0), B, c_size);
   outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
-  loop_ub = outsize_idx_1;
-  loop_ub_0 = c_size[1];
-  for (i = 0; i < loop_ub; i++) {
-    kp_data[i] = '0';
+  s5_iter = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < s5_iter; first++) {
+    kp_data[first] = '0';
   }
 
-  for (i = 0; i < loop_ub_0; i++) {
-    kp_data[i + loop_ub] = B[i];
+  for (first = 0; first < loop_ub; first++) {
+    kp_data[first + s5_iter] = B[first];
   }
 
-  if (rtu_K_d < 45.0) {
-    y = rtu_K_d;
-  } else {
-    y = 45.0;
+  I_ff = Main_Sept1_2021_B.Kd1;
+  if (!(I_ff < 45.0)) {
+    I_ff = 45.0;
   }
 
-  if (!(y > -45.0)) {
-    y = -45.0;
+  if (!(I_ff > -45.0)) {
+    I_ff = -45.0;
   }
 
-  Main_Sept1_2021_dec2bin(std::floor(y * 4095.0 / 5.0), B, c_size);
+  Main_Sept1_2021_dec2bin(std::floor(I_ff * 4095.0 / 5.0), B, c_size);
   outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
-  loop_ub = outsize_idx_1;
-  loop_ub_0 = c_size[1];
-  for (i = 0; i < loop_ub; i++) {
-    kd_data[i] = '0';
+  s5_iter = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < s5_iter; first++) {
+    kd_data[first] = '0';
   }
 
-  for (i = 0; i < loop_ub_0; i++) {
-    kd_data[i + loop_ub] = B[i];
+  for (first = 0; first < loop_ub; first++) {
+    kd_data[first + s5_iter] = B[first];
   }
 
-  if (rtu_T_ff < 45.0) {
-    y = rtu_T_ff;
-  } else {
-    y = 45.0;
+  I_ff = Main_Sept1_2021_B.T1;
+  if (!(I_ff < 45.0)) {
+    I_ff = 45.0;
   }
 
-  if (!(y > -45.0)) {
-    y = -45.0;
+  if (!(I_ff > -45.0)) {
+    I_ff = -45.0;
   }
 
-  Main_Sept1_2021_dec2bin(std::floor((y - -18.0) * 4095.0 / 36.0), B, c_size);
+  Main_Sept1_2021_dec2bin(std::floor((I_ff - -18.0) * 4095.0 / 36.0), B, c_size);
   outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
-  loop_ub = outsize_idx_1;
-  loop_ub_0 = c_size[1];
-  for (i = 0; i < loop_ub; i++) {
-    t_data[i] = '0';
+  s5_iter = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < s5_iter; first++) {
+    t_data[first] = '0';
   }
 
-  for (i = 0; i < loop_ub_0; i++) {
-    t_data[i + loop_ub] = B[i];
+  for (first = 0; first < loop_ub; first++) {
+    t_data[first + s5_iter] = B[first];
   }
 
-  for (i = 0; i < 64; i++) {
-    B[i] = '0';
+  for (first = 0; first < 64; first++) {
+    B[first] = '0';
   }
 
-  for (i = 0; i < 8; i++) {
-    B[i << 3] = p_data[i];
-    B[(i << 3) + 1] = p_data[i + 8];
-    B[(i << 3) + 2] = v_data[i];
+  for (first = 0; first < 8; first++) {
+    B[first << 3] = p_data[first];
+    B[(first << 3) + 1] = p_data[first + 8];
+    B[(first << 3) + 2] = v_data[first];
   }
 
   B[3] = v_data[8];
@@ -409,9 +1234,9 @@ void Main_Sept1_2021_floatsbytes(real_T rtu_position, real_T rtu_velocity,
   B[51] = kp_data[2];
   B[27] = v_data[11];
   B[59] = kp_data[3];
-  for (i = 0; i < 8; i++) {
-    B[(i << 3) + 4] = kp_data[i + 4];
-    B[(i << 3) + 5] = kd_data[i];
+  for (first = 0; first < 8; first++) {
+    B[(first << 3) + 4] = kp_data[first + 4];
+    B[(first << 3) + 5] = kd_data[first];
   }
 
   B[6] = kd_data[8];
@@ -422,49 +1247,46 @@ void Main_Sept1_2021_floatsbytes(real_T rtu_position, real_T rtu_velocity,
   B[54] = t_data[2];
   B[30] = kd_data[11];
   B[62] = t_data[3];
-  for (i = 0; i < 8; i++) {
-    B[(i << 3) + 7] = t_data[i + 4];
+  for (first = 0; first < 8; first++) {
+    B[(first << 3) + 7] = t_data[first + 4];
   }
 
-  for (i = 0; i < 8; i++) {
-    loop_ub = 1;
-    while ((loop_ub < 8) && b[static_cast<uint8_T>(B[((loop_ub - 1) << 3) + i])])
+  for (s5_iter = 0; s5_iter < 8; s5_iter++) {
+    first = 1;
+    while ((first < 8) && b[static_cast<uint8_T>(B[((first - 1) << 3) + s5_iter])])
     {
-      loop_ub++;
+      first++;
     }
 
-    loop_ub_0 = 7;
-    while ((loop_ub_0 + 1 > loop_ub) && b[static_cast<uint8_T>(B[(loop_ub_0 << 3)
-            + i])]) {
-      loop_ub_0--;
+    loop_ub = 7;
+    while ((loop_ub + 1 > first) && b[static_cast<uint8_T>(B[(loop_ub << 3) +
+            s5_iter])]) {
+      loop_ub--;
     }
 
     p2 = 1UL;
     a = 0UL;
-    while ((loop_ub < loop_ub_0 + 1) && b[static_cast<uint8_T>(B[((loop_ub - 1) <<
-             3) + i])]) {
-      loop_ub++;
+    while ((first < loop_ub + 1) && b[static_cast<uint8_T>(B[((first - 1) << 3)
+            + s5_iter])]) {
+      first++;
     }
 
-    while (loop_ub_0 + 1 >= loop_ub) {
-      if (B[(loop_ub_0 << 3) + i] == '1') {
+    while (loop_ub + 1 >= first) {
+      if (B[(loop_ub << 3) + s5_iter] == '1') {
         a += p2;
         p2 += p2;
-      } else if (B[(loop_ub_0 << 3) + i] == '0') {
+      } else if (B[(loop_ub << 3) + s5_iter] == '0') {
         p2 += p2;
       }
 
-      loop_ub_0--;
+      loop_ub--;
     }
 
-    b_B[i] = static_cast<real_T>(a);
-  }
-
-  for (i = 0; i < 8; i++) {
-    y = rt_roundd_snf(b_B[i]);
-    if (y < 256.0) {
-      if (y >= 0.0) {
-        tmp = static_cast<uint8_T>(y);
+    b_B[s5_iter] = static_cast<real_T>(a);
+    I_ff = rt_roundd_snf(b_B[s5_iter]);
+    if (I_ff < 256.0) {
+      if (I_ff >= 0.0) {
+        tmp = static_cast<uint8_T>(I_ff);
       } else {
         tmp = 0U;
       }
@@ -472,1178 +1294,385 @@ void Main_Sept1_2021_floatsbytes(real_T rtu_position, real_T rtu_velocity,
       tmp = MAX_uint8_T;
     }
 
-    localB->b[i] = tmp;
-  }
-}
-
-/* Function for Chart: '<Root>/Chart' */
-static real_T Main_Sept1_2021_getT(real_T p, real_T Kp, real_T Kd, real_T Tff,
-  real_T currP, real_T currV)
-{
-  return ((p - currP) * Kp + (0.0 - currV) * Kd) + Tff;
-}
-
-/* Function for Chart: '<Root>/Chart' */
-static void Main_Sept1_2021_mpower(const real_T a[4], real_T c[4])
-{
-  real_T r;
-  real_T t;
-  if (std::abs(a[1]) > std::abs(a[0])) {
-    r = a[0] / a[1];
-    t = 1.0 / (r * a[3] - a[2]);
-    c[0] = a[3] / a[1] * t;
-    c[1] = -t;
-    c[2] = -a[2] / a[1] * t;
-    c[3] = r * t;
-  } else {
-    r = a[1] / a[0];
-    t = 1.0 / (a[3] - r * a[2]);
-    c[0] = a[3] / a[0] * t;
-    c[1] = -r * t;
-    c[2] = -a[2] / a[0] * t;
-    c[3] = t;
-  }
-}
-
-/* Function for Chart: '<Root>/Chart' */
-static void Main_Sept1_2021_getF(real_T pos1, real_T pos2, real_T Tc1, real_T
-  Tc2, real_T *calcF, real_T *calcFX)
-{
-  real_T a[4];
-  real_T tmp_5[4];
-  real_T tmp;
-  real_T tmp_0;
-  real_T tmp_1;
-  real_T tmp_2;
-  real_T tmp_3;
-  real_T tmp_4;
-  tmp = std::cos(pos1);
-  tmp_0 = std::cos(pos1 + pos2);
-  tmp_1 = std::cos(pos1 + pos2);
-  tmp_2 = std::sin(pos1);
-  tmp_3 = std::sin(pos1 + pos2);
-  tmp_4 = std::sin(pos1 + pos2);
-  tmp_5[0] = 0.14986 * tmp + 0.18796 * tmp_0;
-  tmp_5[1] = 0.18796 * tmp_1;
-  tmp_5[2] = -0.14986 * tmp_2 - 0.18796 * tmp_3;
-  tmp_5[3] = -0.18796 * tmp_4;
-  Main_Sept1_2021_mpower(tmp_5, a);
-  *calcF = a[0] * Tc1;
-  *calcF += a[2] * Tc2;
-  *calcFX = *calcF;
-  *calcF = a[1] * Tc1;
-  *calcF += a[3] * Tc2;
-}
-
-/* Function for Chart: '<Root>/Chart' */
-static void Main_Sept1_2021_getTorque(real_T pos1, real_T pos2, real_T currTime,
-  real_T StartF, real_T *Torque1, real_T *Torque2, real_T *y)
-{
-  real_T A[4];
-  real_T tmp_4[4];
-  real_T F[2];
-  real_T a21;
-  real_T tmp;
-  real_T tmp_0;
-  real_T tmp_1;
-  real_T tmp_2;
-  real_T tmp_3;
-  int32_T r1;
-  int32_T r2;
-  *y = std::sin(62.831853071795862 * currTime + std::asin(StartF / 450.0)) *
-    450.0;
-  if (*y < 0.0) {
-    *y = 0.0;
+    Main_Sept1_2021_B.b_i[s5_iter] = tmp;
   }
 
-  F[0] = 0.0;
-  F[1] = *y;
-  a21 = std::cos(pos1);
-  tmp = std::cos(pos1 + pos2);
-  tmp_0 = std::cos(pos1 + pos2);
-  tmp_1 = std::sin(pos1);
-  tmp_2 = std::sin(pos1 + pos2);
-  tmp_3 = std::sin(pos1 + pos2);
-  tmp_4[0] = 0.14986 * a21 + 0.18796 * tmp;
-  tmp_4[1] = 0.18796 * tmp_0;
-  tmp_4[2] = -0.14986 * tmp_1 - 0.18796 * tmp_2;
-  tmp_4[3] = -0.18796 * tmp_3;
-  Main_Sept1_2021_mpower(tmp_4, A);
-  if (std::abs(A[1]) > std::abs(A[0])) {
-    r1 = 1;
-    r2 = 0;
-  } else {
-    r1 = 0;
-    r2 = 1;
-  }
+  /* End of MATLAB Function: '<S2>/floats -> bytes' */
 
-  a21 = A[r2] / A[r1];
-  *Torque2 = (F[r2] - F[r1] * a21) / (A[r2 + 2] - A[r1 + 2] * a21);
-  *Torque1 = (F[r1] - A[r1 + 2] * *Torque2) / A[r1];
-}
-
-/* Function for Chart: '<Root>/Chart' */
-static void Main_Sept1_2021_Command(void)
-{
-  real_T GRF;
-  real_T calcForceX;
-  real_T exitY;
-  boolean_T sf_internal_predicateOutput;
-  Main_Sept1_2021_B.c = 3.0;
-  if ((Main_Sept1_2021_DW.done == 1.0) || (Main_Sept1_2021_B.Constant == 4.0) ||
-      (Main_Sept1_2021_B.danger == 1.0)) {
-    if (Main_Sept1_2021_DW.is_Command == Main_Sept1_2021_IN_Stance) {
-      Main_Sept1_2021_B.T1 = 0.0;
-      Main_Sept1_2021_B.T2 = 0.0;
-      Main_Sept1_2021_DW.hop++;
-      Main_Sept1_2021_DW.is_Command = 0U;
-    } else {
-      Main_Sept1_2021_DW.is_Flight = 0U;
-      Main_Sept1_2021_DW.is_Command = 0U;
-    }
-
-    Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_202_IN_FinalShutdown;
-    Main_Sept1_2021_B.Kp1 = 0.0;
-    Main_Sept1_2021_B.Kp2 = 0.0;
-    Main_Sept1_2021_B.theta1 = 0.0;
-    Main_Sept1_2021_B.theta2 = 0.0;
-    Main_Sept1_2021_B.T1 = 0.0;
-    Main_Sept1_2021_B.T2 = 0.0;
-  } else {
-    Main_Sept1_2021_B.Tcalc1 = Main_Sept1_2021_getT(Main_Sept1_2021_B.theta1,
-      Main_Sept1_2021_B.Kp1, Main_Sept1_2021_B.Kd1, Main_Sept1_2021_B.T1,
-      Main_Sept1_2021_B.Delay, Main_Sept1_2021_B.velocity_h);
-    Main_Sept1_2021_B.Tcalc2 = Main_Sept1_2021_getT(Main_Sept1_2021_B.theta2,
-      Main_Sept1_2021_B.Kp2, Main_Sept1_2021_B.Kd2, Main_Sept1_2021_B.T2,
-      Main_Sept1_2021_B.Delay1, Main_Sept1_2021_B.velocity);
-    Main_Sept1_2021_getF(Main_Sept1_2021_B.Delay, Main_Sept1_2021_B.Delay1,
-                         Main_Sept1_2021_B.Tcalc1, Main_Sept1_2021_B.Tcalc2,
-                         &GRF, &calcForceX);
-    Main_Sept1_2021_B.GRF_e = GRF;
-    Main_Sept1_2021_B.calcForceX = calcForceX;
-    switch (Main_Sept1_2021_DW.is_Command) {
-     case Main_Sept1_2021_IN_Flight:
-      sf_internal_predicateOutput = ((Main_Sept1_2021_DW.temporalCounter_i2 >=
-        5000U) && (Main_Sept1_2021_DW.Idle == 1.0));
-      if (sf_internal_predicateOutput) {
-        Main_Sept1_2021_DW.is_Flight = 0U;
-        Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Stance;
-        Main_Sept1_2021_DW.temporalCounter_i1 = 0U;
-        Main_Sept1_2021_DW.FStart = Main_Sept1_2021_B.GRF_e;
-        Main_Sept1_2021_B.T1 = Main_Sept1_2021_B.Tcalc1;
-        Main_Sept1_2021_B.T2 = Main_Sept1_2021_B.Tcalc2;
-        Main_Sept1_2021_DW.time = (((Main_Sept1_2021_M->Timing.clockTick1+
-          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001);
-        Main_Sept1_2021_B.Kp1 = 0.0;
-        Main_Sept1_2021_B.Kp2 = 0.0;
-        Main_Sept1_2021_B.Kd1 = 0.0;
-        Main_Sept1_2021_B.Kd2 = 0.0;
-        Main_Sept1_2021_B.exitY = 0.0;
-      } else if (Main_Sept1_2021_DW.is_Flight == Main_Sept1_2021_IN_Idle1) {
-        if (Main_Sept1_2021_B.GRF_e > 0.0) {
-          Main_Sept1_2021_DW.Idle = 1.0;
-          Main_Sept1_2021_DW.is_Flight = Main_Sept1_2021_IN_Idle1;
-        }
-
-        /* case IN_ToPosition: */
-      } else if (((Main_Sept1_2021_B.theta1 >= Main_Sept1_2021_DW.pf) &&
-                  (Main_Sept1_2021_DW.slope1 > 0.0)) ||
-                 ((Main_Sept1_2021_B.theta1 <= Main_Sept1_2021_DW.pf) &&
-                  (Main_Sept1_2021_DW.slope1 < 0.0))) {
-        Main_Sept1_2021_DW.is_Flight = Main_Sept1_2021_IN_Idle1;
-      } else {
-        Main_Sept1_2021_B.theta1 = ((((Main_Sept1_2021_M->Timing.clockTick1+
-          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
-          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope1 +
-          Main_Sept1_2021_DW.po1;
-        Main_Sept1_2021_B.theta2 = ((((Main_Sept1_2021_M->Timing.clockTick1+
-          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
-          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope2 +
-          Main_Sept1_2021_DW.po2;
-      }
-      break;
-
-     case Main_Sept1_2021_IN_Idle:
-      if (Main_Sept1_2021_B.Constant == 3.0) {
-        Main_Sept1_2021_DW.hop = 0.0;
-        Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Stance;
-        Main_Sept1_2021_DW.temporalCounter_i1 = 0U;
-        Main_Sept1_2021_DW.FStart = Main_Sept1_2021_B.GRF_e;
-        Main_Sept1_2021_B.T1 = Main_Sept1_2021_B.Tcalc1;
-        Main_Sept1_2021_B.T2 = Main_Sept1_2021_B.Tcalc2;
-        Main_Sept1_2021_DW.time = (((Main_Sept1_2021_M->Timing.clockTick1+
-          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001);
-        Main_Sept1_2021_B.Kp1 = 0.0;
-        Main_Sept1_2021_B.Kp2 = 0.0;
-        Main_Sept1_2021_B.Kd1 = 0.0;
-        Main_Sept1_2021_B.Kd2 = 0.0;
-        Main_Sept1_2021_B.exitY = 0.0;
-      }
-      break;
-
-     case Main_Sept1_2021_IN_Sit:
-      if (((Main_Sept1_2021_B.theta1 >= Main_Sept1_2021_DW.pf) &&
-           (Main_Sept1_2021_DW.slope1 > 0.0)) || ((Main_Sept1_2021_B.theta1 <=
-            Main_Sept1_2021_DW.pf) && (Main_Sept1_2021_DW.slope1 < 0.0))) {
-        Main_Sept1_2021_DW.done = 1.0;
-        Main_Sept1_2021_DW.pf = -0.35;
-        Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Stand;
-        Main_Sept1_2021_DW.to = (((Main_Sept1_2021_M->Timing.clockTick1+
-          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001);
-        Main_Sept1_2021_DW.tstep = 3.0;
-        Main_Sept1_2021_B.theta1 = Main_Sept1_2021_B.Delay;
-        Main_Sept1_2021_DW.po1 = Main_Sept1_2021_B.theta1;
-        Main_Sept1_2021_DW.slope1 = (Main_Sept1_2021_DW.pf -
-          Main_Sept1_2021_DW.po1) / Main_Sept1_2021_DW.tstep;
-        Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.Delay1;
-        Main_Sept1_2021_DW.po2 = Main_Sept1_2021_B.theta2;
-        Main_Sept1_2021_DW.slope2 = (Main_Sept1_2021_DW.Th2Th1 *
-          Main_Sept1_2021_DW.pf - Main_Sept1_2021_DW.po2) /
-          Main_Sept1_2021_DW.tstep;
-      } else {
-        Main_Sept1_2021_B.theta1 = ((((Main_Sept1_2021_M->Timing.clockTick1+
-          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
-          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope1 +
-          Main_Sept1_2021_DW.po1;
-        Main_Sept1_2021_B.theta2 = ((((Main_Sept1_2021_M->Timing.clockTick1+
-          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
-          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope2 +
-          Main_Sept1_2021_DW.po2;
-      }
-      break;
-
-     case Main_Sept1_2021_IN_Stance:
-      if (Main_Sept1_2021_DW.hop == 2.0) {
-        Main_Sept1_2021_DW.pf = -0.7;
-        Main_Sept1_2021_B.T1 = 0.0;
-        Main_Sept1_2021_B.T2 = 0.0;
-        Main_Sept1_2021_DW.hop++;
-        Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Sit;
-        Main_Sept1_2021_B.Kp1 = 25.0;
-        Main_Sept1_2021_B.Kp2 = 25.0;
-        Main_Sept1_2021_B.Kd1 = 0.1;
-        Main_Sept1_2021_B.Kd2 = 0.1;
-        Main_Sept1_2021_DW.tstep = 3.0;
-        Main_Sept1_2021_DW.to = (((Main_Sept1_2021_M->Timing.clockTick1+
-          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001);
-        Main_Sept1_2021_B.theta1 = Main_Sept1_2021_B.Delay;
-        Main_Sept1_2021_DW.po1 = Main_Sept1_2021_B.theta1;
-        Main_Sept1_2021_DW.slope1 = (Main_Sept1_2021_DW.pf -
-          Main_Sept1_2021_DW.po1) / Main_Sept1_2021_DW.tstep;
-        Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.Delay1;
-        Main_Sept1_2021_DW.po2 = Main_Sept1_2021_B.theta2;
-        Main_Sept1_2021_DW.slope2 = (Main_Sept1_2021_DW.Th2Th1 *
-          Main_Sept1_2021_DW.pf - Main_Sept1_2021_DW.po2) /
-          Main_Sept1_2021_DW.tstep;
-      } else {
-        sf_internal_predicateOutput = ((Main_Sept1_2021_DW.temporalCounter_i1 >=
-          3) && (((((Main_Sept1_2021_M->Timing.clockTick1+
-                     Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) *
-                   0.001) - Main_Sept1_2021_DW.time != 0.0) &&
-                 (Main_Sept1_2021_B.exitY == 0.0) && (Main_Sept1_2021_B.GRF ==
-          0.0)));
-        if (sf_internal_predicateOutput) {
-          Main_Sept1_2021_DW.pf = -0.35;
-          Main_Sept1_2021_B.T1 = 0.0;
-          Main_Sept1_2021_B.T2 = 0.0;
-          Main_Sept1_2021_DW.hop++;
-          Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Flight;
-          Main_Sept1_2021_DW.temporalCounter_i2 = 0U;
-          Main_Sept1_2021_DW.Idle = 0.0;
-          Main_Sept1_2021_DW.is_Flight = Main_Sept1_2021_IN_ToPosition;
-          Main_Sept1_2021_B.Kp1 = 22.75;
-          Main_Sept1_2021_B.Kp2 = 17.0;
-          Main_Sept1_2021_B.Kd1 = 0.95;
-          Main_Sept1_2021_B.Kd2 = 1.45;
-          Main_Sept1_2021_DW.tstep = 0.1;
-          Main_Sept1_2021_DW.to = (((Main_Sept1_2021_M->Timing.clockTick1+
-            Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001);
-          Main_Sept1_2021_B.theta1 = Main_Sept1_2021_B.Delay;
-          Main_Sept1_2021_DW.po1 = Main_Sept1_2021_B.theta1;
-          Main_Sept1_2021_DW.slope1 = (Main_Sept1_2021_DW.pf -
-            Main_Sept1_2021_DW.po1) / Main_Sept1_2021_DW.tstep;
-          Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.Delay1;
-          Main_Sept1_2021_DW.po2 = Main_Sept1_2021_B.theta2;
-          Main_Sept1_2021_DW.slope2 = (Main_Sept1_2021_DW.Th2Th1 *
-            Main_Sept1_2021_DW.pf - Main_Sept1_2021_DW.po2) /
-            Main_Sept1_2021_DW.tstep;
-        } else {
-          Main_Sept1_2021_getTorque(Main_Sept1_2021_B.Delay,
-            Main_Sept1_2021_B.Delay1, (((Main_Sept1_2021_M->Timing.clockTick1+
-            Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
-            Main_Sept1_2021_DW.time, Main_Sept1_2021_DW.FStart, &GRF,
-            &calcForceX, &exitY);
-          Main_Sept1_2021_B.T1 = GRF;
-          Main_Sept1_2021_B.T2 = calcForceX;
-          Main_Sept1_2021_B.exitY = exitY;
-        }
-      }
-      break;
-
-     default:
-      /* case IN_Stand: */
-      if (((Main_Sept1_2021_B.theta1 >= Main_Sept1_2021_DW.pf) &&
-           (Main_Sept1_2021_DW.slope1 > 0.0)) || ((Main_Sept1_2021_B.theta1 <=
-            Main_Sept1_2021_DW.pf) && (Main_Sept1_2021_DW.slope1 < 0.0))) {
-        Main_Sept1_2021_B.theta1 = Main_Sept1_2021_DW.pf;
-        Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.theta1 *
-          Main_Sept1_2021_DW.Th2Th1;
-        Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Idle;
-      } else {
-        Main_Sept1_2021_B.theta1 = ((((Main_Sept1_2021_M->Timing.clockTick1+
-          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
-          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope1 +
-          Main_Sept1_2021_DW.po1;
-        Main_Sept1_2021_B.theta2 = ((((Main_Sept1_2021_M->Timing.clockTick1+
-          Main_Sept1_2021_M->Timing.clockTickH1* 4294967296.0)) * 0.001) -
-          Main_Sept1_2021_DW.to) * Main_Sept1_2021_DW.slope2 +
-          Main_Sept1_2021_DW.po2;
-      }
-      break;
-    }
-  }
-}
-
-/* Model step function */
-void Main_Sept1_2021_step(void)
-{
-  {
-    real_T I_ff;
-    real_T position;
-    real_T velocity;
-    real_T *lastU;
-    int32_T s6_iter;
-
-    /* S-Function (sg_IO602_IO691_setup_s): '<Root>/CAN Setup ' */
-
-    /* Level2 S-Function Block: '<Root>/CAN Setup ' (sg_IO602_IO691_setup_s) */
-    {
-      SimStruct *rts = Main_Sept1_2021_M->childSfunctions[3];
-      sfcnOutputs(rts,0);
-    }
-
-    /* Delay: '<Root>/Delay' */
-    Main_Sept1_2021_B.Delay = Main_Sept1_2021_DW.Delay_DSTATE;
-
-    /* Delay: '<Root>/Delay1' */
-    Main_Sept1_2021_B.Delay1 = Main_Sept1_2021_DW.Delay1_DSTATE;
-
-    /* Outputs for Iterator SubSystem: '<Root>/While Iterator Subsystem' incorporates:
-     *  WhileIterator: '<S6>/While Iterator'
+  /* MultiPortSwitch: '<S2>/Command Switch' */
+  switch (static_cast<int32_T>(Main_Sept1_2021_B.c)) {
+   case 1:
+    /* MultiPortSwitch: '<S2>/Command Switch' incorporates:
+     *  Constant: '<S2>/Constant'
      */
-    s6_iter = 1;
-    do {
-      Main_Sept1_2021_B.WhileIterator = s6_iter;
-
-      /* Level2 S-Function Block: '<S6>/CAN Read' (sg_IO602_IO691_read_s) */
-      {
-        SimStruct *rts = Main_Sept1_2021_M->childSfunctions[2];
-        sfcnOutputs(rts,0);
-      }
-
-      {
-        /* S-Function (scanunpack): '<S10>/CAN Unpack' */
-        uint8_T msgReceived = 0;
-        if ((6 == Main_Sept1_2021_B.CANRead_o2.Length) &&
-            (Main_Sept1_2021_B.CANRead_o2.ID != INVALID_CAN_ID) ) {
-          if ((2 == Main_Sept1_2021_B.CANRead_o2.ID) && (0U ==
-               Main_Sept1_2021_B.CANRead_o2.Extended) ) {
-            msgReceived = 1;
-
-            {
-              /* --------------- START Unpacking signal 0 ------------------
-               *  startBit                = 16
-               *  length                  = 16
-               *  desiredSignalByteLayout = BIGENDIAN
-               *  dataType                = UNSIGNED
-               *  factor                  = 1.0
-               *  offset                  = 0.0
-               * -----------------------------------------------------------------------*/
-              {
-                real64_T outValue = 0;
-
-                {
-                  uint16_T unpackedValue = 0;
-
-                  {
-                    uint16_T tempValue = (uint16_T) (0);
-
-                    {
-                      tempValue = tempValue | (uint16_T)
-                        (Main_Sept1_2021_B.CANRead_o2.Data[2]);
-                      tempValue = tempValue | (uint16_T)((uint16_T)
-                        (Main_Sept1_2021_B.CANRead_o2.Data[1]) << 8);
-                    }
-
-                    unpackedValue = tempValue;
-                  }
-
-                  outValue = (real64_T) (unpackedValue);
-                }
-
-                {
-                  real64_T result = (real64_T) outValue;
-                  Main_Sept1_2021_B.CANUnpack_o1 = result;
-                }
-              }
-
-              /* --------------- START Unpacking signal 1 ------------------
-               *  startBit                = 36
-               *  length                  = 12
-               *  desiredSignalByteLayout = BIGENDIAN
-               *  dataType                = UNSIGNED
-               *  factor                  = 1.0
-               *  offset                  = 0.0
-               * -----------------------------------------------------------------------*/
-              {
-                real64_T outValue = 0;
-
-                {
-                  uint16_T unpackedValue = 0;
-
-                  {
-                    uint16_T tempValue = (uint16_T) (0);
-
-                    {
-                      tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                        (Main_Sept1_2021_B.CANRead_o2.Data[4]) & (uint16_T)
-                        (0xF0U)) >> 4);
-                      tempValue = tempValue | (uint16_T)((uint16_T)
-                        (Main_Sept1_2021_B.CANRead_o2.Data[3]) << 4);
-                    }
-
-                    unpackedValue = tempValue;
-                  }
-
-                  outValue = (real64_T) (unpackedValue);
-                }
-
-                {
-                  real64_T result = (real64_T) outValue;
-                  Main_Sept1_2021_B.CANUnpack_o2 = result;
-                }
-              }
-
-              /* --------------- START Unpacking signal 2 ------------------
-               *  startBit                = 40
-               *  length                  = 12
-               *  desiredSignalByteLayout = BIGENDIAN
-               *  dataType                = UNSIGNED
-               *  factor                  = 1.0
-               *  offset                  = 0.0
-               * -----------------------------------------------------------------------*/
-              {
-                real64_T outValue = 0;
-
-                {
-                  uint16_T unpackedValue = 0;
-
-                  {
-                    uint16_T tempValue = (uint16_T) (0);
-
-                    {
-                      tempValue = tempValue | (uint16_T)
-                        (Main_Sept1_2021_B.CANRead_o2.Data[5]);
-                      tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                        (Main_Sept1_2021_B.CANRead_o2.Data[4]) & (uint16_T)(0xFU))
-                        << 8);
-                    }
-
-                    unpackedValue = tempValue;
-                  }
-
-                  outValue = (real64_T) (unpackedValue);
-                }
-
-                {
-                  real64_T result = (real64_T) outValue;
-                  Main_Sept1_2021_B.CANUnpack_o3 = result;
-                }
-              }
-
-              /* --------------- START Unpacking signal 3 ------------------
-               *  startBit                = 0
-               *  length                  = 8
-               *  desiredSignalByteLayout = BIGENDIAN
-               *  dataType                = UNSIGNED
-               *  factor                  = 1.0
-               *  offset                  = 0.0
-               * -----------------------------------------------------------------------*/
-              {
-                real64_T outValue = 0;
-
-                {
-                  uint8_T unpackedValue = 0;
-
-                  {
-                    uint8_T tempValue = (uint8_T) (0);
-
-                    {
-                      tempValue = tempValue | (uint8_T)
-                        (Main_Sept1_2021_B.CANRead_o2.Data[0]);
-                    }
-
-                    unpackedValue = tempValue;
-                  }
-
-                  outValue = (real64_T) (unpackedValue);
-                }
-
-                {
-                  real64_T result = (real64_T) outValue;
-                  Main_Sept1_2021_B.CANUnpack_o4 = result;
-                }
-              }
-            }
-          }
-        }
-
-        /* Status port */
-        Main_Sept1_2021_B.CANUnpack_o5 = msgReceived;
-      }
-
-      Main_Sept1_2021_B.position = Main_Sept1_2021_B.CANUnpack_o1;
-      Main_Sept1_2021_B.velocity = Main_Sept1_2021_B.CANUnpack_o2;
-      Main_Sept1_2021_B.I_ff = Main_Sept1_2021_B.CANUnpack_o3;
-      I_ff = Main_Sept1_2021_B.I_ff;
-      velocity = Main_Sept1_2021_B.velocity;
-      position = Main_Sept1_2021_B.position;
-      Main_Sept1_2021_B.I_ff = I_ff;
-      Main_Sept1_2021_B.velocity = velocity;
-      Main_Sept1_2021_B.position = position;
-      Main_Sept1_2021_B.position = Main_Sept1_2021_B.position * 191.0 / 65535.0
-        + -95.5;
-      Main_Sept1_2021_B.velocity = Main_Sept1_2021_B.velocity * 90.0 / 4095.0 +
-        -45.0;
-      Main_Sept1_2021_B.I_ff = Main_Sept1_2021_B.I_ff * 80.0 / 4095.0 + -40.0;
-
-      {
-        /* S-Function (scanunpack): '<S9>/CAN Unpack' */
-        uint8_T msgReceived = 0;
-        if ((6 == Main_Sept1_2021_B.CANRead_o2.Length) &&
-            (Main_Sept1_2021_B.CANRead_o2.ID != INVALID_CAN_ID) ) {
-          if ((1 == Main_Sept1_2021_B.CANRead_o2.ID) && (0U ==
-               Main_Sept1_2021_B.CANRead_o2.Extended) ) {
-            msgReceived = 1;
-
-            {
-              /* --------------- START Unpacking signal 0 ------------------
-               *  startBit                = 16
-               *  length                  = 16
-               *  desiredSignalByteLayout = BIGENDIAN
-               *  dataType                = UNSIGNED
-               *  factor                  = 1.0
-               *  offset                  = 0.0
-               * -----------------------------------------------------------------------*/
-              {
-                real64_T outValue = 0;
-
-                {
-                  uint16_T unpackedValue = 0;
-
-                  {
-                    uint16_T tempValue = (uint16_T) (0);
-
-                    {
-                      tempValue = tempValue | (uint16_T)
-                        (Main_Sept1_2021_B.CANRead_o2.Data[2]);
-                      tempValue = tempValue | (uint16_T)((uint16_T)
-                        (Main_Sept1_2021_B.CANRead_o2.Data[1]) << 8);
-                    }
-
-                    unpackedValue = tempValue;
-                  }
-
-                  outValue = (real64_T) (unpackedValue);
-                }
-
-                {
-                  real64_T result = (real64_T) outValue;
-                  Main_Sept1_2021_B.CANUnpack_o1_f = result;
-                }
-              }
-
-              /* --------------- START Unpacking signal 1 ------------------
-               *  startBit                = 36
-               *  length                  = 12
-               *  desiredSignalByteLayout = BIGENDIAN
-               *  dataType                = UNSIGNED
-               *  factor                  = 1.0
-               *  offset                  = 0.0
-               * -----------------------------------------------------------------------*/
-              {
-                real64_T outValue = 0;
-
-                {
-                  uint16_T unpackedValue = 0;
-
-                  {
-                    uint16_T tempValue = (uint16_T) (0);
-
-                    {
-                      tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                        (Main_Sept1_2021_B.CANRead_o2.Data[4]) & (uint16_T)
-                        (0xF0U)) >> 4);
-                      tempValue = tempValue | (uint16_T)((uint16_T)
-                        (Main_Sept1_2021_B.CANRead_o2.Data[3]) << 4);
-                    }
-
-                    unpackedValue = tempValue;
-                  }
-
-                  outValue = (real64_T) (unpackedValue);
-                }
-
-                {
-                  real64_T result = (real64_T) outValue;
-                  Main_Sept1_2021_B.CANUnpack_o2_l = result;
-                }
-              }
-
-              /* --------------- START Unpacking signal 2 ------------------
-               *  startBit                = 40
-               *  length                  = 12
-               *  desiredSignalByteLayout = BIGENDIAN
-               *  dataType                = UNSIGNED
-               *  factor                  = 1.0
-               *  offset                  = 0.0
-               * -----------------------------------------------------------------------*/
-              {
-                real64_T outValue = 0;
-
-                {
-                  uint16_T unpackedValue = 0;
-
-                  {
-                    uint16_T tempValue = (uint16_T) (0);
-
-                    {
-                      tempValue = tempValue | (uint16_T)
-                        (Main_Sept1_2021_B.CANRead_o2.Data[5]);
-                      tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                        (Main_Sept1_2021_B.CANRead_o2.Data[4]) & (uint16_T)(0xFU))
-                        << 8);
-                    }
-
-                    unpackedValue = tempValue;
-                  }
-
-                  outValue = (real64_T) (unpackedValue);
-                }
-
-                {
-                  real64_T result = (real64_T) outValue;
-                  Main_Sept1_2021_B.CANUnpack_o3_k = result;
-                }
-              }
-
-              /* --------------- START Unpacking signal 3 ------------------
-               *  startBit                = 0
-               *  length                  = 8
-               *  desiredSignalByteLayout = BIGENDIAN
-               *  dataType                = UNSIGNED
-               *  factor                  = 1.0
-               *  offset                  = 0.0
-               * -----------------------------------------------------------------------*/
-              {
-                real64_T outValue = 0;
-
-                {
-                  uint8_T unpackedValue = 0;
-
-                  {
-                    uint8_T tempValue = (uint8_T) (0);
-
-                    {
-                      tempValue = tempValue | (uint8_T)
-                        (Main_Sept1_2021_B.CANRead_o2.Data[0]);
-                    }
-
-                    unpackedValue = tempValue;
-                  }
-
-                  outValue = (real64_T) (unpackedValue);
-                }
-
-                {
-                  real64_T result = (real64_T) outValue;
-                  Main_Sept1_2021_B.CANUnpack_o4_i = result;
-                }
-              }
-            }
-          }
-        }
-
-        /* Status port */
-        Main_Sept1_2021_B.CANUnpack_o5_p = msgReceived;
-      }
-
-      Main_Sept1_2021_B.position_j = Main_Sept1_2021_B.CANUnpack_o1_f;
-      Main_Sept1_2021_B.velocity_h = Main_Sept1_2021_B.CANUnpack_o2_l;
-      Main_Sept1_2021_B.I_ff_o = Main_Sept1_2021_B.CANUnpack_o3_k;
-      I_ff = Main_Sept1_2021_B.I_ff_o;
-      velocity = Main_Sept1_2021_B.velocity_h;
-      position = Main_Sept1_2021_B.position_j;
-      Main_Sept1_2021_B.I_ff_o = I_ff;
-      Main_Sept1_2021_B.velocity_h = velocity;
-      Main_Sept1_2021_B.position_j = position;
-      Main_Sept1_2021_B.position_j = Main_Sept1_2021_B.position_j * 191.0 /
-        65535.0 + -95.5;
-      Main_Sept1_2021_B.velocity_h = Main_Sept1_2021_B.velocity_h * 90.0 /
-        4095.0 + -45.0;
-      Main_Sept1_2021_B.I_ff_o = Main_Sept1_2021_B.I_ff_o * 80.0 / 4095.0 +
-        -40.0;
-      Main_Sept1_2021_B.Gain_m = Main_Sept1_2021_cal->Gain_Gain *
-        Main_Sept1_2021_B.position;
-      s6_iter++;
-    } while (Main_Sept1_2021_B.CANRead_o1);
-
-    /* End of Outputs for SubSystem: '<Root>/While Iterator Subsystem' */
-
-    /* SignalConversion generated from: '<S2>/ SFunction ' incorporates:
-     *  MATLAB Function: '<Root>/MATLAB Function'
+    for (s5_iter = 0; s5_iter < 8; s5_iter++) {
+      Main_Sept1_2021_B.CommandSwitch_h[s5_iter] =
+        Main_Sept1_2021_cal->Constant_Value_i[s5_iter];
+    }
+    break;
+
+   case 2:
+    /* MultiPortSwitch: '<S2>/Command Switch' incorporates:
+     *  Constant: '<S2>/Constant1'
      */
-    Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_l[0] =
-      Main_Sept1_2021_B.I_ff_o;
-    Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_l[1] =
-      Main_Sept1_2021_B.I_ff;
+    for (s5_iter = 0; s5_iter < 8; s5_iter++) {
+      Main_Sept1_2021_B.CommandSwitch_h[s5_iter] =
+        Main_Sept1_2021_cal->Constant1_Value[s5_iter];
+    }
+    break;
 
-    /* SignalConversion generated from: '<S2>/ SFunction ' incorporates:
-     *  MATLAB Function: '<Root>/MATLAB Function'
+   case 3:
+    /* MultiPortSwitch: '<S2>/Command Switch' */
+    for (s5_iter = 0; s5_iter < 8; s5_iter++) {
+      Main_Sept1_2021_B.CommandSwitch_h[s5_iter] = Main_Sept1_2021_B.b_i[s5_iter];
+    }
+    break;
+
+   default:
+    /* MultiPortSwitch: '<S2>/Command Switch' incorporates:
+     *  Constant: '<S2>/Constant2'
      */
-    Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_i[0] =
-      Main_Sept1_2021_B.position_j;
-    Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_i[1] =
-      Main_Sept1_2021_B.Gain_m;
-
-    /* MATLAB Function: '<Root>/MATLAB Function' */
-    Main_Sept1_2021_B.GRF = 0.0;
-    if (((Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_i[0] < 0.0) && (2.25 <
-          Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_l[0]) &&
-         (Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_i[1] > 0.0) && (-1.2 >
-          Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_l[1])) ||
-        ((Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_i[0] > 0.0) && (-2.25 >
-          Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_l[0]) &&
-         (Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_i[1] < 0.0) && (1.2 <
-          Main_Sept1_2021_B.TmpSignalConversionAtSFunctio_l[1]))) {
-      Main_Sept1_2021_B.GRF = 1.0;
+    for (s5_iter = 0; s5_iter < 8; s5_iter++) {
+      Main_Sept1_2021_B.CommandSwitch_h[s5_iter] =
+        Main_Sept1_2021_cal->Constant2_Value_k[s5_iter];
     }
-
-    /* SignalConversion generated from: '<S3>/ SFunction ' incorporates:
-     *  MATLAB Function: '<Root>/MATLAB Function1'
-     */
-    Main_Sept1_2021_B.TmpSignalConversionAtSFunctionI[0] =
-      Main_Sept1_2021_B.position_j;
-    Main_Sept1_2021_B.TmpSignalConversionAtSFunctionI[1] =
-      Main_Sept1_2021_B.Gain_m;
-
-    /* MATLAB Function: '<Root>/MATLAB Function1' */
-    Main_Sept1_2021_B.danger = 0.0;
-    if ((0 < ((Main_Sept1_2021_B.TmpSignalConversionAtSFunctionI[0] > 2.0) +
-              (Main_Sept1_2021_B.TmpSignalConversionAtSFunctionI[0] < -2.0)) -
-         (Main_Sept1_2021_B.TmpSignalConversionAtSFunctionI[0] <= -95.5)) || (0 <
-         ((Main_Sept1_2021_B.TmpSignalConversionAtSFunctionI[1] > 2.0) +
-          (Main_Sept1_2021_B.TmpSignalConversionAtSFunctionI[1] < -2.0)) -
-         (Main_Sept1_2021_B.TmpSignalConversionAtSFunctionI[1] <= -95.5))) {
-      Main_Sept1_2021_B.danger = 1.0;
-    }
-
-    /* Constant: '<Root>/Constant' */
-    Main_Sept1_2021_B.Constant = Main_Sept1_2021_cal->Constant_Value;
-
-    /* Chart: '<Root>/Chart' */
-    if (Main_Sept1_2021_DW.temporalCounter_i2 < 8191U) {
-      Main_Sept1_2021_DW.temporalCounter_i2 = static_cast<uint16_T>
-        (Main_Sept1_2021_DW.temporalCounter_i2 + 1U);
-    }
-
-    Main_Sept1_2021_DW.sfEvent = Main_Sept1_2021_CALL_EVENT;
-    if (Main_Sept1_2021_DW.temporalCounter_i1 < 3U) {
-      Main_Sept1_2021_DW.temporalCounter_i1 = static_cast<uint8_T>
-        (Main_Sept1_2021_DW.temporalCounter_i1 + 1U);
-    }
-
-    if (Main_Sept1_2021_DW.is_active_c8_Main_Sept1_2021 == 0U) {
-      Main_Sept1_2021_DW.is_active_c8_Main_Sept1_2021 = 1U;
-      Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_2021_IN_Start;
-      Main_Sept1_2021_DW.temporalCounter_i2 = 0U;
-    } else {
-      switch (Main_Sept1_2021_DW.is_c8_Main_Sept1_2021) {
-       case Main_Sept1_2021_IN_Command:
-        Main_Sept1_2021_Command();
-        break;
-
-       case Main_Sept1_2021_IN_Deinitiate:
-        Main_Sept1_2021_B.c = 4.0;
-        if (Main_Sept1_2021_DW.temporalCounter_i2 >= 3000U) {
-          Main_Sept1_2021_B.stop = 1.0;
-          Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 =
-            Main_Sept1_2021_IN_Deinitiate;
-          Main_Sept1_2021_DW.temporalCounter_i2 = 0U;
-          Main_Sept1_2021_B.c = 4.0;
-        }
-        break;
-
-       case Main_Sept1_202_IN_FinalShutdown:
-        Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_2021_IN_Deinitiate;
-        Main_Sept1_2021_DW.temporalCounter_i2 = 0U;
-        Main_Sept1_2021_B.c = 4.0;
-        break;
-
-       case Main_Sept1_2021_IN_Init:
-        Main_Sept1_2021_B.c = 2.0;
-        if (Main_Sept1_2021_B.Constant == 2.0) {
-          Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_2021_IN_Command;
-          Main_Sept1_2021_B.c = 3.0;
-          Main_Sept1_2021_DW.pf = -0.35;
-          Main_Sept1_2021_DW.is_Command = Main_Sept1_2021_IN_Stand;
-          Main_Sept1_2021_DW.to = Main_Sept1_2021_M->Timing.t[1];
-          Main_Sept1_2021_DW.tstep = 3.0;
-          Main_Sept1_2021_B.theta1 = Main_Sept1_2021_B.Delay;
-          Main_Sept1_2021_DW.po1 = Main_Sept1_2021_B.theta1;
-          Main_Sept1_2021_DW.slope1 = (Main_Sept1_2021_DW.pf -
-            Main_Sept1_2021_DW.po1) / Main_Sept1_2021_DW.tstep;
-          Main_Sept1_2021_B.theta2 = Main_Sept1_2021_B.Delay1;
-          Main_Sept1_2021_DW.po2 = Main_Sept1_2021_B.theta2;
-          Main_Sept1_2021_DW.slope2 = (Main_Sept1_2021_DW.Th2Th1 *
-            Main_Sept1_2021_DW.pf - Main_Sept1_2021_DW.po2) /
-            Main_Sept1_2021_DW.tstep;
-        } else if ((Main_Sept1_2021_B.Constant == 4.0) ||
-                   (Main_Sept1_2021_B.danger == 1.0)) {
-          Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 =
-            Main_Sept1_202_IN_FinalShutdown;
-          Main_Sept1_2021_B.Kp1 = 0.0;
-          Main_Sept1_2021_B.Kp2 = 0.0;
-          Main_Sept1_2021_B.theta1 = 0.0;
-          Main_Sept1_2021_B.theta2 = 0.0;
-          Main_Sept1_2021_B.T1 = 0.0;
-          Main_Sept1_2021_B.T2 = 0.0;
-        }
-        break;
-
-       case Main_Sept1_2021_IN_Start:
-        if (Main_Sept1_2021_B.Constant == 0.0) {
-          Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_2021_IN_Zero;
-          Main_Sept1_2021_DW.temporalCounter_i2 = 0U;
-          Main_Sept1_2021_B.c = 1.0;
-        } else if (Main_Sept1_2021_B.Constant == 1.0) {
-          Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_2021_IN_Init;
-          Main_Sept1_2021_DW.temporalCounter_i2 = 0U;
-          Main_Sept1_2021_B.c = 2.0;
-        }
-        break;
-
-       default:
-        /* case IN_Zero: */
-        Main_Sept1_2021_B.c = 1.0;
-        if (Main_Sept1_2021_B.Constant == 1.0) {
-          Main_Sept1_2021_DW.is_c8_Main_Sept1_2021 = Main_Sept1_2021_IN_Init;
-          Main_Sept1_2021_DW.temporalCounter_i2 = 0U;
-          Main_Sept1_2021_B.c = 2.0;
-        }
-        break;
-      }
-    }
-
-    /* End of Chart: '<Root>/Chart' */
-    /* Gain: '<Root>/Gain' */
-    Main_Sept1_2021_B.Gain = Main_Sept1_2021_cal->Gain_Gain_j *
-      Main_Sept1_2021_B.theta2;
-
-    /* Constant: '<Root>/Constant8' */
-    Main_Sept1_2021_B.Constant8 = Main_Sept1_2021_cal->Constant8_Value;
-
-    /* Outputs for Atomic SubSystem: '<Root>/Simulink Function1' */
-    /* MATLAB Function: '<S4>/floats -> bytes' */
-    Main_Sept1_2021_floatsbytes(Main_Sept1_2021_B.Gain,
-      Main_Sept1_2021_B.Constant8, Main_Sept1_2021_B.Kp2, Main_Sept1_2021_B.Kd2,
-      Main_Sept1_2021_B.T2, &Main_Sept1_2021_B.sf_floatsbytes);
-
-    /* MultiPortSwitch: '<S4>/Multiport Switch' */
-    switch (static_cast<int32_T>(Main_Sept1_2021_B.c)) {
-     case 1:
-      /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
-       *  Constant: '<S4>/Constant'
-       */
-      for (s6_iter = 0; s6_iter < 8; s6_iter++) {
-        Main_Sept1_2021_B.MultiportSwitch_f[s6_iter] =
-          Main_Sept1_2021_cal->Constant_Value_l[s6_iter];
-      }
-      break;
-
-     case 2:
-      /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
-       *  Constant: '<S4>/Constant1'
-       */
-      for (s6_iter = 0; s6_iter < 8; s6_iter++) {
-        Main_Sept1_2021_B.MultiportSwitch_f[s6_iter] =
-          Main_Sept1_2021_cal->Constant1_Value[s6_iter];
-      }
-      break;
-
-     case 3:
-      /* MultiPortSwitch: '<S4>/Multiport Switch' */
-      for (s6_iter = 0; s6_iter < 8; s6_iter++) {
-        Main_Sept1_2021_B.MultiportSwitch_f[s6_iter] =
-          Main_Sept1_2021_B.sf_floatsbytes.b[s6_iter];
-      }
-      break;
-
-     default:
-      /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
-       *  Constant: '<S4>/Constant2'
-       */
-      for (s6_iter = 0; s6_iter < 8; s6_iter++) {
-        Main_Sept1_2021_B.MultiportSwitch_f[s6_iter] =
-          Main_Sept1_2021_cal->Constant2_Value_g[s6_iter];
-      }
-      break;
-    }
-
-    /* End of MultiPortSwitch: '<S4>/Multiport Switch' */
-
-    /* S-Function (slrealtimebytepacking): '<S4>/Byte Packing' */
-
-    /* Byte Packing: <S4>/Byte Packing */
-    (void)memcpy((uint8_T*)&Main_Sept1_2021_B.BytePacking_o[0] + 0, (uint8_T*)
-                 &Main_Sept1_2021_B.MultiportSwitch_f[0], 8);
-
-    /* S-Function (scanpack): '<S4>/CAN Pack1' */
-    /* S-Function (scanpack): '<S4>/CAN Pack1' */
-    Main_Sept1_2021_B.CANmsg2.ID = 2U;
-    Main_Sept1_2021_B.CANmsg2.Length = 8U;
-    Main_Sept1_2021_B.CANmsg2.Extended = 0U;
-    Main_Sept1_2021_B.CANmsg2.Remote = 0;
-    Main_Sept1_2021_B.CANmsg2.Data[0] = 0;
-    Main_Sept1_2021_B.CANmsg2.Data[1] = 0;
-    Main_Sept1_2021_B.CANmsg2.Data[2] = 0;
-    Main_Sept1_2021_B.CANmsg2.Data[3] = 0;
-    Main_Sept1_2021_B.CANmsg2.Data[4] = 0;
-    Main_Sept1_2021_B.CANmsg2.Data[5] = 0;
-    Main_Sept1_2021_B.CANmsg2.Data[6] = 0;
-    Main_Sept1_2021_B.CANmsg2.Data[7] = 0;
-
-    {
-      (void) std::memcpy((Main_Sept1_2021_B.CANmsg2.Data),
-                         &Main_Sept1_2021_B.BytePacking_o[0],
-                         8 * sizeof(uint8_T));
-    }
-
-    /* S-Function (sg_IO602_IO691_write_s): '<S4>/CAN Write1' */
-
-    /* Level2 S-Function Block: '<S4>/CAN Write1' (sg_IO602_IO691_write_s) */
-    {
-      SimStruct *rts = Main_Sept1_2021_M->childSfunctions[0];
-      sfcnOutputs(rts,0);
-    }
-
-    /* Constant: '<Root>/Constant2' */
-    Main_Sept1_2021_B.Constant2 = Main_Sept1_2021_cal->Constant2_Value;
-
-    /* Outputs for Atomic SubSystem: '<Root>/Simulink Function3' */
-    /* MATLAB Function: '<S5>/floats -> bytes' */
-    Main_Sept1_2021_floatsbytes(Main_Sept1_2021_B.theta1,
-      Main_Sept1_2021_B.Constant2, Main_Sept1_2021_B.Kp1, Main_Sept1_2021_B.Kd1,
-      Main_Sept1_2021_B.T1, &Main_Sept1_2021_B.sf_floatsbytes_o);
-
-    /* MultiPortSwitch: '<S5>/Multiport Switch' */
-    switch (static_cast<int32_T>(Main_Sept1_2021_B.c)) {
-     case 1:
-      /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
-       *  Constant: '<S5>/Constant'
-       */
-      for (s6_iter = 0; s6_iter < 8; s6_iter++) {
-        Main_Sept1_2021_B.MultiportSwitch[s6_iter] =
-          Main_Sept1_2021_cal->Constant_Value_i[s6_iter];
-      }
-      break;
-
-     case 2:
-      /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
-       *  Constant: '<S5>/Constant1'
-       */
-      for (s6_iter = 0; s6_iter < 8; s6_iter++) {
-        Main_Sept1_2021_B.MultiportSwitch[s6_iter] =
-          Main_Sept1_2021_cal->Constant1_Value_e[s6_iter];
-      }
-      break;
-
-     case 3:
-      /* MultiPortSwitch: '<S5>/Multiport Switch' */
-      for (s6_iter = 0; s6_iter < 8; s6_iter++) {
-        Main_Sept1_2021_B.MultiportSwitch[s6_iter] =
-          Main_Sept1_2021_B.sf_floatsbytes_o.b[s6_iter];
-      }
-      break;
-
-     default:
-      /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
-       *  Constant: '<S5>/Constant2'
-       */
-      for (s6_iter = 0; s6_iter < 8; s6_iter++) {
-        Main_Sept1_2021_B.MultiportSwitch[s6_iter] =
-          Main_Sept1_2021_cal->Constant2_Value_k[s6_iter];
-      }
-      break;
-    }
-
-    /* End of MultiPortSwitch: '<S5>/Multiport Switch' */
-
-    /* S-Function (slrealtimebytepacking): '<S5>/Byte Packing' */
-
-    /* Byte Packing: <S5>/Byte Packing */
-    (void)memcpy((uint8_T*)&Main_Sept1_2021_B.BytePacking[0] + 0, (uint8_T*)
-                 &Main_Sept1_2021_B.MultiportSwitch[0], 8);
-
-    /* S-Function (scanpack): '<S5>/CAN Pack1' */
-    /* S-Function (scanpack): '<S5>/CAN Pack1' */
-    Main_Sept1_2021_B.CANPack1.ID = 1U;
-    Main_Sept1_2021_B.CANPack1.Length = 8U;
-    Main_Sept1_2021_B.CANPack1.Extended = 0U;
-    Main_Sept1_2021_B.CANPack1.Remote = 0;
-    Main_Sept1_2021_B.CANPack1.Data[0] = 0;
-    Main_Sept1_2021_B.CANPack1.Data[1] = 0;
-    Main_Sept1_2021_B.CANPack1.Data[2] = 0;
-    Main_Sept1_2021_B.CANPack1.Data[3] = 0;
-    Main_Sept1_2021_B.CANPack1.Data[4] = 0;
-    Main_Sept1_2021_B.CANPack1.Data[5] = 0;
-    Main_Sept1_2021_B.CANPack1.Data[6] = 0;
-    Main_Sept1_2021_B.CANPack1.Data[7] = 0;
-
-    {
-      (void) std::memcpy((Main_Sept1_2021_B.CANPack1.Data),
-                         &Main_Sept1_2021_B.BytePacking[0],
-                         8 * sizeof(uint8_T));
-    }
-
-    /* S-Function (sg_IO602_IO691_write_s): '<S5>/CAN Write1' */
-
-    /* Level2 S-Function Block: '<S5>/CAN Write1' (sg_IO602_IO691_write_s) */
-    {
-      SimStruct *rts = Main_Sept1_2021_M->childSfunctions[1];
-      sfcnOutputs(rts,0);
-    }
-
-    /* Stop: '<Root>/Stop Simulation' */
-    if (Main_Sept1_2021_B.stop != 0.0) {
-      rtmSetStopRequested(Main_Sept1_2021_M, 1);
-    }
-
-    /* End of Stop: '<Root>/Stop Simulation' */
-    /* Derivative: '<Root>/Current1Derivative' */
-    if ((Main_Sept1_2021_DW.TimeStampA >= Main_Sept1_2021_M->Timing.t[0]) &&
-        (Main_Sept1_2021_DW.TimeStampB >= Main_Sept1_2021_M->Timing.t[0])) {
-      /* Derivative: '<Root>/Current1Derivative' */
-      Main_Sept1_2021_B.Current1Derivative = 0.0;
-    } else {
-      I_ff = Main_Sept1_2021_DW.TimeStampA;
-      lastU = &Main_Sept1_2021_DW.LastUAtTimeA;
-      if (Main_Sept1_2021_DW.TimeStampA < Main_Sept1_2021_DW.TimeStampB) {
-        if (Main_Sept1_2021_DW.TimeStampB < Main_Sept1_2021_M->Timing.t[0]) {
-          I_ff = Main_Sept1_2021_DW.TimeStampB;
-          lastU = &Main_Sept1_2021_DW.LastUAtTimeB;
-        }
-      } else if (Main_Sept1_2021_DW.TimeStampA >= Main_Sept1_2021_M->Timing.t[0])
-      {
-        I_ff = Main_Sept1_2021_DW.TimeStampB;
-        lastU = &Main_Sept1_2021_DW.LastUAtTimeB;
-      }
-
-      I_ff = Main_Sept1_2021_M->Timing.t[0] - I_ff;
-
-      /* Derivative: '<Root>/Current1Derivative' */
-      Main_Sept1_2021_B.Current1Derivative = (Main_Sept1_2021_B.I_ff_o - *lastU)
-        / I_ff;
-    }
-
-    /* End of Derivative: '<Root>/Current1Derivative' */
-    /* Derivative: '<Root>/Current2Derivative' */
-    if ((Main_Sept1_2021_DW.TimeStampA_o >= Main_Sept1_2021_M->Timing.t[0]) &&
-        (Main_Sept1_2021_DW.TimeStampB_m >= Main_Sept1_2021_M->Timing.t[0])) {
-      /* Derivative: '<Root>/Current2Derivative' */
-      Main_Sept1_2021_B.Current2Derivative = 0.0;
-    } else {
-      I_ff = Main_Sept1_2021_DW.TimeStampA_o;
-      lastU = &Main_Sept1_2021_DW.LastUAtTimeA_d;
-      if (Main_Sept1_2021_DW.TimeStampA_o < Main_Sept1_2021_DW.TimeStampB_m) {
-        if (Main_Sept1_2021_DW.TimeStampB_m < Main_Sept1_2021_M->Timing.t[0]) {
-          I_ff = Main_Sept1_2021_DW.TimeStampB_m;
-          lastU = &Main_Sept1_2021_DW.LastUAtTimeB_p;
-        }
-      } else if (Main_Sept1_2021_DW.TimeStampA_o >= Main_Sept1_2021_M->Timing.t
-                 [0]) {
-        I_ff = Main_Sept1_2021_DW.TimeStampB_m;
-        lastU = &Main_Sept1_2021_DW.LastUAtTimeB_p;
-      }
-
-      I_ff = Main_Sept1_2021_M->Timing.t[0] - I_ff;
-
-      /* Derivative: '<Root>/Current2Derivative' */
-      Main_Sept1_2021_B.Current2Derivative = (Main_Sept1_2021_B.I_ff - *lastU) /
-        I_ff;
-    }
-
-    /* End of Derivative: '<Root>/Current2Derivative' */
-    /* Clock: '<Root>/Clock' */
-    Main_Sept1_2021_B.Clock = Main_Sept1_2021_M->Timing.t[0];
-
-    /* S-Function (sg_IO602_IO691_status_s): '<Root>/CAN Status' */
-
-    /* Level2 S-Function Block: '<Root>/CAN Status' (sg_IO602_IO691_status_s) */
-    {
-      SimStruct *rts = Main_Sept1_2021_M->childSfunctions[4];
-      sfcnOutputs(rts,0);
-    }
+    break;
   }
+
+  /* End of MultiPortSwitch: '<S2>/Command Switch' */
+
+  /* S-Function (slrealtimebytepacking): '<S2>/bytes -> byte vectors' */
+
+  /* Byte Packing: <S2>/bytes -> byte vectors */
+  (void)memcpy((uint8_T*)&Main_Sept1_2021_B.bytesbytevectors_l[0] + 0, (uint8_T*)
+               &Main_Sept1_2021_B.CommandSwitch_h[0], 8);
+
+  /* S-Function (scanpack): '<S2>/bytes vectors -> can message' */
+  /* S-Function (scanpack): '<S2>/bytes vectors -> can message' */
+  Main_Sept1_2021_B.bytesvectorscanmessage_c.ID = 7U;
+  Main_Sept1_2021_B.bytesvectorscanmessage_c.Length = 8U;
+  Main_Sept1_2021_B.bytesvectorscanmessage_c.Extended = 0U;
+  Main_Sept1_2021_B.bytesvectorscanmessage_c.Remote = 0;
+  Main_Sept1_2021_B.bytesvectorscanmessage_c.Data[0] = 0;
+  Main_Sept1_2021_B.bytesvectorscanmessage_c.Data[1] = 0;
+  Main_Sept1_2021_B.bytesvectorscanmessage_c.Data[2] = 0;
+  Main_Sept1_2021_B.bytesvectorscanmessage_c.Data[3] = 0;
+  Main_Sept1_2021_B.bytesvectorscanmessage_c.Data[4] = 0;
+  Main_Sept1_2021_B.bytesvectorscanmessage_c.Data[5] = 0;
+  Main_Sept1_2021_B.bytesvectorscanmessage_c.Data[6] = 0;
+  Main_Sept1_2021_B.bytesvectorscanmessage_c.Data[7] = 0;
 
   {
-    real_T *lastU;
-
-    /* Update for Delay: '<Root>/Delay' */
-    Main_Sept1_2021_DW.Delay_DSTATE = Main_Sept1_2021_B.position_j;
-
-    /* Update for Delay: '<Root>/Delay1' */
-    Main_Sept1_2021_DW.Delay1_DSTATE = Main_Sept1_2021_B.Gain_m;
-
-    /* Update for Derivative: '<Root>/Current1Derivative' */
-    if (Main_Sept1_2021_DW.TimeStampA == (rtInf)) {
-      Main_Sept1_2021_DW.TimeStampA = Main_Sept1_2021_M->Timing.t[0];
-      lastU = &Main_Sept1_2021_DW.LastUAtTimeA;
-    } else if (Main_Sept1_2021_DW.TimeStampB == (rtInf)) {
-      Main_Sept1_2021_DW.TimeStampB = Main_Sept1_2021_M->Timing.t[0];
-      lastU = &Main_Sept1_2021_DW.LastUAtTimeB;
-    } else if (Main_Sept1_2021_DW.TimeStampA < Main_Sept1_2021_DW.TimeStampB) {
-      Main_Sept1_2021_DW.TimeStampA = Main_Sept1_2021_M->Timing.t[0];
-      lastU = &Main_Sept1_2021_DW.LastUAtTimeA;
-    } else {
-      Main_Sept1_2021_DW.TimeStampB = Main_Sept1_2021_M->Timing.t[0];
-      lastU = &Main_Sept1_2021_DW.LastUAtTimeB;
-    }
-
-    *lastU = Main_Sept1_2021_B.I_ff_o;
-
-    /* End of Update for Derivative: '<Root>/Current1Derivative' */
-
-    /* Update for Derivative: '<Root>/Current2Derivative' */
-    if (Main_Sept1_2021_DW.TimeStampA_o == (rtInf)) {
-      Main_Sept1_2021_DW.TimeStampA_o = Main_Sept1_2021_M->Timing.t[0];
-      lastU = &Main_Sept1_2021_DW.LastUAtTimeA_d;
-    } else if (Main_Sept1_2021_DW.TimeStampB_m == (rtInf)) {
-      Main_Sept1_2021_DW.TimeStampB_m = Main_Sept1_2021_M->Timing.t[0];
-      lastU = &Main_Sept1_2021_DW.LastUAtTimeB_p;
-    } else if (Main_Sept1_2021_DW.TimeStampA_o < Main_Sept1_2021_DW.TimeStampB_m)
-    {
-      Main_Sept1_2021_DW.TimeStampA_o = Main_Sept1_2021_M->Timing.t[0];
-      lastU = &Main_Sept1_2021_DW.LastUAtTimeA_d;
-    } else {
-      Main_Sept1_2021_DW.TimeStampB_m = Main_Sept1_2021_M->Timing.t[0];
-      lastU = &Main_Sept1_2021_DW.LastUAtTimeB_p;
-    }
-
-    *lastU = Main_Sept1_2021_B.I_ff;
-
-    /* End of Update for Derivative: '<Root>/Current2Derivative' */
+    (void) std::memcpy((Main_Sept1_2021_B.bytesvectorscanmessage_c.Data),
+                       &Main_Sept1_2021_B.bytesbytevectors_l[0],
+                       8 * sizeof(uint8_T));
   }
+
+  /* S-Function (sg_IO602_IO691_write_s): '<S2>/Motor 1' */
+
+  /* Level2 S-Function Block: '<S2>/Motor 1' (sg_IO602_IO691_write_s) */
+  {
+    SimStruct *rts = Main_Sept1_2021_M->childSfunctions[0];
+    sfcnOutputs(rts,0);
+  }
+
+  /* Gain: '<Root>/Gain' */
+  Main_Sept1_2021_B.Th2 = Main_Sept1_2021_cal->Gain_Gain *
+    Main_Sept1_2021_B.theta2;
+
+  /* Constant: '<Root>/Constant8' */
+  Main_Sept1_2021_B.Thdot2 = Main_Sept1_2021_cal->Constant8_Value;
+
+  /* Outputs for Atomic SubSystem: '<Root>/Knee Actuator' */
+  /* MATLAB Function: '<S3>/floats -> bytes1' */
+  I_ff = Main_Sept1_2021_B.Th2;
+  if (!(I_ff < 95.5)) {
+    I_ff = 95.5;
+  }
+
+  if (!(I_ff > -95.5)) {
+    I_ff = -95.5;
+  }
+
+  Main_Sept1_2021_dec2bin(std::floor((I_ff - -95.5) * 65535.0 / 191.0), B,
+    c_size);
+  outsize_idx_1 = static_cast<int8_T>(16 - c_size[1]);
+  s5_iter = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < s5_iter; first++) {
+    p_data[first] = '0';
+  }
+
+  for (first = 0; first < loop_ub; first++) {
+    p_data[first + s5_iter] = B[first];
+  }
+
+  I_ff = Main_Sept1_2021_B.Thdot2;
+  if (!(I_ff < 45.0)) {
+    I_ff = 45.0;
+  }
+
+  if (!(I_ff > -45.0)) {
+    I_ff = -45.0;
+  }
+
+  Main_Sept1_2021_dec2bin(std::floor((I_ff - -45.0) * 4095.0 / 90.0), B, c_size);
+  outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
+  s5_iter = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < s5_iter; first++) {
+    v_data[first] = '0';
+  }
+
+  for (first = 0; first < loop_ub; first++) {
+    v_data[first + s5_iter] = B[first];
+  }
+
+  I_ff = Main_Sept1_2021_B.Kp2;
+  if (!(I_ff < 500.0)) {
+    I_ff = 500.0;
+  }
+
+  if (!(I_ff > 0.0)) {
+    I_ff = 0.0;
+  }
+
+  Main_Sept1_2021_dec2bin(std::floor(I_ff * 4095.0 / 500.0), B, c_size);
+  outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
+  s5_iter = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < s5_iter; first++) {
+    kp_data[first] = '0';
+  }
+
+  for (first = 0; first < loop_ub; first++) {
+    kp_data[first + s5_iter] = B[first];
+  }
+
+  I_ff = Main_Sept1_2021_B.Kd2;
+  if (!(I_ff < 45.0)) {
+    I_ff = 45.0;
+  }
+
+  if (!(I_ff > -45.0)) {
+    I_ff = -45.0;
+  }
+
+  Main_Sept1_2021_dec2bin(std::floor(I_ff * 4095.0 / 5.0), B, c_size);
+  outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
+  s5_iter = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < s5_iter; first++) {
+    kd_data[first] = '0';
+  }
+
+  for (first = 0; first < loop_ub; first++) {
+    kd_data[first + s5_iter] = B[first];
+  }
+
+  I_ff = Main_Sept1_2021_B.T2;
+  if (!(I_ff < 45.0)) {
+    I_ff = 45.0;
+  }
+
+  if (!(I_ff > -45.0)) {
+    I_ff = -45.0;
+  }
+
+  Main_Sept1_2021_dec2bin(std::floor((I_ff - -18.0) * 4095.0 / 36.0), B, c_size);
+  outsize_idx_1 = static_cast<int8_T>(12 - c_size[1]);
+  s5_iter = outsize_idx_1;
+  loop_ub = c_size[1];
+  for (first = 0; first < s5_iter; first++) {
+    t_data[first] = '0';
+  }
+
+  for (first = 0; first < loop_ub; first++) {
+    t_data[first + s5_iter] = B[first];
+  }
+
+  for (first = 0; first < 64; first++) {
+    B[first] = '0';
+  }
+
+  for (first = 0; first < 8; first++) {
+    B[first << 3] = p_data[first];
+    B[(first << 3) + 1] = p_data[first + 8];
+    B[(first << 3) + 2] = v_data[first];
+  }
+
+  B[3] = v_data[8];
+  B[35] = kp_data[0];
+  B[11] = v_data[9];
+  B[43] = kp_data[1];
+  B[19] = v_data[10];
+  B[51] = kp_data[2];
+  B[27] = v_data[11];
+  B[59] = kp_data[3];
+  for (first = 0; first < 8; first++) {
+    B[(first << 3) + 4] = kp_data[first + 4];
+    B[(first << 3) + 5] = kd_data[first];
+  }
+
+  B[6] = kd_data[8];
+  B[38] = t_data[0];
+  B[14] = kd_data[9];
+  B[46] = t_data[1];
+  B[22] = kd_data[10];
+  B[54] = t_data[2];
+  B[30] = kd_data[11];
+  B[62] = t_data[3];
+  for (first = 0; first < 8; first++) {
+    B[(first << 3) + 7] = t_data[first + 4];
+  }
+
+  for (s5_iter = 0; s5_iter < 8; s5_iter++) {
+    first = 1;
+    while ((first < 8) && b[static_cast<uint8_T>(B[((first - 1) << 3) + s5_iter])])
+    {
+      first++;
+    }
+
+    loop_ub = 7;
+    while ((loop_ub + 1 > first) && b[static_cast<uint8_T>(B[(loop_ub << 3) +
+            s5_iter])]) {
+      loop_ub--;
+    }
+
+    p2 = 1UL;
+    a = 0UL;
+    while ((first < loop_ub + 1) && b[static_cast<uint8_T>(B[((first - 1) << 3)
+            + s5_iter])]) {
+      first++;
+    }
+
+    while (loop_ub + 1 >= first) {
+      if (B[(loop_ub << 3) + s5_iter] == '1') {
+        a += p2;
+        p2 += p2;
+      } else if (B[(loop_ub << 3) + s5_iter] == '0') {
+        p2 += p2;
+      }
+
+      loop_ub--;
+    }
+
+    b_B[s5_iter] = static_cast<real_T>(a);
+    I_ff = rt_roundd_snf(b_B[s5_iter]);
+    if (I_ff < 256.0) {
+      if (I_ff >= 0.0) {
+        tmp = static_cast<uint8_T>(I_ff);
+      } else {
+        tmp = 0U;
+      }
+    } else {
+      tmp = MAX_uint8_T;
+    }
+
+    Main_Sept1_2021_B.b[s5_iter] = tmp;
+  }
+
+  /* End of MATLAB Function: '<S3>/floats -> bytes1' */
+
+  /* MultiPortSwitch: '<S3>/Command Switch' */
+  switch (static_cast<int32_T>(Main_Sept1_2021_B.c)) {
+   case 1:
+    /* MultiPortSwitch: '<S3>/Command Switch' incorporates:
+     *  Constant: '<S3>/Constant3'
+     */
+    for (s5_iter = 0; s5_iter < 8; s5_iter++) {
+      Main_Sept1_2021_B.CommandSwitch[s5_iter] =
+        Main_Sept1_2021_cal->Constant3_Value[s5_iter];
+    }
+    break;
+
+   case 2:
+    /* MultiPortSwitch: '<S3>/Command Switch' incorporates:
+     *  Constant: '<S3>/Constant4'
+     */
+    for (s5_iter = 0; s5_iter < 8; s5_iter++) {
+      Main_Sept1_2021_B.CommandSwitch[s5_iter] =
+        Main_Sept1_2021_cal->Constant4_Value[s5_iter];
+    }
+    break;
+
+   case 3:
+    /* MultiPortSwitch: '<S3>/Command Switch' */
+    for (s5_iter = 0; s5_iter < 8; s5_iter++) {
+      Main_Sept1_2021_B.CommandSwitch[s5_iter] = Main_Sept1_2021_B.b[s5_iter];
+    }
+    break;
+
+   default:
+    /* MultiPortSwitch: '<S3>/Command Switch' incorporates:
+     *  Constant: '<S3>/Constant5'
+     */
+    for (s5_iter = 0; s5_iter < 8; s5_iter++) {
+      Main_Sept1_2021_B.CommandSwitch[s5_iter] =
+        Main_Sept1_2021_cal->Constant5_Value[s5_iter];
+    }
+    break;
+  }
+
+  /* End of MultiPortSwitch: '<S3>/Command Switch' */
+
+  /* S-Function (slrealtimebytepacking): '<S3>/bytes -> byte vectors' */
+
+  /* Byte Packing: <S3>/bytes -> byte vectors */
+  (void)memcpy((uint8_T*)&Main_Sept1_2021_B.bytesbytevectors[0] + 0, (uint8_T*)
+               &Main_Sept1_2021_B.CommandSwitch[0], 8);
+
+  /* S-Function (scanpack): '<S3>/bytes vectors -> can message' */
+  /* S-Function (scanpack): '<S3>/bytes vectors -> can message' */
+  Main_Sept1_2021_B.bytesvectorscanmessage.ID = 8U;
+  Main_Sept1_2021_B.bytesvectorscanmessage.Length = 8U;
+  Main_Sept1_2021_B.bytesvectorscanmessage.Extended = 0U;
+  Main_Sept1_2021_B.bytesvectorscanmessage.Remote = 0;
+  Main_Sept1_2021_B.bytesvectorscanmessage.Data[0] = 0;
+  Main_Sept1_2021_B.bytesvectorscanmessage.Data[1] = 0;
+  Main_Sept1_2021_B.bytesvectorscanmessage.Data[2] = 0;
+  Main_Sept1_2021_B.bytesvectorscanmessage.Data[3] = 0;
+  Main_Sept1_2021_B.bytesvectorscanmessage.Data[4] = 0;
+  Main_Sept1_2021_B.bytesvectorscanmessage.Data[5] = 0;
+  Main_Sept1_2021_B.bytesvectorscanmessage.Data[6] = 0;
+  Main_Sept1_2021_B.bytesvectorscanmessage.Data[7] = 0;
+
+  {
+    (void) std::memcpy((Main_Sept1_2021_B.bytesvectorscanmessage.Data),
+                       &Main_Sept1_2021_B.bytesbytevectors[0],
+                       8 * sizeof(uint8_T));
+  }
+
+  /* S-Function (sg_IO602_IO691_write_s): '<S3>/Motor 2' */
+
+  /* Level2 S-Function Block: '<S3>/Motor 2' (sg_IO602_IO691_write_s) */
+  {
+    SimStruct *rts = Main_Sept1_2021_M->childSfunctions[1];
+    sfcnOutputs(rts,0);
+  }
+
+  /* Stop: '<Root>/Stop Simulation' */
+  if (Main_Sept1_2021_B.stop != 0.0) {
+    rtmSetStopRequested(Main_Sept1_2021_M, 1);
+  }
+
+  /* End of Stop: '<Root>/Stop Simulation' */
+  /* Clock: '<Root>/Clock' */
+  Main_Sept1_2021_B.Clock = Main_Sept1_2021_M->Timing.t[0];
+
+  /* S-Function (sg_IO602_IO691_status_s): '<Root>/CAN Status' */
+
+  /* Level2 S-Function Block: '<Root>/CAN Status' (sg_IO602_IO691_status_s) */
+  {
+    SimStruct *rts = Main_Sept1_2021_M->childSfunctions[4];
+    sfcnOutputs(rts,0);
+  }
+
+  /* Update for Delay: '<Root>/Delay' */
+  Main_Sept1_2021_DW.Delay_DSTATE = Main_Sept1_2021_B.position_j;
+
+  /* Update for Delay: '<Root>/Delay1' */
+  Main_Sept1_2021_DW.Delay1_DSTATE = Main_Sept1_2021_B.GearRatio;
 
   /* Update absolute time for base rate */
   /* The "clockTick0" counts the number of times the code of this task has
@@ -1750,8 +1779,8 @@ void Main_Sept1_2021_initialize(void)
 
   {
     Main_Sept1_2021_B.CANRead_o2 = CAN_DATATYPE_GROUND;
-    Main_Sept1_2021_B.CANPack1 = CAN_DATATYPE_GROUND;
-    Main_Sept1_2021_B.CANmsg2 = CAN_DATATYPE_GROUND;
+    Main_Sept1_2021_B.bytesvectorscanmessage = CAN_DATATYPE_GROUND;
+    Main_Sept1_2021_B.bytesvectorscanmessage_c = CAN_DATATYPE_GROUND;
   }
 
   /* states (dwork) */
@@ -1806,7 +1835,7 @@ void Main_Sept1_2021_initialize(void)
       }
     }
 
-    /* Level2 S-Function Block: Main_Sept1_2021/<S4>/CAN Write1 (sg_IO602_IO691_write_s) */
+    /* Level2 S-Function Block: Main_Sept1_2021/<S2>/Motor 1 (sg_IO602_IO691_write_s) */
     {
       SimStruct *rts = Main_Sept1_2021_M->childSfunctions[0];
 
@@ -1869,15 +1898,16 @@ void Main_Sept1_2021_initialize(void)
         /* port 0 */
         {
           ssSetInputPortRequiredContiguous(rts, 0, 1);
-          ssSetInputPortSignal(rts, 0, &Main_Sept1_2021_B.CANmsg2);
+          ssSetInputPortSignal(rts, 0,
+                               &Main_Sept1_2021_B.bytesvectorscanmessage_c);
           _ssSetInputPortNumDimensions(rts, 0, 1);
           ssSetInputPortWidth(rts, 0, 1);
         }
       }
 
       /* path info */
-      ssSetModelName(rts, "CAN Write1");
-      ssSetPath(rts, "Main_Sept1_2021/Simulink Function1/CAN Write1");
+      ssSetModelName(rts, "Motor 1");
+      ssSetPath(rts, "Main_Sept1_2021/HIP Actuator/Motor 1");
       ssSetRTModel(rts,Main_Sept1_2021_M);
       ssSetParentSS(rts, (NULL));
       ssSetRootSS(rts, rts);
@@ -1889,11 +1919,11 @@ void Main_Sept1_2021_initialize(void)
           &Main_Sept1_2021_M->NonInlinedSFcns.Sfcn0.params;
         ssSetSFcnParamsCount(rts, 1);
         ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
-        ssSetSFcnParam(rts, 0, (mxArray*)Main_Sept1_2021_cal->CANWrite1_P1_Size);
+        ssSetSFcnParam(rts, 0, (mxArray*)Main_Sept1_2021_cal->Motor1_P1_Size);
       }
 
       /* work vectors */
-      ssSetPWork(rts, (void **) &Main_Sept1_2021_DW.CANWrite1_PWORK_f);
+      ssSetPWork(rts, (void **) &Main_Sept1_2021_DW.Motor1_PWORK);
 
       {
         struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
@@ -1908,7 +1938,7 @@ void Main_Sept1_2021_initialize(void)
         ssSetDWorkWidth(rts, 0, 1);
         ssSetDWorkDataType(rts, 0,SS_POINTER);
         ssSetDWorkComplexSignal(rts, 0, 0);
-        ssSetDWork(rts, 0, &Main_Sept1_2021_DW.CANWrite1_PWORK_f);
+        ssSetDWork(rts, 0, &Main_Sept1_2021_DW.Motor1_PWORK);
       }
 
       /* registration */
@@ -1931,7 +1961,7 @@ void Main_Sept1_2021_initialize(void)
       ssSetInputPortBufferDstPort(rts, 0, -1);
     }
 
-    /* Level2 S-Function Block: Main_Sept1_2021/<S5>/CAN Write1 (sg_IO602_IO691_write_s) */
+    /* Level2 S-Function Block: Main_Sept1_2021/<S3>/Motor 2 (sg_IO602_IO691_write_s) */
     {
       SimStruct *rts = Main_Sept1_2021_M->childSfunctions[1];
 
@@ -1994,15 +2024,15 @@ void Main_Sept1_2021_initialize(void)
         /* port 0 */
         {
           ssSetInputPortRequiredContiguous(rts, 0, 1);
-          ssSetInputPortSignal(rts, 0, &Main_Sept1_2021_B.CANPack1);
+          ssSetInputPortSignal(rts, 0, &Main_Sept1_2021_B.bytesvectorscanmessage);
           _ssSetInputPortNumDimensions(rts, 0, 1);
           ssSetInputPortWidth(rts, 0, 1);
         }
       }
 
       /* path info */
-      ssSetModelName(rts, "CAN Write1");
-      ssSetPath(rts, "Main_Sept1_2021/Simulink Function3/CAN Write1");
+      ssSetModelName(rts, "Motor 2");
+      ssSetPath(rts, "Main_Sept1_2021/Knee Actuator/Motor 2");
       ssSetRTModel(rts,Main_Sept1_2021_M);
       ssSetParentSS(rts, (NULL));
       ssSetRootSS(rts, rts);
@@ -2014,12 +2044,11 @@ void Main_Sept1_2021_initialize(void)
           &Main_Sept1_2021_M->NonInlinedSFcns.Sfcn1.params;
         ssSetSFcnParamsCount(rts, 1);
         ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
-        ssSetSFcnParam(rts, 0, (mxArray*)
-                       Main_Sept1_2021_cal->CANWrite1_P1_Size_d);
+        ssSetSFcnParam(rts, 0, (mxArray*)Main_Sept1_2021_cal->Motor2_P1_Size);
       }
 
       /* work vectors */
-      ssSetPWork(rts, (void **) &Main_Sept1_2021_DW.CANWrite1_PWORK);
+      ssSetPWork(rts, (void **) &Main_Sept1_2021_DW.Motor2_PWORK);
 
       {
         struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
@@ -2034,7 +2063,7 @@ void Main_Sept1_2021_initialize(void)
         ssSetDWorkWidth(rts, 0, 1);
         ssSetDWorkDataType(rts, 0,SS_POINTER);
         ssSetDWorkComplexSignal(rts, 0, 0);
-        ssSetDWork(rts, 0, &Main_Sept1_2021_DW.CANWrite1_PWORK);
+        ssSetDWork(rts, 0, &Main_Sept1_2021_DW.Motor2_PWORK);
       }
 
       /* registration */
@@ -2057,7 +2086,7 @@ void Main_Sept1_2021_initialize(void)
       ssSetInputPortBufferDstPort(rts, 0, -1);
     }
 
-    /* Level2 S-Function Block: Main_Sept1_2021/<S6>/CAN Read (sg_IO602_IO691_read_s) */
+    /* Level2 S-Function Block: Main_Sept1_2021/<S5>/CAN Read (sg_IO602_IO691_read_s) */
     {
       SimStruct *rts = Main_Sept1_2021_M->childSfunctions[2];
 
@@ -2138,7 +2167,7 @@ void Main_Sept1_2021_initialize(void)
 
       /* path info */
       ssSetModelName(rts, "CAN Read");
-      ssSetPath(rts, "Main_Sept1_2021/While Iterator Subsystem/CAN Read");
+      ssSetPath(rts, "Main_Sept1_2021/Read and Sort CAN Responces/CAN Read");
       ssSetRTModel(rts,Main_Sept1_2021_M);
       ssSetParentSS(rts, (NULL));
       ssSetRootSS(rts, rts);
@@ -2468,11 +2497,11 @@ void Main_Sept1_2021_initialize(void)
   /* Start for Constant: '<Root>/Constant' */
   Main_Sept1_2021_B.Constant = Main_Sept1_2021_cal->Constant_Value;
 
-  /* Start for Constant: '<Root>/Constant8' */
-  Main_Sept1_2021_B.Constant8 = Main_Sept1_2021_cal->Constant8_Value;
-
   /* Start for Constant: '<Root>/Constant2' */
   Main_Sept1_2021_B.Constant2 = Main_Sept1_2021_cal->Constant2_Value;
+
+  /* Start for Constant: '<Root>/Constant8' */
+  Main_Sept1_2021_B.Thdot2 = Main_Sept1_2021_cal->Constant8_Value;
 
   /* Start for S-Function (sg_IO602_IO691_status_s): '<Root>/CAN Status' */
   /* Level2 S-Function Block: '<Root>/CAN Status' (sg_IO602_IO691_status_s) */
@@ -2490,16 +2519,8 @@ void Main_Sept1_2021_initialize(void)
   Main_Sept1_2021_DW.Delay1_DSTATE =
     Main_Sept1_2021_cal->Delay1_InitialCondition;
 
-  /* InitializeConditions for Derivative: '<Root>/Current1Derivative' */
-  Main_Sept1_2021_DW.TimeStampA = (rtInf);
-  Main_Sept1_2021_DW.TimeStampB = (rtInf);
-
-  /* InitializeConditions for Derivative: '<Root>/Current2Derivative' */
-  Main_Sept1_2021_DW.TimeStampA_o = (rtInf);
-  Main_Sept1_2021_DW.TimeStampB_m = (rtInf);
-
-  /* Start for S-Function (sg_IO602_IO691_read_s): '<S6>/CAN Read' */
-  /* Level2 S-Function Block: '<S6>/CAN Read' (sg_IO602_IO691_read_s) */
+  /* Start for S-Function (sg_IO602_IO691_read_s): '<S5>/CAN Read' */
+  /* Level2 S-Function Block: '<S5>/CAN Read' (sg_IO602_IO691_read_s) */
   {
     SimStruct *rts = Main_Sept1_2021_M->childSfunctions[2];
     sfcnStart(rts);
@@ -2507,61 +2528,41 @@ void Main_Sept1_2021_initialize(void)
       return;
   }
 
-  /* SystemInitialize for Atomic SubSystem: '<S6>/If Action Subsystem1' */
-  /* Start for S-Function (scanunpack): '<S10>/CAN Unpack' */
+  /* SystemInitialize for Atomic SubSystem: '<S5>/ID 1 Read  ' */
+  /* Start for S-Function (scanunpack): '<S8>/CAN Msg -> bytes' */
 
-  /*-----------S-Function Block: <S10>/CAN Unpack -----------------*/
+  /*-----------S-Function Block: <S8>/CAN Msg -> bytes -----------------*/
 
-  /* End of SystemInitialize for SubSystem: '<S6>/If Action Subsystem1' */
+  /* End of SystemInitialize for SubSystem: '<S5>/ID 1 Read  ' */
 
-  /* SystemInitialize for Atomic SubSystem: '<S6>/If Action Subsystem' */
+  /* SystemInitialize for Atomic SubSystem: '<S5>/ID 2 Read' */
   /* Start for S-Function (scanunpack): '<S9>/CAN Unpack' */
 
   /*-----------S-Function Block: <S9>/CAN Unpack -----------------*/
 
-  /* End of SystemInitialize for SubSystem: '<S6>/If Action Subsystem' */
+  /* End of SystemInitialize for SubSystem: '<S5>/ID 2 Read' */
 
-  /* SystemInitialize for Outport: '<S6>/P1' */
+  /* SystemInitialize for Outport: '<S5>/P1' */
   Main_Sept1_2021_B.position_j = Main_Sept1_2021_cal->P1_Y0;
 
-  /* SystemInitialize for Outport: '<S6>/V1' */
+  /* SystemInitialize for Gain: '<S5>/Gear Ratio' incorporates:
+   *  Outport: '<S5>/P2'
+   */
+  Main_Sept1_2021_B.GearRatio = Main_Sept1_2021_cal->P2_Y0;
+
+  /* SystemInitialize for Outport: '<S5>/V1' */
   Main_Sept1_2021_B.velocity_h = Main_Sept1_2021_cal->V1_Y0;
 
-  /* SystemInitialize for Outport: '<S6>/Curr1' */
-  Main_Sept1_2021_B.I_ff_o = Main_Sept1_2021_cal->Curr1_Y0;
-
-  /* SystemInitialize for S-Function (scanunpack): '<S9>/CAN Unpack' incorporates:
-   *  Outport: '<S6>/ID1'
-   */
-  Main_Sept1_2021_B.CANUnpack_o4_i = Main_Sept1_2021_cal->ID1_Y0;
-
-  /* SystemInitialize for S-Function (scanunpack): '<S9>/CAN Unpack' incorporates:
-   *  Outport: '<S6>/Status1'
-   */
-  Main_Sept1_2021_B.CANUnpack_o5_p = Main_Sept1_2021_cal->Status1_Y0;
-
-  /* SystemInitialize for Gain: '<S6>/Gain' incorporates:
-   *  Outport: '<S6>/P2'
-   */
-  Main_Sept1_2021_B.Gain_m = Main_Sept1_2021_cal->P2_Y0;
-
-  /* SystemInitialize for Outport: '<S6>/V2' */
+  /* SystemInitialize for Outport: '<S5>/V2' */
   Main_Sept1_2021_B.velocity = Main_Sept1_2021_cal->V2_Y0;
 
-  /* SystemInitialize for Outport: '<S6>/Curr2' */
+  /* SystemInitialize for Outport: '<S5>/Curr1' */
+  Main_Sept1_2021_B.I_ff_o = Main_Sept1_2021_cal->Curr1_Y0;
+
+  /* SystemInitialize for Outport: '<S5>/Curr2' */
   Main_Sept1_2021_B.I_ff = Main_Sept1_2021_cal->Curr2_Y0;
 
-  /* SystemInitialize for S-Function (scanunpack): '<S10>/CAN Unpack' incorporates:
-   *  Outport: '<S6>/ID2'
-   */
-  Main_Sept1_2021_B.CANUnpack_o4 = Main_Sept1_2021_cal->ID2_Y0;
-
-  /* SystemInitialize for S-Function (scanunpack): '<S10>/CAN Unpack' incorporates:
-   *  Outport: '<S6>/Status2'
-   */
-  Main_Sept1_2021_B.CANUnpack_o5 = Main_Sept1_2021_cal->Status2_Y0;
-
-  /* End of SystemInitialize for SubSystem: '<Root>/While Iterator Subsystem' */
+  /* End of SystemInitialize for SubSystem: '<Root>/Read and Sort CAN Responces' */
 
   /* SystemInitialize for Chart: '<Root>/Chart' */
   Main_Sept1_2021_DW.sfEvent = Main_Sept1_2021_CALL_EVENT;
@@ -2580,10 +2581,11 @@ void Main_Sept1_2021_initialize(void)
   Main_Sept1_2021_DW.slope1 = 0.0;
   Main_Sept1_2021_DW.slope2 = 0.0;
   Main_Sept1_2021_DW.Idle = 0.0;
-  Main_Sept1_2021_DW.hop = 0.0;
   Main_Sept1_2021_DW.time = 0.0;
   Main_Sept1_2021_DW.FStart = 0.0;
-  Main_Sept1_2021_DW.Th2Th1 = -1.8;
+  Main_Sept1_2021_DW.Th2Th1 = -2.0;
+  Main_Sept1_2021_DW.GRFy = 0.0;
+  Main_Sept1_2021_DW.exitY = 0.0;
   Main_Sept1_2021_B.stop = 0.0;
   Main_Sept1_2021_B.theta1 = 0.0;
   Main_Sept1_2021_B.theta2 = 0.0;
@@ -2594,14 +2596,14 @@ void Main_Sept1_2021_initialize(void)
   Main_Sept1_2021_B.Kp2 = 25.0;
   Main_Sept1_2021_B.Kd1 = 0.1;
   Main_Sept1_2021_B.Kd2 = 0.1;
-  Main_Sept1_2021_B.exitY = 0.0;
   Main_Sept1_2021_B.Tcalc1 = 0.0;
   Main_Sept1_2021_B.Tcalc2 = 0.0;
   Main_Sept1_2021_B.calcForceX = 0.0;
-  Main_Sept1_2021_B.GRF_e = 0.0;
+  Main_Sept1_2021_B.GRF = 0.0;
+  Main_Sept1_2021_B.hop = 0.0;
 
-  /* Start for S-Function (sg_IO602_IO691_write_s): '<S4>/CAN Write1' */
-  /* Level2 S-Function Block: '<S4>/CAN Write1' (sg_IO602_IO691_write_s) */
+  /* Start for S-Function (sg_IO602_IO691_write_s): '<S2>/Motor 1' */
+  /* Level2 S-Function Block: '<S2>/Motor 1' (sg_IO602_IO691_write_s) */
   {
     SimStruct *rts = Main_Sept1_2021_M->childSfunctions[0];
     sfcnStart(rts);
@@ -2609,8 +2611,8 @@ void Main_Sept1_2021_initialize(void)
       return;
   }
 
-  /* Start for S-Function (sg_IO602_IO691_write_s): '<S5>/CAN Write1' */
-  /* Level2 S-Function Block: '<S5>/CAN Write1' (sg_IO602_IO691_write_s) */
+  /* Start for S-Function (sg_IO602_IO691_write_s): '<S3>/Motor 2' */
+  /* Level2 S-Function Block: '<S3>/Motor 2' (sg_IO602_IO691_write_s) */
   {
     SimStruct *rts = Main_Sept1_2021_M->childSfunctions[1];
     sfcnStart(rts);
@@ -2629,38 +2631,38 @@ void Main_Sept1_2021_terminate(void)
     sfcnTerminate(rts);
   }
 
-  /* Terminate for Iterator SubSystem: '<Root>/While Iterator Subsystem' */
+  /* Terminate for Iterator SubSystem: '<Root>/Read and Sort CAN Responces' */
 
-  /* Terminate for S-Function (sg_IO602_IO691_read_s): '<S6>/CAN Read' */
-  /* Level2 S-Function Block: '<S6>/CAN Read' (sg_IO602_IO691_read_s) */
+  /* Terminate for S-Function (sg_IO602_IO691_read_s): '<S5>/CAN Read' */
+  /* Level2 S-Function Block: '<S5>/CAN Read' (sg_IO602_IO691_read_s) */
   {
     SimStruct *rts = Main_Sept1_2021_M->childSfunctions[2];
     sfcnTerminate(rts);
   }
 
-  /* End of Terminate for SubSystem: '<Root>/While Iterator Subsystem' */
+  /* End of Terminate for SubSystem: '<Root>/Read and Sort CAN Responces' */
 
-  /* Terminate for Atomic SubSystem: '<Root>/Simulink Function1' */
+  /* Terminate for Atomic SubSystem: '<Root>/HIP Actuator' */
 
-  /* Terminate for S-Function (sg_IO602_IO691_write_s): '<S4>/CAN Write1' */
-  /* Level2 S-Function Block: '<S4>/CAN Write1' (sg_IO602_IO691_write_s) */
+  /* Terminate for S-Function (sg_IO602_IO691_write_s): '<S2>/Motor 1' */
+  /* Level2 S-Function Block: '<S2>/Motor 1' (sg_IO602_IO691_write_s) */
   {
     SimStruct *rts = Main_Sept1_2021_M->childSfunctions[0];
     sfcnTerminate(rts);
   }
 
-  /* End of Terminate for SubSystem: '<Root>/Simulink Function1' */
+  /* End of Terminate for SubSystem: '<Root>/HIP Actuator' */
 
-  /* Terminate for Atomic SubSystem: '<Root>/Simulink Function3' */
+  /* Terminate for Atomic SubSystem: '<Root>/Knee Actuator' */
 
-  /* Terminate for S-Function (sg_IO602_IO691_write_s): '<S5>/CAN Write1' */
-  /* Level2 S-Function Block: '<S5>/CAN Write1' (sg_IO602_IO691_write_s) */
+  /* Terminate for S-Function (sg_IO602_IO691_write_s): '<S3>/Motor 2' */
+  /* Level2 S-Function Block: '<S3>/Motor 2' (sg_IO602_IO691_write_s) */
   {
     SimStruct *rts = Main_Sept1_2021_M->childSfunctions[1];
     sfcnTerminate(rts);
   }
 
-  /* End of Terminate for SubSystem: '<Root>/Simulink Function3' */
+  /* End of Terminate for SubSystem: '<Root>/Knee Actuator' */
 
   /* Terminate for S-Function (sg_IO602_IO691_status_s): '<Root>/CAN Status' */
   /* Level2 S-Function Block: '<Root>/CAN Status' (sg_IO602_IO691_status_s) */

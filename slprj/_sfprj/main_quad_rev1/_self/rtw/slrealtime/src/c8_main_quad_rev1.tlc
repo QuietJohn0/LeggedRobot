@@ -1,0 +1,119 @@
+%implements "chartSource" "C"
+%function ChartConfig(block, system) void
+  %createrecord chartConfiguration { ...
+          executeAtInitialization  0 ...
+  }
+  %return chartConfiguration
+%endfunction
+%function ChartDataMap(block, system) void
+  %createrecord ChartDataElements {\
+    NumChartData   14 \
+    ChartDataDefaults {\
+      RecordType   "ChartData"\
+      Dimensions   []\
+      IsTestPoint  0\
+    }\
+    ChartData {\
+      Name         "sfEvent"\
+      Description  "ActiveChartEvent"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "is_active_c8_main_quad_rev1"\
+      Description  "StateIsActive"\
+      SFName       "is_active_c8_main_quad_rev1"\
+      Path         "is_active_c8_main_quad_rev1"\
+      SrcLocation  ""\
+      IsTestPoint  1\
+    }\
+    ChartData {\
+      Name         "is_c8_main_quad_rev1"\
+      Description  "StateActiveChild"\
+      SFName       "is_c8_main_quad_rev1"\
+      Path         "is_c8_main_quad_rev1"\
+      SrcLocation  ""\
+      IsTestPoint  1\
+    }\
+    ChartData {\
+      Name         "is_Command"\
+      Description  "StateActiveChild"\
+      SFName       "is_Command"\
+      Path         "Command.is_Command"\
+      SrcLocation  ""\
+      IsTestPoint  1\
+    }\
+    ChartData {\
+      Name         "done"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "done"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "pf"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "pf"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "tstep"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "tstep"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "to"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "to"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "po1"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "po1"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "po2"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "po2"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "slope1"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "slope1"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "slope2"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "slope2"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "Th2Th1"\
+      Description  "ChartLocal"\
+      SFName       ""\
+      Path         "Th2Th1"\
+      SrcLocation  ""\
+    }\
+    ChartData {\
+      Name         "temporalCounter_i1"\
+      Description  "TemporalCounter"\
+      SFName       ""\
+      Path         ""\
+      SrcLocation  ""\
+    }\
+  }
+  %return ChartDataElements
+%endfunction

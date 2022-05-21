@@ -2,7 +2,7 @@
 ## Makefile generated for component 'Main_Sept1_2021'. 
 ## 
 ## Makefile     : Main_Sept1_2021.mk
-## Generated on : Wed Sep 08 14:05:57 2021
+## Generated on : Thu May 19 16:44:07 2022
 ## Final product: $(START_DIR)/Main_Sept1_2021_slrealtime_rtw/Main_Sept1_2021
 ## Product type : executable
 ## 
@@ -21,7 +21,7 @@ MAKEFILE                  = Main_Sept1_2021.mk
 MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2021a
 MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2021a/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
-START_DIR                 = C:/Users/celwe/OneDrive/Desktop/GITHUB~1/LEGGED~1
+START_DIR                 = C:/Users/johna/Documents/MATtierLAB/MATtierLAB/LeggedRobotGithub/LeggedRobot
 SOLVER                    = 
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0

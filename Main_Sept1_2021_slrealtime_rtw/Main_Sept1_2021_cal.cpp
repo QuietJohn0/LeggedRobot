@@ -2,80 +2,70 @@
 
 /* Storage class 'PageSwitching' */
 Main_Sept1_2021_cal_type Main_Sept1_2021_cal_impl = {
-  /* Computed Parameter: CANWrite1_P1_Size
-   * Referenced by: '<S4>/CAN Write1'
+  /* Computed Parameter: Motor1_P1_Size
+   * Referenced by: '<S2>/Motor 1'
    */
   { 1.0, 7.0 },
 
   /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
-   * Referenced by: '<S4>/CAN Write1'
+   * Referenced by: '<S2>/Motor 1'
    */
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0, 0.0 },
 
-  /* Computed Parameter: CANWrite1_P1_Size_d
-   * Referenced by: '<S5>/CAN Write1'
+  /* Computed Parameter: Motor2_P1_Size
+   * Referenced by: '<S3>/Motor 2'
    */
   { 1.0, 7.0 },
 
   /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
-   * Referenced by: '<S5>/CAN Write1'
+   * Referenced by: '<S3>/Motor 2'
    */
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0, 0.0 },
 
   /* Computed Parameter: P1_Y0
-   * Referenced by: '<S6>/P1'
-   */
-  0.0,
-
-  /* Computed Parameter: V1_Y0
-   * Referenced by: '<S6>/V1'
-   */
-  0.0,
-
-  /* Computed Parameter: Curr1_Y0
-   * Referenced by: '<S6>/Curr1'
-   */
-  0.0,
-
-  /* Computed Parameter: ID1_Y0
-   * Referenced by: '<S6>/ID1'
+   * Referenced by: '<S5>/P1'
    */
   0.0,
 
   /* Computed Parameter: P2_Y0
-   * Referenced by: '<S6>/P2'
+   * Referenced by: '<S5>/P2'
+   */
+  0.0,
+
+  /* Computed Parameter: V1_Y0
+   * Referenced by: '<S5>/V1'
    */
   0.0,
 
   /* Computed Parameter: V2_Y0
-   * Referenced by: '<S6>/V2'
+   * Referenced by: '<S5>/V2'
+   */
+  0.0,
+
+  /* Computed Parameter: Curr1_Y0
+   * Referenced by: '<S5>/Curr1'
    */
   0.0,
 
   /* Computed Parameter: Curr2_Y0
-   * Referenced by: '<S6>/Curr2'
-   */
-  0.0,
-
-  /* Computed Parameter: ID2_Y0
-   * Referenced by: '<S6>/ID2'
+   * Referenced by: '<S5>/Curr2'
    */
   0.0,
 
   /* Computed Parameter: CANRead_P1_Size
-   * Referenced by: '<S6>/CAN Read'
+   * Referenced by: '<S5>/CAN Read'
    */
   { 1.0, 6.0 },
 
   /* Expression: [initValues(1:4) messageType initValues(6)]
-   * Referenced by: '<S6>/CAN Read'
+   * Referenced by: '<S5>/CAN Read'
    */
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0 },
 
-  /* Expression: 30/18
-   * Referenced by: '<S6>/Gain'
+  /* Expression: 1
+   * Referenced by: '<S5>/Gear Ratio'
    */
-  1.6666666666666667,
+  1.0,
 
   /* Computed Parameter: CANSetup_P1_Size
    * Referenced by: '<Root>/CAN Setup '
@@ -119,23 +109,23 @@ Main_Sept1_2021_cal_type Main_Sept1_2021_cal_impl = {
    */
   0.0,
 
-  /* Expression: 1
-   * Referenced by: '<Root>/Constant'
-   */
-  1.0,
-
-  /* Expression: 18/30
-   * Referenced by: '<Root>/Gain'
-   */
-  0.6,
-
   /* Expression: 0
-   * Referenced by: '<Root>/Constant8'
+   * Referenced by: '<Root>/Constant'
    */
   0.0,
 
   /* Expression: 0
    * Referenced by: '<Root>/Constant2'
+   */
+  0.0,
+
+  /* Expression: 1
+   * Referenced by: '<Root>/Gain'
+   */
+  1.0,
+
+  /* Expression: 0
+   * Referenced by: '<Root>/Constant8'
    */
   0.0,
 
@@ -480,44 +470,34 @@ Main_Sept1_2021_cal_type Main_Sept1_2021_cal_impl = {
   0.0,
 
   /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
-   * Referenced by: '<S4>/Constant'
+   * Referenced by: '<S2>/Constant'
    */
   { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 254U },
 
   /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC]
-   * Referenced by: '<S4>/Constant1'
+   * Referenced by: '<S2>/Constant1'
    */
   { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 252U },
 
   /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFD]
-   * Referenced by: '<S4>/Constant2'
+   * Referenced by: '<S2>/Constant2'
    */
   { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 253U },
 
   /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
-   * Referenced by: '<S5>/Constant'
+   * Referenced by: '<S3>/Constant3'
    */
   { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 254U },
 
   /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC]
-   * Referenced by: '<S5>/Constant1'
+   * Referenced by: '<S3>/Constant4'
    */
   { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 252U },
 
   /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFD]
-   * Referenced by: '<S5>/Constant2'
+   * Referenced by: '<S3>/Constant5'
    */
-  { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 253U },
-
-  /* Computed Parameter: Status1_Y0
-   * Referenced by: '<S6>/Status1'
-   */
-  0U,
-
-  /* Computed Parameter: Status2_Y0
-   * Referenced by: '<S6>/Status2'
-   */
-  0U
+  { 255U, 255U, 255U, 255U, 255U, 255U, 255U, 253U }
 };
 
 Main_Sept1_2021_cal_type *Main_Sept1_2021_cal = &Main_Sept1_2021_cal_impl;

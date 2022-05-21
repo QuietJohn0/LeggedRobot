@@ -5,53 +5,47 @@
 
 /* Storage class 'PageSwitching', for system '<Root>' */
 struct Main_Sept1_2021_cal_type {
-  real_T CANWrite1_P1_Size[2];         /* Computed Parameter: CANWrite1_P1_Size
-                                        * Referenced by: '<S4>/CAN Write1'
+  real_T Motor1_P1_Size[2];            /* Computed Parameter: Motor1_P1_Size
+                                        * Referenced by: '<S2>/Motor 1'
                                         */
-  real_T CANWrite1_P1[7];
+  real_T Motor1_P1[7];
      /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
-      * Referenced by: '<S4>/CAN Write1'
+      * Referenced by: '<S2>/Motor 1'
       */
-  real_T CANWrite1_P1_Size_d[2];      /* Computed Parameter: CANWrite1_P1_Size_d
-                                       * Referenced by: '<S5>/CAN Write1'
-                                       */
-  real_T CANWrite1_P1_j[7];
+  real_T Motor2_P1_Size[2];            /* Computed Parameter: Motor2_P1_Size
+                                        * Referenced by: '<S3>/Motor 2'
+                                        */
+  real_T Motor2_P1[7];
      /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
-      * Referenced by: '<S5>/CAN Write1'
+      * Referenced by: '<S3>/Motor 2'
       */
   real_T P1_Y0;                        /* Computed Parameter: P1_Y0
-                                        * Referenced by: '<S6>/P1'
-                                        */
-  real_T V1_Y0;                        /* Computed Parameter: V1_Y0
-                                        * Referenced by: '<S6>/V1'
-                                        */
-  real_T Curr1_Y0;                     /* Computed Parameter: Curr1_Y0
-                                        * Referenced by: '<S6>/Curr1'
-                                        */
-  real_T ID1_Y0;                       /* Computed Parameter: ID1_Y0
-                                        * Referenced by: '<S6>/ID1'
+                                        * Referenced by: '<S5>/P1'
                                         */
   real_T P2_Y0;                        /* Computed Parameter: P2_Y0
-                                        * Referenced by: '<S6>/P2'
+                                        * Referenced by: '<S5>/P2'
+                                        */
+  real_T V1_Y0;                        /* Computed Parameter: V1_Y0
+                                        * Referenced by: '<S5>/V1'
                                         */
   real_T V2_Y0;                        /* Computed Parameter: V2_Y0
-                                        * Referenced by: '<S6>/V2'
+                                        * Referenced by: '<S5>/V2'
+                                        */
+  real_T Curr1_Y0;                     /* Computed Parameter: Curr1_Y0
+                                        * Referenced by: '<S5>/Curr1'
                                         */
   real_T Curr2_Y0;                     /* Computed Parameter: Curr2_Y0
-                                        * Referenced by: '<S6>/Curr2'
-                                        */
-  real_T ID2_Y0;                       /* Computed Parameter: ID2_Y0
-                                        * Referenced by: '<S6>/ID2'
+                                        * Referenced by: '<S5>/Curr2'
                                         */
   real_T CANRead_P1_Size[2];           /* Computed Parameter: CANRead_P1_Size
-                                        * Referenced by: '<S6>/CAN Read'
+                                        * Referenced by: '<S5>/CAN Read'
                                         */
   real_T CANRead_P1[6];
                       /* Expression: [initValues(1:4) messageType initValues(6)]
-                       * Referenced by: '<S6>/CAN Read'
+                       * Referenced by: '<S5>/CAN Read'
                        */
-  real_T Gain_Gain;                    /* Expression: 30/18
-                                        * Referenced by: '<S6>/Gain'
+  real_T GearRatio_Gain;               /* Expression: 1
+                                        * Referenced by: '<S5>/Gear Ratio'
                                         */
   real_T CANSetup_P1_Size[2];          /* Computed Parameter: CANSetup_P1_Size
                                         * Referenced by: '<Root>/CAN Setup '
@@ -78,17 +72,17 @@ struct Main_Sept1_2021_cal_type {
   real_T Delay1_InitialCondition;      /* Expression: 0.0
                                         * Referenced by: '<Root>/Delay1'
                                         */
-  real_T Constant_Value;               /* Expression: 1
+  real_T Constant_Value;               /* Expression: 0
                                         * Referenced by: '<Root>/Constant'
                                         */
-  real_T Gain_Gain_j;                  /* Expression: 18/30
+  real_T Constant2_Value;              /* Expression: 0
+                                        * Referenced by: '<Root>/Constant2'
+                                        */
+  real_T Gain_Gain;                    /* Expression: 1
                                         * Referenced by: '<Root>/Gain'
                                         */
   real_T Constant8_Value;              /* Expression: 0
                                         * Referenced by: '<Root>/Constant8'
-                                        */
-  real_T Constant2_Value;              /* Expression: 0
-                                        * Referenced by: '<Root>/Constant2'
                                         */
   real_T CANStatus_P1_Size[2];         /* Computed Parameter: CANStatus_P1_Size
                                         * Referenced by: '<Root>/CAN Status'
@@ -294,36 +288,30 @@ struct Main_Sept1_2021_cal_type {
   real_T CANStatus_P34;                /* Expression: isFDMod
                                         * Referenced by: '<Root>/CAN Status'
                                         */
-  uint8_T Constant_Value_l[8];
+  uint8_T Constant_Value_i[8];
                  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
-                  * Referenced by: '<S4>/Constant'
+                  * Referenced by: '<S2>/Constant'
                   */
   uint8_T Constant1_Value[8];
                  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC]
-                  * Referenced by: '<S4>/Constant1'
-                  */
-  uint8_T Constant2_Value_g[8];
-                 /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFD]
-                  * Referenced by: '<S4>/Constant2'
-                  */
-  uint8_T Constant_Value_i[8];
-                 /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
-                  * Referenced by: '<S5>/Constant'
-                  */
-  uint8_T Constant1_Value_e[8];
-                 /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC]
-                  * Referenced by: '<S5>/Constant1'
+                  * Referenced by: '<S2>/Constant1'
                   */
   uint8_T Constant2_Value_k[8];
                  /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFD]
-                  * Referenced by: '<S5>/Constant2'
+                  * Referenced by: '<S2>/Constant2'
                   */
-  uint8_T Status1_Y0;                  /* Computed Parameter: Status1_Y0
-                                        * Referenced by: '<S6>/Status1'
-                                        */
-  uint8_T Status2_Y0;                  /* Computed Parameter: Status2_Y0
-                                        * Referenced by: '<S6>/Status2'
-                                        */
+  uint8_T Constant3_Value[8];
+                 /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
+                  * Referenced by: '<S3>/Constant3'
+                  */
+  uint8_T Constant4_Value[8];
+                 /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFC]
+                  * Referenced by: '<S3>/Constant4'
+                  */
+  uint8_T Constant5_Value[8];
+                 /* Expression: [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFD]
+                  * Referenced by: '<S3>/Constant5'
+                  */
 };
 
 /* Storage class 'PageSwitching' */
