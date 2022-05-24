@@ -10,7 +10,7 @@ main_quad_rev3_21_200p_cal_type main_quad_rev3_21_200p_cal_impl = {
   /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
    * Referenced by: '<S3>/CAN Write1'
    */
-  { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0, 0.0 },
+  { 691.0, 1.0, -1.0, 1.0, 1.0, 1.0, 0.0 },
 
   /* Computed Parameter: CANWrite1_P1_Size_n
    * Referenced by: '<S4>/CAN Write1'
@@ -20,7 +20,7 @@ main_quad_rev3_21_200p_cal_type main_quad_rev3_21_200p_cal_impl = {
   /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
    * Referenced by: '<S4>/CAN Write1'
    */
-  { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0, 0.0 },
+  { 691.0, 1.0, -1.0, 1.0, 1.0, 1.0, 0.0 },
 
   /* Computed Parameter: CANWrite1_P1_Size_d
    * Referenced by: '<S5>/CAN Write1'
@@ -50,7 +50,7 @@ main_quad_rev3_21_200p_cal_type main_quad_rev3_21_200p_cal_impl = {
   /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
    * Referenced by: '<S7>/CAN Write1'
    */
-  { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0, 0.0 },
+  { 691.0, 1.0, -1.0, 1.0, 1.0, 1.0, 0.0 },
 
   /* Computed Parameter: CANWrite1_P1_Size_b
    * Referenced by: '<S8>/CAN Write1'
@@ -70,7 +70,7 @@ main_quad_rev3_21_200p_cal_type main_quad_rev3_21_200p_cal_impl = {
   /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
    * Referenced by: '<S9>/CAN Write1'
    */
-  { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0, 0.0 },
+  { 691.0, 1.0, -1.0, 1.0, 1.0, 1.0, 0.0 },
 
   /* Computed Parameter: CANWrite1_P1_Size_l
    * Referenced by: '<S10>/CAN Write1'
@@ -82,18 +82,8 @@ main_quad_rev3_21_200p_cal_type main_quad_rev3_21_200p_cal_impl = {
    */
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0, 0.0 },
 
-  /* Computed Parameter: P1_Y0
-   * Referenced by: '<S11>/P1'
-   */
-  0.0,
-
   /* Computed Parameter: P2_Y0
    * Referenced by: '<S11>/P2'
-   */
-  0.0,
-
-  /* Computed Parameter: P3_Y0
-   * Referenced by: '<S11>/P3'
    */
   0.0,
 
@@ -102,18 +92,8 @@ main_quad_rev3_21_200p_cal_type main_quad_rev3_21_200p_cal_impl = {
    */
   0.0,
 
-  /* Computed Parameter: P5_Y0
-   * Referenced by: '<S11>/P5'
-   */
-  0.0,
-
   /* Computed Parameter: P6_Y0
    * Referenced by: '<S11>/P6'
-   */
-  0.0,
-
-  /* Computed Parameter: P7_Y0
-   * Referenced by: '<S11>/P7'
    */
   0.0,
 
@@ -129,6 +109,36 @@ main_quad_rev3_21_200p_cal_type main_quad_rev3_21_200p_cal_impl = {
 
   /* Expression: [initValues(1:4) messageType initValues(6)]
    * Referenced by: '<S11>/CAN Read'
+   */
+  { 691.0, 1.0, -1.0, 1.0, 1.0, 1.0 },
+
+  /* Computed Parameter: P1_Y0
+   * Referenced by: '<S12>/P1'
+   */
+  0.0,
+
+  /* Computed Parameter: P3_Y0
+   * Referenced by: '<S12>/P3'
+   */
+  0.0,
+
+  /* Computed Parameter: P5_Y0
+   * Referenced by: '<S12>/P5'
+   */
+  0.0,
+
+  /* Computed Parameter: P7_Y0
+   * Referenced by: '<S12>/P7'
+   */
+  0.0,
+
+  /* Computed Parameter: CANRead_P1_Size_k
+   * Referenced by: '<S12>/CAN Read'
+   */
+  { 1.0, 6.0 },
+
+  /* Expression: [initValues(1:4) messageType initValues(6)]
+   * Referenced by: '<S12>/CAN Read'
    */
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0 },
 
@@ -199,20 +209,20 @@ main_quad_rev3_21_200p_cal_type main_quad_rev3_21_200p_cal_impl = {
    */
   1.0,
 
-  /* Expression: 1
+  /* Expression: -1
    * Referenced by: '<Root>/Gain6'
    */
-  1.0,
+  -1.0,
 
-  /* Expression: 1
+  /* Expression: -1
    * Referenced by: '<Root>/Gain7'
    */
-  1.0,
+  -1.0,
 
-  /* Expression: 1
+  /* Expression: -1
    * Referenced by: '<Root>/Gain8'
    */
-  1.0,
+  -1.0,
 
   /* Expression: 1
    * Referenced by: '<Root>/Gain4'
@@ -234,50 +244,50 @@ main_quad_rev3_21_200p_cal_type main_quad_rev3_21_200p_cal_impl = {
    */
   1.0,
 
-  /* Expression: 1
+  /* Expression: -1
    * Referenced by: '<Root>/Gain9'
    */
-  1.0,
+  -1.0,
 
-  /* Expression: 1
+  /* Expression: -1
    * Referenced by: '<Root>/Gain10'
    */
-  1.0,
+  -1.0,
 
-  /* Expression: 1
+  /* Expression: -1
    * Referenced by: '<Root>/Gain11'
    */
-  1.0,
+  -1.0,
 
-  /* Expression: 1
+  /* Expression: -1
    * Referenced by: '<Root>/Gain12'
    */
-  1.0,
+  -1.0,
 
-  /* Expression: 1
+  /* Expression: -1
    * Referenced by: '<Root>/Gain13'
    */
-  1.0,
+  -1.0,
 
-  /* Expression: 1
+  /* Expression: -1
    * Referenced by: '<Root>/Gain14'
    */
-  1.0,
+  -1.0,
 
-  /* Expression: 1
+  /* Expression: -1
    * Referenced by: '<Root>/Gain15'
    */
-  1.0,
+  -1.0,
 
-  /* Expression: 1
+  /* Expression: -1
    * Referenced by: '<Root>/Gain16'
    */
-  1.0,
+  -1.0,
 
-  /* Expression: 1
+  /* Expression: -1
    * Referenced by: '<Root>/Gain17'
    */
-  1.0,
+  -1.0,
 
   /* Expression: 1
    * Referenced by: '<Root>/Gain18'

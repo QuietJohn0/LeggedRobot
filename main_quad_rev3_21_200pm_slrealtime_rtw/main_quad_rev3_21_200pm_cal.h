@@ -61,26 +61,14 @@ struct main_quad_rev3_21_200p_cal_type {
      /* Expression: [initValues(1:4) messageType initValues(6) enableStatusPort]
       * Referenced by: '<S10>/CAN Write1'
       */
-  real_T P1_Y0;                        /* Computed Parameter: P1_Y0
-                                        * Referenced by: '<S11>/P1'
-                                        */
   real_T P2_Y0;                        /* Computed Parameter: P2_Y0
                                         * Referenced by: '<S11>/P2'
-                                        */
-  real_T P3_Y0;                        /* Computed Parameter: P3_Y0
-                                        * Referenced by: '<S11>/P3'
                                         */
   real_T P4_Y0;                        /* Computed Parameter: P4_Y0
                                         * Referenced by: '<S11>/P4'
                                         */
-  real_T P5_Y0;                        /* Computed Parameter: P5_Y0
-                                        * Referenced by: '<S11>/P5'
-                                        */
   real_T P6_Y0;                        /* Computed Parameter: P6_Y0
                                         * Referenced by: '<S11>/P6'
-                                        */
-  real_T P7_Y0;                        /* Computed Parameter: P7_Y0
-                                        * Referenced by: '<S11>/P7'
                                         */
   real_T P8_Y0;                        /* Computed Parameter: P8_Y0
                                         * Referenced by: '<S11>/P8'
@@ -91,6 +79,25 @@ struct main_quad_rev3_21_200p_cal_type {
   real_T CANRead_P1[6];
                       /* Expression: [initValues(1:4) messageType initValues(6)]
                        * Referenced by: '<S11>/CAN Read'
+                       */
+  real_T P1_Y0;                        /* Computed Parameter: P1_Y0
+                                        * Referenced by: '<S12>/P1'
+                                        */
+  real_T P3_Y0;                        /* Computed Parameter: P3_Y0
+                                        * Referenced by: '<S12>/P3'
+                                        */
+  real_T P5_Y0;                        /* Computed Parameter: P5_Y0
+                                        * Referenced by: '<S12>/P5'
+                                        */
+  real_T P7_Y0;                        /* Computed Parameter: P7_Y0
+                                        * Referenced by: '<S12>/P7'
+                                        */
+  real_T CANRead_P1_Size_k[2];         /* Computed Parameter: CANRead_P1_Size_k
+                                        * Referenced by: '<S12>/CAN Read'
+                                        */
+  real_T CANRead_P1_j[6];
+                      /* Expression: [initValues(1:4) messageType initValues(6)]
+                       * Referenced by: '<S12>/CAN Read'
                        */
   real_T CANSetup_P1_Size[2];          /* Computed Parameter: CANSetup_P1_Size
                                         * Referenced by: '<Root>/CAN Setup '
@@ -132,13 +139,13 @@ struct main_quad_rev3_21_200p_cal_type {
   real_T Gain3_Gain;                   /* Expression: 1
                                         * Referenced by: '<Root>/Gain3'
                                         */
-  real_T Gain6_Gain;                   /* Expression: 1
+  real_T Gain6_Gain;                   /* Expression: -1
                                         * Referenced by: '<Root>/Gain6'
                                         */
-  real_T Gain7_Gain;                   /* Expression: 1
+  real_T Gain7_Gain;                   /* Expression: -1
                                         * Referenced by: '<Root>/Gain7'
                                         */
-  real_T Gain8_Gain;                   /* Expression: 1
+  real_T Gain8_Gain;                   /* Expression: -1
                                         * Referenced by: '<Root>/Gain8'
                                         */
   real_T Gain4_Gain;                   /* Expression: 1
@@ -153,31 +160,31 @@ struct main_quad_rev3_21_200p_cal_type {
   real_T Gain26_Gain;                  /* Expression: 1
                                         * Referenced by: '<Root>/Gain26'
                                         */
-  real_T Gain9_Gain;                   /* Expression: 1
+  real_T Gain9_Gain;                   /* Expression: -1
                                         * Referenced by: '<Root>/Gain9'
                                         */
-  real_T Gain10_Gain;                  /* Expression: 1
+  real_T Gain10_Gain;                  /* Expression: -1
                                         * Referenced by: '<Root>/Gain10'
                                         */
-  real_T Gain11_Gain;                  /* Expression: 1
+  real_T Gain11_Gain;                  /* Expression: -1
                                         * Referenced by: '<Root>/Gain11'
                                         */
-  real_T Gain12_Gain;                  /* Expression: 1
+  real_T Gain12_Gain;                  /* Expression: -1
                                         * Referenced by: '<Root>/Gain12'
                                         */
-  real_T Gain13_Gain;                  /* Expression: 1
+  real_T Gain13_Gain;                  /* Expression: -1
                                         * Referenced by: '<Root>/Gain13'
                                         */
-  real_T Gain14_Gain;                  /* Expression: 1
+  real_T Gain14_Gain;                  /* Expression: -1
                                         * Referenced by: '<Root>/Gain14'
                                         */
-  real_T Gain15_Gain;                  /* Expression: 1
+  real_T Gain15_Gain;                  /* Expression: -1
                                         * Referenced by: '<Root>/Gain15'
                                         */
-  real_T Gain16_Gain;                  /* Expression: 1
+  real_T Gain16_Gain;                  /* Expression: -1
                                         * Referenced by: '<Root>/Gain16'
                                         */
-  real_T Gain17_Gain;                  /* Expression: 1
+  real_T Gain17_Gain;                  /* Expression: -1
                                         * Referenced by: '<Root>/Gain17'
                                         */
   real_T Gain18_Gain;                  /* Expression: 1

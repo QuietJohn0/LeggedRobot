@@ -9,7 +9,7 @@
  *
  * Model version              : 1.50
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Sat May 21 15:52:00 2022
+ * C++ source code generated on : Sat May 21 16:36:23 2022
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -478,14 +478,14 @@ void main_quad_rev3_21_2_floatsbytes(real_T rtu_position, real_T rtu_velocity,
 
 /*
  * Output and update for atomic system:
- *    '<S20>/bytes -> floats'
  *    '<S21>/bytes -> floats'
  *    '<S22>/bytes -> floats'
  *    '<S23>/bytes -> floats'
  *    '<S24>/bytes -> floats'
- *    '<S25>/bytes -> floats'
- *    '<S26>/bytes -> floats'
- *    '<S27>/bytes -> floats'
+ *    '<S29>/bytes -> floats'
+ *    '<S30>/bytes -> floats'
+ *    '<S31>/bytes -> floats'
+ *    '<S32>/bytes -> floats'
  */
 void main_quad_rev3_21_2_bytesfloats(B_bytesfloats_main_quad_rev3__T *localB)
 {
@@ -509,13 +509,13 @@ void main_quad_rev3_21_200pm_step(void)
   int32_T P1_idx_1;
   int32_T P1_idx_2;
   int32_T P1_idx_3;
-  int32_T s11_iter;
+  int32_T s12_iter;
 
   /* S-Function (sg_IO602_IO691_setup_s): '<Root>/CAN Setup ' */
 
   /* Level2 S-Function Block: '<Root>/CAN Setup ' (sg_IO602_IO691_setup_s) */
   {
-    SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[9];
+    SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[10];
     sfcnOutputs(rts,0);
   }
 
@@ -525,190 +525,21 @@ void main_quad_rev3_21_200pm_step(void)
   /* Delay: '<Root>/Delay1' */
   main_quad_rev3_21_200pm_B.Delay1 = main_quad_rev3_21_200pm_DW.Delay1_DSTATE;
 
-  /* Outputs for Iterator SubSystem: '<Root>/While Iterator Subsystem' incorporates:
-   *  WhileIterator: '<S11>/While Iterator'
+  /* Outputs for Iterator SubSystem: '<Root>/While Iterator Subsystem2' incorporates:
+   *  WhileIterator: '<S12>/While Iterator'
    */
-  s11_iter = 1;
+  s12_iter = 1;
   do {
-    main_quad_rev3_21_200pm_B.WhileIterator = s11_iter;
+    main_quad_rev3_21_200pm_B.WhileIterator = s12_iter;
 
-    /* Level2 S-Function Block: '<S11>/CAN Read' (sg_IO602_IO691_read_s) */
+    /* Level2 S-Function Block: '<S12>/CAN Read' (sg_IO602_IO691_read_s) */
     {
-      SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[8];
+      SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[9];
       sfcnOutputs(rts,0);
     }
 
     {
-      /* S-Function (scanunpack): '<S21>/CAN Unpack' */
-      uint8_T msgReceived = 0;
-      if ((6 == main_quad_rev3_21_200pm_B.CANRead_o2.Length) &&
-          (main_quad_rev3_21_200pm_B.CANRead_o2.ID != INVALID_CAN_ID) ) {
-        if ((4 == main_quad_rev3_21_200pm_B.CANRead_o2.ID) && (0U ==
-             main_quad_rev3_21_200pm_B.CANRead_o2.Extended) ) {
-          msgReceived = 1;
-
-          {
-            /* --------------- START Unpacking signal 0 ------------------
-             *  startBit                = 16
-             *  length                  = 16
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[2]);
-                    tempValue = tempValue | (uint16_T)((uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[1]) << 8);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o1_p = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 1 ------------------
-             *  startBit                = 36
-             *  length                  = 12
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[4]) & (uint16_T)
-                      (0xF0U)) >> 4);
-                    tempValue = tempValue | (uint16_T)((uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[3]) << 4);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o2_gg = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 2 ------------------
-             *  startBit                = 40
-             *  length                  = 12
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[5]);
-                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[4]) & (uint16_T)
-                      (0xFU)) << 8);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o3_h = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 3 ------------------
-             *  startBit                = 0
-             *  length                  = 8
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint8_T unpackedValue = 0;
-
-                {
-                  uint8_T tempValue = (uint8_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint8_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[0]);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o4_j = result;
-              }
-            }
-          }
-        }
-      }
-
-      /* Status port */
-      main_quad_rev3_21_200pm_B.CANUnpack_o5_fk = msgReceived;
-    }
-
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_e.position =
-      main_quad_rev3_21_200pm_B.CANUnpack_o1_p;
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_e.velocity =
-      main_quad_rev3_21_200pm_B.CANUnpack_o2_gg;
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_e.I_ff =
-      main_quad_rev3_21_200pm_B.CANUnpack_o3_h;
-    main_quad_rev3_21_2_bytesfloats(&main_quad_rev3_21_200pm_B.sf_bytesfloats_e);
-
-    {
-      /* S-Function (scanunpack): '<S22>/CAN Unpack' */
+      /* S-Function (scanunpack): '<S30>/CAN Unpack' */
       uint8_T msgReceived = 0;
       if ((6 == main_quad_rev3_21_200pm_B.CANRead_o2.Length) &&
           (main_quad_rev3_21_200pm_B.CANRead_o2.ID != INVALID_CAN_ID) ) {
@@ -749,7 +580,7 @@ void main_quad_rev3_21_200pm_step(void)
 
               {
                 real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o1_nr = result;
+                main_quad_rev3_21_200pm_B.CANUnpack_o1_h = result;
               }
             }
 
@@ -786,7 +617,7 @@ void main_quad_rev3_21_200pm_step(void)
 
               {
                 real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o2_n = result;
+                main_quad_rev3_21_200pm_B.CANUnpack_o2_k = result;
               }
             }
 
@@ -823,7 +654,7 @@ void main_quad_rev3_21_200pm_step(void)
 
               {
                 real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o3_cp = result;
+                main_quad_rev3_21_200pm_B.CANUnpack_o3_i = result;
               }
             }
 
@@ -857,7 +688,7 @@ void main_quad_rev3_21_200pm_step(void)
 
               {
                 real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o4_e = result;
+                main_quad_rev3_21_200pm_B.CANUnpack_o4_o = result;
               }
             }
           }
@@ -865,188 +696,19 @@ void main_quad_rev3_21_200pm_step(void)
       }
 
       /* Status port */
-      main_quad_rev3_21_200pm_B.CANUnpack_o5_cc = msgReceived;
+      main_quad_rev3_21_200pm_B.CANUnpack_o5_e = msgReceived;
     }
 
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_c.position =
-      main_quad_rev3_21_200pm_B.CANUnpack_o1_nr;
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_c.velocity =
-      main_quad_rev3_21_200pm_B.CANUnpack_o2_n;
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_c.I_ff =
-      main_quad_rev3_21_200pm_B.CANUnpack_o3_cp;
-    main_quad_rev3_21_2_bytesfloats(&main_quad_rev3_21_200pm_B.sf_bytesfloats_c);
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_b.position =
+      main_quad_rev3_21_200pm_B.CANUnpack_o1_h;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_b.velocity =
+      main_quad_rev3_21_200pm_B.CANUnpack_o2_k;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_b.I_ff =
+      main_quad_rev3_21_200pm_B.CANUnpack_o3_i;
+    main_quad_rev3_21_2_bytesfloats(&main_quad_rev3_21_200pm_B.sf_bytesfloats_b);
 
     {
-      /* S-Function (scanunpack): '<S23>/CAN Unpack' */
-      uint8_T msgReceived = 0;
-      if ((6 == main_quad_rev3_21_200pm_B.CANRead_o2.Length) &&
-          (main_quad_rev3_21_200pm_B.CANRead_o2.ID != INVALID_CAN_ID) ) {
-        if ((2 == main_quad_rev3_21_200pm_B.CANRead_o2.ID) && (0U ==
-             main_quad_rev3_21_200pm_B.CANRead_o2.Extended) ) {
-          msgReceived = 1;
-
-          {
-            /* --------------- START Unpacking signal 0 ------------------
-             *  startBit                = 16
-             *  length                  = 16
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[2]);
-                    tempValue = tempValue | (uint16_T)((uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[1]) << 8);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o1_k = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 1 ------------------
-             *  startBit                = 36
-             *  length                  = 12
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[4]) & (uint16_T)
-                      (0xF0U)) >> 4);
-                    tempValue = tempValue | (uint16_T)((uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[3]) << 4);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o2_d = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 2 ------------------
-             *  startBit                = 40
-             *  length                  = 12
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[5]);
-                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[4]) & (uint16_T)
-                      (0xFU)) << 8);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o3_a = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 3 ------------------
-             *  startBit                = 0
-             *  length                  = 8
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint8_T unpackedValue = 0;
-
-                {
-                  uint8_T tempValue = (uint8_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint8_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[0]);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o4_a = result;
-              }
-            }
-          }
-        }
-      }
-
-      /* Status port */
-      main_quad_rev3_21_200pm_B.CANUnpack_o5_f = msgReceived;
-    }
-
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_er.position =
-      main_quad_rev3_21_200pm_B.CANUnpack_o1_k;
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_er.velocity =
-      main_quad_rev3_21_200pm_B.CANUnpack_o2_d;
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_er.I_ff =
-      main_quad_rev3_21_200pm_B.CANUnpack_o3_a;
-    main_quad_rev3_21_2_bytesfloats(&main_quad_rev3_21_200pm_B.sf_bytesfloats_er);
-
-    {
-      /* S-Function (scanunpack): '<S24>/CAN Unpack' */
+      /* S-Function (scanunpack): '<S31>/CAN Unpack' */
       uint8_T msgReceived = 0;
       if ((6 == main_quad_rev3_21_200pm_B.CANRead_o2.Length) &&
           (main_quad_rev3_21_200pm_B.CANRead_o2.ID != INVALID_CAN_ID) ) {
@@ -1087,176 +749,7 @@ void main_quad_rev3_21_200pm_step(void)
 
               {
                 real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o1_e = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 1 ------------------
-             *  startBit                = 36
-             *  length                  = 12
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[4]) & (uint16_T)
-                      (0xF0U)) >> 4);
-                    tempValue = tempValue | (uint16_T)((uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[3]) << 4);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o2_e = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 2 ------------------
-             *  startBit                = 40
-             *  length                  = 12
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[5]);
-                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[4]) & (uint16_T)
-                      (0xFU)) << 8);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o3_c = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 3 ------------------
-             *  startBit                = 0
-             *  length                  = 8
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint8_T unpackedValue = 0;
-
-                {
-                  uint8_T tempValue = (uint8_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint8_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[0]);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o4_i = result;
-              }
-            }
-          }
-        }
-      }
-
-      /* Status port */
-      main_quad_rev3_21_200pm_B.CANUnpack_o5_l = msgReceived;
-    }
-
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_g.position =
-      main_quad_rev3_21_200pm_B.CANUnpack_o1_e;
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_g.velocity =
-      main_quad_rev3_21_200pm_B.CANUnpack_o2_e;
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_g.I_ff =
-      main_quad_rev3_21_200pm_B.CANUnpack_o3_c;
-    main_quad_rev3_21_2_bytesfloats(&main_quad_rev3_21_200pm_B.sf_bytesfloats_g);
-
-    {
-      /* S-Function (scanunpack): '<S25>/CAN Unpack' */
-      uint8_T msgReceived = 0;
-      if ((6 == main_quad_rev3_21_200pm_B.CANRead_o2.Length) &&
-          (main_quad_rev3_21_200pm_B.CANRead_o2.ID != INVALID_CAN_ID) ) {
-        if ((8 == main_quad_rev3_21_200pm_B.CANRead_o2.ID) && (0U ==
-             main_quad_rev3_21_200pm_B.CANRead_o2.Extended) ) {
-          msgReceived = 1;
-
-          {
-            /* --------------- START Unpacking signal 0 ------------------
-             *  startBit                = 16
-             *  length                  = 16
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[2]);
-                    tempValue = tempValue | (uint16_T)((uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[1]) << 8);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o1_b = result;
+                main_quad_rev3_21_200pm_B.CANUnpack_o1_j = result;
               }
             }
 
@@ -1330,7 +823,7 @@ void main_quad_rev3_21_200pm_step(void)
 
               {
                 real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o3_e = result;
+                main_quad_rev3_21_200pm_B.CANUnpack_o3_p = result;
               }
             }
 
@@ -1364,7 +857,7 @@ void main_quad_rev3_21_200pm_step(void)
 
               {
                 real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o4_h = result;
+                main_quad_rev3_21_200pm_B.CANUnpack_o4_k = result;
               }
             }
           }
@@ -1372,192 +865,23 @@ void main_quad_rev3_21_200pm_step(void)
       }
 
       /* Status port */
-      main_quad_rev3_21_200pm_B.CANUnpack_o5_i = msgReceived;
+      main_quad_rev3_21_200pm_B.CANUnpack_o5_n = msgReceived;
     }
 
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_o.position =
-      main_quad_rev3_21_200pm_B.CANUnpack_o1_b;
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_o.velocity =
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_cd.position =
+      main_quad_rev3_21_200pm_B.CANUnpack_o1_j;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_cd.velocity =
       main_quad_rev3_21_200pm_B.CANUnpack_o2_g;
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_o.I_ff =
-      main_quad_rev3_21_200pm_B.CANUnpack_o3_e;
-    main_quad_rev3_21_2_bytesfloats(&main_quad_rev3_21_200pm_B.sf_bytesfloats_o);
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_cd.I_ff =
+      main_quad_rev3_21_200pm_B.CANUnpack_o3_p;
+    main_quad_rev3_21_2_bytesfloats(&main_quad_rev3_21_200pm_B.sf_bytesfloats_cd);
 
     {
-      /* S-Function (scanunpack): '<S26>/CAN Unpack' */
+      /* S-Function (scanunpack): '<S32>/CAN Unpack' */
       uint8_T msgReceived = 0;
       if ((6 == main_quad_rev3_21_200pm_B.CANRead_o2.Length) &&
           (main_quad_rev3_21_200pm_B.CANRead_o2.ID != INVALID_CAN_ID) ) {
         if ((5 == main_quad_rev3_21_200pm_B.CANRead_o2.ID) && (0U ==
-             main_quad_rev3_21_200pm_B.CANRead_o2.Extended) ) {
-          msgReceived = 1;
-
-          {
-            /* --------------- START Unpacking signal 0 ------------------
-             *  startBit                = 16
-             *  length                  = 16
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[2]);
-                    tempValue = tempValue | (uint16_T)((uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[1]) << 8);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o1_n = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 1 ------------------
-             *  startBit                = 36
-             *  length                  = 12
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[4]) & (uint16_T)
-                      (0xF0U)) >> 4);
-                    tempValue = tempValue | (uint16_T)((uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[3]) << 4);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o2_f = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 2 ------------------
-             *  startBit                = 40
-             *  length                  = 12
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint16_T unpackedValue = 0;
-
-                {
-                  uint16_T tempValue = (uint16_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[5]);
-                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[4]) & (uint16_T)
-                      (0xFU)) << 8);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o3_m = result;
-              }
-            }
-
-            /* --------------- START Unpacking signal 3 ------------------
-             *  startBit                = 0
-             *  length                  = 8
-             *  desiredSignalByteLayout = BIGENDIAN
-             *  dataType                = UNSIGNED
-             *  factor                  = 1.0
-             *  offset                  = 0.0
-             * -----------------------------------------------------------------------*/
-            {
-              real64_T outValue = 0;
-
-              {
-                uint8_T unpackedValue = 0;
-
-                {
-                  uint8_T tempValue = (uint8_T) (0);
-
-                  {
-                    tempValue = tempValue | (uint8_T)
-                      (main_quad_rev3_21_200pm_B.CANRead_o2.Data[0]);
-                  }
-
-                  unpackedValue = tempValue;
-                }
-
-                outValue = (real64_T) (unpackedValue);
-              }
-
-              {
-                real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o4_g = result;
-              }
-            }
-          }
-        }
-      }
-
-      /* Status port */
-      main_quad_rev3_21_200pm_B.CANUnpack_o5_c = msgReceived;
-    }
-
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_f.position =
-      main_quad_rev3_21_200pm_B.CANUnpack_o1_n;
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_f.velocity =
-      main_quad_rev3_21_200pm_B.CANUnpack_o2_f;
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_f.I_ff =
-      main_quad_rev3_21_200pm_B.CANUnpack_o3_m;
-    main_quad_rev3_21_2_bytesfloats(&main_quad_rev3_21_200pm_B.sf_bytesfloats_f);
-
-    {
-      /* S-Function (scanunpack): '<S27>/CAN Unpack' */
-      uint8_T msgReceived = 0;
-      if ((6 == main_quad_rev3_21_200pm_B.CANRead_o2.Length) &&
-          (main_quad_rev3_21_200pm_B.CANRead_o2.ID != INVALID_CAN_ID) ) {
-        if ((6 == main_quad_rev3_21_200pm_B.CANRead_o2.ID) && (0U ==
              main_quad_rev3_21_200pm_B.CANRead_o2.Extended) ) {
           msgReceived = 1;
 
@@ -1713,16 +1037,16 @@ void main_quad_rev3_21_200pm_step(void)
       main_quad_rev3_21_200pm_B.CANUnpack_o5 = msgReceived;
     }
 
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_i.position =
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_f.position =
       main_quad_rev3_21_200pm_B.CANUnpack_o1;
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_i.velocity =
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_f.velocity =
       main_quad_rev3_21_200pm_B.CANUnpack_o2;
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_i.I_ff =
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_f.I_ff =
       main_quad_rev3_21_200pm_B.CANUnpack_o3;
-    main_quad_rev3_21_2_bytesfloats(&main_quad_rev3_21_200pm_B.sf_bytesfloats_i);
+    main_quad_rev3_21_2_bytesfloats(&main_quad_rev3_21_200pm_B.sf_bytesfloats_f);
 
     {
-      /* S-Function (scanunpack): '<S20>/CAN Unpack' */
+      /* S-Function (scanunpack): '<S29>/CAN Unpack' */
       uint8_T msgReceived = 0;
       if ((6 == main_quad_rev3_21_200pm_B.CANRead_o2.Length) &&
           (main_quad_rev3_21_200pm_B.CANRead_o2.ID != INVALID_CAN_ID) ) {
@@ -1763,7 +1087,7 @@ void main_quad_rev3_21_200pm_step(void)
 
               {
                 real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o1_f = result;
+                main_quad_rev3_21_200pm_B.CANUnpack_o1_k = result;
               }
             }
 
@@ -1800,7 +1124,7 @@ void main_quad_rev3_21_200pm_step(void)
 
               {
                 real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o2_l = result;
+                main_quad_rev3_21_200pm_B.CANUnpack_o2_h = result;
               }
             }
 
@@ -1837,7 +1161,7 @@ void main_quad_rev3_21_200pm_step(void)
 
               {
                 real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o3_k = result;
+                main_quad_rev3_21_200pm_B.CANUnpack_o3_a = result;
               }
             }
 
@@ -1871,7 +1195,7 @@ void main_quad_rev3_21_200pm_step(void)
 
               {
                 real64_T result = (real64_T) outValue;
-                main_quad_rev3_21_200pm_B.CANUnpack_o4_is = result;
+                main_quad_rev3_21_200pm_B.CANUnpack_o4_l = result;
               }
             }
           }
@@ -1879,44 +1203,737 @@ void main_quad_rev3_21_200pm_step(void)
       }
 
       /* Status port */
-      main_quad_rev3_21_200pm_B.CANUnpack_o5_p = msgReceived;
+      main_quad_rev3_21_200pm_B.CANUnpack_o5_a = msgReceived;
+    }
+
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_a.position =
+      main_quad_rev3_21_200pm_B.CANUnpack_o1_k;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_a.velocity =
+      main_quad_rev3_21_200pm_B.CANUnpack_o2_h;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_a.I_ff =
+      main_quad_rev3_21_200pm_B.CANUnpack_o3_a;
+    main_quad_rev3_21_2_bytesfloats(&main_quad_rev3_21_200pm_B.sf_bytesfloats_a);
+    s12_iter++;
+  } while (main_quad_rev3_21_200pm_B.CANRead_o1);
+
+  /* End of Outputs for SubSystem: '<Root>/While Iterator Subsystem2' */
+
+  /* Outputs for Iterator SubSystem: '<Root>/While Iterator Subsystem1' incorporates:
+   *  WhileIterator: '<S11>/While Iterator'
+   */
+  s12_iter = 1;
+  do {
+    main_quad_rev3_21_200pm_B.WhileIterator_m = s12_iter;
+
+    /* Level2 S-Function Block: '<S11>/CAN Read' (sg_IO602_IO691_read_s) */
+    {
+      SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[8];
+      sfcnOutputs(rts,0);
+    }
+
+    {
+      /* S-Function (scanunpack): '<S21>/CAN Unpack' */
+      uint8_T msgReceived = 0;
+      if ((6 == main_quad_rev3_21_200pm_B.CANRead_o2_a.Length) &&
+          (main_quad_rev3_21_200pm_B.CANRead_o2_a.ID != INVALID_CAN_ID) ) {
+        if ((4 == main_quad_rev3_21_200pm_B.CANRead_o2_a.ID) && (0U ==
+             main_quad_rev3_21_200pm_B.CANRead_o2_a.Extended) ) {
+          msgReceived = 1;
+
+          {
+            /* --------------- START Unpacking signal 0 ------------------
+             *  startBit                = 16
+             *  length                  = 16
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[2]);
+                    tempValue = tempValue | (uint16_T)((uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[1]) << 8);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                main_quad_rev3_21_200pm_B.CANUnpack_o1_lm = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 1 ------------------
+             *  startBit                = 36
+             *  length                  = 12
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[4]) &
+                      (uint16_T)(0xF0U)) >> 4);
+                    tempValue = tempValue | (uint16_T)((uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[3]) << 4);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                main_quad_rev3_21_200pm_B.CANUnpack_o2_d = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 2 ------------------
+             *  startBit                = 40
+             *  length                  = 12
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[5]);
+                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[4]) &
+                      (uint16_T)(0xFU)) << 8);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                main_quad_rev3_21_200pm_B.CANUnpack_o3_m = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 3 ------------------
+             *  startBit                = 0
+             *  length                  = 8
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint8_T unpackedValue = 0;
+
+                {
+                  uint8_T tempValue = (uint8_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint8_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[0]);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                main_quad_rev3_21_200pm_B.CANUnpack_o4_a = result;
+              }
+            }
+          }
+        }
+      }
+
+      /* Status port */
+      main_quad_rev3_21_200pm_B.CANUnpack_o5_f = msgReceived;
     }
 
     main_quad_rev3_21_200pm_B.sf_bytesfloats.position =
-      main_quad_rev3_21_200pm_B.CANUnpack_o1_f;
+      main_quad_rev3_21_200pm_B.CANUnpack_o1_lm;
     main_quad_rev3_21_200pm_B.sf_bytesfloats.velocity =
-      main_quad_rev3_21_200pm_B.CANUnpack_o2_l;
+      main_quad_rev3_21_200pm_B.CANUnpack_o2_d;
     main_quad_rev3_21_200pm_B.sf_bytesfloats.I_ff =
-      main_quad_rev3_21_200pm_B.CANUnpack_o3_k;
+      main_quad_rev3_21_200pm_B.CANUnpack_o3_m;
     main_quad_rev3_21_2_bytesfloats(&main_quad_rev3_21_200pm_B.sf_bytesfloats);
-    s11_iter++;
-  } while (main_quad_rev3_21_200pm_B.CANRead_o1);
 
-  /* End of Outputs for SubSystem: '<Root>/While Iterator Subsystem' */
+    {
+      /* S-Function (scanunpack): '<S22>/CAN Unpack' */
+      uint8_T msgReceived = 0;
+      if ((6 == main_quad_rev3_21_200pm_B.CANRead_o2_a.Length) &&
+          (main_quad_rev3_21_200pm_B.CANRead_o2_a.ID != INVALID_CAN_ID) ) {
+        if ((2 == main_quad_rev3_21_200pm_B.CANRead_o2_a.ID) && (0U ==
+             main_quad_rev3_21_200pm_B.CANRead_o2_a.Extended) ) {
+          msgReceived = 1;
+
+          {
+            /* --------------- START Unpacking signal 0 ------------------
+             *  startBit                = 16
+             *  length                  = 16
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[2]);
+                    tempValue = tempValue | (uint16_T)((uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[1]) << 8);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                main_quad_rev3_21_200pm_B.CANUnpack_o1_l = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 1 ------------------
+             *  startBit                = 36
+             *  length                  = 12
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[4]) &
+                      (uint16_T)(0xF0U)) >> 4);
+                    tempValue = tempValue | (uint16_T)((uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[3]) << 4);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                main_quad_rev3_21_200pm_B.CANUnpack_o2_o = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 2 ------------------
+             *  startBit                = 40
+             *  length                  = 12
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[5]);
+                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[4]) &
+                      (uint16_T)(0xFU)) << 8);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                main_quad_rev3_21_200pm_B.CANUnpack_o3_d = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 3 ------------------
+             *  startBit                = 0
+             *  length                  = 8
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint8_T unpackedValue = 0;
+
+                {
+                  uint8_T tempValue = (uint8_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint8_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[0]);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                main_quad_rev3_21_200pm_B.CANUnpack_o4_j = result;
+              }
+            }
+          }
+        }
+      }
+
+      /* Status port */
+      main_quad_rev3_21_200pm_B.CANUnpack_o5_gy = msgReceived;
+    }
+
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_c.position =
+      main_quad_rev3_21_200pm_B.CANUnpack_o1_l;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_c.velocity =
+      main_quad_rev3_21_200pm_B.CANUnpack_o2_o;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_c.I_ff =
+      main_quad_rev3_21_200pm_B.CANUnpack_o3_d;
+    main_quad_rev3_21_2_bytesfloats(&main_quad_rev3_21_200pm_B.sf_bytesfloats_c);
+
+    {
+      /* S-Function (scanunpack): '<S23>/CAN Unpack' */
+      uint8_T msgReceived = 0;
+      if ((6 == main_quad_rev3_21_200pm_B.CANRead_o2_a.Length) &&
+          (main_quad_rev3_21_200pm_B.CANRead_o2_a.ID != INVALID_CAN_ID) ) {
+        if ((8 == main_quad_rev3_21_200pm_B.CANRead_o2_a.ID) && (0U ==
+             main_quad_rev3_21_200pm_B.CANRead_o2_a.Extended) ) {
+          msgReceived = 1;
+
+          {
+            /* --------------- START Unpacking signal 0 ------------------
+             *  startBit                = 16
+             *  length                  = 16
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[2]);
+                    tempValue = tempValue | (uint16_T)((uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[1]) << 8);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                main_quad_rev3_21_200pm_B.CANUnpack_o1_c = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 1 ------------------
+             *  startBit                = 36
+             *  length                  = 12
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[4]) &
+                      (uint16_T)(0xF0U)) >> 4);
+                    tempValue = tempValue | (uint16_T)((uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[3]) << 4);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                main_quad_rev3_21_200pm_B.CANUnpack_o2_b = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 2 ------------------
+             *  startBit                = 40
+             *  length                  = 12
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[5]);
+                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[4]) &
+                      (uint16_T)(0xFU)) << 8);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                main_quad_rev3_21_200pm_B.CANUnpack_o3_g = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 3 ------------------
+             *  startBit                = 0
+             *  length                  = 8
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint8_T unpackedValue = 0;
+
+                {
+                  uint8_T tempValue = (uint8_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint8_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[0]);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                main_quad_rev3_21_200pm_B.CANUnpack_o4_kw = result;
+              }
+            }
+          }
+        }
+      }
+
+      /* Status port */
+      main_quad_rev3_21_200pm_B.CANUnpack_o5_i = msgReceived;
+    }
+
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_l.position =
+      main_quad_rev3_21_200pm_B.CANUnpack_o1_c;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_l.velocity =
+      main_quad_rev3_21_200pm_B.CANUnpack_o2_b;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_l.I_ff =
+      main_quad_rev3_21_200pm_B.CANUnpack_o3_g;
+    main_quad_rev3_21_2_bytesfloats(&main_quad_rev3_21_200pm_B.sf_bytesfloats_l);
+
+    {
+      /* S-Function (scanunpack): '<S24>/CAN Unpack' */
+      uint8_T msgReceived = 0;
+      if ((6 == main_quad_rev3_21_200pm_B.CANRead_o2_a.Length) &&
+          (main_quad_rev3_21_200pm_B.CANRead_o2_a.ID != INVALID_CAN_ID) ) {
+        if ((6 == main_quad_rev3_21_200pm_B.CANRead_o2_a.ID) && (0U ==
+             main_quad_rev3_21_200pm_B.CANRead_o2_a.Extended) ) {
+          msgReceived = 1;
+
+          {
+            /* --------------- START Unpacking signal 0 ------------------
+             *  startBit                = 16
+             *  length                  = 16
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[2]);
+                    tempValue = tempValue | (uint16_T)((uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[1]) << 8);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                main_quad_rev3_21_200pm_B.CANUnpack_o1_p = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 1 ------------------
+             *  startBit                = 36
+             *  length                  = 12
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[4]) &
+                      (uint16_T)(0xF0U)) >> 4);
+                    tempValue = tempValue | (uint16_T)((uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[3]) << 4);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                main_quad_rev3_21_200pm_B.CANUnpack_o2_kk = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 2 ------------------
+             *  startBit                = 40
+             *  length                  = 12
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint16_T unpackedValue = 0;
+
+                {
+                  uint16_T tempValue = (uint16_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[5]);
+                    tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[4]) &
+                      (uint16_T)(0xFU)) << 8);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                main_quad_rev3_21_200pm_B.CANUnpack_o3_e = result;
+              }
+            }
+
+            /* --------------- START Unpacking signal 3 ------------------
+             *  startBit                = 0
+             *  length                  = 8
+             *  desiredSignalByteLayout = BIGENDIAN
+             *  dataType                = UNSIGNED
+             *  factor                  = 1.0
+             *  offset                  = 0.0
+             * -----------------------------------------------------------------------*/
+            {
+              real64_T outValue = 0;
+
+              {
+                uint8_T unpackedValue = 0;
+
+                {
+                  uint8_T tempValue = (uint8_T) (0);
+
+                  {
+                    tempValue = tempValue | (uint8_T)
+                      (main_quad_rev3_21_200pm_B.CANRead_o2_a.Data[0]);
+                  }
+
+                  unpackedValue = tempValue;
+                }
+
+                outValue = (real64_T) (unpackedValue);
+              }
+
+              {
+                real64_T result = (real64_T) outValue;
+                main_quad_rev3_21_200pm_B.CANUnpack_o4_f = result;
+              }
+            }
+          }
+        }
+      }
+
+      /* Status port */
+      main_quad_rev3_21_200pm_B.CANUnpack_o5_g = msgReceived;
+    }
+
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_j.position =
+      main_quad_rev3_21_200pm_B.CANUnpack_o1_p;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_j.velocity =
+      main_quad_rev3_21_200pm_B.CANUnpack_o2_kk;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_j.I_ff =
+      main_quad_rev3_21_200pm_B.CANUnpack_o3_e;
+    main_quad_rev3_21_2_bytesfloats(&main_quad_rev3_21_200pm_B.sf_bytesfloats_j);
+    s12_iter++;
+  } while (main_quad_rev3_21_200pm_B.CANRead_o1_d);
+
+  /* End of Outputs for SubSystem: '<Root>/While Iterator Subsystem1' */
 
   /* SignalConversion generated from: '<S2>/ SFunction ' incorporates:
    *  MATLAB Function: '<Root>/MATLAB Function1'
    */
   main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[0] =
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_c.position;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_b.position;
   main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[1] =
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_er.position;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_c.position;
   main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[2] =
-    main_quad_rev3_21_200pm_B.sf_bytesfloats.position;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_a.position;
   main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[3] =
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_e.position;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats.position;
   main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[4] =
     main_quad_rev3_21_200pm_B.sf_bytesfloats_f.position;
   main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[5] =
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_i.position;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_j.position;
   main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[6] =
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_g.position;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_cd.position;
   main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[7] =
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_o.position;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_l.position;
 
   /* MATLAB Function: '<Root>/MATLAB Function1' */
   main_quad_rev3_21_200pm_B.danger = 0.0;
-  s11_iter = ((main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[0] >
+  s12_iter = ((main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[0] >
                2.0) +
               (main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[0] <
                -2.0)) -
@@ -1936,13 +1953,13 @@ void main_quad_rev3_21_200pm_step(void)
               (main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[6] <
                -2.0)) -
     (main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[6] <= -95.5);
-  s11_iter += P1_idx_1;
-  s11_iter += P1_idx_2;
-  s11_iter += P1_idx_3;
-  if (0 < s11_iter) {
+  s12_iter += P1_idx_1;
+  s12_iter += P1_idx_2;
+  s12_iter += P1_idx_3;
+  if (0 < s12_iter) {
     main_quad_rev3_21_200pm_B.danger = 1.0;
   } else {
-    s11_iter = ((main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[1] >
+    s12_iter = ((main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[1] >
                  1.9) +
                 (main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[1] <
                  -1.9)) -
@@ -1962,10 +1979,10 @@ void main_quad_rev3_21_200pm_step(void)
                 (main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[7] <
                  -1.9)) -
       (main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[7] <= -95.5);
-    s11_iter += P1_idx_1;
-    s11_iter += P1_idx_2;
-    s11_iter += P1_idx_3;
-    if (0 < s11_iter) {
+    s12_iter += P1_idx_1;
+    s12_iter += P1_idx_2;
+    s12_iter += P1_idx_3;
+    if (0 < s12_iter) {
       main_quad_rev3_21_200pm_B.danger = 1.0;
     }
   }
@@ -2216,9 +2233,9 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S3>/Multiport Switch' incorporates:
      *  Constant: '<S3>/Constant'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_f[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant_Value_l[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_f[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant_Value_l[s12_iter];
     }
     break;
 
@@ -2226,17 +2243,17 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S3>/Multiport Switch' incorporates:
      *  Constant: '<S3>/Constant1'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_f[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant1_Value[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_f[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant1_Value[s12_iter];
     }
     break;
 
    case 3:
     /* MultiPortSwitch: '<S3>/Multiport Switch' */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_f[s11_iter] =
-        main_quad_rev3_21_200pm_B.sf_floatsbytes.b[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_f[s12_iter] =
+        main_quad_rev3_21_200pm_B.sf_floatsbytes.b[s12_iter];
     }
     break;
 
@@ -2244,9 +2261,9 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S3>/Multiport Switch' incorporates:
      *  Constant: '<S3>/Constant2'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_f[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant2_Value_g[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_f[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant2_Value_g[s12_iter];
     }
     break;
   }
@@ -2315,9 +2332,9 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
      *  Constant: '<S4>/Constant'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_p2[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant_Value_p[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_p2[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant_Value_p[s12_iter];
     }
     break;
 
@@ -2325,17 +2342,17 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
      *  Constant: '<S4>/Constant1'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_p2[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant1_Value_k[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_p2[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant1_Value_k[s12_iter];
     }
     break;
 
    case 3:
     /* MultiPortSwitch: '<S4>/Multiport Switch' */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_p2[s11_iter] =
-        main_quad_rev3_21_200pm_B.sf_floatsbytes_b.b[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_p2[s12_iter] =
+        main_quad_rev3_21_200pm_B.sf_floatsbytes_b.b[s12_iter];
     }
     break;
 
@@ -2343,9 +2360,9 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S4>/Multiport Switch' incorporates:
      *  Constant: '<S4>/Constant2'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_p2[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant2_Value_d[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_p2[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant2_Value_d[s12_iter];
     }
     break;
   }
@@ -2414,9 +2431,9 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
      *  Constant: '<S5>/Constant'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_i[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant_Value_i[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_i[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant_Value_i[s12_iter];
     }
     break;
 
@@ -2424,17 +2441,17 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
      *  Constant: '<S5>/Constant1'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_i[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant1_Value_e[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_i[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant1_Value_e[s12_iter];
     }
     break;
 
    case 3:
     /* MultiPortSwitch: '<S5>/Multiport Switch' */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_i[s11_iter] =
-        main_quad_rev3_21_200pm_B.sf_floatsbytes_o.b[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_i[s12_iter] =
+        main_quad_rev3_21_200pm_B.sf_floatsbytes_o.b[s12_iter];
     }
     break;
 
@@ -2442,9 +2459,9 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S5>/Multiport Switch' incorporates:
      *  Constant: '<S5>/Constant2'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_i[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant2_Value_k[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_i[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant2_Value_k[s12_iter];
     }
     break;
   }
@@ -2513,9 +2530,9 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S6>/Multiport Switch' incorporates:
      *  Constant: '<S6>/Constant'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_ce[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant_Value_le[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_ce[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant_Value_le[s12_iter];
     }
     break;
 
@@ -2523,17 +2540,17 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S6>/Multiport Switch' incorporates:
      *  Constant: '<S6>/Constant1'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_ce[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant1_Value_f[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_ce[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant1_Value_f[s12_iter];
     }
     break;
 
    case 3:
     /* MultiPortSwitch: '<S6>/Multiport Switch' */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_ce[s11_iter] =
-        main_quad_rev3_21_200pm_B.sf_floatsbytes_i.b[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_ce[s12_iter] =
+        main_quad_rev3_21_200pm_B.sf_floatsbytes_i.b[s12_iter];
     }
     break;
 
@@ -2541,9 +2558,9 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S6>/Multiport Switch' incorporates:
      *  Constant: '<S6>/Constant2'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_ce[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant2_Value_j[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_ce[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant2_Value_j[s12_iter];
     }
     break;
   }
@@ -2612,9 +2629,9 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S7>/Multiport Switch' incorporates:
      *  Constant: '<S7>/Constant'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_c[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant_Value_b[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_c[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant_Value_b[s12_iter];
     }
     break;
 
@@ -2622,17 +2639,17 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S7>/Multiport Switch' incorporates:
      *  Constant: '<S7>/Constant1'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_c[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant1_Value_h[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_c[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant1_Value_h[s12_iter];
     }
     break;
 
    case 3:
     /* MultiPortSwitch: '<S7>/Multiport Switch' */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_c[s11_iter] =
-        main_quad_rev3_21_200pm_B.sf_floatsbytes_if.b[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_c[s12_iter] =
+        main_quad_rev3_21_200pm_B.sf_floatsbytes_if.b[s12_iter];
     }
     break;
 
@@ -2640,9 +2657,9 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S7>/Multiport Switch' incorporates:
      *  Constant: '<S7>/Constant2'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_c[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant2_Value_n[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_c[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant2_Value_n[s12_iter];
     }
     break;
   }
@@ -2711,9 +2728,9 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S8>/Multiport Switch' incorporates:
      *  Constant: '<S8>/Constant'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_p[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant_Value_bb[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_p[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant_Value_bb[s12_iter];
     }
     break;
 
@@ -2721,17 +2738,17 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S8>/Multiport Switch' incorporates:
      *  Constant: '<S8>/Constant1'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_p[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant1_Value_i[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_p[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant1_Value_i[s12_iter];
     }
     break;
 
    case 3:
     /* MultiPortSwitch: '<S8>/Multiport Switch' */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_p[s11_iter] =
-        main_quad_rev3_21_200pm_B.sf_floatsbytes_bb.b[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_p[s12_iter] =
+        main_quad_rev3_21_200pm_B.sf_floatsbytes_bb.b[s12_iter];
     }
     break;
 
@@ -2739,9 +2756,9 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S8>/Multiport Switch' incorporates:
      *  Constant: '<S8>/Constant2'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_p[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant2_Value_l[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_p[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant2_Value_l[s12_iter];
     }
     break;
   }
@@ -2810,9 +2827,9 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S9>/Multiport Switch' incorporates:
      *  Constant: '<S9>/Constant'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_a[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant_Value_o[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_a[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant_Value_o[s12_iter];
     }
     break;
 
@@ -2820,17 +2837,17 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S9>/Multiport Switch' incorporates:
      *  Constant: '<S9>/Constant1'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_a[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant1_Value_m[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_a[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant1_Value_m[s12_iter];
     }
     break;
 
    case 3:
     /* MultiPortSwitch: '<S9>/Multiport Switch' */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_a[s11_iter] =
-        main_quad_rev3_21_200pm_B.sf_floatsbytes_k.b[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_a[s12_iter] =
+        main_quad_rev3_21_200pm_B.sf_floatsbytes_k.b[s12_iter];
     }
     break;
 
@@ -2838,9 +2855,9 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S9>/Multiport Switch' incorporates:
      *  Constant: '<S9>/Constant2'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch_a[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant2_Value_i[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch_a[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant2_Value_i[s12_iter];
     }
     break;
   }
@@ -2909,9 +2926,9 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S10>/Multiport Switch' incorporates:
      *  Constant: '<S10>/Constant'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant_Value_ob[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant_Value_ob[s12_iter];
     }
     break;
 
@@ -2919,17 +2936,17 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S10>/Multiport Switch' incorporates:
      *  Constant: '<S10>/Constant1'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant1_Value_a[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant1_Value_a[s12_iter];
     }
     break;
 
    case 3:
     /* MultiPortSwitch: '<S10>/Multiport Switch' */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch[s11_iter] =
-        main_quad_rev3_21_200pm_B.sf_floatsbytes_kd.b[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch[s12_iter] =
+        main_quad_rev3_21_200pm_B.sf_floatsbytes_kd.b[s12_iter];
     }
     break;
 
@@ -2937,9 +2954,9 @@ void main_quad_rev3_21_200pm_step(void)
     /* MultiPortSwitch: '<S10>/Multiport Switch' incorporates:
      *  Constant: '<S10>/Constant2'
      */
-    for (s11_iter = 0; s11_iter < 8; s11_iter++) {
-      main_quad_rev3_21_200pm_B.MultiportSwitch[s11_iter] =
-        main_quad_rev3_21_200pm_cal->Constant2_Value_a[s11_iter];
+    for (s12_iter = 0; s12_iter < 8; s12_iter++) {
+      main_quad_rev3_21_200pm_B.MultiportSwitch[s12_iter] =
+        main_quad_rev3_21_200pm_cal->Constant2_Value_a[s12_iter];
     }
     break;
   }
@@ -2989,17 +3006,17 @@ void main_quad_rev3_21_200pm_step(void)
   /* End of Stop: '<Root>/Stop Simulation' */
   /* Sum: '<Root>/Add' */
   main_quad_rev3_21_200pm_B.Add =
-    ((main_quad_rev3_21_200pm_B.sf_bytesfloats_er.position +
-      main_quad_rev3_21_200pm_B.sf_bytesfloats_e.position) +
-     main_quad_rev3_21_200pm_B.sf_bytesfloats_i.position) +
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_o.position;
+    ((main_quad_rev3_21_200pm_B.sf_bytesfloats_c.position +
+      main_quad_rev3_21_200pm_B.sf_bytesfloats.position) +
+     main_quad_rev3_21_200pm_B.sf_bytesfloats_j.position) +
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_l.position;
 
   /* Sum: '<Root>/Add1' */
   main_quad_rev3_21_200pm_B.Add1 =
-    ((main_quad_rev3_21_200pm_B.sf_bytesfloats_c.position +
-      main_quad_rev3_21_200pm_B.sf_bytesfloats.position) +
+    ((main_quad_rev3_21_200pm_B.sf_bytesfloats_b.position +
+      main_quad_rev3_21_200pm_B.sf_bytesfloats_a.position) +
      main_quad_rev3_21_200pm_B.sf_bytesfloats_f.position) +
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_g.position;
+    main_quad_rev3_21_200pm_B.sf_bytesfloats_cd.position;
 
   /* Gain: '<Root>/Gain24' */
   main_quad_rev3_21_200pm_B.Gain24 = main_quad_rev3_21_200pm_cal->Gain24_Gain *
@@ -3016,7 +3033,7 @@ void main_quad_rev3_21_200pm_step(void)
 
   /* Level2 S-Function Block: '<Root>/CAN Status' (sg_IO602_IO691_status_s) */
   {
-    SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[10];
+    SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[11];
     sfcnOutputs(rts,0);
   }
 
@@ -3140,6 +3157,7 @@ void main_quad_rev3_21_200pm_initialize(void)
 
   {
     main_quad_rev3_21_200pm_B.CANRead_o2 = CAN_DATATYPE_GROUND;
+    main_quad_rev3_21_200pm_B.CANRead_o2_a = CAN_DATATYPE_GROUND;
     main_quad_rev3_21_200pm_B.CANPack1 = CAN_DATATYPE_GROUND;
     main_quad_rev3_21_200pm_B.CANmsg2 = CAN_DATATYPE_GROUND;
     main_quad_rev3_21_200pm_B.CANPack1_m = CAN_DATATYPE_GROUND;
@@ -3188,20 +3206,20 @@ void main_quad_rev3_21_200pm_initialize(void)
     rtssSetSolverInfoPtr(sfcnInfo, &main_quad_rev3_21_200pm_M->solverInfoPtr);
   }
 
-  main_quad_rev3_21_200pm_M->Sizes.numSFcns = (11);
+  main_quad_rev3_21_200pm_M->Sizes.numSFcns = (12);
 
   /* register each child */
   {
     (void) std::memset(static_cast<void *>
                        (&main_quad_rev3_21_200pm_M->NonInlinedSFcns.childSFunctions
                         [0]), 0,
-                       11*sizeof(SimStruct));
+                       12*sizeof(SimStruct));
     main_quad_rev3_21_200pm_M->childSfunctions =
       (&main_quad_rev3_21_200pm_M->NonInlinedSFcns.childSFunctionPtrs[0]);
 
     {
       int_T i;
-      for (i = 0; i < 11; i++) {
+      for (i = 0; i < 12; i++) {
         main_quad_rev3_21_200pm_M->childSfunctions[i] =
           (&main_quad_rev3_21_200pm_M->NonInlinedSFcns.childSFunctions[i]);
       }
@@ -4399,7 +4417,7 @@ void main_quad_rev3_21_200pm_initialize(void)
           _ssSetOutputPortNumDimensions(rts, 0, 1);
           ssSetOutputPortWidth(rts, 0, 1);
           ssSetOutputPortSignal(rts, 0, ((boolean_T *)
-            &main_quad_rev3_21_200pm_B.CANRead_o1));
+            &main_quad_rev3_21_200pm_B.CANRead_o1_d));
         }
 
         /* port 1 */
@@ -4407,13 +4425,14 @@ void main_quad_rev3_21_200pm_initialize(void)
           _ssSetOutputPortNumDimensions(rts, 1, 1);
           ssSetOutputPortWidth(rts, 1, 1);
           ssSetOutputPortSignal(rts, 1, ((CAN_DATATYPE *)
-            &main_quad_rev3_21_200pm_B.CANRead_o2));
+            &main_quad_rev3_21_200pm_B.CANRead_o2_a));
         }
       }
 
       /* path info */
       ssSetModelName(rts, "CAN Read");
-      ssSetPath(rts, "main_quad_rev3_21_200pm/While Iterator Subsystem/CAN Read");
+      ssSetPath(rts,
+                "main_quad_rev3_21_200pm/While Iterator Subsystem1/CAN Read");
       ssSetRTModel(rts,main_quad_rev3_21_200pm_M);
       ssSetParentSS(rts, (NULL));
       ssSetRootSS(rts, rts);
@@ -4430,7 +4449,7 @@ void main_quad_rev3_21_200pm_initialize(void)
       }
 
       /* work vectors */
-      ssSetPWork(rts, (void **) &main_quad_rev3_21_200pm_DW.CANRead_PWORK);
+      ssSetPWork(rts, (void **) &main_quad_rev3_21_200pm_DW.CANRead_PWORK_i);
 
       {
         struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
@@ -4445,7 +4464,7 @@ void main_quad_rev3_21_200pm_initialize(void)
         ssSetDWorkWidth(rts, 0, 1);
         ssSetDWorkDataType(rts, 0,SS_POINTER);
         ssSetDWorkComplexSignal(rts, 0, 0);
-        ssSetDWork(rts, 0, &main_quad_rev3_21_200pm_DW.CANRead_PWORK);
+        ssSetDWork(rts, 0, &main_quad_rev3_21_200pm_DW.CANRead_PWORK_i);
       }
 
       /* registration */
@@ -4470,7 +4489,7 @@ void main_quad_rev3_21_200pm_initialize(void)
       /* Update the BufferDstPort flags for each input port */
     }
 
-    /* Level2 S-Function Block: main_quad_rev3_21_200pm/<Root>/CAN Setup  (sg_IO602_IO691_setup_s) */
+    /* Level2 S-Function Block: main_quad_rev3_21_200pm/<S12>/CAN Read (sg_IO602_IO691_read_s) */
     {
       SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[9];
 
@@ -4530,9 +4549,42 @@ void main_quad_rev3_21_200pm_initialize(void)
           &main_quad_rev3_21_200pm_M->NonInlinedSFcns.periodicStatesInfo[9]);
       }
 
+      /* outputs */
+      {
+        ssSetPortInfoForOutputs(rts,
+          &main_quad_rev3_21_200pm_M->NonInlinedSFcns.Sfcn9.outputPortInfo[0]);
+        _ssSetNumOutputPorts(rts, 2);
+        _ssSetPortInfo2ForOutputUnits(rts,
+          &main_quad_rev3_21_200pm_M->NonInlinedSFcns.Sfcn9.outputPortUnits[0]);
+        ssSetOutputPortUnit(rts, 0, 0);
+        ssSetOutputPortUnit(rts, 1, 0);
+        _ssSetPortInfo2ForOutputCoSimAttribute(rts,
+          &main_quad_rev3_21_200pm_M->NonInlinedSFcns.Sfcn9.outputPortCoSimAttribute
+          [0]);
+        ssSetOutputPortIsContinuousQuantity(rts, 0, 0);
+        ssSetOutputPortIsContinuousQuantity(rts, 1, 0);
+
+        /* port 0 */
+        {
+          _ssSetOutputPortNumDimensions(rts, 0, 1);
+          ssSetOutputPortWidth(rts, 0, 1);
+          ssSetOutputPortSignal(rts, 0, ((boolean_T *)
+            &main_quad_rev3_21_200pm_B.CANRead_o1));
+        }
+
+        /* port 1 */
+        {
+          _ssSetOutputPortNumDimensions(rts, 1, 1);
+          ssSetOutputPortWidth(rts, 1, 1);
+          ssSetOutputPortSignal(rts, 1, ((CAN_DATATYPE *)
+            &main_quad_rev3_21_200pm_B.CANRead_o2));
+        }
+      }
+
       /* path info */
-      ssSetModelName(rts, "CAN Setup ");
-      ssSetPath(rts, "main_quad_rev3_21_200pm/CAN Setup ");
+      ssSetModelName(rts, "CAN Read");
+      ssSetPath(rts,
+                "main_quad_rev3_21_200pm/While Iterator Subsystem2/CAN Read");
       ssSetRTModel(rts,main_quad_rev3_21_200pm_M);
       ssSetParentSS(rts, (NULL));
       ssSetRootSS(rts, rts);
@@ -4542,18 +4594,14 @@ void main_quad_rev3_21_200pm_initialize(void)
       {
         mxArray **sfcnParams = (mxArray **)
           &main_quad_rev3_21_200pm_M->NonInlinedSFcns.Sfcn9.params;
-        ssSetSFcnParamsCount(rts, 3);
+        ssSetSFcnParamsCount(rts, 1);
         ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
         ssSetSFcnParam(rts, 0, (mxArray*)
-                       main_quad_rev3_21_200pm_cal->CANSetup_P1_Size);
-        ssSetSFcnParam(rts, 1, (mxArray*)
-                       main_quad_rev3_21_200pm_cal->CANSetup_P2_Size);
-        ssSetSFcnParam(rts, 2, (mxArray*)
-                       main_quad_rev3_21_200pm_cal->CANSetup_P3_Size);
+                       main_quad_rev3_21_200pm_cal->CANRead_P1_Size_k);
       }
 
       /* work vectors */
-      ssSetPWork(rts, (void **) &main_quad_rev3_21_200pm_DW.CANSetup_PWORK);
+      ssSetPWork(rts, (void **) &main_quad_rev3_21_200pm_DW.CANRead_PWORK);
 
       {
         struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
@@ -4568,11 +4616,11 @@ void main_quad_rev3_21_200pm_initialize(void)
         ssSetDWorkWidth(rts, 0, 1);
         ssSetDWorkDataType(rts, 0,SS_POINTER);
         ssSetDWorkComplexSignal(rts, 0, 0);
-        ssSetDWork(rts, 0, &main_quad_rev3_21_200pm_DW.CANSetup_PWORK);
+        ssSetDWork(rts, 0, &main_quad_rev3_21_200pm_DW.CANRead_PWORK);
       }
 
       /* registration */
-      sg_IO602_IO691_setup_s(rts);
+      sg_IO602_IO691_read_s(rts);
       sfcnInitializeSizes(rts);
       sfcnInitializeSampleTimes(rts);
 
@@ -4585,10 +4633,15 @@ void main_quad_rev3_21_200pm_initialize(void)
       ssSetNumNonsampledZCs(rts, 0);
 
       /* Update connectivity flags for each port */
+      _ssSetOutputPortConnected(rts, 0, 1);
+      _ssSetOutputPortConnected(rts, 1, 1);
+      _ssSetOutputPortBeingMerged(rts, 0, 0);
+      _ssSetOutputPortBeingMerged(rts, 1, 0);
+
       /* Update the BufferDstPort flags for each input port */
     }
 
-    /* Level2 S-Function Block: main_quad_rev3_21_200pm/<Root>/CAN Status (sg_IO602_IO691_status_s) */
+    /* Level2 S-Function Block: main_quad_rev3_21_200pm/<Root>/CAN Setup  (sg_IO602_IO691_setup_s) */
     {
       SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[10];
 
@@ -4649,6 +4702,124 @@ void main_quad_rev3_21_200pm_initialize(void)
       }
 
       /* path info */
+      ssSetModelName(rts, "CAN Setup ");
+      ssSetPath(rts, "main_quad_rev3_21_200pm/CAN Setup ");
+      ssSetRTModel(rts,main_quad_rev3_21_200pm_M);
+      ssSetParentSS(rts, (NULL));
+      ssSetRootSS(rts, rts);
+      ssSetVersion(rts, SIMSTRUCT_VERSION_LEVEL2);
+
+      /* parameters */
+      {
+        mxArray **sfcnParams = (mxArray **)
+          &main_quad_rev3_21_200pm_M->NonInlinedSFcns.Sfcn10.params;
+        ssSetSFcnParamsCount(rts, 3);
+        ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
+        ssSetSFcnParam(rts, 0, (mxArray*)
+                       main_quad_rev3_21_200pm_cal->CANSetup_P1_Size);
+        ssSetSFcnParam(rts, 1, (mxArray*)
+                       main_quad_rev3_21_200pm_cal->CANSetup_P2_Size);
+        ssSetSFcnParam(rts, 2, (mxArray*)
+                       main_quad_rev3_21_200pm_cal->CANSetup_P3_Size);
+      }
+
+      /* work vectors */
+      ssSetPWork(rts, (void **) &main_quad_rev3_21_200pm_DW.CANSetup_PWORK);
+
+      {
+        struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
+          &main_quad_rev3_21_200pm_M->NonInlinedSFcns.Sfcn10.dWork;
+        struct _ssDWorkAuxRecord *dWorkAuxRecord = (struct _ssDWorkAuxRecord *)
+          &main_quad_rev3_21_200pm_M->NonInlinedSFcns.Sfcn10.dWorkAux;
+        ssSetSFcnDWork(rts, dWorkRecord);
+        ssSetSFcnDWorkAux(rts, dWorkAuxRecord);
+        _ssSetNumDWork(rts, 1);
+
+        /* PWORK */
+        ssSetDWorkWidth(rts, 0, 1);
+        ssSetDWorkDataType(rts, 0,SS_POINTER);
+        ssSetDWorkComplexSignal(rts, 0, 0);
+        ssSetDWork(rts, 0, &main_quad_rev3_21_200pm_DW.CANSetup_PWORK);
+      }
+
+      /* registration */
+      sg_IO602_IO691_setup_s(rts);
+      sfcnInitializeSizes(rts);
+      sfcnInitializeSampleTimes(rts);
+
+      /* adjust sample time */
+      ssSetSampleTime(rts, 0, 0.005);
+      ssSetOffsetTime(rts, 0, 0.0);
+      sfcnTsMap[0] = 1;
+
+      /* set compiled values of dynamic vector attributes */
+      ssSetNumNonsampledZCs(rts, 0);
+
+      /* Update connectivity flags for each port */
+      /* Update the BufferDstPort flags for each input port */
+    }
+
+    /* Level2 S-Function Block: main_quad_rev3_21_200pm/<Root>/CAN Status (sg_IO602_IO691_status_s) */
+    {
+      SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[11];
+
+      /* timing info */
+      time_T *sfcnPeriod =
+        main_quad_rev3_21_200pm_M->NonInlinedSFcns.Sfcn11.sfcnPeriod;
+      time_T *sfcnOffset =
+        main_quad_rev3_21_200pm_M->NonInlinedSFcns.Sfcn11.sfcnOffset;
+      int_T *sfcnTsMap =
+        main_quad_rev3_21_200pm_M->NonInlinedSFcns.Sfcn11.sfcnTsMap;
+      (void) std::memset(static_cast<void*>(sfcnPeriod), 0,
+                         sizeof(time_T)*1);
+      (void) std::memset(static_cast<void*>(sfcnOffset), 0,
+                         sizeof(time_T)*1);
+      ssSetSampleTimePtr(rts, &sfcnPeriod[0]);
+      ssSetOffsetTimePtr(rts, &sfcnOffset[0]);
+      ssSetSampleTimeTaskIDPtr(rts, sfcnTsMap);
+
+      {
+        ssSetBlkInfo2Ptr(rts,
+                         &main_quad_rev3_21_200pm_M->NonInlinedSFcns.blkInfo2[11]);
+      }
+
+      _ssSetBlkInfo2PortInfo2Ptr(rts,
+        &main_quad_rev3_21_200pm_M->NonInlinedSFcns.inputOutputPortInfo2[11]);
+
+      /* Set up the mdlInfo pointer */
+      ssSetRTWSfcnInfo(rts, main_quad_rev3_21_200pm_M->sfcnInfo);
+
+      /* Allocate memory of model methods 2 */
+      {
+        ssSetModelMethods2(rts,
+                           &main_quad_rev3_21_200pm_M->NonInlinedSFcns.methods2
+                           [11]);
+      }
+
+      /* Allocate memory of model methods 3 */
+      {
+        ssSetModelMethods3(rts,
+                           &main_quad_rev3_21_200pm_M->NonInlinedSFcns.methods3
+                           [11]);
+      }
+
+      /* Allocate memory of model methods 4 */
+      {
+        ssSetModelMethods4(rts,
+                           &main_quad_rev3_21_200pm_M->NonInlinedSFcns.methods4
+                           [11]);
+      }
+
+      /* Allocate memory for states auxilliary information */
+      {
+        ssSetStatesInfo2(rts,
+                         &main_quad_rev3_21_200pm_M->
+                         NonInlinedSFcns.statesInfo2[11]);
+        ssSetPeriodicStatesInfo(rts,
+          &main_quad_rev3_21_200pm_M->NonInlinedSFcns.periodicStatesInfo[11]);
+      }
+
+      /* path info */
       ssSetModelName(rts, "CAN Status");
       ssSetPath(rts, "main_quad_rev3_21_200pm/CAN Status");
       ssSetRTModel(rts,main_quad_rev3_21_200pm_M);
@@ -4659,7 +4830,7 @@ void main_quad_rev3_21_200pm_initialize(void)
       /* parameters */
       {
         mxArray **sfcnParams = (mxArray **)
-          &main_quad_rev3_21_200pm_M->NonInlinedSFcns.Sfcn10.params;
+          &main_quad_rev3_21_200pm_M->NonInlinedSFcns.Sfcn11.params;
         ssSetSFcnParamsCount(rts, 34);
         ssSetSFcnParamsPtr(rts, &sfcnParams[0]);
         ssSetSFcnParam(rts, 0, (mxArray*)
@@ -4737,9 +4908,9 @@ void main_quad_rev3_21_200pm_initialize(void)
 
       {
         struct _ssDWorkRecord *dWorkRecord = (struct _ssDWorkRecord *)
-          &main_quad_rev3_21_200pm_M->NonInlinedSFcns.Sfcn10.dWork;
+          &main_quad_rev3_21_200pm_M->NonInlinedSFcns.Sfcn11.dWork;
         struct _ssDWorkAuxRecord *dWorkAuxRecord = (struct _ssDWorkAuxRecord *)
-          &main_quad_rev3_21_200pm_M->NonInlinedSFcns.Sfcn10.dWorkAux;
+          &main_quad_rev3_21_200pm_M->NonInlinedSFcns.Sfcn11.dWorkAux;
         ssSetSFcnDWork(rts, dWorkRecord);
         ssSetSFcnDWorkAux(rts, dWorkAuxRecord);
         _ssSetNumDWork(rts, 1);
@@ -4772,7 +4943,7 @@ void main_quad_rev3_21_200pm_initialize(void)
   /* Start for S-Function (sg_IO602_IO691_setup_s): '<Root>/CAN Setup ' */
   /* Level2 S-Function Block: '<Root>/CAN Setup ' (sg_IO602_IO691_setup_s) */
   {
-    SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[9];
+    SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[10];
     sfcnStart(rts);
     if (ssGetErrorStatus(rts) != (NULL))
       return;
@@ -4785,7 +4956,7 @@ void main_quad_rev3_21_200pm_initialize(void)
   /* Start for S-Function (sg_IO602_IO691_status_s): '<Root>/CAN Status' */
   /* Level2 S-Function Block: '<Root>/CAN Status' (sg_IO602_IO691_status_s) */
   {
-    SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[10];
+    SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[11];
     sfcnStart(rts);
     if (ssGetErrorStatus(rts) != (NULL))
       return;
@@ -4799,6 +4970,60 @@ void main_quad_rev3_21_200pm_initialize(void)
   main_quad_rev3_21_200pm_DW.Delay1_DSTATE =
     main_quad_rev3_21_200pm_cal->Delay1_InitialCondition;
 
+  /* Start for S-Function (sg_IO602_IO691_read_s): '<S12>/CAN Read' */
+  /* Level2 S-Function Block: '<S12>/CAN Read' (sg_IO602_IO691_read_s) */
+  {
+    SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[9];
+    sfcnStart(rts);
+    if (ssGetErrorStatus(rts) != (NULL))
+      return;
+  }
+
+  /* SystemInitialize for Atomic SubSystem: '<S12>/If Action Subsystem2' */
+  /* Start for S-Function (scanunpack): '<S30>/CAN Unpack' */
+
+  /*-----------S-Function Block: <S30>/CAN Unpack -----------------*/
+
+  /* End of SystemInitialize for SubSystem: '<S12>/If Action Subsystem2' */
+
+  /* SystemInitialize for Atomic SubSystem: '<S12>/If Action Subsystem4' */
+  /* Start for S-Function (scanunpack): '<S31>/CAN Unpack' */
+
+  /*-----------S-Function Block: <S31>/CAN Unpack -----------------*/
+
+  /* End of SystemInitialize for SubSystem: '<S12>/If Action Subsystem4' */
+
+  /* SystemInitialize for Atomic SubSystem: '<S12>/If Action Subsystem6' */
+  /* Start for S-Function (scanunpack): '<S32>/CAN Unpack' */
+
+  /*-----------S-Function Block: <S32>/CAN Unpack -----------------*/
+
+  /* End of SystemInitialize for SubSystem: '<S12>/If Action Subsystem6' */
+
+  /* SystemInitialize for Atomic SubSystem: '<S12>/If Action Subsystem' */
+  /* Start for S-Function (scanunpack): '<S29>/CAN Unpack' */
+
+  /*-----------S-Function Block: <S29>/CAN Unpack -----------------*/
+
+  /* End of SystemInitialize for SubSystem: '<S12>/If Action Subsystem' */
+
+  /* SystemInitialize for Outport: '<S12>/P1' */
+  main_quad_rev3_21_200pm_B.sf_bytesfloats_b.position =
+    main_quad_rev3_21_200pm_cal->P1_Y0;
+
+  /* SystemInitialize for Outport: '<S12>/P3' */
+  main_quad_rev3_21_200pm_B.sf_bytesfloats_a.position =
+    main_quad_rev3_21_200pm_cal->P3_Y0;
+
+  /* SystemInitialize for Outport: '<S12>/P5' */
+  main_quad_rev3_21_200pm_B.sf_bytesfloats_f.position =
+    main_quad_rev3_21_200pm_cal->P5_Y0;
+
+  /* SystemInitialize for Outport: '<S12>/P7' */
+  main_quad_rev3_21_200pm_B.sf_bytesfloats_cd.position =
+    main_quad_rev3_21_200pm_cal->P7_Y0;
+
+  /* End of SystemInitialize for SubSystem: '<Root>/While Iterator Subsystem2' */
   /* Start for S-Function (sg_IO602_IO691_read_s): '<S11>/CAN Read' */
   /* Level2 S-Function Block: '<S11>/CAN Read' (sg_IO602_IO691_read_s) */
   {
@@ -4815,88 +5040,44 @@ void main_quad_rev3_21_200pm_initialize(void)
 
   /* End of SystemInitialize for SubSystem: '<S11>/If Action Subsystem1' */
 
-  /* SystemInitialize for Atomic SubSystem: '<S11>/If Action Subsystem2' */
+  /* SystemInitialize for Atomic SubSystem: '<S11>/If Action Subsystem3' */
   /* Start for S-Function (scanunpack): '<S22>/CAN Unpack' */
 
   /*-----------S-Function Block: <S22>/CAN Unpack -----------------*/
 
-  /* End of SystemInitialize for SubSystem: '<S11>/If Action Subsystem2' */
+  /* End of SystemInitialize for SubSystem: '<S11>/If Action Subsystem3' */
 
-  /* SystemInitialize for Atomic SubSystem: '<S11>/If Action Subsystem3' */
+  /* SystemInitialize for Atomic SubSystem: '<S11>/If Action Subsystem5' */
   /* Start for S-Function (scanunpack): '<S23>/CAN Unpack' */
 
   /*-----------S-Function Block: <S23>/CAN Unpack -----------------*/
 
-  /* End of SystemInitialize for SubSystem: '<S11>/If Action Subsystem3' */
+  /* End of SystemInitialize for SubSystem: '<S11>/If Action Subsystem5' */
 
-  /* SystemInitialize for Atomic SubSystem: '<S11>/If Action Subsystem4' */
+  /* SystemInitialize for Atomic SubSystem: '<S11>/If Action Subsystem7' */
   /* Start for S-Function (scanunpack): '<S24>/CAN Unpack' */
 
   /*-----------S-Function Block: <S24>/CAN Unpack -----------------*/
 
-  /* End of SystemInitialize for SubSystem: '<S11>/If Action Subsystem4' */
-
-  /* SystemInitialize for Atomic SubSystem: '<S11>/If Action Subsystem5' */
-  /* Start for S-Function (scanunpack): '<S25>/CAN Unpack' */
-
-  /*-----------S-Function Block: <S25>/CAN Unpack -----------------*/
-
-  /* End of SystemInitialize for SubSystem: '<S11>/If Action Subsystem5' */
-
-  /* SystemInitialize for Atomic SubSystem: '<S11>/If Action Subsystem6' */
-  /* Start for S-Function (scanunpack): '<S26>/CAN Unpack' */
-
-  /*-----------S-Function Block: <S26>/CAN Unpack -----------------*/
-
-  /* End of SystemInitialize for SubSystem: '<S11>/If Action Subsystem6' */
-
-  /* SystemInitialize for Atomic SubSystem: '<S11>/If Action Subsystem7' */
-  /* Start for S-Function (scanunpack): '<S27>/CAN Unpack' */
-
-  /*-----------S-Function Block: <S27>/CAN Unpack -----------------*/
-
   /* End of SystemInitialize for SubSystem: '<S11>/If Action Subsystem7' */
 
-  /* SystemInitialize for Atomic SubSystem: '<S11>/If Action Subsystem' */
-  /* Start for S-Function (scanunpack): '<S20>/CAN Unpack' */
-
-  /*-----------S-Function Block: <S20>/CAN Unpack -----------------*/
-
-  /* End of SystemInitialize for SubSystem: '<S11>/If Action Subsystem' */
-
-  /* SystemInitialize for Outport: '<S11>/P1' */
-  main_quad_rev3_21_200pm_B.sf_bytesfloats_c.position =
-    main_quad_rev3_21_200pm_cal->P1_Y0;
-
   /* SystemInitialize for Outport: '<S11>/P2' */
-  main_quad_rev3_21_200pm_B.sf_bytesfloats_er.position =
+  main_quad_rev3_21_200pm_B.sf_bytesfloats_c.position =
     main_quad_rev3_21_200pm_cal->P2_Y0;
 
-  /* SystemInitialize for Outport: '<S11>/P3' */
-  main_quad_rev3_21_200pm_B.sf_bytesfloats.position =
-    main_quad_rev3_21_200pm_cal->P3_Y0;
-
   /* SystemInitialize for Outport: '<S11>/P4' */
-  main_quad_rev3_21_200pm_B.sf_bytesfloats_e.position =
+  main_quad_rev3_21_200pm_B.sf_bytesfloats.position =
     main_quad_rev3_21_200pm_cal->P4_Y0;
 
-  /* SystemInitialize for Outport: '<S11>/P5' */
-  main_quad_rev3_21_200pm_B.sf_bytesfloats_f.position =
-    main_quad_rev3_21_200pm_cal->P5_Y0;
-
   /* SystemInitialize for Outport: '<S11>/P6' */
-  main_quad_rev3_21_200pm_B.sf_bytesfloats_i.position =
+  main_quad_rev3_21_200pm_B.sf_bytesfloats_j.position =
     main_quad_rev3_21_200pm_cal->P6_Y0;
 
-  /* SystemInitialize for Outport: '<S11>/P7' */
-  main_quad_rev3_21_200pm_B.sf_bytesfloats_g.position =
-    main_quad_rev3_21_200pm_cal->P7_Y0;
-
   /* SystemInitialize for Outport: '<S11>/P8' */
-  main_quad_rev3_21_200pm_B.sf_bytesfloats_o.position =
+  main_quad_rev3_21_200pm_B.sf_bytesfloats_l.position =
     main_quad_rev3_21_200pm_cal->P8_Y0;
 
-  /* End of SystemInitialize for SubSystem: '<Root>/While Iterator Subsystem' */
+  /* End of SystemInitialize for SubSystem: '<Root>/While Iterator Subsystem1' */
 
   /* SystemInitialize for Chart: '<Root>/Chart' */
   main_quad_rev3_21_200pm_DW.sfEvent = main_quad_rev3_21_20_CALL_EVENT;
@@ -5003,11 +5184,22 @@ void main_quad_rev3_21_200pm_terminate(void)
   /* Terminate for S-Function (sg_IO602_IO691_setup_s): '<Root>/CAN Setup ' */
   /* Level2 S-Function Block: '<Root>/CAN Setup ' (sg_IO602_IO691_setup_s) */
   {
+    SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[10];
+    sfcnTerminate(rts);
+  }
+
+  /* Terminate for Iterator SubSystem: '<Root>/While Iterator Subsystem2' */
+
+  /* Terminate for S-Function (sg_IO602_IO691_read_s): '<S12>/CAN Read' */
+  /* Level2 S-Function Block: '<S12>/CAN Read' (sg_IO602_IO691_read_s) */
+  {
     SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[9];
     sfcnTerminate(rts);
   }
 
-  /* Terminate for Iterator SubSystem: '<Root>/While Iterator Subsystem' */
+  /* End of Terminate for SubSystem: '<Root>/While Iterator Subsystem2' */
+
+  /* Terminate for Iterator SubSystem: '<Root>/While Iterator Subsystem1' */
 
   /* Terminate for S-Function (sg_IO602_IO691_read_s): '<S11>/CAN Read' */
   /* Level2 S-Function Block: '<S11>/CAN Read' (sg_IO602_IO691_read_s) */
@@ -5016,7 +5208,7 @@ void main_quad_rev3_21_200pm_terminate(void)
     sfcnTerminate(rts);
   }
 
-  /* End of Terminate for SubSystem: '<Root>/While Iterator Subsystem' */
+  /* End of Terminate for SubSystem: '<Root>/While Iterator Subsystem1' */
 
   /* Terminate for Atomic SubSystem: '<Root>/Simulink Function1' */
 
@@ -5109,7 +5301,7 @@ void main_quad_rev3_21_200pm_terminate(void)
   /* Terminate for S-Function (sg_IO602_IO691_status_s): '<Root>/CAN Status' */
   /* Level2 S-Function Block: '<Root>/CAN Status' (sg_IO602_IO691_status_s) */
   {
-    SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[10];
+    SimStruct *rts = main_quad_rev3_21_200pm_M->childSfunctions[11];
     sfcnTerminate(rts);
   }
 }
