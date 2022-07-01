@@ -7,9 +7,9 @@
  *
  * Code generation for model "main_quad_rev3_21_200pm".
  *
- * Model version              : 1.50
+ * Model version              : 1.51
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Sat May 21 16:36:23 2022
+ * C++ source code generated on : Tue May 24 15:04:45 2022
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -520,10 +520,10 @@ void main_quad_rev3_21_200pm_step(void)
   }
 
   /* Delay: '<Root>/Delay' */
-  main_quad_rev3_21_200pm_B.Delay = main_quad_rev3_21_200pm_DW.Delay_DSTATE;
+  main_quad_rev3_21_200pm_B.P_1_avg = main_quad_rev3_21_200pm_DW.Delay_DSTATE;
 
   /* Delay: '<Root>/Delay1' */
-  main_quad_rev3_21_200pm_B.Delay1 = main_quad_rev3_21_200pm_DW.Delay1_DSTATE;
+  main_quad_rev3_21_200pm_B.P_2_avg = main_quad_rev3_21_200pm_DW.Delay1_DSTATE;
 
   /* Outputs for Iterator SubSystem: '<Root>/While Iterator Subsystem2' incorporates:
    *  WhileIterator: '<S12>/While Iterator'
@@ -1213,6 +1213,17 @@ void main_quad_rev3_21_200pm_step(void)
     main_quad_rev3_21_200pm_B.sf_bytesfloats_a.I_ff =
       main_quad_rev3_21_200pm_B.CANUnpack_o3_a;
     main_quad_rev3_21_2_bytesfloats(&main_quad_rev3_21_200pm_B.sf_bytesfloats_a);
+    main_quad_rev3_21_200pm_B.Gain = main_quad_rev3_21_200pm_cal->Gain_Gain_e *
+      main_quad_rev3_21_200pm_B.sf_bytesfloats_cd.position;
+    main_quad_rev3_21_200pm_B.Gain1_k =
+      main_quad_rev3_21_200pm_cal->Gain1_Gain_a *
+      main_quad_rev3_21_200pm_B.sf_bytesfloats_b.position;
+    main_quad_rev3_21_200pm_B.Gain2_n =
+      main_quad_rev3_21_200pm_cal->Gain2_Gain_f *
+      main_quad_rev3_21_200pm_B.sf_bytesfloats_f.position;
+    main_quad_rev3_21_200pm_B.Gain3_b =
+      main_quad_rev3_21_200pm_cal->Gain3_Gain_i *
+      main_quad_rev3_21_200pm_B.sf_bytesfloats_a.position;
     s12_iter++;
   } while (main_quad_rev3_21_200pm_B.CANRead_o1);
 
@@ -1906,6 +1917,14 @@ void main_quad_rev3_21_200pm_step(void)
     main_quad_rev3_21_200pm_B.sf_bytesfloats_j.I_ff =
       main_quad_rev3_21_200pm_B.CANUnpack_o3_e;
     main_quad_rev3_21_2_bytesfloats(&main_quad_rev3_21_200pm_B.sf_bytesfloats_j);
+    main_quad_rev3_21_200pm_B.Gain_p = main_quad_rev3_21_200pm_cal->Gain_Gain *
+      main_quad_rev3_21_200pm_B.sf_bytesfloats_l.position;
+    main_quad_rev3_21_200pm_B.Gain1_f = main_quad_rev3_21_200pm_cal->Gain1_Gain *
+      main_quad_rev3_21_200pm_B.sf_bytesfloats.position;
+    main_quad_rev3_21_200pm_B.Gain2_b = main_quad_rev3_21_200pm_cal->Gain2_Gain *
+      main_quad_rev3_21_200pm_B.sf_bytesfloats_c.position;
+    main_quad_rev3_21_200pm_B.Gain3_a = main_quad_rev3_21_200pm_cal->Gain3_Gain *
+      main_quad_rev3_21_200pm_B.sf_bytesfloats_j.position;
     s12_iter++;
   } while (main_quad_rev3_21_200pm_B.CANRead_o1_d);
 
@@ -1915,21 +1934,21 @@ void main_quad_rev3_21_200pm_step(void)
    *  MATLAB Function: '<Root>/MATLAB Function1'
    */
   main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[0] =
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_b.position;
+    main_quad_rev3_21_200pm_B.Gain1_k;
   main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[1] =
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_c.position;
+    main_quad_rev3_21_200pm_B.Gain2_b;
   main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[2] =
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_a.position;
+    main_quad_rev3_21_200pm_B.Gain3_b;
   main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[3] =
-    main_quad_rev3_21_200pm_B.sf_bytesfloats.position;
+    main_quad_rev3_21_200pm_B.Gain1_f;
   main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[4] =
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_f.position;
+    main_quad_rev3_21_200pm_B.Gain2_n;
   main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[5] =
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_j.position;
+    main_quad_rev3_21_200pm_B.Gain3_a;
   main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[6] =
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_cd.position;
+    main_quad_rev3_21_200pm_B.Gain;
   main_quad_rev3_21_200pm_B.TmpSignalConversionAtSFunctionI[7] =
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_l.position;
+    main_quad_rev3_21_200pm_B.Gain_p;
 
   /* MATLAB Function: '<Root>/MATLAB Function1' */
   main_quad_rev3_21_200pm_B.danger = 0.0;
@@ -2033,11 +2052,11 @@ void main_quad_rev3_21_200pm_step(void)
             main_quad_rev3_21_200pm_DW.tstep = 3.0;
             main_quad_rev3_21_200pm_DW.to = main_quad_rev3_21_200pm_M->Timing.t
               [1];
-            main_quad_rev3_21_200pm_B.theta1 = main_quad_rev3_21_200pm_B.Delay;
+            main_quad_rev3_21_200pm_B.theta1 = main_quad_rev3_21_200pm_B.P_1_avg;
             main_quad_rev3_21_200pm_DW.po1 = main_quad_rev3_21_200pm_B.theta1;
             main_quad_rev3_21_200pm_DW.slope1 = (main_quad_rev3_21_200pm_DW.pf -
               main_quad_rev3_21_200pm_DW.po1) / main_quad_rev3_21_200pm_DW.tstep;
-            main_quad_rev3_21_200pm_B.theta2 = main_quad_rev3_21_200pm_B.Delay1;
+            main_quad_rev3_21_200pm_B.theta2 = main_quad_rev3_21_200pm_B.P_2_avg;
             main_quad_rev3_21_200pm_DW.po2 = main_quad_rev3_21_200pm_B.theta2;
             main_quad_rev3_21_200pm_DW.slope2 =
               (main_quad_rev3_21_200pm_DW.Th2Th1 * main_quad_rev3_21_200pm_DW.pf
@@ -2054,11 +2073,11 @@ void main_quad_rev3_21_200pm_step(void)
             main_quad_rev3_21_200pm_DW.to = main_quad_rev3_21_200pm_M->Timing.t
               [1];
             main_quad_rev3_21_200pm_DW.tstep = 3.0;
-            main_quad_rev3_21_200pm_B.theta1 = main_quad_rev3_21_200pm_B.Delay;
+            main_quad_rev3_21_200pm_B.theta1 = main_quad_rev3_21_200pm_B.P_1_avg;
             main_quad_rev3_21_200pm_DW.po1 = main_quad_rev3_21_200pm_B.theta1;
             main_quad_rev3_21_200pm_DW.slope1 = (main_quad_rev3_21_200pm_DW.pf -
               main_quad_rev3_21_200pm_DW.po1) / main_quad_rev3_21_200pm_DW.tstep;
-            main_quad_rev3_21_200pm_B.theta2 = main_quad_rev3_21_200pm_B.Delay1;
+            main_quad_rev3_21_200pm_B.theta2 = main_quad_rev3_21_200pm_B.P_2_avg;
             main_quad_rev3_21_200pm_DW.po2 = main_quad_rev3_21_200pm_B.theta2;
             main_quad_rev3_21_200pm_DW.slope2 =
               (main_quad_rev3_21_200pm_DW.Th2Th1 * main_quad_rev3_21_200pm_DW.pf
@@ -2155,11 +2174,11 @@ void main_quad_rev3_21_200pm_step(void)
         main_quad_rev3_21_200pm_DW.is_Command = main_quad_rev3_21_200p_IN_Stand;
         main_quad_rev3_21_200pm_DW.to = main_quad_rev3_21_200pm_M->Timing.t[1];
         main_quad_rev3_21_200pm_DW.tstep = 3.0;
-        main_quad_rev3_21_200pm_B.theta1 = main_quad_rev3_21_200pm_B.Delay;
+        main_quad_rev3_21_200pm_B.theta1 = main_quad_rev3_21_200pm_B.P_1_avg;
         main_quad_rev3_21_200pm_DW.po1 = main_quad_rev3_21_200pm_B.theta1;
         main_quad_rev3_21_200pm_DW.slope1 = (main_quad_rev3_21_200pm_DW.pf -
           main_quad_rev3_21_200pm_DW.po1) / main_quad_rev3_21_200pm_DW.tstep;
-        main_quad_rev3_21_200pm_B.theta2 = main_quad_rev3_21_200pm_B.Delay1;
+        main_quad_rev3_21_200pm_B.theta2 = main_quad_rev3_21_200pm_B.P_2_avg;
         main_quad_rev3_21_200pm_DW.po2 = main_quad_rev3_21_200pm_B.theta2;
         main_quad_rev3_21_200pm_DW.slope2 = (main_quad_rev3_21_200pm_DW.Th2Th1 *
           main_quad_rev3_21_200pm_DW.pf - main_quad_rev3_21_200pm_DW.po2) /
@@ -2207,17 +2226,17 @@ void main_quad_rev3_21_200pm_step(void)
   /* End of Chart: '<Root>/Chart' */
 
   /* Gain: '<Root>/Gain1' */
-  main_quad_rev3_21_200pm_B.Gain1 = main_quad_rev3_21_200pm_cal->Gain1_Gain *
+  main_quad_rev3_21_200pm_B.Gain1 = main_quad_rev3_21_200pm_cal->Gain1_Gain_o *
     main_quad_rev3_21_200pm_B.theta2;
 
   /* Gain: '<Root>/Gain2' incorporates:
    *  Constant: '<Root>/Constant8'
    */
-  main_quad_rev3_21_200pm_B.Gain2 = main_quad_rev3_21_200pm_cal->Gain2_Gain *
+  main_quad_rev3_21_200pm_B.Gain2 = main_quad_rev3_21_200pm_cal->Gain2_Gain_n *
     main_quad_rev3_21_200pm_cal->Constant8_Value;
 
   /* Gain: '<Root>/Gain3' */
-  main_quad_rev3_21_200pm_B.Gain3 = main_quad_rev3_21_200pm_cal->Gain3_Gain *
+  main_quad_rev3_21_200pm_B.Gain3 = main_quad_rev3_21_200pm_cal->Gain3_Gain_im *
     main_quad_rev3_21_200pm_B.T2;
 
   /* Outputs for Atomic SubSystem: '<Root>/Simulink Function1' */
@@ -3005,18 +3024,14 @@ void main_quad_rev3_21_200pm_step(void)
 
   /* End of Stop: '<Root>/Stop Simulation' */
   /* Sum: '<Root>/Add' */
-  main_quad_rev3_21_200pm_B.Add =
-    ((main_quad_rev3_21_200pm_B.sf_bytesfloats_c.position +
-      main_quad_rev3_21_200pm_B.sf_bytesfloats.position) +
-     main_quad_rev3_21_200pm_B.sf_bytesfloats_j.position) +
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_l.position;
+  main_quad_rev3_21_200pm_B.Add = ((main_quad_rev3_21_200pm_B.Gain2_b +
+    main_quad_rev3_21_200pm_B.Gain1_f) + main_quad_rev3_21_200pm_B.Gain3_a) +
+    main_quad_rev3_21_200pm_B.Gain_p;
 
   /* Sum: '<Root>/Add1' */
-  main_quad_rev3_21_200pm_B.Add1 =
-    ((main_quad_rev3_21_200pm_B.sf_bytesfloats_b.position +
-      main_quad_rev3_21_200pm_B.sf_bytesfloats_a.position) +
-     main_quad_rev3_21_200pm_B.sf_bytesfloats_f.position) +
-    main_quad_rev3_21_200pm_B.sf_bytesfloats_cd.position;
+  main_quad_rev3_21_200pm_B.Add1 = ((main_quad_rev3_21_200pm_B.Gain +
+    main_quad_rev3_21_200pm_B.Gain2_n) + main_quad_rev3_21_200pm_B.Gain3_b) +
+    main_quad_rev3_21_200pm_B.Gain1_k;
 
   /* Gain: '<Root>/Gain24' */
   main_quad_rev3_21_200pm_B.Gain24 = main_quad_rev3_21_200pm_cal->Gain24_Gain *
@@ -5007,21 +5022,25 @@ void main_quad_rev3_21_200pm_initialize(void)
 
   /* End of SystemInitialize for SubSystem: '<S12>/If Action Subsystem' */
 
-  /* SystemInitialize for Outport: '<S12>/P1' */
-  main_quad_rev3_21_200pm_B.sf_bytesfloats_b.position =
-    main_quad_rev3_21_200pm_cal->P1_Y0;
+  /* SystemInitialize for Gain: '<S12>/Gain1' incorporates:
+   *  Outport: '<S12>/P1'
+   */
+  main_quad_rev3_21_200pm_B.Gain1_k = main_quad_rev3_21_200pm_cal->P1_Y0;
 
-  /* SystemInitialize for Outport: '<S12>/P3' */
-  main_quad_rev3_21_200pm_B.sf_bytesfloats_a.position =
-    main_quad_rev3_21_200pm_cal->P3_Y0;
+  /* SystemInitialize for Gain: '<S12>/Gain3' incorporates:
+   *  Outport: '<S12>/P3'
+   */
+  main_quad_rev3_21_200pm_B.Gain3_b = main_quad_rev3_21_200pm_cal->P3_Y0;
 
-  /* SystemInitialize for Outport: '<S12>/P5' */
-  main_quad_rev3_21_200pm_B.sf_bytesfloats_f.position =
-    main_quad_rev3_21_200pm_cal->P5_Y0;
+  /* SystemInitialize for Gain: '<S12>/Gain2' incorporates:
+   *  Outport: '<S12>/P5'
+   */
+  main_quad_rev3_21_200pm_B.Gain2_n = main_quad_rev3_21_200pm_cal->P5_Y0;
 
-  /* SystemInitialize for Outport: '<S12>/P7' */
-  main_quad_rev3_21_200pm_B.sf_bytesfloats_cd.position =
-    main_quad_rev3_21_200pm_cal->P7_Y0;
+  /* SystemInitialize for Gain: '<S12>/Gain' incorporates:
+   *  Outport: '<S12>/P7'
+   */
+  main_quad_rev3_21_200pm_B.Gain = main_quad_rev3_21_200pm_cal->P7_Y0;
 
   /* End of SystemInitialize for SubSystem: '<Root>/While Iterator Subsystem2' */
   /* Start for S-Function (sg_IO602_IO691_read_s): '<S11>/CAN Read' */
@@ -5061,21 +5080,25 @@ void main_quad_rev3_21_200pm_initialize(void)
 
   /* End of SystemInitialize for SubSystem: '<S11>/If Action Subsystem7' */
 
-  /* SystemInitialize for Outport: '<S11>/P2' */
-  main_quad_rev3_21_200pm_B.sf_bytesfloats_c.position =
-    main_quad_rev3_21_200pm_cal->P2_Y0;
+  /* SystemInitialize for Gain: '<S11>/Gain2' incorporates:
+   *  Outport: '<S11>/P2'
+   */
+  main_quad_rev3_21_200pm_B.Gain2_b = main_quad_rev3_21_200pm_cal->P2_Y0;
 
-  /* SystemInitialize for Outport: '<S11>/P4' */
-  main_quad_rev3_21_200pm_B.sf_bytesfloats.position =
-    main_quad_rev3_21_200pm_cal->P4_Y0;
+  /* SystemInitialize for Gain: '<S11>/Gain1' incorporates:
+   *  Outport: '<S11>/P4'
+   */
+  main_quad_rev3_21_200pm_B.Gain1_f = main_quad_rev3_21_200pm_cal->P4_Y0;
 
-  /* SystemInitialize for Outport: '<S11>/P6' */
-  main_quad_rev3_21_200pm_B.sf_bytesfloats_j.position =
-    main_quad_rev3_21_200pm_cal->P6_Y0;
+  /* SystemInitialize for Gain: '<S11>/Gain3' incorporates:
+   *  Outport: '<S11>/P6'
+   */
+  main_quad_rev3_21_200pm_B.Gain3_a = main_quad_rev3_21_200pm_cal->P6_Y0;
 
-  /* SystemInitialize for Outport: '<S11>/P8' */
-  main_quad_rev3_21_200pm_B.sf_bytesfloats_l.position =
-    main_quad_rev3_21_200pm_cal->P8_Y0;
+  /* SystemInitialize for Gain: '<S11>/Gain' incorporates:
+   *  Outport: '<S11>/P8'
+   */
+  main_quad_rev3_21_200pm_B.Gain_p = main_quad_rev3_21_200pm_cal->P8_Y0;
 
   /* End of SystemInitialize for SubSystem: '<Root>/While Iterator Subsystem1' */
 

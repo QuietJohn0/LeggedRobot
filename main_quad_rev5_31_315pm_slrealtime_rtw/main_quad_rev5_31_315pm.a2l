@@ -1,0 +1,2464 @@
+﻿/******************************************************************************
+ *
+ *  ASAP2 file:     main_quad_rev5_31_315pm.a2l
+ *
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
+ * Code generation for model "main_quad_rev5_31_315pm".
+ *
+ * Model version              : 1.60
+ * Simulink Coder version : 10.3 R2021a
+ * C source code generated on : Tue May 31 17:43:17 2022
+ *
+ * Target selection: slrealtime.tlc
+ * Embedded hardware selection: Intel->x86-64 (Linux 64)
+ * Code generation objectives: Unspecified
+ * Validation result: Not run
+ *
+ * (add additional file header information here)
+ *
+ ******************************************************************************/
+ASAP2_VERSION  1 71  
+/begin PROJECT ProjectName "Project Comment Goes Here"
+
+  /begin HEADER "Header Comments go here"
+
+  /end HEADER
+
+  /begin MODULE ModuleName  "Module Comment Goes Here"
+
+    /begin A2ML
+
+      struct Protocol_Layer {
+        uint;  /* XCP protocol layer version, current 0x100 */
+        uint;  /* T1 [ms] */
+        uint;  /* T2 [ms] */
+        uint;  /* T3 [ms] */
+        uint;  /* T4 [ms] */
+        uint;  /* T5 [ms] */
+        uint;  /* T6 [ms] */
+        uint;  /* T7 [ms] */
+        uchar;  /* MAX_CTO */
+        uint;  /* MAX_DTO */
+        enum {
+          "BYTE_ORDER_MSB_LAST" = 0,
+          "BYTE_ORDER_MSB_FIRST" = 1
+        };
+        enum {
+          "ADDRESS_GRANULARITY_BYTE" = 1,
+          "ADDRESS_GRANULARITY_WORD" = 2,
+          "ADDRESS_GRANULARITY_DWORD" = 4
+        };
+        taggedstruct {
+          ("OPTIONAL_CMD" enum {
+            "GET_COMM_MODE_INFO" = 251,
+            "GET_ID" = 250,
+            "SET_REQUEST" = 249,
+            "GET_SEED" = 248,
+            "UNLOCK" = 247,
+            "SET_MTA" = 246,
+            "UPLOAD" = 245,
+            "SHORT_UPLOAD" = 244,
+            "BUILD_CHECKSUM" = 243,
+            "TRANSPORT_LAYER_CMD" = 242,
+            "USER_CMD" = 241,
+            "DOWNLOAD" = 240,
+            "DOWNLOAD_NEXT" = 239,
+            "DOWNLOAD_MAX" = 238,
+            "SHORT_DOWNLOAD" = 237,
+            "MODIFY_BITS" = 236,
+            "SET_CAL_PAGE" = 235,
+            "GET_CAL_PAGE" = 234,
+            "GET_PAG_PROCESSOR_INFO" = 233,
+            "GET_SEGMENT_INFO" = 232,
+            "GET_PAGE_INFO" = 231,
+            "SET_SEGMENT_MODE" = 230,
+            "GET_SEGMENT_MODE" = 229,
+            "COPY_CAL_PAGE" = 228,
+            "CLEAR_DAQ_LIST" = 227,
+            "SET_DAQ_PTR" = 226,
+            "WRITE_DAQ" = 225,
+            "SET_DAQ_LIST_MODE" = 224,
+            "GET_DAQ_LIST_MODE" = 223,
+            "START_STOP_DAQ_LIST" = 222,
+            "START_STOP_SYNCH" = 221,
+            "GET_DAQ_CLOCK" = 220,
+            "READ_DAQ" = 219,
+            "GET_DAQ_PROCESSOR_INFO" = 218,
+            "GET_DAQ_RESOLUTION_INFO" = 217,
+            "GET_DAQ_LIST_INFO" = 216,
+            "GET_DAQ_EVENT_INFO" = 215,
+            "FREE_DAQ" = 214,
+            "ALLOC_DAQ" = 213,
+            "ALLOC_ODT" = 212,
+            "ALLOC_ODT_ENTRY" = 211,
+            "PROGRAM_START" = 210,
+            "PROGRAM_CLEAR" = 209,
+            "PROGRAM" = 208,
+            "PROGRAM_RESET" = 207,
+            "GET_PGM_PROCESSOR_INFO" = 206,
+            "GET_SECTOR_INFO" = 205,
+            "PROGRAM_PREPARE" = 204,
+            "PROGRAM_FORMAT" = 203,
+            "PROGRAM_NEXT" = 202,
+            "PROGRAM_MAX" = 201,
+            "PROGRAM_VERIFY" = 200
+          })*;
+          "COMMUNICATION_MODE_SUPPORTED" taggedunion {
+            "BLOCK" taggedstruct {
+              "SLAVE" ;
+              "MASTER" struct {
+                uchar;  /* MAX_BS */
+                uchar;  /* MIN_ST */
+              };
+            };
+            "INTERLEAVED" uchar;  /* QUEUE_SIZE */
+          };
+          "SEED_AND_KEY_EXTERNAL_FUNCTION" char[256];  /* Name of the Seed&Key function */
+        };
+      };
+
+      struct Daq {
+        enum {
+          "STATIC" = 0,
+          "DYNAMIC" = 1
+        };
+        uint;  /* MAX_DAQ */
+        uint;  /* MAX_EVENT_CHANNEL */
+        uchar;  /* MIN_DAQ */
+        enum {
+          "OPTIMISATION_TYPE_DEFAULT" = 0,
+          "OPTIMISATION_TYPE_ODT_TYPE_16" = 1,
+          "OPTIMISATION_TYPE_ODT_TYPE_32" = 2,
+          "OPTIMISATION_TYPE_ODT_TYPE_64" = 3,
+          "OPTIMISATION_TYPE_ODT_TYPE_ALIGNMENT" = 4,
+          "OPTIMISATION_TYPE_MAX_ENTRY_SIZE" = 5
+        };
+        enum {
+          "ADDRESS_EXTENSION_FREE" = 0,
+          "ADDRESS_EXTENSION_ODT" = 1,
+          "ADDRESS_EXTENSION_DAQ" = 3
+        };
+        enum {
+          "IDENTIFICATION_FIELD_TYPE_ABSOLUTE" = 0,
+          "IDENTIFICATION_FIELD_TYPE_RELATIVE_BYTE" = 1,
+          "IDENTIFICATION_FIELD_TYPE_RELATIVE_WORD" = 2,
+          "IDENTIFICATION_FIELD_TYPE_RELATIVE_WORD_ALIGNED" = 3
+        };
+        enum {
+          "GRANULARITY_ODT_ENTRY_SIZE_DAQ_BYTE" = 1,
+          "GRANULARITY_ODT_ENTRY_SIZE_DAQ_WORD" = 2,
+          "GRANULARITY_ODT_ENTRY_SIZE_DAQ_DWORD" = 4,
+          "GRANULARITY_ODT_ENTRY_SIZE_DAQ_DLONG" = 8
+        };
+        uchar;  /* MAX_ODT_ENTRY_SIZE_DAQ */
+        enum {
+          "NO_OVERLOAD_INDICATION" = 0,
+          "OVERLOAD_INDICATION_PID" = 1,
+          "OVERLOAD_INDICATION_EVENT" = 2
+        };
+        taggedstruct {
+          "PRESCALER_SUPPORTED" ;
+          "RESUME_SUPPORTED" ;
+          block "STIM" struct {
+            enum {
+              "GRANULARITY_ODT_ENTRY_SIZE_STIM_BYTE" = 1,
+              "GRANULARITY_ODT_ENTRY_SIZE_STIM_WORD" = 2,
+              "GRANULARITY_ODT_ENTRY_SIZE_STIM_DWORD" = 4,
+              "GRANULARITY_ODT_ENTRY_SIZE_STIM_DLONG" = 8
+            };
+            uchar;  /* MAX_ODT_ENTRY_SIZE_STIM */
+            taggedstruct {
+              "BIT_STIM_SUPPORTED" ;
+            };
+          };
+          block "TIMESTAMP_SUPPORTED" struct {
+            uint;  /* TIMESTAMP_TICKS */
+            enum {
+              "NO_TIME_STAMP" = 0,
+              "SIZE_BYTE" = 1,
+              "SIZE_WORD" = 2,
+              "SIZE_DWORD" = 4
+            };
+            enum {
+              "UNIT_1NS" = 0,
+              "UNIT_10NS" = 1,
+              "UNIT_100NS" = 2,
+              "UNIT_1US" = 3,
+              "UNIT_10US" = 4,
+              "UNIT_100US" = 5,
+              "UNIT_1MS" = 6,
+              "UNIT_10MS" = 7,
+              "UNIT_100MS" = 8,
+              "UNIT_1S" = 9
+            };
+            taggedstruct {
+              "TIMESTAMP_FIXED" ;
+            };
+          };
+          "PID_OFF_SUPPORTED" ;
+          (block "DAQ_LIST" struct {
+            uint;  /* DAQ_LIST_NUMBER */
+            taggedstruct {
+              "DAQ_LIST_TYPE" enum {
+                "DAQ" = 1,
+                "STIM" = 2,
+                "DAQ_STIM" = 3
+              };
+              "MAX_ODT" uchar;
+              "MAX_ODT_ENTRIES" uchar;
+              "FIRST_PID" uchar;
+              "EVENT_FIXED" uint;
+              block "PREDEFINED" taggedstruct {
+                (block "ODT" struct {
+                  uchar;  /* ODT number */
+                  taggedstruct {
+                    ("ODT_ENTRY" struct {
+                      uchar;  /* ODT_ENTRY number */
+                      ulong;  /* address of element */
+                      uchar;  /* address extension of element */
+                      uchar;  /* size of element [AG] */
+                      uchar;  /* BIT_OFFSET */
+                    })*;
+                  };
+                })*;
+              };
+            };
+          })*;
+          (block "EVENT" struct {
+            char[101];  /* EVENT_CHANNEL_NAME       */
+            char[9];  /* EVENT_CHANNEL_SHORT_NAME */
+            uint;  /* EVENT_CHANNEL_NUMBER     */
+            enum {
+              "DAQ" = 1,
+              "STIM" = 2,
+              "DAQ_STIM" = 3
+            };
+            uchar;  /* MAX_DAQ_LIST */
+            uchar;  /* TIME_CYCLE   */
+            uchar;  /* TIME_UNIT    */
+            uchar;  /* PRIORITY     */
+          })*;
+        };
+      };
+
+      taggedunion Daq_Event {
+        "FIXED_EVENT_LIST" taggedstruct {
+          ("EVENT" uint)*;
+        };
+        "VARIABLE" taggedstruct {
+          block "AVAILABLE_EVENT_LIST" taggedstruct {
+            ("EVENT" uint)*;
+          };
+          block "DEFAULT_EVENT_LIST" taggedstruct {
+            ("EVENT" uint)*;
+          };
+        };
+      };
+
+      struct Pag {
+        uchar;  /* MAX_SEGMENTS */
+        taggedstruct {
+          "FREEZE_SUPPORTED" ;
+        };
+      };
+
+      struct Pgm {
+        enum {
+          "PGM_MODE_ABSOLUTE" = 1,
+          "PGM_MODE_FUNCTIONAL" = 2,
+          "PGM_MODE_ABSOLUTE_AND_FUNCTIONAL" = 3
+        };
+        uchar;  /* MAX_SECTORS */
+        uchar;  /* MAX_CTO_PGM */
+        taggedstruct {
+          (block "SECTOR" struct {
+            char[101];  /* SECTOR_NAME */
+            uchar;  /* SECTOR_NUMBER */
+            ulong;  /* Address */
+            ulong;  /* Length  */
+            uchar;  /* CLEAR_SEQUENCE_NUMBER */
+            uchar;  /* PROGRAM_SEQUENCE_NUMBER */
+            uchar;  /* PROGRAM_METHOD */
+          })*;
+          "COMMUNICATION_MODE_SUPPORTED" taggedunion {
+            "BLOCK" taggedstruct {
+              "SLAVE" ;
+              "MASTER" struct {
+                uchar;  /* MAX_BS_PGM */
+                uchar;  /* MIN_ST_PGM */
+              };
+            };
+            "INTERLEAVED" uchar;  /* QUEUE_SIZE_PGM */
+          };
+        };
+      };
+
+      struct Segment {
+        uchar;  /* SEGMENT_NUMBER */
+        uchar;  /* number of pages */
+        uchar;  /* ADDRESS_EXTENSION */
+        uchar;  /* COMPRESSION_METHOD */
+        uchar;  /* ENCRYPTION_METHOD */
+        taggedstruct {
+          block "CHECKSUM" struct {
+            enum {
+              "XCP_ADD_11" = 1,
+              "XCP_ADD_12" = 2,
+              "XCP_ADD_14" = 3,
+              "XCP_ADD_22" = 4,
+              "XCP_ADD_24" = 5,
+              "XCP_ADD_44" = 6,
+              "XCP_CRC_16" = 7,
+              "XCP_CRC_16_CITT" = 8,
+              "XCP_CRC_32" = 9,
+              "XCP_USER_DEFINED" = 255
+            };
+            taggedstruct {
+              "MAX_BLOCK_SIZE" ulong;
+              "EXTERNAL_FUNCTION" char[256];  /* Name of the Checksum.DLL */
+            };
+          };
+          (block "PAGE" struct {
+            uchar;  /* PAGE_NUMBER */
+            enum {
+              "ECU_ACCESS_NOT_ALLOWED" = 0,
+              "ECU_ACCESS_WITHOUT_XCP_ONLY" = 1,
+              "ECU_ACCESS_WITH_XCP_ONLY" = 2,
+              "ECU_ACCESS_DONT_CARE" = 3
+            };
+            enum {
+              "XCP_READ_ACCESS_NOT_ALLOWED" = 0,
+              "XCP_READ_ACCESS_WITHOUT_ECU_ONLY" = 1,
+              "XCP_READ_ACCESS_WITH_ECU_ONLY" = 2,
+              "XCP_READ_ACCESS_DONT_CARE" = 3
+            };
+            enum {
+              "XCP_WRITE_ACCESS_NOT_ALLOWED" = 0,
+              "XCP_WRITE_ACCESS_WITHOUT_ECU_ONLY" = 1,
+              "XCP_WRITE_ACCESS_WITH_ECU_ONLY" = 2,
+              "XCP_WRITE_ACCESS_DONT_CARE" = 3
+            };
+            taggedstruct {
+              "INIT_SEGMENT" uchar;  /* references segment that initialises this page */
+            };
+          })*;
+          (block "ADDRESS_MAPPING" struct {
+            ulong;  /* source address */
+            ulong;  /* destination address */
+            ulong;  /* length */
+          })*;
+          "PGM_VERIFY" ulong;  /* verification value for PGM */
+        };
+      };
+
+      taggedstruct Common_Parameters {
+        block "PROTOCOL_LAYER" struct Protocol_Layer;
+        block "SEGMENT" struct Segment;
+        block "DAQ" struct Daq;
+        block "PAG" struct Pag;
+        block "PGM" struct Pgm;
+        block "DAQ_EVENT" taggedunion Daq_Event;
+      };
+
+      struct CAN_Parameters {
+        uint;  /* XCP on CAN version, currentl 0x0100 */
+        taggedstruct {
+          "CAN_ID_BROADCAST" ulong;  /* Auto-detection CAN-ID */
+          "CAN_ID_MASTER" ulong;  /* CMD/STIM CAN-ID */
+          "CAN_ID_SLAVE" ulong;  /* RES/ERR/EV/SERV/DAQ CAN-ID */
+          "BAUDRATE" ulong;  /* Baudrate in Hz */
+          "SAMPLE_POINT" uchar;  /* Sample point in  of bit time */
+          "SAMPLE_RATE" enum {
+            "SINGLE" = 1,
+            "TRIPLE" = 3
+          };
+          "BTL_CYCLES" uchar;  /* slots per bit time */
+          "SJW" uchar;
+          "SYNC_EDGE" enum {
+            "SINGLE" = 1,
+            "DUAL" = 2
+          };
+          "MAX_DLC_REQUIRED" ;  /* master to slave frames */
+          (block "DAQ_LIST_CAN_ID" struct {
+            uint;  /* reference to DAQ_LIST_NUMBER */
+            taggedstruct {
+              "VARIABLE" ;
+              "FIXED" ulong;  /* this DAQ_LIST always on this CAN_ID */
+            };
+          })*;
+        };
+      };
+
+      struct SxI_Parameters {
+        uint;  /* XCP on SxI version, currently 0x0100 */
+        ulong;  /* BAUDRATE [Hz] */
+        taggedstruct {
+          "ASYNCH_FULL_DUPLEX_MODE" struct {
+            enum {
+              "PARITY_NONE" = 0,
+              "PARITY_ODD" = 1,
+              "PARITY_EVEN" = 2
+            };
+            enum {
+              "ONE_STOP_BIT" = 1,
+              "TWO_STOP_BITS" = 2
+            };
+          };
+          "SYNCH_FULL_DUPLEX_MODE_BYTE" ;
+          "SYNCH_FULL_DUPLEX_MODE_WORD" ;
+          "SYNCH_FULL_DUPLEX_MODE_DWORD" ;
+          "SYNCH_MASTER_SLAVE_MODE_BYTE" ;
+          "SYNCH_MASTER_SLAVE_MODE_WORD" ;
+          "SYNCH_MASTER_SLAVE_MODE_DWORD" ;
+        };
+        enum {
+          "HEADER_LEN_BYTE" = 0,
+          "HEADER_LEN_CTR_BYTE" = 1,
+          "HEADER_LEN_FILL_BYTE" = 2,
+          "HEADER_LEN_WORD" = 3,
+          "HEADER_LEN_CTR_WORD" = 4,
+          "HEADER_LEN_FILL_WORD" = 5
+        };
+        enum {
+          "NO_CHECKSUM" = 0,
+          "CHECKSUM_BYTE" = 1,
+          "CHECKSUM_WORD" = 2
+        };
+      };
+
+      struct TCP_IP_Parameters {
+        uint;  /* XCP on TCP_IP version, currently 0x0100 */
+        uint;  /* PORT */
+        taggedunion {
+          "HOST_NAME" char[256];
+          "ADDRESS" char[15];
+        };
+      };
+
+      struct UDP_Parameters {
+        uint;  /* XCP on UDP version, currently 0x0100 */
+        uint;  /* PORT */
+        taggedunion {
+          "HOST_NAME" char[256];
+          "ADDRESS" char[15];
+        };
+      };
+
+      struct ep_parameters {
+        uchar;  /* ENDPOINT_NUMBER, not endpoint address */
+        enum {
+          "BULK_TRANSFER" = 2,
+          "INTERRUPT_TRANSFER" = 3
+        };
+        uint;  /* wMaxPacketSize: Maximum packet  
+ size of endpoint in bytes       */
+        uchar;  /* bInterval: polling of endpoint  */
+        enum {
+          "MESSAGE_PACKING_SINGLE" = 0,
+          "MESSAGE_PACKING_MULTIPLE" = 1,
+          "MESSAGE_PACKING_STREAMING" = 2
+        };
+        enum {
+          "ALIGNMENT_8_BIT" = 0,
+          "ALIGNMENT_16_BIT" = 1,
+          "ALIGNMENT_32_BIT" = 2,
+          "ALIGNMENT_64_BIT" = 3
+        };
+        taggedstruct {
+          "RECOMMENDED_HOST_BUFSIZE" uint;  /* Recommended size for the host 
+ buffer size. The size is defined
+ as multiple of wMaxPacketSize.  */
+        };
+      };  /* end of ep_parameters */
+
+      struct USB_Parameters {
+        uint;  /* XCP on USB version  
+ e.g. "1.0" = 0x0100 */
+        uint;  /* Vendor ID                       */
+        uint;  /* Product ID                      */
+        uchar;  /* Number of interface             */
+        enum {
+          "HEADER_LEN_BYTE" = 0,
+          "HEADER_LEN_CTR_BYTE" = 1,
+          "HEADER_LEN_FILL_BYTE" = 2,
+          "HEADER_LEN_WORD" = 3,
+          "HEADER_LEN_CTR_WORD" = 4,
+          "HEADER_LEN_FILL_WORD" = 5
+        };
+        taggedunion {
+          block "OUT_EP_CMD_STIM" struct ep_parameters;
+        };
+        taggedunion {
+          block "IN_EP_RESERR_DAQ_EVSERV" struct ep_parameters;
+        };
+        taggedstruct {
+          "ALTERNATE_SETTING_NO" uchar;  /* Number of alternate setting   */
+          "INTERFACE_STRING_DESCRIPTOR" char[101];
+          (block "OUT_EP_ONLY_STIM" struct ep_parameters)*;
+          (block "IN_EP_ONLY_DAQ" struct ep_parameters)*;
+          block "IN_EP_ONLY_EVSERV" struct ep_parameters;
+          (block "DAQ_LIST_USB_ENDPOINT" struct {
+            uint;  /* reference to DAQ_LIST_NUMBER          */
+            taggedstruct {
+              "FIXED_IN" uchar;  /* this DAQ list always                
+ ENDPOINT_NUMBER, not endpoint address */
+              "FIXED_OUT" uchar;  /* this STIM list always               
+ ENDPOINT_NUMBER, not endpoint address */
+            };
+          })*;  /* end of DAQ_LIST_USB_ENDPOINT */
+        };  /* end of optional */
+      };
+
+      struct SIMULINK_Parameters {
+        taggedstruct {
+          "MODEL_NAME" char[64];
+        };
+      };
+
+      enum packet_assignment_type {
+        "NOT_ALLOWED" = 0,
+        "FIXED" = 1,
+        "VARIABLE_INITIALISED" = 2,
+        "VARIABLE" = 3
+      };  /* end of packet_assignment_type */
+
+      struct buffer {
+        uchar;  /* FLX_BUF */
+        taggedstruct {
+          "MAX_FLX_LEN_BUF" taggedunion {
+            "FIXED" uchar;  /* constant value */
+            "VARIABLE" uchar;  /* initial value */
+          };  /* end of MAX_FLX_LEN_BUF */
+          block "LPDU_ID" taggedstruct {
+            "FLX_SLOT_ID" taggedunion {
+              "FIXED" uint;
+              "VARIABLE" taggedstruct {
+                "INITIAL_VALUE" uint;
+              };
+            };  /* end of FLX_SLOT_ID */
+            "OFFSET" taggedunion {
+              "FIXED" uchar;
+              "VARIABLE" taggedstruct {
+                "INITIAL_VALUE" uchar;
+              };
+            };  /* end of OFFSET */
+            "CYCLE_REPETITION" taggedunion {
+              "FIXED" uchar;
+              "VARIABLE" taggedstruct {
+                "INITIAL_VALUE" uchar;
+              };
+            };  /* end of CYCLE_REPETITION */
+            "CHANNEL" taggedunion {
+              "FIXED" enum {
+                "A" = 0,
+                "B" = 1
+              };
+              "VARIABLE" taggedstruct {
+                "INITIAL_VALUE" enum {
+                  "A" = 0,
+                  "B" = 1
+                };
+              };
+            };  /* end of CHANNEL */
+          };  /* end of LPDU_ID */
+          block "XCP_PACKET" taggedstruct {
+            "CMD" enum packet_assignment_type;  /* end of CMD     */
+            "RES_ERR" enum packet_assignment_type;  /* end of RES_ERR */
+            "EV_SERV" enum packet_assignment_type;  /* end of EV_SERV */
+            "DAQ" enum packet_assignment_type;  /* end of DAQ     */
+            "STIM" enum packet_assignment_type;  /* end of STIM    */
+          };  /* end of XCP_PACKET */
+        };
+      };  /* end of buffer */
+
+      struct FLX_Parameters {
+
+        uint;              /* XCP on FlexRay version  */
+                           /* e.g. "1.0" = 0x0100 */
+
+        uint;              /* T1_FLX [ms] */
+
+        char[256];         /* FIBEX-file */
+                           /* including CHI information */
+                           /* including extension */
+                           /* without path */
+
+        char[256];         /* Cluster-ID */
+
+        uchar;             /* NAX */
+
+        enum { 
+          "HEADER_NAX"              = 0,
+          "HEADER_NAX_FILL"         = 1,
+          "HEADER_NAX_CTR"          = 2,
+          "HEADER_NAX_FILL3"        = 3,
+          "HEADER_NAX_CTR_FILL2"    = 4,
+          "HEADER_NAX_LEN"          = 5,
+          "HEADER_NAX_CTR_LEN"      = 6,
+          "HEADER_NAX_FILL2_LEN"    = 7,
+          "HEADER_NAX_CTR_FILL_LEN" = 8
+        };
+        enum {
+          "PACKET_ALIGNMENT_8" = 0,
+          "PACKET_ALIGNMENT_16" = 1,
+          "PACKET_ALIGNMENT_32" = 2
+        };
+        taggedunion {
+          block "INITIAL_CMD_BUFFER" struct buffer;
+        };
+        taggedunion {
+          block "INITIAL_RES_ERR_BUFFER" struct buffer;
+        };
+        taggedstruct {
+          (block "POOL_BUFFER" struct buffer)*;
+        };
+      };
+
+      block "IF_DATA" taggedunion if_data {
+
+        "CANAPE_EXT" struct {
+          int;             /* version number */
+          taggedstruct {
+            "LINK_MAP" struct {
+              char[256];   /* segment name */
+              long;        /* base address of the segment */
+              uint;        /* address extension of the segment */
+              uint;        /* flag: address is relative to DS */
+              long;        /* offset of the segment address */
+              uint;        /* datatypValid */
+              uint;        /* enum datatyp */
+              uint;        /* bit offset of the segment */
+            };
+            "DISPLAY" struct {
+              long;        /* display color */
+              double;      /* minimal display value (phys)*/
+              double;      /* maximal display value (phys)*/
+            };
+            "VIRTUAL_CONVERSION" struct {
+              char[256];   /* name of the conversion formula */
+            };
+          };
+        };
+        "CANAPE_MODULE" struct {
+          taggedstruct {
+            ("RECORD_LAYOUT_STEPSIZE" struct {
+              char[256];   /* name of record layout*/
+              uint;        /* stepsize for FNC_VALUES */
+              uint;        /* stepsize for AXIS_PTS_X */
+              uint;        /* stepsize for AXIS_PTS_Y */
+              uint;        /* stepsize for AXIS_PTS_Z */
+              uint;        /* stepsize for AXIS_PTS_4 */
+              uint;        /* stepsize for AXIS_PTS_5 */
+            })*;
+          };
+        };
+        /*********************************************************/
+        /*   XCP                                                 */
+        /*********************************************************/
+        "XCP" struct {
+          taggedstruct Common_Parameters;  /* default parameters */
+          taggedstruct {
+            block "XCP_ON_CAN" struct {
+              struct CAN_Parameters;  /* specific for CAN */
+              taggedstruct Common_Parameters;  /* overruling of default */
+            };
+            block "XCP_ON_SxI" struct {
+              struct SxI_Parameters;  /* specific for SxI */
+              taggedstruct Common_Parameters;  /* overruling of default */
+            };
+            block "XCP_ON_TCP_IP" struct {
+              struct TCP_IP_Parameters;  /* specific for TCP_IP */
+              taggedstruct Common_Parameters;  /* overruling of default */
+            };
+            block "XCP_ON_UDP_IP" struct {
+              struct UDP_Parameters;  /* specific for UDP */
+              taggedstruct Common_Parameters;  /* overruling of default */
+            };
+            block "XCP_ON_USB" struct {
+              struct USB_Parameters;  /* specific for USB      */
+              taggedstruct Common_Parameters;  /* overruling of default */
+            };
+            block "XCP_ON_FLX" struct {
+              struct FLX_Parameters;  /* specific for FlexRay  */
+              taggedstruct Common_Parameters;  /* overruling of default */
+            };
+          };
+        };
+      };
+
+    /end A2ML
+
+
+
+    /begin IF_DATA XCP
+      
+      
+      /begin PROTOCOL_LAYER
+        0x0100
+        0x03E8
+        0x00C8
+        0x0000
+        0x0000
+        0x0000
+        0x0000
+        0x0000
+        0xFC
+        0x0578
+        BYTE_ORDER_MSB_LAST
+        ADDRESS_GRANULARITY_BYTE
+        OPTIONAL_CMD ALLOC_ODT_ENTRY
+        OPTIONAL_CMD ALLOC_ODT
+        OPTIONAL_CMD ALLOC_DAQ
+        OPTIONAL_CMD FREE_DAQ
+        OPTIONAL_CMD GET_DAQ_RESOLUTION_INFO
+        OPTIONAL_CMD GET_DAQ_PROCESSOR_INFO
+        OPTIONAL_CMD START_STOP_SYNCH
+        OPTIONAL_CMD START_STOP_DAQ_LIST
+        OPTIONAL_CMD SET_DAQ_LIST_MODE
+        OPTIONAL_CMD WRITE_DAQ
+        OPTIONAL_CMD SET_DAQ_PTR
+        OPTIONAL_CMD GET_CAL_PAGE
+        OPTIONAL_CMD SET_CAL_PAGE
+        OPTIONAL_CMD COPY_CAL_PAGE
+        OPTIONAL_CMD SHORT_DOWNLOAD
+        OPTIONAL_CMD DOWNLOAD_MAX
+        OPTIONAL_CMD DOWNLOAD
+        OPTIONAL_CMD SHORT_UPLOAD
+        OPTIONAL_CMD UPLOAD
+        OPTIONAL_CMD SET_MTA
+      /end PROTOCOL_LAYER
+
+      
+      /begin DAQ
+        DYNAMIC
+        0x0000
+        0x0080
+        0x00
+        OPTIMISATION_TYPE_DEFAULT
+        ADDRESS_EXTENSION_FREE
+        IDENTIFICATION_FIELD_TYPE_RELATIVE_WORD_ALIGNED
+        GRANULARITY_ODT_ENTRY_SIZE_DAQ_BYTE
+        0xFF
+        OVERLOAD_INDICATION_PID
+        PRESCALER_SUPPORTED 
+        
+        /begin STIM
+          GRANULARITY_ODT_ENTRY_SIZE_STIM_BYTE
+          0xFF
+          
+        /end STIM
+
+        /begin TIMESTAMP_SUPPORTED
+          0x0001
+          SIZE_DWORD
+          UNIT_1US
+          TIMESTAMP_FIXED 
+        /end TIMESTAMP_SUPPORTED
+
+        
+        /begin EVENT
+          "5 ms"
+          "5 ms"
+          0x0000
+          DAQ
+          0xFF
+          0x05
+          0x06
+          0x00
+        /end EVENT
+
+      /end DAQ
+
+      
+      /begin XCP_ON_UDP_IP
+        0x0100
+        0x15B3
+        ADDRESS "192.168.7.5"
+      /end XCP_ON_UDP_IP
+
+    /end IF_DATA
+
+
+
+    /begin MOD_PAR "MOD PAR Comment Goes Here"
+
+       /begin MEMORY_SEGMENT main_quad_rev5_31_315p_cal_impl
+       "main_quad_rev5_31_315p_cal_impl"
+       DATA
+       FLASH
+       INTERN
+       0x0021A020
+       0x9D8
+       -1 -1 -1 -1 -1       /begin IF_DATA XCP
+         /begin SEGMENT
+            0x00
+            0x02
+            0x00
+            0x00
+            0x00
+            /begin PAGE
+              0x00
+              ECU_ACCESS_DONT_CARE
+              XCP_READ_ACCESS_DONT_CARE
+              XCP_WRITE_ACCESS_NOT_ALLOWED
+            /end PAGE
+            /begin PAGE
+              0x01
+              ECU_ACCESS_DONT_CARE
+              XCP_READ_ACCESS_DONT_CARE
+              XCP_WRITE_ACCESS_DONT_CARE
+            /end PAGE
+          /end SEGMENT
+        /end IF_DATA
+        /end MEMORY_SEGMENT
+
+    /end MOD_PAR
+
+    /begin MOD_COMMON  "Mod Common Comment Here"
+      BYTE_ORDER     MSB_LAST
+      ALIGNMENT_BYTE 1
+      ALIGNMENT_WORD 2
+      ALIGNMENT_LONG 8
+      ALIGNMENT_FLOAT32_IEEE 4
+      ALIGNMENT_FLOAT64_IEEE 8
+      ALIGNMENT_INT64 4
+    /end MOD_COMMON
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANRead_P1 ""  
+    VAL_BLK 0x0021A290 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+    MATRIX_DIM                        6 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANRead_P1_j ""  
+    VAL_BLK 0x0021A310 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+    MATRIX_DIM                        6 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANSetup_P1 ""  
+    VAL_BLK 0x0021A370 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+    MATRIX_DIM                        40 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANSetup_P2 ""  
+    VALUE 0x0021A4C0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANSetup_P3 ""  
+    VALUE 0x0021A4D8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P1 ""  
+    VALUE 0x0021A618 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P10 ""  
+    VALUE 0x0021A6F0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P11 ""  
+    VALUE 0x0021A708 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P12 ""  
+    VALUE 0x0021A720 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P13 ""  
+    VALUE 0x0021A738 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P14 ""  
+    VALUE 0x0021A750 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P15 ""  
+    VALUE 0x0021A768 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P16 ""  
+    VALUE 0x0021A780 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P17 ""  
+    VALUE 0x0021A798 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P18 ""  
+    VALUE 0x0021A7B0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P19 ""  
+    VALUE 0x0021A7C8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P2 ""  
+    VALUE 0x0021A630 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P20 ""  
+    VALUE 0x0021A7E0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P21 ""  
+    VALUE 0x0021A7F8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P22 ""  
+    VALUE 0x0021A810 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P23 ""  
+    VALUE 0x0021A828 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P24 ""  
+    VALUE 0x0021A840 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P25 ""  
+    VALUE 0x0021A858 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P26 ""  
+    VALUE 0x0021A870 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P27 ""  
+    VALUE 0x0021A888 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P28 ""  
+    VALUE 0x0021A8A0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P29 ""  
+    VALUE 0x0021A8B8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P3 ""  
+    VALUE 0x0021A648 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P30 ""  
+    VALUE 0x0021A8D0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P31 ""  
+    VALUE 0x0021A8E8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P32 ""  
+    VALUE 0x0021A900 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P33 ""  
+    VALUE 0x0021A918 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P34 ""  
+    VALUE 0x0021A930 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P4 ""  
+    VALUE 0x0021A660 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P5 ""  
+    VALUE 0x0021A678 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P6 ""  
+    VALUE 0x0021A690 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P7 ""  
+    VALUE 0x0021A6A8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P8 ""  
+    VALUE 0x0021A6C0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANStatus_P9 ""  
+    VALUE 0x0021A6D8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANWrite1_P1 ""  
+    VAL_BLK 0x0021A030 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+    MATRIX_DIM                        7 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANWrite1_P1_d ""  
+    VAL_BLK 0x0021A198 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+    MATRIX_DIM                        7 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANWrite1_P1_j ""  
+    VAL_BLK 0x0021A0C0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+    MATRIX_DIM                        7 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANWrite1_P1_je ""  
+    VAL_BLK 0x0021A108 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+    MATRIX_DIM                        7 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANWrite1_P1_l ""  
+    VAL_BLK 0x0021A078 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+    MATRIX_DIM                        7 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANWrite1_P1_n ""  
+    VAL_BLK 0x0021A150 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+    MATRIX_DIM                        7 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANWrite1_P1_nj ""  
+    VAL_BLK 0x0021A1E0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+    MATRIX_DIM                        7 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.CANWrite1_P1_p ""  
+    VAL_BLK 0x0021A228 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+    MATRIX_DIM                        7 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant1_Value ""  
+    VALUE 0x0021A508 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant1_Value_a ""  
+    VAL_BLK 0x0021A9E8 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant1_Value_e ""  
+    VAL_BLK 0x0021A970 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant1_Value_f ""  
+    VAL_BLK 0x0021A988 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant1_Value_h ""  
+    VAL_BLK 0x0021A9A0 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant1_Value_i ""  
+    VAL_BLK 0x0021A9B8 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant1_Value_k ""  
+    VAL_BLK 0x0021A958 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant1_Value_m ""  
+    VAL_BLK 0x0021A940 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant1_Value_mj ""  
+    VAL_BLK 0x0021A9D0 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant2_Value ""  
+    VALUE 0x0021A558 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant2_Value_a ""  
+    VAL_BLK 0x0021A9F0 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant2_Value_d ""  
+    VAL_BLK 0x0021A960 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant2_Value_g ""  
+    VAL_BLK 0x0021A948 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant2_Value_i ""  
+    VAL_BLK 0x0021A9D8 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant2_Value_j ""  
+    VAL_BLK 0x0021A990 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant2_Value_k ""  
+    VAL_BLK 0x0021A978 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant2_Value_l ""  
+    VAL_BLK 0x0021A9C0 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant2_Value_n ""  
+    VAL_BLK 0x0021A9A8 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant3_Value ""  
+    VALUE 0x0021A510 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant8_Value ""  
+    VALUE 0x0021A520 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant_Value ""  
+    VALUE 0x0021A4F0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant_Value_b ""  
+    VAL_BLK 0x0021A998 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant_Value_bb ""  
+    VAL_BLK 0x0021A9B0 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant_Value_i ""  
+    VAL_BLK 0x0021A968 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant_Value_l ""  
+    VAL_BLK 0x0021A938 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant_Value_le ""  
+    VAL_BLK 0x0021A980 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant_Value_o ""  
+    VAL_BLK 0x0021A9C8 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant_Value_ob ""  
+    VAL_BLK 0x0021A9E0 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Constant_Value_p ""  
+    VAL_BLK 0x0021A950 Scalar_UBYTE 0 main_quad_rev5_31_315pm_CM_uint8 0 255  
+    MATRIX_DIM                        8 1 
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Delay1_InitialCondition ""  
+    VALUE 0x0021A4E8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Delay2_InitialCondition ""  
+    VALUE 0x0021A4F8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Delay3_InitialCondition ""  
+    VALUE 0x0021A500 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Delay_InitialCondition ""  
+    VALUE 0x0021A4E0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain10_Gain ""  
+    VALUE 0x0021A570 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain11_Gain ""  
+    VALUE 0x0021A578 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain12_Gain ""  
+    VALUE 0x0021A5A0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain13_Gain ""  
+    VALUE 0x0021A5A8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain14_Gain ""  
+    VALUE 0x0021A588 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain15_Gain ""  
+    VALUE 0x0021A590 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain16_Gain ""  
+    VALUE 0x0021A5B0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain17_Gain ""  
+    VALUE 0x0021A598 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain18_Gain ""  
+    VALUE 0x0021A5B8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain19_Gain ""  
+    VALUE 0x0021A5C0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain1_Gain ""  
+    VALUE 0x0021A2C8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain1_Gain_a ""  
+    VALUE 0x0021A348 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain1_Gain_o ""  
+    VALUE 0x0021A518 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain20_Gain ""  
+    VALUE 0x0021A5E0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain21_Gain ""  
+    VALUE 0x0021A5C8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain22_Gain ""  
+    VALUE 0x0021A5D0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain23_Gain ""  
+    VALUE 0x0021A5D8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain24_Gain ""  
+    VALUE 0x0021A5E8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain25_Gain ""  
+    VALUE 0x0021A5F0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain26_Gain ""  
+    VALUE 0x0021A568 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain27_Gain ""  
+    VALUE 0x0021A5F8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain28_Gain ""  
+    VALUE 0x0021A600 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain2_Gain ""  
+    VALUE 0x0021A2D0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain2_Gain_f ""  
+    VALUE 0x0021A350 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain2_Gain_n ""  
+    VALUE 0x0021A528 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain3_Gain ""  
+    VALUE 0x0021A2D8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain3_Gain_i ""  
+    VALUE 0x0021A358 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain3_Gain_im ""  
+    VALUE 0x0021A530 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain4_Gain ""  
+    VALUE 0x0021A550 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain5_Gain ""  
+    VALUE 0x0021A560 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain6_Gain ""  
+    VALUE 0x0021A538 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain7_Gain ""  
+    VALUE 0x0021A540 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain8_Gain ""  
+    VALUE 0x0021A580 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain9_Gain ""  
+    VALUE 0x0021A548 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain_Gain ""  
+    VALUE 0x0021A2C0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.Gain_Gain_e ""  
+    VALUE 0x0021A340 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.P1_Y0 ""  
+    VALUE 0x0021A2E0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.P2_Y0 ""  
+    VALUE 0x0021A260 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.P3_Y0 ""  
+    VALUE 0x0021A2E8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.P4_Y0 ""  
+    VALUE 0x0021A268 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.P5_Y0 ""  
+    VALUE 0x0021A2F0 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.P6_Y0 ""  
+    VALUE 0x0021A270 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.P7_Y0 ""  
+    VALUE 0x0021A2F8 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC  main_quad_rev5_31_315p_cal_impl.P8_Y0 ""  
+    VALUE 0x0021A278 Scalar_FLOAT64_IEEE 0 main_quad_rev5_31_315pm_CM_double -1.7E+308 1.7E+308  
+  /end CHARACTERISTIC 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Add ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220CA8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Add1 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220CB0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Add2 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220CB8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Add3 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220CC0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.BytePacking ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00220EF0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.BytePacking_a ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00220F10
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.BytePacking_d ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00220F40
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.BytePacking_f ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00220F20
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.BytePacking_k ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00220F50
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.BytePacking_o ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00220F00
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.BytePacking_or ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00220F60
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.BytePacking_p ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00220F30
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANRead_o1 ""  
+    UBYTE main_quad_rev5_31_315pm_CM_logical       0             0       0 1  
+    ECU_ADDRESS                       0x00220F68
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANRead_o1_d ""  
+    UBYTE main_quad_rev5_31_315pm_CM_logical       0             0       0 1  
+    ECU_ADDRESS                       0x00220F69
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o1 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D10
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o1_c ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220DD0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o1_h ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D50
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o1_j ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D30
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o1_k ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D70
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o1_l ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220DF0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o1_lm ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220E10
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o1_p ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220DB0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o2 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D18
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o2_b ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220DD8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o2_d ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220E18
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o2_g ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D38
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o2_h ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D78
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o2_k ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D58
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o2_kk ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220DB8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o2_o ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220DF8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o3 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D20
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o3_a ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D80
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o3_d ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220E00
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o3_e ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220DC0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o3_g ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220DE0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o3_i ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D60
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o3_m ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220E20
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o3_p ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D40
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o4 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D28
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o4_a ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220E28
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o4_f ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220DC8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o4_j ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220E08
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o4_k ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D48
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o4_kw ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220DE8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o4_l ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D88
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o4_o ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D68
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o5 ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    ECU_ADDRESS                       0x00220EE0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o5_a ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    ECU_ADDRESS                       0x00220EE3
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o5_e ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    ECU_ADDRESS                       0x00220EE2
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o5_f ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    ECU_ADDRESS                       0x00220EE7
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o5_g ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    ECU_ADDRESS                       0x00220EE4
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o5_gy ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    ECU_ADDRESS                       0x00220EE6
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o5_i ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    ECU_ADDRESS                       0x00220EE5
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.CANUnpack_o5_n ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    ECU_ADDRESS                       0x00220EE1
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Clock ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220CE8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Constant ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220BC0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Constant1 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220BD8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Constant3 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220BE0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220CF0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain1 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220BE8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain10 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C30
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain11 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C38
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain12 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C60
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain13 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C68
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain14 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C48
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain15 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C50
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain16 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C70
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain17 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C58
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain18 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C78
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain19 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C80
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain1_f ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D98
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain1_k ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220CF8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain2 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220BF0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain20 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220CA0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain21 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C88
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain22 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C90
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain23 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C98
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain24 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220CC8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain25 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220CD0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain26 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C28
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain27 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220CD8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain28 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220CE0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain2_b ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220DA0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain2_n ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D00
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain3 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220BF8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain3_a ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220DA8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain3_b ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D08
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain4 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C18
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain5 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C20
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain6 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C00
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain7 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C08
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain8 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C40
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain9 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220C10
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Gain_p ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220D90
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Kd1 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220EB8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Kd2 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220EC0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Kp1 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220EA8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.Kp2 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220EB0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.MultiportSwitch ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00220EE8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.MultiportSwitch_a ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00220EF8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.MultiportSwitch_c ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00220F18
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.MultiportSwitch_ce ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00220F28
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.MultiportSwitch_f ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00220F58
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.MultiportSwitch_i ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00220F38
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.MultiportSwitch_p ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00220F08
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.MultiportSwitch_p2 ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00220F48
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.P_1L_avg ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220BB0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.P_1R_avg ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220BC8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.P_2L_avg ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220BB8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.P_2R_avg ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220BD0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.T1 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220E98
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.T2 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220EA0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.TmpSignalConversionAtSFunctionI ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00220E30
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.WhileIterator ""  
+    SLONG main_quad_rev5_31_315pm_CM_int32       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220ED8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.WhileIterator_m ""  
+    SLONG main_quad_rev5_31_315pm_CM_int32       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220EDC
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.c ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220E90
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.danger ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220E70
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats.I_ff ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00221028
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats.position ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00221018
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats.velocity ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00221020
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_a.I_ff ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220FC8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_a.position ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220FB8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_a.velocity ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220FC0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_b.I_ff ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220FB0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_b.position ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220FA0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_b.velocity ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220FA8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_c.I_ff ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00221010
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_c.position ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00221000
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_c.velocity ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00221008
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_cd.I_ff ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220F98
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_cd.position ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220F88
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_cd.velocity ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220F90
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_f.I_ff ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220F80
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_f.position ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220F70
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_f.velocity ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220F78
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_j.I_ff ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220FE0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_j.position ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220FD0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_j.velocity ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220FD8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_l.I_ff ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220FF8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_l.position ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220FE8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_bytesfloats_l.velocity ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220FF0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_floatsbytes.b ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00221068
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_floatsbytes_b.b ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00221060
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_floatsbytes_bb.b ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00221040
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_floatsbytes_i.b ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00221050
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_floatsbytes_if.b ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00221048
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_floatsbytes_k.b ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00221038
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_floatsbytes_kd.b ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00221030
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.sf_floatsbytes_o.b ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    LAYOUT                            COLUMN_DIR
+    MATRIX_DIM                        8 
+    ECU_ADDRESS                       0x00221058
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.stop ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220E78
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.theta1 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220E80
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.theta1r ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220EC8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.theta2 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220E88
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_B.theta2r ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220ED0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.CANUnpack_ModeSignalID ""  
+    SLONG main_quad_rev5_31_315pm_CM_int_T       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220A3C
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.CANUnpack_ModeSignalID_a ""  
+    SLONG main_quad_rev5_31_315pm_CM_int_T       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220A64
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.CANUnpack_ModeSignalID_d ""  
+    SLONG main_quad_rev5_31_315pm_CM_int_T       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220A5C
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.CANUnpack_ModeSignalID_j ""  
+    SLONG main_quad_rev5_31_315pm_CM_int_T       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220A44
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.CANUnpack_ModeSignalID_jt ""  
+    SLONG main_quad_rev5_31_315pm_CM_int_T       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220A6C
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.CANUnpack_ModeSignalID_m ""  
+    SLONG main_quad_rev5_31_315pm_CM_int_T       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220A4C
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.CANUnpack_ModeSignalID_o ""  
+    SLONG main_quad_rev5_31_315pm_CM_int_T       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220A54
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.CANUnpack_ModeSignalID_or ""  
+    SLONG main_quad_rev5_31_315pm_CM_int_T       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220A74
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.CANUnpack_StatusPortID ""  
+    SLONG main_quad_rev5_31_315pm_CM_int_T       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220A40
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.CANUnpack_StatusPortID_e ""  
+    SLONG main_quad_rev5_31_315pm_CM_int_T       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220A78
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.CANUnpack_StatusPortID_i ""  
+    SLONG main_quad_rev5_31_315pm_CM_int_T       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220A68
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.CANUnpack_StatusPortID_j ""  
+    SLONG main_quad_rev5_31_315pm_CM_int_T       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220A58
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.CANUnpack_StatusPortID_l ""  
+    SLONG main_quad_rev5_31_315pm_CM_int_T       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220A50
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.CANUnpack_StatusPortID_o ""  
+    SLONG main_quad_rev5_31_315pm_CM_int_T       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220A60
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.CANUnpack_StatusPortID_o4 ""  
+    SLONG main_quad_rev5_31_315pm_CM_int_T       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220A70
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.CANUnpack_StatusPortID_p ""  
+    SLONG main_quad_rev5_31_315pm_CM_int_T       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x00220A48
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.Delay1_DSTATE ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x002206A8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.Delay2_DSTATE ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x002206B0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.Delay3_DSTATE ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x002206B8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.Delay_DSTATE ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x002206A0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.Kp1temp ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220748
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.Kp2temp ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220750
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.Th2Th1 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x002206F8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.done ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x002206C0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.is_Command ""  
+    ULONG main_quad_rev5_31_315pm_CM_uint32       0             0       0 2147483646  
+    ECU_ADDRESS                       0x002209B0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.is_active_c8_main_quad_rev5_31_ ""  
+    UBYTE main_quad_rev5_31_315pm_CM_uint8       0             0       0 255  
+    ECU_ADDRESS                       0x00220ABE
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.is_c8_main_quad_rev5_31_315pm ""  
+    ULONG main_quad_rev5_31_315pm_CM_uint32       0             0       0 2147483646  
+    ECU_ADDRESS                       0x002209AC
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.p_jump ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220758
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.p_mid ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220730
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.p_sit ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220738
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.p_stand ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220740
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.pf ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x002206C8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.pfr ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220700
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.po1 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x002206D8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.po1r ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220708
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.po2 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x002206E0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.po2r ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220710
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.sfEvent ""  
+    SLONG main_quad_rev5_31_315pm_CM_int32       0             0       -2147483648 2147483647  
+    ECU_ADDRESS                       0x002209A8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.slope1 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x002206E8
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.slope1r ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220718
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.slope2 ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x002206F0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.slope2r ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220720
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.temporalCounter_i1 ""  
+    UWORD main_quad_rev5_31_315pm_CM_uint16       0             0       0 65535  
+    ECU_ADDRESS                       0x00220ABC
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.to ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x002206D0
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT  main_quad_rev5_31_315pm_DW.wasReady ""  
+    FLOAT64_IEEE main_quad_rev5_31_315pm_CM_double       0             0       -1.7E+308 1.7E+308  
+    ECU_ADDRESS                       0x00220728
+  /end MEASUREMENT 
+
+  /begin COMPU_METHOD main_quad_rev5_31_315pm_CM_double ""  
+    IDENTICAL "%15.10" ""  
+  /end COMPU_METHOD
+
+  /begin COMPU_METHOD main_quad_rev5_31_315pm_CM_int32 ""  
+    IDENTICAL "%10.0" ""  
+  /end COMPU_METHOD
+
+  /begin COMPU_METHOD main_quad_rev5_31_315pm_CM_int_T ""  
+    IDENTICAL "customformat" ""  
+  /end COMPU_METHOD
+
+  /begin COMPU_METHOD main_quad_rev5_31_315pm_CM_logical ""  
+    IDENTICAL "%1.0" ""  
+  /end COMPU_METHOD
+
+  /begin COMPU_METHOD main_quad_rev5_31_315pm_CM_uint16 ""  
+    IDENTICAL "%5.0" ""  
+  /end COMPU_METHOD
+
+  /begin COMPU_METHOD main_quad_rev5_31_315pm_CM_uint32 ""  
+    IDENTICAL "%10.0" ""  
+  /end COMPU_METHOD
+
+  /begin COMPU_METHOD main_quad_rev5_31_315pm_CM_uint8 ""  
+    IDENTICAL "%3.0" ""  
+  /end COMPU_METHOD
+
+  /begin  RECORD_LAYOUT Scalar_BOOLEAN
+    FNC_VALUES 1 UBYTE COLUMN_DIR DIRECT
+  /end  RECORD_LAYOUT 
+
+  /begin  RECORD_LAYOUT Scalar_FLOAT64_IEEE
+    FNC_VALUES 1 FLOAT64_IEEE COLUMN_DIR DIRECT
+  /end  RECORD_LAYOUT 
+
+  /begin  RECORD_LAYOUT Scalar_SLONG
+    FNC_VALUES 1 SLONG COLUMN_DIR DIRECT
+  /end  RECORD_LAYOUT 
+
+  /begin  RECORD_LAYOUT Scalar_UBYTE
+    FNC_VALUES 1 UBYTE COLUMN_DIR DIRECT
+  /end  RECORD_LAYOUT 
+
+  /begin  RECORD_LAYOUT Scalar_ULONG
+    FNC_VALUES 1 ULONG COLUMN_DIR DIRECT
+  /end  RECORD_LAYOUT 
+
+  /begin  RECORD_LAYOUT Scalar_UWORD
+    FNC_VALUES 1 UWORD COLUMN_DIR DIRECT
+  /end  RECORD_LAYOUT 
+
+  /begin GROUP main_quad_rev5_31_315pm "main_quad_rev5_31_315pm" ROOT  
+  /end GROUP
+
+  /end MODULE
+
+/end PROJECT
+

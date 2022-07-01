@@ -80,6 +80,18 @@ struct main_quad_rev3_21_200p_cal_type {
                       /* Expression: [initValues(1:4) messageType initValues(6)]
                        * Referenced by: '<S11>/CAN Read'
                        */
+  real_T Gain_Gain;                    /* Expression: 1
+                                        * Referenced by: '<S11>/Gain'
+                                        */
+  real_T Gain1_Gain;                   /* Expression: 1
+                                        * Referenced by: '<S11>/Gain1'
+                                        */
+  real_T Gain2_Gain;                   /* Expression: -1
+                                        * Referenced by: '<S11>/Gain2'
+                                        */
+  real_T Gain3_Gain;                   /* Expression: -1
+                                        * Referenced by: '<S11>/Gain3'
+                                        */
   real_T P1_Y0;                        /* Computed Parameter: P1_Y0
                                         * Referenced by: '<S12>/P1'
                                         */
@@ -99,6 +111,18 @@ struct main_quad_rev3_21_200p_cal_type {
                       /* Expression: [initValues(1:4) messageType initValues(6)]
                        * Referenced by: '<S12>/CAN Read'
                        */
+  real_T Gain_Gain_e;                  /* Expression: 1
+                                        * Referenced by: '<S12>/Gain'
+                                        */
+  real_T Gain1_Gain_a;                 /* Expression: -1
+                                        * Referenced by: '<S12>/Gain1'
+                                        */
+  real_T Gain2_Gain_f;                 /* Expression: -1
+                                        * Referenced by: '<S12>/Gain2'
+                                        */
+  real_T Gain3_Gain_i;                 /* Expression: 1
+                                        * Referenced by: '<S12>/Gain3'
+                                        */
   real_T CANSetup_P1_Size[2];          /* Computed Parameter: CANSetup_P1_Size
                                         * Referenced by: '<Root>/CAN Setup '
                                         */
@@ -127,16 +151,16 @@ struct main_quad_rev3_21_200p_cal_type {
   real_T Constant_Value;               /* Expression: 0
                                         * Referenced by: '<Root>/Constant'
                                         */
-  real_T Gain1_Gain;                   /* Expression: 1
+  real_T Gain1_Gain_o;                 /* Expression: 1
                                         * Referenced by: '<Root>/Gain1'
                                         */
   real_T Constant8_Value;              /* Expression: 0
                                         * Referenced by: '<Root>/Constant8'
                                         */
-  real_T Gain2_Gain;                   /* Expression: 1
+  real_T Gain2_Gain_n;                 /* Expression: 1
                                         * Referenced by: '<Root>/Gain2'
                                         */
-  real_T Gain3_Gain;                   /* Expression: 1
+  real_T Gain3_Gain_im;                /* Expression: 1
                                         * Referenced by: '<Root>/Gain3'
                                         */
   real_T Gain6_Gain;                   /* Expression: -1

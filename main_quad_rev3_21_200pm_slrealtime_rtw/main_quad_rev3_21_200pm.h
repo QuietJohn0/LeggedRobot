@@ -7,9 +7,9 @@
  *
  * Code generation for model "main_quad_rev3_21_200pm".
  *
- * Model version              : 1.50
+ * Model version              : 1.51
  * Simulink Coder version : 9.5 (R2021a) 14-Nov-2020
- * C++ source code generated on : Sat May 21 16:36:23 2022
+ * C++ source code generated on : Tue May 24 15:04:45 2022
  *
  * Target selection: slrealtime.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -149,8 +149,8 @@ struct B_main_quad_rev3_21_200pm_T {
   CAN_DATATYPE CANPack1_c;             /* '<S5>/CAN Pack1' */
   CAN_DATATYPE CANmsg2_a;              /* '<S4>/CAN Pack1' */
   CAN_DATATYPE CANmsg2_j1;             /* '<S3>/CAN Pack1' */
-  real_T Delay;                        /* '<Root>/Delay' */
-  real_T Delay1;                       /* '<Root>/Delay1' */
+  real_T P_1_avg;                      /* '<Root>/Delay' */
+  real_T P_2_avg;                      /* '<Root>/Delay1' */
   real_T Constant;                     /* '<Root>/Constant' */
   real_T Gain1;                        /* '<Root>/Gain1' */
   real_T Gain2;                        /* '<Root>/Gain2' */
@@ -181,6 +181,10 @@ struct B_main_quad_rev3_21_200pm_T {
   real_T Gain24;                       /* '<Root>/Gain24' */
   real_T Gain25;                       /* '<Root>/Gain25' */
   real_T Clock;                        /* '<Root>/Clock' */
+  real_T Gain;                         /* '<S12>/Gain' */
+  real_T Gain1_k;                      /* '<S12>/Gain1' */
+  real_T Gain2_n;                      /* '<S12>/Gain2' */
+  real_T Gain3_b;                      /* '<S12>/Gain3' */
   real_T CANUnpack_o1;                 /* '<S32>/CAN Unpack' */
   real_T CANUnpack_o2;                 /* '<S32>/CAN Unpack' */
   real_T CANUnpack_o3;                 /* '<S32>/CAN Unpack' */
@@ -197,6 +201,10 @@ struct B_main_quad_rev3_21_200pm_T {
   real_T CANUnpack_o2_h;               /* '<S29>/CAN Unpack' */
   real_T CANUnpack_o3_a;               /* '<S29>/CAN Unpack' */
   real_T CANUnpack_o4_l;               /* '<S29>/CAN Unpack' */
+  real_T Gain_p;                       /* '<S11>/Gain' */
+  real_T Gain1_f;                      /* '<S11>/Gain1' */
+  real_T Gain2_b;                      /* '<S11>/Gain2' */
+  real_T Gain3_a;                      /* '<S11>/Gain3' */
   real_T CANUnpack_o1_p;               /* '<S24>/CAN Unpack' */
   real_T CANUnpack_o2_kk;              /* '<S24>/CAN Unpack' */
   real_T CANUnpack_o3_e;               /* '<S24>/CAN Unpack' */
@@ -316,6 +324,14 @@ struct DW_main_quad_rev3_21_200pm_T {
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Const;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Delay;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Del_p;   /* synthesized block */
 
   struct {
     void *AQHandles;

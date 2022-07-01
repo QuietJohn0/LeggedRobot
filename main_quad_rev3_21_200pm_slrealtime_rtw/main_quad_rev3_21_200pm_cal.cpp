@@ -112,6 +112,26 @@ main_quad_rev3_21_200p_cal_type main_quad_rev3_21_200p_cal_impl = {
    */
   { 691.0, 1.0, -1.0, 1.0, 1.0, 1.0 },
 
+  /* Expression: 1
+   * Referenced by: '<S11>/Gain'
+   */
+  1.0,
+
+  /* Expression: 1
+   * Referenced by: '<S11>/Gain1'
+   */
+  1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S11>/Gain2'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S11>/Gain3'
+   */
+  -1.0,
+
   /* Computed Parameter: P1_Y0
    * Referenced by: '<S12>/P1'
    */
@@ -141,6 +161,26 @@ main_quad_rev3_21_200p_cal_type main_quad_rev3_21_200p_cal_impl = {
    * Referenced by: '<S12>/CAN Read'
    */
   { 691.0, 1.0, -1.0, 0.0, 1.0, 1.0 },
+
+  /* Expression: 1
+   * Referenced by: '<S12>/Gain'
+   */
+  1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S12>/Gain1'
+   */
+  -1.0,
+
+  /* Expression: -1
+   * Referenced by: '<S12>/Gain2'
+   */
+  -1.0,
+
+  /* Expression: 1
+   * Referenced by: '<S12>/Gain3'
+   */
+  1.0,
 
   /* Computed Parameter: CANSetup_P1_Size
    * Referenced by: '<Root>/CAN Setup '
